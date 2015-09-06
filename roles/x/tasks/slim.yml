@@ -1,0 +1,6 @@
+---
+- name: Install SLiM
+  pacman: name=slim state=present
+
+- name: Enable SLiM
+  service: name=slim.service enabled=yes

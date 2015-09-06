@@ -1,0 +1,15 @@
+---
+- name: Install libOTR
+  pacman: name=libotr state=present
+
+- name: Install Bitlbee
+  pacman: name=bitlbee state=present
+
+- name: Copy Bitlbee configuration file
+  copy: src=bitlbee.conf dest=/etc/bitlbee/bitlbee.conf
+
+- name: Ensure proper ownership of configuration directory
+  file: path=/var/lib/bitlbee group=bitlbee owner=bitlbee
+
+- name: Enable and start Bitlbee
+  service: name=bitlbee enabled=yes state=started

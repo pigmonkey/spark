@@ -1,0 +1,3 @@
+---
+- include: battery.yml
+#- include: fan.yml

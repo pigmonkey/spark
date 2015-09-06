@@ -1,0 +1,5 @@
+---
+- name: Install i3
+  pacman: name=i3 state=present
+
+- include: rofi.yml

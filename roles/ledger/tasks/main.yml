@@ -1,0 +1,25 @@
+---
+- name: Install ledger dependencies
+  pacman: name={{ item }} state=present
+  with_items:
+    - boost
+    - cmake
+    - texlive-plainextra
+  tags:
+    - aur
+
+- name: Download ledger
+  command: cower -dq ledger
+           chdir=/home/{{ user.name }}/{{ aur.dir }}
+           creates=/home/{{ user.name }}/{{ aur.dir }}/ledger
+  tags:
+    - aur
+  become: yes
+  become_user: "{{ user.name }}"
+
+- name: Build and install ledger
+  command: "{{ aur.makepkg }} chdir=/home/{{ user.name }}/{{ aur.dir }}/ledger"
+  tags:
+    - aur
+  become: yes
+  become_user: "{{ user.name }}"

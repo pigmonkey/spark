@@ -1,0 +1,17 @@
+# {{ ansible_managed }}
+
+Port {{ ssh.port }}
+Protocol 2
+PermitRootLogin no
+PasswordAuthentication no
+AllowTcpForwarding no
+X11Forwarding no
+PrintMotd no
+PrintLastLog yes
+AllowUsers {{ user }}
+LoginGraceTime 1m
+ChallengeResponseAuthentication no
+PubkeyAuthentication yes
+Subsystem	sftp	/usr/lib/ssh/sftp-server
+Ciphers aes256-ctr
+MACs hmac-sha2-512

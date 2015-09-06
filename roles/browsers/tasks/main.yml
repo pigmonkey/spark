@@ -1,0 +1,25 @@
+---
+- name: Install Lynx
+  pacman: name=lynx state=present
+
+- name: Install Firefox
+  pacman: name=firefox state=present
+
+- name: Install Chromium
+  pacman: name=chromium state=present
+
+- name: Download Chromium Pepper Flash
+  command: cower -dq chromium-pepper-flash
+           chdir=/home/{{ user.name }}/{{ aur.dir }}
+           creates=/home/{{ user.name }}/{{ aur.dir }}/chromium-pepper-flash
+  tags:
+    - aur
+  become: yes
+  become_user: "{{ user.name }}"
+
+- name: Build and install Chromium Pepper Flash
+  command: "{{ aur.makepkg }} chdir=/home/{{ user.name }}/{{ aur.dir }}/chromium-pepper-flash"
+  tags:
+    - aur
+  become: yes
+  become_user: "{{ user.name }}"

@@ -1,0 +1,19 @@
+---
+- name: Install acpi_call for TLP battery functions
+  pacman: name=acpi_call state=present
+
+- name: Download tpacpi-bat
+  command: cower -dq tpacpi-bat
+           chdir=/home/{{ user.name }}/{{ aur.dir }}
+           creates=/home/{{ user.name }}/{{ aur.dir }}/tpacpi-bat
+  tags:
+    - aur
+  become: yes
+  become_user: "{{ user.name }}"
+
+- name: Build and install tpacpi-bat
+  command: "{{ aur.makepkg }} chdir=/home/{{ user.name }}/{{ aur.dir }}/tpacpi-bat"
+  tags:
+    - aur
+  become: yes
+  become_user: "{{ user.name }}"

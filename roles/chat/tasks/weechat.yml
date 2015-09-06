@@ -1,0 +1,6 @@
+---
+- name: Install weechat
+  pacman: name=weechat state=present
+
+- name: Install dunst
+  pacman: name=dunst state=present

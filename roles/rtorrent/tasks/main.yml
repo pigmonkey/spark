@@ -1,0 +1,3 @@
+---
+- name: Install rtorrent
+  pacman: name=rtorrent state=present

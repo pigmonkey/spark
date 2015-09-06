@@ -1,0 +1,6 @@
+---
+- name: Install youtube-dl
+  pacman: name=youtube-dl state=present
+
+- name: Install mpv
+  pacman: name=mpv state=present

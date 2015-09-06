@@ -1,0 +1,3 @@
+---
+- name: Install vagrant
+  pacman: name=vagrant state=present

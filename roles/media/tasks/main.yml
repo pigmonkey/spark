@@ -1,0 +1,21 @@
+---
+- include: mpv.yml
+- include: mpd.yml
+- include: beets.yml
+- include: abcde.yml
+- include: xfburn.yml
+- include: imagemagick.yml
+- include: gimp.yml
+- include: gthumb.yml
+- include: feh.yml
+- include: calibre.yml
+- include: pianobar.yml
+
+- name: Install misc media codecs and helpers
+  pacman: name={{ item }} state=present
+  with_items:
+    - flac
+    - lame
+    - gst-libav
+    - gst-plugins-good
+    - exiv2

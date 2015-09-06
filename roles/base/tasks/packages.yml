@@ -1,0 +1,85 @@
+---
+- name: Install universal packages
+  pacman: name={{ item }} state=present
+  with_items:
+    - tmux
+    - git
+    - gnupg
+    - rsync
+    - glances
+    - task
+    - coreutils
+    - moreutils
+    - pass
+    - reflector
+    - zip
+    - unzip
+    - unrar
+    - bc
+    - ranger
+    - alsa-utils
+
+- name: Create AUR directory
+  file: path=/home/{{ user.name }}/{{ aur.dir }}
+        state=directory
+        owner={{ user.name }}
+        group={{ user.group }}
+  tags:
+    - aur
+
+- name: Download cower
+  get_url: url=https://aur.archlinux.org/cgit/aur.git/snapshot/cower.tar.gz
+           dest=/home/{{ user.name }}/{{ aur.dir }}
+           owner={{ user.name }}
+           group={{ user.group }}
+  tags:
+    - aur
+
+- name: Extract cower
+  unarchive: src=/home/{{ user.name }}/{{ aur.dir }}/cower.tar.gz
+             dest=/home/{{ user.name }}/{{ aur.dir }}
+             copy=no
+             owner={{ user.name }}
+             group={{ user.group }}
+             creates=/home/{{ user.name }}/{{ aur.dir }}/cower
+  tags:
+    - aur
+
+- name: Build and install cower
+  command: "{{ aur.makepkg }} --skippgpcheck chdir=/home/{{ user.name }}/{{ aur.dir }}/cower"
+  tags:
+    - aur
+  become: yes
+  become_user: "{{ user.name }}"
+
+- name: Download AUR helper
+  command: cower -dq {{ aur.helper }}
+           chdir=/home/{{ user.name }}/{{ aur.dir }}
+           creates=/home/{{ user.name }}/{{ aur.dir }}/{{ aur.helper }}
+  tags:
+    - aur
+  become: yes
+  become_user: "{{ user.name }}"
+
+- name: Build and install AUR helper
+  command: "{{ aur.makepkg }} chdir=/home/{{ user.name }}/{{ aur.dir }}/{{ aur.helper }}"
+  tags:
+    - aur
+  become: yes
+  become_user: "{{ user.name }}"
+
+- name: Download pmount
+  command: cower -dq pmount
+           chdir=/home/{{ user.name }}/{{ aur.dir }}
+           creates=/home/{{ user.name }}/{{ aur.dir }}/pmount
+  tags:
+    - aur
+  become: yes
+  become_user: "{{ user.name }}"
+
+- name: Build and install pmount
+  command: "{{ aur.makepkg }} chdir=/home/{{ user.name }}/{{ aur.dir }}/pmount"
+  tags:
+    - aur
+  become: yes
+  become_user: "{{ user.name }}"

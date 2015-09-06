@@ -1,0 +1,34 @@
+---
+- hosts: localhost
+  sudo: yes
+  roles:
+    - { role: base }
+    - { role: fonts }
+    - { role: x }
+    - { role: i3 }
+    - { role: network }
+    - { role: npd }
+    - { role: unbound }
+    - { role: vim }
+    - { role: browsers }
+    - { role: media }
+    - { role: laptop }
+    - { role: thinkpad }
+    - { role: screensaver }
+    - { role: firejail }
+    - { role: chat }
+    - { role: git-annex }
+    - { role: ledger }
+    - { role: mail }
+    - { role: office }
+    - { role: redshift }
+    - { role: rtorrent }
+    - { role: vm }
+    - { role: yubikey }
+    - { role: development }
+    - { role: backup }
+    - { role: mapping }
+  vars_prompt:
+    - name: user_password
+      prompt: "Enter desired user password"
+

@@ -1,0 +1,30 @@
+---
+- name: Install VirtualBox and dependencies
+  pacman: name={{ item }} state=present
+  with_items:
+    - net-tools
+    - qt4
+    - virtualbox-guest-iso
+    - virtualbox
+
+- name: Download VirtualBox extensions
+  command: cower -dq virtualbox-ext-oracle
+           chdir=/home/{{ user.name }}/{{ aur.dir }}
+           creates=/home/{{ user.name }}/{{ aur.dir }}/virtualbox-ext-oracle
+  tags:
+    - aur
+  become: yes
+  become_user: "{{ user.name }}"
+
+- name: Build and install VirtualBox extensions
+  command: "{{ aur.makepkg }} chdir=/home/{{ user.name }}/{{ aur.dir }}/virtualbox-ext-oracle"
+  tags:
+    - aur
+  become: yes
+  become_user: "{{ user.name }}"
+
+- name: Copy kernel modules to load
+  copy: src=modules.conf dest=/etc/modules-load.d/virtualbox.conf
+
+- name: Add the user to vboxusers group
+  user: name={{ user.name }} groups=vboxusers append=yes

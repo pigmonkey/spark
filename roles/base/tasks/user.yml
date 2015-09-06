@@ -1,0 +1,6 @@
+---
+- name: Create user group
+  group: name={{ user.group }} state=present
+
+- name: Create user and assign to group
+  user: name={{ user.name }} group={{ user.group }} password={{ user_password|password_hash('sha512') }} shell={{ user.shell }} update_password=on_create

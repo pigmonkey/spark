@@ -1,0 +1,27 @@
+---
+- name: Install OpenVPN
+  pacman: name=openvpn state=present
+
+- name: Install MTR
+  pacman: name=mtr state=present
+
+- name: Install NetworkManager
+  pacman: name=networkmanager state=present
+
+- name: Install NetworkManager OpenVPN plugin
+  pacman: name=networkmanager-openvpn state=present
+
+- name: Install NetworkManager applet
+  pacman: name=network-manager-applet state=present
+
+- name: Install Xfce notification daemon
+  pacman: name=xfce4-notifyd state=present
+
+- name: Install GNOME Keyring
+  pacman: name=gnome-keyring state=present
+
+- name: Enable and start NetworkManager
+  service: name=NetworkManager.service enabled=yes state=started
+
+- name: Enable and start NetworkManager dispatcher
+  service: name=NetworkManager-dispatcher.service enabled=yes state=started

@@ -1,0 +1,49 @@
+---
+- name: Install virtualenv and virtualenvwrapper
+  pacman: name=python-virtualenvwrapper state=present
+  tags:
+    - python-dev
+
+- name: Install tig
+  pacman: name=tig state=present
+
+- name: Install Ruby
+  pacman: name=ruby state=present
+  tags:
+    - ruby-dev
+
+- name: Download Ruby bundler
+  command: cower -dq ruby-bundler
+           chdir=/home/{{ user.name }}/{{ aur.dir }}
+           creates=/home/{{ user.name }}/{{ aur.dir }}/ruby-bundler
+  tags:
+    - aur
+    - ruby-dev
+  become: yes
+  become_user: "{{ user.name }}"
+
+- name: Build and install Ruby bundler
+  command: "{{ aur.makepkg }} chdir=/home/{{ user.name }}/{{ aur.dir }}/ruby-bundler"
+  tags:
+    - aur
+    - ruby-dev
+  become: yes
+  become_user: "{{ user.name }}"
+
+- name: Download Compass
+  command: cower -dq ruby-compass
+           chdir=/home/{{ user.name }}/{{ aur.dir }}
+           creates=/home/{{ user.name }}/{{ aur.dir }}/ruby-compass
+  tags:
+    - aur
+    - ruby-dev
+  become: yes
+  become_user: "{{ user.name }}"
+
+- name: Build and install Compass
+  command: "{{ aur.makepkg }} chdir=/home/{{ user.name }}/{{ aur.dir }}/ruby-compass"
+  tags:
+    - aur
+    - ruby-dev
+  become: yes
+  become_user: "{{ user.name }}"

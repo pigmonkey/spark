@@ -1,0 +1,5 @@
+---
+- include: infinality.yml
+
+- name: Install Terminus
+  pacman: name=terminus-font state=present

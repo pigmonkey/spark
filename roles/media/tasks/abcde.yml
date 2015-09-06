@@ -1,0 +1,6 @@
+---
+- name: Install abcde and dependencies
+  pacman: name={{ item }} state=present
+  with_items:
+    - cdparanoia
+    - abcde

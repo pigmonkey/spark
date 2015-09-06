@@ -1,0 +1,15 @@
+---
+- name: Install Unbound
+  pacman: name=unbound state=present
+
+- name: Download root hints
+  get_url: url=ftp://FTP.INTERNIC.NET/domain/named.cache dest=/etc/unbound/root.hints
+
+- name: Copy ad blocking hosts file
+  copy: src=local-blocking-data.conf dest=/etc/unbound/local-blocking-data.conf
+
+- name: Copy Unbound configuration file
+  copy: src=unbound.conf dest=/etc/unbound/unbound.conf
+
+- name: Enable and start Unbound
+  service: name=unbound.service enabled=yes state=started

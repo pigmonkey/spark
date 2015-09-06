@@ -1,0 +1,14 @@
+---
+- include: cups.yml
+
+- name: Install LibreOffice
+  pacman: name=libreoffice-fresh state=present
+
+- name: Install Zathura and dependencies
+  pacman: name={{ item }} state=present
+  with_items:
+    - zathura-pdf-mupdf
+    - zathura-ps
+
+- name: Install Simple Scan
+  pacman: name=simple-scan state=present

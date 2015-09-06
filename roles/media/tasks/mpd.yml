@@ -1,0 +1,9 @@
+---
+- name: Install mpd
+  pacman: name=mpd state=present
+
+- name: Install mpc
+  pacman: name=mpc state=present
+
+- name: Install ncmpcpp
+  pacman: name=ncmpcpp state=present

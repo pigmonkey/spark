@@ -1,0 +1,26 @@
+---
+- name: Download tpfanco
+  command: cower -dq tpfanco-svn
+           chdir=/home/{{ user.name }}/{{ aur.dir }}
+           creates=/home/{{ user.name }}/{{ aur.dir }}/tpfanco-svn
+  tags:
+    - aur
+  become: yes
+  become_user: "{{ user.name }}"
+
+- name: Build and install tpfanco
+  command: "{{ aur.makepkg }} chdir=/home/{{ user.name }}/{{ aur.dir }}/tpfanco-svn"
+  tags:
+    - aur
+  become: yes
+  become_user: "{{ user.name }}"
+
+- name: Copy tpfanco configuration file
+  copy: src=thinkfan.conf dest=/etc/thinkfan.conf
+  tags:
+    - aur
+
+- name: Enable and start tpfanco
+  service: name=tpfand enabled=yes state=started
+  tags:
+    - aur

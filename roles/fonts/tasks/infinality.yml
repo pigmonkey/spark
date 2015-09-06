@@ -1,0 +1,34 @@
+---
+- name: Add Infinality repository to pacman
+  lineinfile: dest=/etc/pacman.conf
+              state=present
+              insertafter=EOF
+              line="{{ item.line }}"
+  with_items:
+    - { line: "\n[infinality-bundle]" }
+    - { line: "Server = http://bohoomil.com/repo/$arch" }
+
+- name: Verify root gnupg directory exists
+  file: path=/root/.gnupg/ state=directory
+
+- name: Verify dirmngr is configured
+  file: path=/root/.gnupg/dirmngr_ldapservers.conf state=touch
+
+- name: Verify dirmngr is running
+  command: dirmngr
+
+- name: Install Infinality repository key
+  command: pacman-key -r AE6866C7962DDE58
+
+- name: Trust Infinality repository key
+  command: pacman-key --lsign-key AE6866C7962DDE58
+
+- name: Update package cache
+  pacman: update_cache=yes
+
+- name: Install Infinality bundle
+  pacman: name={{ item }} state=present
+  with_items:
+    - freetype2-infinality-ultimate
+    - fontconfig-infinality-ultimate
+    - cairo-infinality-ultimate

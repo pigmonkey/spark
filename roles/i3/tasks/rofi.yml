@@ -1,0 +1,35 @@
+---
+- name: Download rofi
+  command: cower -dq rofi-git
+           chdir=/home/{{ user.name }}/{{ aur.dir }}
+           creates=/home/{{ user.name }}/{{ aur.dir }}/rofi-git
+  tags:
+    - aur
+  become: yes
+  become_user: "{{ user.name }}"
+
+- name: Build and install rofi
+  command: "{{ aur.makepkg }} chdir=/home/{{ user.name }}/{{ aur.dir }}/rofi-git"
+  tags:
+    - aur
+  become: yes
+  become_user: "{{ user.name }}"
+
+- name: Download rofi-pass
+  command: cower -dq rofi-pass-git
+           chdir=/home/{{ user.name }}/{{ aur.dir }}
+           creates=/home/{{ user.name }}/{{ aur.dir }}/rofi-pass-git
+  tags:
+    - aur
+  become: yes
+  become_user: "{{ user.name }}"
+
+- name: Build and install rofi-pass
+  command: "{{ aur.makepkg }} chdir=/home/{{ user.name }}/{{ aur.dir }}/rofi-pass-git"
+  tags:
+    - aur
+  become: yes
+  become_user: "{{ user.name }}"
+
+- name: Install i3-wm for rofi window switching
+  pacman: name=i3-wm state=present

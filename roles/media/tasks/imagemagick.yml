@@ -1,0 +1,9 @@
+---
+- name: Install imagemagick and dependencies
+  pacman: name={{ item }} state=present
+  with_items:
+    - libraw
+    - libpng
+    - librsvg
+    - openjpeg2
+    - imagemagick

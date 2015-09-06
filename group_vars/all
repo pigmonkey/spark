@@ -1,0 +1,20 @@
+user:
+    name: pigmonkey
+    group: pigmonkey
+    shell: /usr/bin/zsh
+
+dotfiles:
+    url: git@github.com:pigmonkey/dotfiles.git
+    rcup_flags: -x README.md
+
+hostname: nous
+
+aur:
+    dir: aur
+    helper: aura-bin
+    makepkg: makepkg -csri --noconfirm --needed --noprogressbar
+
+ssh:
+    port: 22
+    user_key: /root/id_rsa
+    enable_sshd: False

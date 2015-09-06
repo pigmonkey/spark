@@ -1,0 +1,38 @@
+---
+- name: Download Mutt
+  command: cower -dq mutt-sidebar
+           chdir=/home/{{ user.name }}/{{ aur.dir }}
+           creates=/home/{{ user.name }}/{{ aur.dir }}/mutt-sidebar
+  tags:
+    - aur
+  become: yes
+  become_user: "{{ user.name }}"
+
+- name: Build and install Mutt
+  command: "{{ aur.makepkg }} chdir=/home/{{ user.name }}/{{ aur.dir }}/mutt-sidebar"
+  tags:
+    - aur
+  become: yes
+  become_user: "{{ user.name }}"
+
+- name: Download urlview
+  command: cower -dq urlview
+           chdir=/home/{{ user.name }}/{{ aur.dir }}
+           creates=/home/{{ user.name }}/{{ aur.dir }}/urlview
+  tags:
+    - aur
+  become: yes
+  become_user: "{{ user.name }}"
+
+- name: Build and install urlview
+  command: "{{ aur.makepkg }} chdir=/home/{{ user.name }}/{{ aur.dir }}/urlview"
+  tags:
+    - aur
+  become: yes
+  become_user: "{{ user.name }}"
+
+- name: Install OfflineIMAP
+  pacman: name=offlineimap state=present
+
+- name: Install msmtp
+  pacman: name=msmtp-mta state=present

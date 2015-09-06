@@ -1,0 +1,22 @@
+---
+- name: Install Xorg
+  pacman: name=xorg-server state=present
+
+- name: Install Xinit
+  pacman: name=xorg-xinit state=present
+
+- name: Install xmodmap
+  pacman: name=xorg-xmodmap state=present
+
+- name: Install Intel video driver
+  pacman: name=xf86-video-intel  state=present
+
+- name: Add user to video group
+  user: name={{ user.name }} groups=video append=yes
+
+- include: slim.yml
+- include: sxhkd.yml
+- include: unclutter.yml
+- include: volwheel.yml
+- include: autorandr.yml
+- include: termite.yml

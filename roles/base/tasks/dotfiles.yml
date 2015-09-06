@@ -1,0 +1,36 @@
+---
+- name: Download rcm
+  command: cower -dq rcm
+           chdir=/home/{{ user.name }}/{{ aur.dir }}
+           creates=/home/{{ user.name }}/{{ aur.dir }}/rcm
+  tags:
+    - aur
+  become: yes
+  become_user: "{{ user.name }}"
+
+- name: Build and install rcm
+  command: "{{ aur.makepkg }} chdir=/home/{{ user.name }}/{{ aur.dir }}/rcm"
+  tags:
+    - aur
+  become: yes
+  become_user: "{{ user.name }}"
+
+- name: Clone user dotfiles
+  git: repo={{ dotfiles.url }} dest=/home/{{ user.name }}/.dotfiles accept_hostkey=yes update=no
+  become: yes
+  become_user: "{{ user.name }}"
+
+- name: Initialize dotfile submodules
+  command: git submodule init chdir=/home/{{ user.name }}/.dotfiles
+  become: yes
+  become_user: "{{ user.name }}"
+
+- name: Update dotfile submodules
+  command: git submodule update chdir=/home/{{ user.name }}/.dotfiles
+  become: yes
+  become_user: "{{ user.name }}"
+
+- name: Install user dotfiles
+  command: rcup {{ dotfiles.rcup_flags }}
+  become: yes
+  become_user: "{{ user.name }}"

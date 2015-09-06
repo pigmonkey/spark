@@ -1,0 +1,6 @@
+---
+- name: Install Tarsnap
+  pacman: name=tarsnap state=present
+
+- name: Install rsnapshot
+  pacman: name=rsnapshot state=present

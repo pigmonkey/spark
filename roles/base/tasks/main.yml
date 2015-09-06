@@ -1,0 +1,17 @@
+---
+- name: Copy pacman configuration file
+  copy: src=pacman.conf dest=/etc/pacman.conf
+
+- name: Refresh pacman mirrors
+  pacman: update_cache=yes
+
+- name: Set the hostname
+  hostname: name={{ hostname }}
+
+- include: shell.yml
+- include: user.yml
+- include: sudo.yml
+- include: packages.yml
+- include: cron.yml
+- include: ssh.yml
+- include: dotfiles.yml

@@ -1,0 +1,6 @@
+---
+- name: Install Synaptics input driver
+  pacman: name=xf86-input-synaptics state=present
+
+- name: Copy Synaptics configuration file
+  copy: src=50-synaptics.conf dest=/etc/X11/xorg.conf.d/50-synaptics.conf
