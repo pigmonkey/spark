@@ -6,7 +6,7 @@ taking the place of any [post-installation][3]), but due to Ansible's
 idempotent nature it may also be run on top of an already configured machine.
 
 Spark assumes it will be run on a laptop -- specifically, a ThinkPad -- and
-performs some configuration based on this assumption. This behaviour maybe
+performs some configuration based on this assumption. This behaviour may be
 changed by removing the `laptop` and/or `thinkpad` role from the playbook, as
 appropriate.
 
