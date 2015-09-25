@@ -17,7 +17,6 @@
     - unrar
     - bc
     - ranger
-    - alsa-utils
 
 - name: Create AUR directory
   file: path=/home/{{ user.name }}/{{ aur.dir }}

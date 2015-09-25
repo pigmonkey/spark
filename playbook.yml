@@ -28,6 +28,7 @@
     - { role: development }
     - { role: backup }
     - { role: mapping }
+    - { role: sound }
   vars_prompt:
     - name: user_password
       prompt: "Enter desired user password"
