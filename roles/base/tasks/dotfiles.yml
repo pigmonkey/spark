@@ -20,16 +20,6 @@
   become: yes
   become_user: "{{ user.name }}"
 
-- name: Initialize dotfile submodules
-  command: git submodule init chdir=/home/{{ user.name }}/.dotfiles
-  become: yes
-  become_user: "{{ user.name }}"
-
-- name: Update dotfile submodules
-  command: git submodule update chdir=/home/{{ user.name }}/.dotfiles
-  become: yes
-  become_user: "{{ user.name }}"
-
 - name: Install user dotfiles
   command: rcup {{ dotfiles.rcup_flags }}
   become: yes
