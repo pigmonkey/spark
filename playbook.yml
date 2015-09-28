@@ -7,7 +7,7 @@
     - { role: x }
     - { role: i3 }
     - { role: network }
-    - { role: npd }
+    - { role: ntp }
     - { role: unbound }
     - { role: vim }
     - { role: browsers }
