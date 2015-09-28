@@ -9,7 +9,7 @@
     - { role: network }
     - { role: ntp }
     - { role: unbound }
-    - { role: vim }
+    - { role: editors }
     - { role: browsers }
     - { role: media }
     - { role: laptop }

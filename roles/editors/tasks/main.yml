@@ -1,0 +1,4 @@
+---
+- name: Install editors
+  pacman: name={{ item }} state=present
+  with_items: "{{ editors }}"

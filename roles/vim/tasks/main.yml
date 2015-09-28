@@ -1,6 +1,0 @@
----
-- name: Install gvim
-  pacman: name=gvim state=present
-
-- name: Install vim plugins
-  command: vim +PluginInstall! +qall
