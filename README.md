@@ -21,7 +21,7 @@ should be available at the path specified in the `ssh.user_key` variable.
 
 Run the playbook as root.
 
-    $ ansible-playbook -i localhost playbook.yml
+    # ansible-playbook -i localhost playbook.yml
 
 When run, Ansible will prompt for the user password. This only needs to be
 provided on the first run when the user is being created. On later runs,
