@@ -1,3 +1,4 @@
 ---
+- include: synaptics.yml
 - include: battery.yml
 #- include: fan.yml
