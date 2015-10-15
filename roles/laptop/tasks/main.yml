@@ -1,5 +1,4 @@
 ---
-- include: synaptics.yml
 - include: tlp.yml
 
 - name: Copy logind configuration file
