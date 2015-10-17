@@ -21,3 +21,6 @@ ssh:
 
 editors:
     - gvim
+
+video_drivers:
+    - xf86-video-intel

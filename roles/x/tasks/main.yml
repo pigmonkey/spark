@@ -9,7 +9,8 @@
   pacman: name=xorg-xmodmap state=present
 
 - name: Install Intel video driver
-  pacman: name=xf86-video-intel  state=present
+  pacman: name={{ item }} state=present
+  with_items: "{{ video_drivers }}"
 
 - name: Add user to video group
   user: name={{ user.name }} groups=video append=yes
