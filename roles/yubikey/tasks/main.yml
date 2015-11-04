@@ -14,3 +14,10 @@
     - aur
   become: yes
   become_user: "{{ user.name }}"
+
+- name: Install smartcard libs/tools
+  pacman: name={{ item }} state=present
+  with_items:
+    - pcsclite
+    - libusb-compat
+    - ccid

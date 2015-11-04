@@ -17,6 +17,9 @@
     - unrar
     - bc
     - ranger
+    - strace
+    - lsof
+    - sysstat
 
 - name: Create AUR directory
   file: path=/home/{{ user.name }}/{{ aur.dir }}

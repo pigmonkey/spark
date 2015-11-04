@@ -1,0 +1,17 @@
+---
+- name: Download orpie
+  command: cower -dq orpie
+           chdir=/home/{{ user.name }}/{{ aur.dir }}
+           creates=/home/{{ user.name }}/{{ aur.dir }}/orpie
+  tags:
+    - aur
+  become: yes
+  become_user: "{{ user.name }}"
+
+- name: Build and install orpie
+  command: "{{ aur.makepkg }} chdir=/home/{{ user.name }}/{{ aur.dir }}/orpie"
+  tags:
+    - aur
+  become: yes
+  become_user: "{{ user.name }}"
+

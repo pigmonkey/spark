@@ -5,6 +5,18 @@
 - name: Install MTR
   pacman: name=mtr state=present
 
+- name: Install net-tools
+  pacman: name=net-tools state=present
+
+- name: Install bind-tools
+  pacman: name=bind-tools state=present
+
+- name: Install whois
+  pacman: name=whois state=present
+
+- name: Install netcat
+  pacman: name=gnu-netcat state=present
+
 - name: Install NetworkManager
   pacman: name=networkmanager state=present
 
@@ -25,3 +37,5 @@
 
 - name: Enable and start NetworkManager dispatcher
   service: name=NetworkManager-dispatcher.service enabled=yes state=started
+
+- include: pdsh.yml

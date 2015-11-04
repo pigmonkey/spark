@@ -8,7 +8,13 @@
 - name: Install xmodmap
   pacman: name=xorg-xmodmap state=present
 
-- name: Install Intel video driver
+- name: Install xdpyinfo
+  pacman: name=xorg-xdpyinfo state=present
+
+- name: Install xev
+  pacman: name=xorg-xev state=present
+
+- name: Install video driver(s)
   pacman: name={{ item }} state=present
   with_items: "{{ video_drivers }}"
 
@@ -22,3 +28,4 @@
 - include: autorandr.yml
 - include: srandrd.yml
 - include: termite.yml
+- include: autocutsel.yml
