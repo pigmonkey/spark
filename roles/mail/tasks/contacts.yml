@@ -14,3 +14,35 @@
     - aur
   become: yes
   become_user: "{{ user.name }}"
+
+- name: Download vdirsyncer
+  command: cower -dq vdirsyncer
+           chdir=/home/{{ user.name }}/{{ aur.dir }}
+           creates=/home/{{ user.name }}/{{ aur.dir }}/vdirsyncer
+  tags:
+    - aur
+  become: yes
+  become_user: "{{ user.name }}"
+
+- name: Build and install vdirsyncer
+  command: "{{ aur.makepkg }} chdir=/home/{{ user.name }}/{{ aur.dir }}/vdirsyncer"
+  tags:
+    - aur
+  become: yes
+  become_user: "{{ user.name }}"
+
+- name: Download khard-git
+  command: cower -dq khard-git
+           chdir=/home/{{ user.name }}/{{ aur.dir }}
+           creates=/home/{{ user.name }}/{{ aur.dir }}/khard-git
+  tags:
+    - aur
+  become: yes
+  become_user: "{{ user.name }}"
+
+- name: Build and install khard-git
+  command: "{{ aur.makepkg }} chdir=/home/{{ user.name }}/{{ aur.dir }}/khard-git"
+  tags:
+    - aur
+  become: yes
+  become_user: "{{ user.name }}"
