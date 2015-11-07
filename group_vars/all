@@ -24,3 +24,23 @@ editors:
 
 video_drivers:
     - xf86-video-intel
+
+base_packages:
+    - tmux
+    - git
+    - gnupg
+    - rsync
+    - glances
+    - task
+    - coreutils
+    - moreutils
+    - pass
+    - reflector
+    - zip
+    - unzip
+    - unrar
+    - bc
+    - ranger
+    - strace
+    - lsof
+    - sysstat

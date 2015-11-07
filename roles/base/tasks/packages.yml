@@ -1,25 +1,7 @@
 ---
-- name: Install universal packages
+- name: Install universal base packages
   pacman: name={{ item }} state=present
-  with_items:
-    - tmux
-    - git
-    - gnupg
-    - rsync
-    - glances
-    - task
-    - coreutils
-    - moreutils
-    - pass
-    - reflector
-    - zip
-    - unzip
-    - unrar
-    - bc
-    - ranger
-    - strace
-    - lsof
-    - sysstat
+  with_items: "{{ base_packages }}"
 
 - name: Create AUR directory
   file: path=/home/{{ user.name }}/{{ aur.dir }}
