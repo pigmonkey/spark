@@ -40,18 +40,4 @@
 - name: Install notmuch
   pacman: name=notmuch state=present
 
-- name: Download goobook-git
-  command: cower -dq goobook-git
-           chdir=/home/{{ user.name }}/{{ aur.dir }}
-           creates=/home/{{ user.name }}/{{ aur.dir }}/goobook-git
-  tags:
-    - aur
-  become: yes
-  become_user: "{{ user.name }}"
-
-- name: Build and install goobook-git
-  command: "{{ aur.makepkg }} chdir=/home/{{ user.name }}/{{ aur.dir }}/goobook-git"
-  tags:
-    - aur
-  become: yes
-  become_user: "{{ user.name }}"
+- include: contacts.yml
