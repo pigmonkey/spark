@@ -44,3 +44,4 @@ base_packages:
     - strace
     - lsof
     - sysstat
+    - arch-wiki-lite
