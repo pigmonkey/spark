@@ -5,6 +5,7 @@
            creates=/home/{{ user.name }}/{{ aur.dir }}/goobook-git
   tags:
     - aur
+    - contacts
   become: yes
   become_user: "{{ user.name }}"
 
@@ -12,6 +13,7 @@
   command: "{{ aur.makepkg }} chdir=/home/{{ user.name }}/{{ aur.dir }}/goobook-git"
   tags:
     - aur
+    - contacts
   become: yes
   become_user: "{{ user.name }}"
 
@@ -21,6 +23,7 @@
            creates=/home/{{ user.name }}/{{ aur.dir }}/vdirsyncer
   tags:
     - aur
+    - contacts
   become: yes
   become_user: "{{ user.name }}"
 
@@ -28,6 +31,7 @@
   command: "{{ aur.makepkg }} chdir=/home/{{ user.name }}/{{ aur.dir }}/vdirsyncer"
   tags:
     - aur
+    - contacts
   become: yes
   become_user: "{{ user.name }}"
 
@@ -37,6 +41,7 @@
            creates=/home/{{ user.name }}/{{ aur.dir }}/khard-git
   tags:
     - aur
+    - contacts
   become: yes
   become_user: "{{ user.name }}"
 
@@ -44,5 +49,6 @@
   command: "{{ aur.makepkg }} chdir=/home/{{ user.name }}/{{ aur.dir }}/khard-git"
   tags:
     - aur
+    - contacts
   become: yes
   become_user: "{{ user.name }}"

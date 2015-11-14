@@ -1,6 +1,8 @@
 ---
 - name: Install vte3-ng
   pacman: name=vte3-ng state=present
+  tags:
+    - termite
 
 - name: Download termite
   command: cower -dq termite-git
@@ -8,6 +10,7 @@
            creates=/home/{{ user.name }}/{{ aur.dir }}/termite-git
   tags:
     - aur
+    - termite
   become: yes
   become_user: "{{ user.name }}"
 
@@ -15,5 +18,6 @@
   command: "{{ aur.makepkg }} chdir=/home/{{ user.name }}/{{ aur.dir }}/termite-git"
   tags:
     - aur
+    - termite
   become: yes
   become_user: "{{ user.name }}"

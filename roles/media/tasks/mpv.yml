@@ -1,6 +1,10 @@
 ---
 - name: Install youtube-dl
   pacman: name=youtube-dl state=present
+  tags:
+    - mpv
 
 - name: Install mpv
   pacman: name=mpv state=present
+  tags:
+    - mpv

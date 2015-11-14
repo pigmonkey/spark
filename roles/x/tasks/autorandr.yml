@@ -5,6 +5,7 @@
            creates=/home/{{ user.name }}/{{ aur.dir }}/autorandr-git
   tags:
     - aur
+    - autorandr
   become: yes
   become_user: "{{ user.name }}"
 
@@ -12,5 +13,6 @@
   command: "{{ aur.makepkg }} chdir=/home/{{ user.name }}/{{ aur.dir }}/autorandr-git"
   tags:
     - aur
+    - autorandr
   become: yes
   become_user: "{{ user.name }}"

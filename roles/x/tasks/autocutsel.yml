@@ -1,3 +1,5 @@
 ---
 - name: Install autocutsel
   pacman: name=autocutsel state=present
+  tags:
+    - autocutsel

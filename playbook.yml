@@ -2,33 +2,33 @@
 - hosts: localhost
   sudo: yes
   roles:
-    - { role: base }
-    - { role: fonts }
-    - { role: x }
-    - { role: i3 }
-    - { role: network }
-    - { role: ntp }
-    - { role: unbound }
-    - { role: editors }
-    - { role: browsers }
-    - { role: media }
-    - { role: laptop }
-    - { role: thinkpad }
-    - { role: screensaver }
-    - { role: firejail }
-    - { role: chat }
-    - { role: git-annex }
-    - { role: ledger }
-    - { role: mail }
-    - { role: office }
-    - { role: redshift }
-    - { role: rtorrent }
-    - { role: vm }
-    - { role: yubikey }
-    - { role: development }
-    - { role: backup }
-    - { role: mapping }
-    - { role: sound }
+    - { role: base, tags: ['base'] }
+    - { role: fonts, tags: ['fonts'] }
+    - { role: x, tags: ['x'] }
+    - { role: i3, tags: ['i3'] }
+    - { role: network, tags: ['network'] }
+    - { role: ntp, tags: ['ntp'] }
+    - { role: unbound, tags: ['unbound'] }
+    - { role: editors, tags: ['editors'] }
+    - { role: browsers, tags: ['browsers'] }
+    - { role: media, tags: ['media'] }
+    - { role: laptop, tags: ['laptop'] }
+    - { role: thinkpad, tags: ['thinkpad'] }
+    - { role: screensaver, tags: ['screensaver'] }
+    - { role: firejail, tags: ['firejail'] }
+    - { role: chat, tags: ['chat'] }
+    - { role: git-annex, tags: ['git-annex'] }
+    - { role: ledger, tags: ['ledger'] }
+    - { role: mail, tags: ['mail'] }
+    - { role: office, tags: ['office'] }
+    - { role: redshift, tags: ['redshift'] }
+    - { role: rtorrent, tags: ['rtorrent'] }
+    - { role: vm, tags: ['vm'] }
+    - { role: yubikey, tags: ['yubikey'] }
+    - { role: development, tags: ['development'] }
+    - { role: backup, tags: ['backup'] }
+    - { role: mapping, tags: ['mapping'] }
+    - { role: sound, tags: ['sound'] }
   vars_prompt:
     - name: user_password
       prompt: "Enter desired user password"

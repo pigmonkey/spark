@@ -5,6 +5,7 @@
            creates=/home/{{ user.name }}/{{ aur.dir }}/rcm
   tags:
     - aur
+    - dotfiles
   become: yes
   become_user: "{{ user.name }}"
 
@@ -12,6 +13,7 @@
   command: "{{ aur.makepkg }} chdir=/home/{{ user.name }}/{{ aur.dir }}/rcm"
   tags:
     - aur
+    - dotfiles
   become: yes
   become_user: "{{ user.name }}"
 
@@ -19,8 +21,12 @@
   git: repo={{ dotfiles.url }} dest=/home/{{ user.name }}/.dotfiles accept_hostkey=yes update=no
   become: yes
   become_user: "{{ user.name }}"
+  tags:
+    - dotfiles
 
 - name: Install user dotfiles
   command: rcup {{ dotfiles.rcup_flags }}
   become: yes
   become_user: "{{ user.name }}"
+  tags:
+    - dotfiles

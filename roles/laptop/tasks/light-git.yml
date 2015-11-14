@@ -5,6 +5,7 @@
            creates=/home/{{ user.name }}/{{ aur.dir }}/light-git
   tags:
     - aur
+    - light-git
   become: yes
   become_user: "{{ user.name }}"
 
@@ -12,6 +13,7 @@
   command: "{{ aur.makepkg }} chdir=/home/{{ user.name }}/{{ aur.dir }}/light-git"
   tags:
     - aur
+    - light-git
   become: yes
   become_user: "{{ user.name }}"
 

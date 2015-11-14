@@ -4,3 +4,5 @@
   with_items:
     - cdparanoia
     - abcde
+  tags:
+    - abcde

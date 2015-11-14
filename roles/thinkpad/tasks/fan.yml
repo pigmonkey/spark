@@ -5,6 +5,7 @@
            creates=/home/{{ user.name }}/{{ aur.dir }}/tpfanco-svn
   tags:
     - aur
+    - fan
   become: yes
   become_user: "{{ user.name }}"
 
@@ -12,6 +13,7 @@
   command: "{{ aur.makepkg }} chdir=/home/{{ user.name }}/{{ aur.dir }}/tpfanco-svn"
   tags:
     - aur
+    - fan
   become: yes
   become_user: "{{ user.name }}"
 
@@ -19,8 +21,10 @@
   copy: src=thinkfan.conf dest=/etc/thinkfan.conf
   tags:
     - aur
+    - fan
 
 - name: Enable and start tpfanco
   service: name=tpfand enabled=yes state=started
   tags:
     - aur
+    - fan

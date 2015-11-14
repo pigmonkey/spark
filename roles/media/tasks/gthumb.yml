@@ -1,3 +1,5 @@
 ---
 - name: Install gThumb
   pacman: name=gthumb state=present
+  tags:
+    - gthumb

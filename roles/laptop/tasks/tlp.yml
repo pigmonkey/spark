@@ -1,18 +1,30 @@
 ---
 - name: Install tlp-rdw for radio management
   pacman: name=tlp-rdw state=present
+  tags:
+    - tlp
 
 - name: Install TLP
   pacman: name=tlp state=present
+  tags:
+    - tlp
 
 - name: Copy TLP configuration file
   copy: src=tlp.conf dest=/etc/default/tlp
+  tags:
+    - tlp
 
 - name: Mask systemd radio service
   command: systemctl mask systemd-rfkill@.service
+  tags:
+    - tlp
 
 - name: Enable TLP
   service: name=tlp.service enabled=yes
+  tags:
+    - tlp
 
 - name: Enable TLP sleep
   service: name=tlp-sleep.service enabled=yes
+  tags:
+    - tlp

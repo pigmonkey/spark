@@ -10,3 +10,5 @@
     - gstreamer0.10-python
     - gstreamer0.10-ugly
     - beets
+  tags:
+    - beets

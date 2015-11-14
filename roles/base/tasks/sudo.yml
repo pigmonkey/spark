@@ -1,9 +1,15 @@
 ---
 - name: Install sudo
   pacman: name=sudo state=present
+  tags:
+    - sudo
 
 - name: Add user to wheel group
   user: name={{ user.name }} groups=wheel append=yes
+  tags:
+    - sudo
 
 - name: Copy sudo configuration
   copy: src=sudoers dest=/etc/sudoers mode=440
+  tags:
+    - sudo

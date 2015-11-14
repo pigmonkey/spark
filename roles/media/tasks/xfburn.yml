@@ -1,3 +1,5 @@
 ---
 - name: Install xfburn
   pacman: name=xfburn state=present
+  tags:
+    - xfburn

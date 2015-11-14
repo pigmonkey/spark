@@ -1,6 +1,10 @@
 ---
 - name: Install weechat
   pacman: name=weechat state=present
+  tags:
+    - weechat
 
 - name: Install dunst
   pacman: name=dunst state=present
+  tags:
+    - weechat

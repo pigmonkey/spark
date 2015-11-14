@@ -1,3 +1,5 @@
 ---
 - name: Install GIMP
   pacman: name=gimp state=present
+  tags:
+    - gimp

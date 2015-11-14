@@ -1,3 +1,5 @@
 ---
 - name: Install feh
   pacman: name=feh state=present
+  tags:
+    - feh

@@ -5,6 +5,7 @@
            creates=/home/{{ user.name }}/{{ aur.dir }}/rofi-git
   tags:
     - aur
+    - rofi
   become: yes
   become_user: "{{ user.name }}"
 
@@ -12,6 +13,7 @@
   command: "{{ aur.makepkg }} chdir=/home/{{ user.name }}/{{ aur.dir }}/rofi-git"
   tags:
     - aur
+    - rofi
   become: yes
   become_user: "{{ user.name }}"
 
@@ -21,6 +23,7 @@
            creates=/home/{{ user.name }}/{{ aur.dir }}/rofi-pass-git
   tags:
     - aur
+    - rofi
   become: yes
   become_user: "{{ user.name }}"
 
@@ -28,11 +31,14 @@
   command: "{{ aur.makepkg }} chdir=/home/{{ user.name }}/{{ aur.dir }}/rofi-pass-git"
   tags:
     - aur
+    - rofi
   become: yes
   become_user: "{{ user.name }}"
 
 - name: Install i3-wm for rofi window switching
   pacman: name=i3-wm state=present
+  tags:
+    - rofi
 
 - name: Download teiler (rofi screenshot app)
   command: cower -dq teiler-git
@@ -40,6 +46,7 @@
            creates=/home/{{ user.name }}/{{ aur.dir }}/teiler-git
   tags:
     - aur
+    - rofi
   become: yes
   become_user: "{{ user.name }}"
 
@@ -47,6 +54,7 @@
   command: "{{ aur.makepkg }} chdir=/home/{{ user.name }}/{{ aur.dir }}/teiler-git"
   tags:
     - aur
+    - rofi
   become: yes
   become_user: "{{ user.name }}"
 
@@ -56,6 +64,7 @@
            creates=/home/{{ user.name }}/{{ aur.dir }}/copyq-git
   tags:
     - aur
+    - rofi
   become: yes
   become_user: "{{ user.name }}"
 
@@ -63,5 +72,6 @@
   command: "{{ aur.makepkg }} chdir=/home/{{ user.name }}/{{ aur.dir }}/copyq-git"
   tags:
     - aur
+    - rofi
   become: yes
   become_user: "{{ user.name }}"

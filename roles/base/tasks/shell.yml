@@ -4,9 +4,13 @@
   with_items:
     - bash
     - bash-completion
+  tags:
+    - shell
 
 - name: Install ZSH
   pacman: name={{ item }} state=present
   with_items:
     - zsh
     - zsh-completions
+  tags:
+    - shell

@@ -7,3 +7,5 @@
     - librsvg
     - openjpeg2
     - imagemagick
+  tags:
+    - imagemagick

@@ -1,3 +1,5 @@
 ---
 - name: Install sxhkd
   pacman: name=sxhkd state=present
+  tags:
+    - sxhkd

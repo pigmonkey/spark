@@ -1,9 +1,15 @@
 ---
 - name: Install mpd
   pacman: name=mpd state=present
+  tags:
+    - mpd
 
 - name: Install mpc
   pacman: name=mpc state=present
+  tags:
+    - mpd
 
 - name: Install ncmpcpp
   pacman: name=ncmpcpp state=present
+  tags:
+    - mpd

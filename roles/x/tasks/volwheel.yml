@@ -1,3 +1,5 @@
 ---
 - name: Install volwheel
   pacman: name=volwheel state=present
+  tags:
+    - volwheel

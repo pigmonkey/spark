@@ -1,6 +1,8 @@
 ---
 - name: Copy mtrack-git configuration file
   copy: src=50-mtrack-git.conf dest=/etc/X11/xorg.conf.d/50-mtrack-git.conf
+  tags:
+    - mtrack-git
 
 - name: Download xf86-input-mtrack-git
   command: cower -dq xf86-input-mtrack-git
@@ -8,6 +10,7 @@
            creates=/home/{{ user.name }}/{{ aur.dir }}/xf86-input-mtrack-git
   tags:
     - aur
+    - mtrack-git
   become: yes
   become_user: "{{ user.name }}"
 
@@ -15,6 +18,7 @@
   command: "{{ aur.makepkg }} chdir=/home/{{ user.name }}/{{ aur.dir }}/xf86-input-mtrack-git"
   tags:
     - aur
+    - mtrack-git
   become: yes
   become_user: "{{ user.name }}"
 

@@ -1,9 +1,15 @@
 ---
 - name: Install cronie
   pacman: name=cronie state=present
+  tags:
+    - cron
 
 - name: Enable cronie
   service: name=cronie.service enabled=yes state=started
+  tags:
+    - cron
 
 - name: Add paccache cleanup to daily cron
   copy: src=cron/paccache.sh dest=/etc/cron.daily/paccache mode=755
+  tags:
+    - cron

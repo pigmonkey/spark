@@ -28,6 +28,15 @@ provided on the first run when the user is being created. On later runs,
 providing any password -- whether the current user password or a new one --
 will have no effect.
 
+## Tagging
+
+All tasks are tagged with their role, allowing them to be skipped by tag in
+addition to modifying `playbook.yml`. For instance, a system could be built
+excluding the entire `media` role and the `dotfiles` section of the `base`
+role.
+
+    # ansible-playbook -i localhost playbook.yml --skip-tags "media,dotfiles"
+
 ## AUR
 
 All tasks involving the [AUR][4] are tagged `aur`. To provision an AUR-free
