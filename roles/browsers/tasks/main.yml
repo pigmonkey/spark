@@ -2,6 +2,9 @@
 - name: Install Lynx
   pacman: name=lynx state=present
 
+- name: Install w3m
+  pacman: name=w3m state=present
+
 - name: Install Firefox
   pacman: name=firefox state=present
 
