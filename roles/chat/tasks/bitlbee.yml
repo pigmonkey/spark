@@ -19,6 +19,18 @@
   tags:
     - bitlbee
 
+- name: Create Bitlbee systemd unit file directory
+  file: path=/etc/systemd/system/bitlbee.service.d state=directory
+  tags:
+    - bitlbee
+    - firejail
+
+- name: Push Bitlbee socket unit file
+  copy: src=bitlbee-service-override.conf dest=/etc/systemd/system/bitlbee.service.d/override.conf
+  tags:
+    - bitlbee
+    - firejail
+
 - name: Enable and start Bitlbee
   service: name=bitlbee enabled=yes state=started
   tags:
