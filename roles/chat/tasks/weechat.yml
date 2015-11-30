@@ -4,6 +4,12 @@
   tags:
     - weechat
 
+- name: Jail weechat
+  copy: src=weechat.sh dest=/usr/local/bin/weechat mode=0755
+  tags:
+    - weechat
+    - firejail
+
 - name: Install dunst
   pacman: name=dunst state=present
   tags:

@@ -1,3 +1,8 @@
 ---
 - name: Install rtorrent
   pacman: name=rtorrent state=present
+
+- name: Jail rtorrent
+  copy: src=rtorrent.sh dest=/usr/local/bin/rtorrent mode=0755
+  tags:
+    - firejail
