@@ -5,34 +5,5 @@
 - name: Install w3m
   pacman: name=w3m state=present
 
-- name: Install Firefox
-  pacman: name=firefox state=present
-
-- name: Jail Firefox
-  copy: src=firefox.sh dest=/usr/local/bin/firefox mode=0755
-  tags:
-    - firejail
-
-- name: Install Chromium
-  pacman: name=chromium state=present
-
-- name: Jail Chromium
-  copy: src=chromium.sh dest=/usr/local/bin/chromium mode=0755
-  tags:
-    - firejail
-
-- name: Download Chromium Pepper Flash
-  command: cower -dq chromium-pepper-flash
-           chdir=/home/{{ user.name }}/{{ aur.dir }}
-           creates=/home/{{ user.name }}/{{ aur.dir }}/chromium-pepper-flash
-  tags:
-    - aur
-  become: yes
-  become_user: "{{ user.name }}"
-
-- name: Build and install Chromium Pepper Flash
-  command: "{{ aur.makepkg }} chdir=/home/{{ user.name }}/{{ aur.dir }}/chromium-pepper-flash"
-  tags:
-    - aur
-  become: yes
-  become_user: "{{ user.name }}"
+- include: firefox.yml
+- include: chromium.yml

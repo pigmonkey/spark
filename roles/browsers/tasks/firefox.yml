@@ -1,0 +1,11 @@
+---
+- name: Install Firefox
+  pacman: name=firefox state=present
+  tags:
+    - firefox
+
+- name: Jail Firefox
+  copy: src=firefox.sh dest=/usr/local/bin/firefox mode=0755
+  tags:
+    - firefox
+    - firejail
