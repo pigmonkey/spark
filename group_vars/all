@@ -45,3 +45,4 @@ base_packages:
     - lsof
     - sysstat
     - arch-wiki-lite
+    - dosfstools
