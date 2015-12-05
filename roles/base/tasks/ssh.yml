@@ -32,6 +32,11 @@
   tags:
     - ssh
 
+- name: Install autossh
+  pacman: name=autossh state=present
+  tags:
+    - ssh
+
 - name: Copy fuse configuration file
   copy: src=fuse.conf dest=/etc/fuse.conf
   tags:
