@@ -1,3 +1,22 @@
+---
+- name: Download xininfo
+  command: cower -dq xininfo-git
+           chdir=/home/{{ user.name }}/{{ aur.dir }}
+           creates=/home/{{ user.name }}/{{ aur.dir }}/xininfo-git
+  tags:
+    - aur
+    - teiler
+  become: yes
+  become_user: "{{ user.name }}"
+
+- name: Build and install xininfo
+  command: "{{ aur.makepkg }} chdir=/home/{{ user.name }}/{{ aur.dir }}/xininfo-git"
+  tags:
+    - aur
+    - teiler
+  become: yes
+  become_user: "{{ user.name }}"
+
 - name: Download teiler (rofi screenshot app)
   command: cower -dq teiler-git
            chdir=/home/{{ user.name }}/{{ aur.dir }}
