@@ -1,18 +1,5 @@
 ---
-- name: Download par2cmdline
-  command: cower -dq par2cmdline
-           chdir=/home/{{ user.name }}/{{ aur.dir }}
-           creates=/home/{{ user.name }}/{{ aur.dir }}/par2cmdline
+- name: Install par2cmdline
+  pacman: name=par2cmdline state=present
   tags:
-    - aur
     - par2
-  become: yes
-  become_user: "{{ user.name }}"
-
-- name: Build and install par2cmdline
-  command: "{{ aur.makepkg }} --skippgpcheck chdir=/home/{{ user.name }}/{{ aur.dir }}/par2cmdline"
-  tags:
-    - aur
-    - par2
-  become: yes
-  become_user: "{{ user.name }}"
