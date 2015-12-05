@@ -35,6 +35,24 @@
   become: yes
   become_user: "{{ user.name }}"
 
+- name: Download python2-vobject
+  command: cower -dq python2-vobject
+           chdir=/home/{{ user.name }}/{{ aur.dir }}
+           creates=/home/{{ user.name }}/{{ aur.dir }}/python2-vobject
+  tags:
+    - aur
+    - contacts
+  become: yes
+  become_user: "{{ user.name }}"
+
+- name: Build and install python2-vobject
+  command: "{{ aur.makepkg }} chdir=/home/{{ user.name }}/{{ aur.dir }}/python2-vobject"
+  tags:
+    - aur
+    - contacts
+  become: yes
+  become_user: "{{ user.name }}"
+
 - name: Download khard-git
   command: cower -dq khard-git
            chdir=/home/{{ user.name }}/{{ aur.dir }}
