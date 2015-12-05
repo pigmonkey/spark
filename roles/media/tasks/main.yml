@@ -10,6 +10,7 @@
 - include: feh.yml
 - include: calibre.yml
 - include: pianobar.yml
+- include: teiler.yml
 
 - name: Install misc media codecs and helpers
   pacman: name={{ item }} state=present
