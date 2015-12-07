@@ -1,4 +1,9 @@
 ---
+- name: Install poppler-glib
+  pacman: name=poppler-glib state=present
+  tags:
+    - gimp
+
 - name: Install GIMP
   pacman: name=gimp state=present
   tags:
