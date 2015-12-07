@@ -8,3 +8,11 @@
   service: name=slim.service enabled=yes
   tags:
     - slim
+
+- name: Set the SLiM login shell
+  lineinfile: dest=/etc/slim.conf
+              regexp=^login_cmd
+              state=present
+              line="login_cmd   exec {{ user.shell }} --login ~/.xinitrc %session"
+  tags:
+    - slim
