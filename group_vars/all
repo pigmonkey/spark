@@ -45,4 +45,8 @@ base_packages:
     - lsof
     - sysstat
     - arch-wiki-lite
+
+filesystem_packages:
     - dosfstools
+    - hfsprogs
+    - ntfs-3g

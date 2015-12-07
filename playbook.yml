@@ -30,6 +30,7 @@
     - { role: mapping, tags: ['mapping'] }
     - { role: sound, tags: ['sound'] }
     - { role: archive, tags: ['archive'] }
+    - { role: filesystems, tags: ['filesystems'] }
   vars_prompt:
     - name: user_password
       prompt: "Enter desired user password"

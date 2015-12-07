@@ -1,0 +1,4 @@
+---
+- name: Install filesystem packages
+  pacman: name={{ item }} state=present
+  with_items: "{{ filesystem_packages }}"
