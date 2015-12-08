@@ -31,6 +31,7 @@
     - { role: sound, tags: ['sound'] }
     - { role: archive, tags: ['archive'] }
     - { role: filesystems, tags: ['filesystems'] }
+    - { role: pim, tags: ['pim'] }
   vars_prompt:
     - name: user_password
       prompt: "Enter desired user password"
