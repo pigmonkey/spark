@@ -4,6 +4,11 @@
   tags:
     - python-dev
 
+- name: Install fabric
+  pacman: name=fabric state=present
+  tags:
+    - python-dev
+
 - name: Install tig
   pacman: name=tig state=present
 
