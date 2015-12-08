@@ -8,3 +8,8 @@
   user: name={{ user.name }} group={{ user.group }} password={{ user_password|password_hash('sha512') }} shell={{ user.shell }} update_password=on_create
   tags:
     - user
+
+- name: Create user bin
+  file: path=/home/{{ user.name }}/bin state=directory owner={{ user.name }} group={{ user.group }}
+  tags:
+    - user
