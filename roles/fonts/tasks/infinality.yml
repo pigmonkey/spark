@@ -5,7 +5,7 @@
               insertafter=EOF
               line="{{ item.line }}"
   with_items:
-    - { line: "\n[infinality-bundle]" }
+    - { line: "[infinality-bundle]" }
     - { line: "Server = http://bohoomil.com/repo/$arch" }
   tags:
     - infinality
