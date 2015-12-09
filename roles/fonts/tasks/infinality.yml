@@ -1,12 +1,6 @@
 ---
 - name: Add Infinality repository to pacman
-  lineinfile: dest=/etc/pacman.conf
-              state=present
-              insertafter=EOF
-              line="{{ item.line }}"
-  with_items:
-    - { line: "\n[infinality-bundle]" }
-    - { line: "Server = http://bohoomil.com/repo/$arch" }
+  command: bash -c "if ! grep -q bohoomil.com/repo /etc/pacman.conf; then printf '\n[infinality-bundle]\nServer = http://bohoomil.com/repo/$arch\n' >> /etc/pacman.conf; fi"
   tags:
     - infinality
 
