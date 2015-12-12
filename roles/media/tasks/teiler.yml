@@ -1,54 +1,11 @@
 ---
-- name: Download xininfo
-  command: cower -dq xininfo-git
-           chdir=/home/{{ user.name }}/{{ aur.dir }}
-           creates=/home/{{ user.name }}/{{ aur.dir }}/xininfo-git
+- name: Install teiler and dependencies
+  aur: name=ledger user={{ user.name }}
+  aur: name={{ item }} user={{ user.name }}
+  with_items:
+    - xininfo-git
+    - copyq-git
+    - teiler-git
   tags:
     - aur
     - teiler
-  become: yes
-  become_user: "{{ user.name }}"
-
-- name: Build and install xininfo
-  command: "{{ aur.makepkg }} chdir=/home/{{ user.name }}/{{ aur.dir }}/xininfo-git"
-  tags:
-    - aur
-    - teiler
-  become: yes
-  become_user: "{{ user.name }}"
-
-- name: Download teiler (rofi screenshot app)
-  command: cower -dq teiler-git
-           chdir=/home/{{ user.name }}/{{ aur.dir }}
-           creates=/home/{{ user.name }}/{{ aur.dir }}/teiler-git
-  tags:
-    - aur
-    - teiler
-  become: yes
-  become_user: "{{ user.name }}"
-
-- name: Build and install teiler
-  command: "{{ aur.makepkg }} chdir=/home/{{ user.name }}/{{ aur.dir }}/teiler-git"
-  tags:
-    - aur
-    - teiler
-  become: yes
-  become_user: "{{ user.name }}"
-
-- name: Download copyq (clipboard mgr)
-  command: cower -dq copyq-git
-           chdir=/home/{{ user.name }}/{{ aur.dir }}
-           creates=/home/{{ user.name }}/{{ aur.dir }}/copyq-git
-  tags:
-    - aur
-    - teiler
-  become: yes
-  become_user: "{{ user.name }}"
-
-- name: Build and install copyq
-  command: "{{ aur.makepkg }} chdir=/home/{{ user.name }}/{{ aur.dir }}/copyq-git"
-  tags:
-    - aur
-    - teiler
-  become: yes
-  become_user: "{{ user.name }}"

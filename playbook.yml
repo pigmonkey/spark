@@ -15,7 +15,6 @@
     - { role: laptop, tags: ['laptop'] }
     - { role: thinkpad, tags: ['thinkpad'] }
     - { role: screensaver, tags: ['screensaver'] }
-    - { role: firejail, tags: ['firejail'] }
     - { role: chat, tags: ['chat'] }
     - { role: git-annex, tags: ['git-annex'] }
     - { role: ledger, tags: ['ledger'] }

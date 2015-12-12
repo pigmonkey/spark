@@ -1,18 +1,6 @@
 ---
-- name: Download srandrd
-  command: cower -dq srandrd
-           chdir=/home/{{ user.name }}/{{ aur.dir }}
-           creates=/home/{{ user.name }}/{{ aur.dir }}/srandrd
+- name: Install srandrd
+  aur: name=srandrd user={{ user.name }}
   tags:
     - aur
     - srandrd
-  become: yes
-  become_user: "{{ user.name }}"
-
-- name: Build and install srandrd
-  command: "{{ aur.makepkg }} chdir=/home/{{ user.name }}/{{ aur.dir }}/srandrd"
-  tags:
-    - aur
-    - srandrd
-  become: yes
-  become_user: "{{ user.name }}"

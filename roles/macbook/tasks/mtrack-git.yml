@@ -4,21 +4,8 @@
   tags:
     - mtrack-git
 
-- name: Download xf86-input-mtrack-git
-  command: cower -dq xf86-input-mtrack-git
-           chdir=/home/{{ user.name }}/{{ aur.dir }}
-           creates=/home/{{ user.name }}/{{ aur.dir }}/xf86-input-mtrack-git
+- name: Install xf86-input-mtrack-git
+  aur: name=xf86-input-mtrack-git user={{ user.name }}
   tags:
     - aur
     - mtrack-git
-  become: yes
-  become_user: "{{ user.name }}"
-
-- name: Build and install mtrack-git
-  command: "{{ aur.makepkg }} chdir=/home/{{ user.name }}/{{ aur.dir }}/xf86-input-mtrack-git"
-  tags:
-    - aur
-    - mtrack-git
-  become: yes
-  become_user: "{{ user.name }}"
-

@@ -1,21 +1,9 @@
 ---
-- name: Download tpfanco
-  command: cower -dq tpfanco-svn
-           chdir=/home/{{ user.name }}/{{ aur.dir }}
-           creates=/home/{{ user.name }}/{{ aur.dir }}/tpfanco-svn
+- name: Install tpfanco
+  aur: name=tpfanco-svn user={{ user.name }}
   tags:
     - aur
     - fan
-  become: yes
-  become_user: "{{ user.name }}"
-
-- name: Build and install tpfanco
-  command: "{{ aur.makepkg }} chdir=/home/{{ user.name }}/{{ aur.dir }}/tpfanco-svn"
-  tags:
-    - aur
-    - fan
-  become: yes
-  become_user: "{{ user.name }}"
 
 - name: Copy tpfanco configuration file
   copy: src=thinkfan.conf dest=/etc/thinkfan.conf

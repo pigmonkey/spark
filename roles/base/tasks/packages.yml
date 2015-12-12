@@ -14,66 +14,15 @@
     - aur
     - packages
 
-- name: Download cower
-  get_url: url=https://aur.archlinux.org/cgit/aur.git/snapshot/cower.tar.gz
-           dest=/home/{{ user.name }}/{{ aur.dir }}
-           owner={{ user.name }}
-           group={{ user.group }}
+- name: Install cower
+  aur: name=cower user={{ user.name }} skip_pgp=yes
   tags:
     - aur
     - packages
 
-- name: Extract cower
-  unarchive: src=/home/{{ user.name }}/{{ aur.dir }}/cower.tar.gz
-             dest=/home/{{ user.name }}/{{ aur.dir }}
-             copy=no
-             owner={{ user.name }}
-             group={{ user.group }}
-             creates=/home/{{ user.name }}/{{ aur.dir }}/cower
+- name: Install AUR base packages
+  aur: name={{ item }} user={{ user.name }}
+  with_items: "{{ aur.packages }}"
   tags:
     - aur
     - packages
-
-- name: Build and install cower
-  command: "{{ aur.makepkg }} --skippgpcheck chdir=/home/{{ user.name }}/{{ aur.dir }}/cower"
-  tags:
-    - aur
-    - packages
-  become: yes
-  become_user: "{{ user.name }}"
-
-- name: Download AUR helper
-  command: cower -dq {{ aur.helper }}
-           chdir=/home/{{ user.name }}/{{ aur.dir }}
-           creates=/home/{{ user.name }}/{{ aur.dir }}/{{ aur.helper }}
-  tags:
-    - aur
-    - packages
-  become: yes
-  become_user: "{{ user.name }}"
-
-- name: Build and install AUR helper
-  command: "{{ aur.makepkg }} chdir=/home/{{ user.name }}/{{ aur.dir }}/{{ aur.helper }}"
-  tags:
-    - aur
-    - packages
-  become: yes
-  become_user: "{{ user.name }}"
-
-- name: Download pmount
-  command: cower -dq pmount
-           chdir=/home/{{ user.name }}/{{ aur.dir }}
-           creates=/home/{{ user.name }}/{{ aur.dir }}/pmount
-  tags:
-    - aur
-    - packages
-  become: yes
-  become_user: "{{ user.name }}"
-
-- name: Build and install pmount
-  command: "{{ aur.makepkg }} chdir=/home/{{ user.name }}/{{ aur.dir }}/pmount"
-  tags:
-    - aur
-    - packages
-  become: yes
-  become_user: "{{ user.name }}"

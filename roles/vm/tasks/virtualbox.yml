@@ -9,23 +9,11 @@
   tags:
     - virtualbox
 
-- name: Download VirtualBox extensions
-  command: cower -dq virtualbox-ext-oracle
-           chdir=/home/{{ user.name }}/{{ aur.dir }}
-           creates=/home/{{ user.name }}/{{ aur.dir }}/virtualbox-ext-oracle
+- name: Install VirtualBox extensions
+  aur: name=virtualbox-ext-oracle user={{ user.name }}
   tags:
     - aur
     - virtualbox
-  become: yes
-  become_user: "{{ user.name }}"
-
-- name: Build and install VirtualBox extensions
-  command: "{{ aur.makepkg }} chdir=/home/{{ user.name }}/{{ aur.dir }}/virtualbox-ext-oracle"
-  tags:
-    - aur
-    - virtualbox
-  become: yes
-  become_user: "{{ user.name }}"
 
 - name: Copy kernel modules to load
   copy: src=modules.conf dest=/etc/modules-load.d/virtualbox.conf

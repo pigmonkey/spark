@@ -1,18 +1,6 @@
 ---
-- name: Download autorandr
-  command: cower -dq autorandr-git
-           chdir=/home/{{ user.name }}/{{ aur.dir }}
-           creates=/home/{{ user.name }}/{{ aur.dir }}/autorandr-git
+- name: Install autorandr
+  aur: name=autorandr-git user={{ user.name }}
   tags:
     - aur
     - autorandr
-  become: yes
-  become_user: "{{ user.name }}"
-
-- name: Build and install autorandr
-  command: "{{ aur.makepkg }} chdir=/home/{{ user.name }}/{{ aur.dir }}/autorandr-git"
-  tags:
-    - aur
-    - autorandr
-  become: yes
-  become_user: "{{ user.name }}"

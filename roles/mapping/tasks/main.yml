@@ -2,18 +2,7 @@
 - name: Install Viking
   pacman: name=viking state=present
 
-#- name: Download gpxpy
-#  command: cower -dq python-gpxpy
-#           chdir=/home/{{ user.name }}/{{ aur.dir }}
-#           creates=/home/{{ user.name }}/{{ aur.dir }}/python-gpxpy
-#  tags:
-#    - aur
-#  become: yes
-#  become_user: "{{ user.name }}"
-
-#- name: Build and install gpxpy
-#  command: "{{ aur.makepkg }} chdir=/home/{{ user.name }}/{{ aur.dir }}/python-gpxpy"
-#  tags:
-#    - aur
-#  become: yes
-#  become_user: "{{ user.name }}"
+- name: Install gpxpy
+  aur: name=python-gpxpy user={{ user.name }}
+  tags:
+    - aur

@@ -11,8 +11,11 @@ hostname: nous
 
 aur:
     dir: aur
-    helper: aura-bin
-    makepkg: makepkg -csri --noconfirm --needed --noprogressbar
+    packages:
+        - aura-bin
+        - pmount
+        - orpie
+        - firejail
 
 ssh:
     port: 22

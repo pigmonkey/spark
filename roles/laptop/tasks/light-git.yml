@@ -1,19 +1,6 @@
 ---
-- name: Download light-git
-  command: cower -dq light-git
-           chdir=/home/{{ user.name }}/{{ aur.dir }}
-           creates=/home/{{ user.name }}/{{ aur.dir }}/light-git
+- name: Install light-git
+  aur: name=light-git user={{ user.name }}
   tags:
     - aur
     - light-git
-  become: yes
-  become_user: "{{ user.name }}"
-
-- name: Build and install light-git
-  command: "{{ aur.makepkg }} chdir=/home/{{ user.name }}/{{ aur.dir }}/light-git"
-  tags:
-    - aur
-    - light-git
-  become: yes
-  become_user: "{{ user.name }}"
-

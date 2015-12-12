@@ -4,20 +4,8 @@
   tags:
     - termite
 
-- name: Download termite
-  command: cower -dq termite-git
-           chdir=/home/{{ user.name }}/{{ aur.dir }}
-           creates=/home/{{ user.name }}/{{ aur.dir }}/termite-git
+- name: Install termite
+  aur: name=termite-git user={{ user.name }}
   tags:
     - aur
     - termite
-  become: yes
-  become_user: "{{ user.name }}"
-
-- name: Build and install termite
-  command: "{{ aur.makepkg }} chdir=/home/{{ user.name }}/{{ aur.dir }}/termite-git"
-  tags:
-    - aur
-    - termite
-  become: yes
-  become_user: "{{ user.name }}"

@@ -10,20 +10,8 @@
     - chromium
     - firejail
 
-- name: Download Chromium Pepper Flash
-  command: cower -dq chromium-pepper-flash
-           chdir=/home/{{ user.name }}/{{ aur.dir }}
-           creates=/home/{{ user.name }}/{{ aur.dir }}/chromium-pepper-flash
+- name: Install Chromium Pepper Flash
+  aur: name=chromium-pepper-flash user={{ user.name }}
   tags:
     - aur
     - chromium
-  become: yes
-  become_user: "{{ user.name }}"
-
-- name: Build and install Chromium Pepper Flash
-  command: "{{ aur.makepkg }} chdir=/home/{{ user.name }}/{{ aur.dir }}/chromium-pepper-flash"
-  tags:
-    - aur
-    - chromium
-  become: yes
-  become_user: "{{ user.name }}"

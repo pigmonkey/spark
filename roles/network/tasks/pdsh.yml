@@ -1,19 +1,5 @@
 ---
-- name: Download pdsh
-  command: cower -dq pdsh
-           chdir=/home/{{ user.name }}/{{ aur.dir }}
-           creates=/home/{{ user.name }}/{{ aur.dir }}/pdsh
+- name: Install pdsh
+  aur: name=pdsh user={{ user.name }}
   tags:
     - aur
-    - pdsh
-  become: yes
-  become_user: "{{ user.name }}"
-
-- name: Build and install pdsh
-  command: "{{ aur.makepkg }} chdir=/home/{{ user.name }}/{{ aur.dir }}/pdsh"
-  tags:
-    - aur
-    - pdsh
-  become: yes
-  become_user: "{{ user.name }}"
-

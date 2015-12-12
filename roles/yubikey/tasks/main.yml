@@ -1,19 +1,8 @@
 ---
-- name: Download YubiKey Personalizaiton GUI
-  command: cower -dq yubikey-personalization-gui-git
-           chdir=/home/{{ user.name }}/{{ aur.dir }}
-           creates=/home/{{ user.name }}/{{ aur.dir }}/yubikey-personalization-gui-git
+- name: Install YubiKey Personalization GUI
+  aur: name=yubikey-personalization-gui-git user={{ user.name }}
   tags:
     - aur
-  become: yes
-  become_user: "{{ user.name }}"
-
-- name: Build and install YubiKey Personalization GUI
-  command: "{{ aur.makepkg }} chdir=/home/{{ user.name }}/{{ aur.dir }}/yubikey-personalization-gui-git"
-  tags:
-    - aur
-  become: yes
-  become_user: "{{ user.name }}"
 
 - name: Install smartcard libs/tools
   pacman: name={{ item }} state=present

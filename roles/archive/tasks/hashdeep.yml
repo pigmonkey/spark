@@ -1,18 +1,6 @@
 ---
-- name: Download hashdeep
-  command: cower -dq hashdeep
-           chdir=/home/{{ user.name }}/{{ aur.dir }}
-           creates=/home/{{ user.name }}/{{ aur.dir }}/hashdeep
+- name: Install hashdeep
+  aur: name=hashdeep user={{ user.name }}
   tags:
     - aur
     - hashdeep
-  become: yes
-  become_user: "{{ user.name }}"
-
-- name: Build and install hashdeep
-  command: "{{ aur.makepkg }} --skippgpcheck chdir=/home/{{ user.name }}/{{ aur.dir }}/hashdeep"
-  tags:
-    - aur
-    - hashdeep
-  become: yes
-  become_user: "{{ user.name }}"

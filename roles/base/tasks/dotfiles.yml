@@ -1,23 +1,10 @@
 ---
-- name: Download rcm
-  command: cower -dq rcm
-           chdir=/home/{{ user.name }}/{{ aur.dir }}
-           creates=/home/{{ user.name }}/{{ aur.dir }}/rcm
+- name: Install rcm
+  aur: name=rcm user={{ user.name }}
   when: dotfiles is defined
   tags:
     - aur
     - dotfiles
-  become: yes
-  become_user: "{{ user.name }}"
-
-- name: Build and install rcm
-  command: "{{ aur.makepkg }} chdir=/home/{{ user.name }}/{{ aur.dir }}/rcm"
-  when: dotfiles is defined
-  tags:
-    - aur
-    - dotfiles
-  become: yes
-  become_user: "{{ user.name }}"
 
 - name: Clone user dotfiles
   git: repo={{ dotfiles.url }} dest=/home/{{ user.name }}/.dotfiles accept_hostkey=yes update=no

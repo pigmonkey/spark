@@ -57,19 +57,15 @@ role.
 All tasks involving the [AUR][6] are tagged `aur`. To provision an AUR-free
 system, pass this tag to ansible's `--skip-tag`.
 
-AUR packages will be downloaded via [cower][7] and installed with [makepkg][8].
-It is assumed that the user will want to use an [AUR helper][9] after the
-system has been provisioned, so whatever package is defined in `aur.helper`
-will be installed. This helper will *not* be used during any of the
-provisioning.
+AUR packages are installed via the [ansible-aur][7] module. Note that while
+[aura][8], an [AUR helper][9], is installed by default, it will *not* be used
+during any of the provisioning.
 
 ## Known Issues
 
 * [tpfanco][10], normally installed as part of the `thinkpad` role is currently
   [unavailable in the AUR][11]. No ThinkPad fan control software is currently
   installed.
-* [gpxpy][12], normally installed as part of the `mapping` role is currently
-  [unavailable in the AUR][13].
 
 
 [1]: http://www.ansible.com
@@ -78,10 +74,8 @@ provisioning.
 [4]: https://wiki.archlinux.org/index.php/Secure_Shell#Managing_the_sshd_daemon
 [5]: https://thoughtbot.github.io/rcm/
 [6]: https://aur.archlinux.org
-[7]: https://github.com/falconindy/cower
-[8]: https://wiki.archlinux.org/index.php/Makepkg
+[7]: https://github.com/pigmonkey/ansible-aur
+[8]: https://github.com/aurapm/aura
 [9]: https://wiki.archlinux.org/index.php/AUR_helpers
 [10]: https://code.google.com/p/tpfanco/
 [11]: https://aur.archlinux.org/packages/?O=0&K=tpfanco
-[12]: https://github.com/tkrajina/gpxpy
-[13]: https://aur.archlinux.org/packages/?O=0&K=gpxpy

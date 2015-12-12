@@ -15,4 +15,3 @@
 - include: cron.yml
 - include: ssh.yml
 - include: dotfiles.yml
-- include: orpie.yml

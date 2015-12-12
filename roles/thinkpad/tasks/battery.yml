@@ -4,20 +4,8 @@
   tags:
     - battery
 
-- name: Download tpacpi-bat
-  command: cower -dq tpacpi-bat
-           chdir=/home/{{ user.name }}/{{ aur.dir }}
-           creates=/home/{{ user.name }}/{{ aur.dir }}/tpacpi-bat
+- name: Install tpacpi-bat
+  aur: name=tpacpi-bat user={{ user.name }}
   tags:
     - aur
     - battery
-  become: yes
-  become_user: "{{ user.name }}"
-
-- name: Build and install tpacpi-bat
-  command: "{{ aur.makepkg }} chdir=/home/{{ user.name }}/{{ aur.dir }}/tpacpi-bat"
-  tags:
-    - aur
-    - battery
-  become: yes
-  become_user: "{{ user.name }}"

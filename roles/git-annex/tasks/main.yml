@@ -1,16 +1,5 @@
 ---
-- name: Download git-annex
-  command: cower -dq git-annex-bin
-           chdir=/home/{{ user.name }}/{{ aur.dir }}
-           creates=/home/{{ user.name }}/{{ aur.dir }}/git-annex-bin
+- name: Install git-annex
+  aur: name=git-annex-bin user={{ user.name }} skip_pgp=yes
   tags:
     - aur
-  become: yes
-  become_user: "{{ user.name }}"
-
-- name: Build and install git-annex
-  command: "{{ aur.makepkg }} --skippgpcheck chdir=/home/{{ user.name }}/{{ aur.dir }}/git-annex-bin"
-  tags:
-    - aur
-  become: yes
-  become_user: "{{ user.name }}"

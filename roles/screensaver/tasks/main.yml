@@ -2,21 +2,10 @@
 - name: Install xautolock
   pacman: name=xautolock state=present
 
-- name: Download physlock
-  command: cower -dq physlock
-           chdir=/home/{{ user.name }}/{{ aur.dir }}
-           creates=/home/{{ user.name }}/{{ aur.dir }}/physlock
+- name: Install physlock
+  aur: name=physlock user={{ user.name }}
   tags:
     - aur
-  become: yes
-  become_user: "{{ user.name }}"
-
-- name: Build and install physlock
-  command: "{{ aur.makepkg }} chdir=/home/{{ user.name }}/{{ aur.dir }}/physlock"
-  tags:
-    - aur
-  become: yes
-  become_user: "{{ user.name }}"
 
 - name: Push sleep lock script
   template: src=lock.sh.j2 dest=/usr/lib/systemd/system-sleep/lock.sh mode=755
