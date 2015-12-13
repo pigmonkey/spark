@@ -1,8 +1,7 @@
 ---
 - name: Install rofi
-  aur: name=rofi-git user={{ user.name }}
+  pacman: name=rofi state=present
   tags:
-    - aur
     - rofi
 
 - name: Install rofi-pass
