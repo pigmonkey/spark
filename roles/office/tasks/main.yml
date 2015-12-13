@@ -10,5 +10,8 @@
     - zathura-pdf-mupdf
     - zathura-ps
 
+- name: Install enscript
+  pacman: name=enscript state=present
+
 - name: Install Simple Scan
   pacman: name=simple-scan state=present
