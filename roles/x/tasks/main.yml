@@ -14,6 +14,9 @@
 - name: Install xev
   pacman: name=xorg-xev state=present
 
+- name: Install xorg-sessreg
+  pacman: name=xorg-sessreg state=present
+
 - name: Install video driver(s)
   pacman: name={{ item }} state=present
   with_items: "{{ video_drivers }}"

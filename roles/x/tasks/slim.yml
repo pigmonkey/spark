@@ -16,3 +16,19 @@
               line="login_cmd   exec {{ user.shell }} --login ~/.xinitrc %session"
   tags:
     - slim
+
+- name: Configure SLiM to properly log logins to utmp and wtmp
+  lineinfile: dest=/etc/slim.conf
+              regexp=^sessionstart_cmd
+              state=present
+              line="sessionstart_cmd   /usr/bin/sessreg -a -l tty$(fgconsole) %user"
+  tags:
+    - slim
+
+- name: Configure SLiM to properly log logouts to utmp and wtmp
+  lineinfile: dest=/etc/slim.conf
+              regexp=^sessionstop_cmd
+              state=present
+              line="sessionstop_cmd   /usr/bin/sessreg -d -l tty$(fgconsole) %user"
+  tags:
+    - slim
