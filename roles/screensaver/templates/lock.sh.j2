@@ -3,6 +3,6 @@
 
 if [ "$1" = "post" ]; then
 	if ! pidof physlock > /dev/null; then
-		/usr/sbin/physlock -u {{ user.name }}
+		/usr/sbin/physlock -m
 	fi
 fi
