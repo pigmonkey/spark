@@ -20,3 +20,4 @@
     - gst-libav
     - gst-plugins-good
     - exiv2
+    - opus-tools
