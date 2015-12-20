@@ -1,0 +1,6 @@
+---
+- name: Install flac2all
+  aur: name=flac2all user={{ user.name }}
+  tags:
+    - aur
+    - flac2all
