@@ -1,6 +1,5 @@
 ---
 - name: Install teiler and dependencies
-  aur: name=ledger user={{ user.name }}
   aur: name={{ item }} user={{ user.name }}
   with_items:
     - xininfo-git
