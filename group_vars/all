@@ -2,6 +2,7 @@ user:
     name: pigmonkey
     group: pigmonkey
     shell: /usr/bin/zsh
+    email:  peter@havenaut.net
 
 dotfiles:
     url: git@github.com:pigmonkey/dotfiles.git

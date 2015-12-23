@@ -12,10 +12,8 @@
 - name: Install OfflineIMAP
   pacman: name=offlineimap state=present
 
-- name: Install msmtp
-  pacman: name=msmtp-mta state=present
-
 - name: Install notmuch
   pacman: name=notmuch state=present
 
+- include: msmtp.yml
 - include: contacts.yml

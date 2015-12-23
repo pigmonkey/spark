@@ -61,6 +61,12 @@ AUR packages are installed via the [ansible-aur][7] module. Note that while
 [aura][8], an [AUR helper][9], is installed by default, it will *not* be used
 during any of the provisioning.
 
+## System Mail
+
+If the `email.user` variable is defined, the system will be configured to
+forward mail for the user and root to this address. Removing this variable will
+cause no mail aliases to be put in place.
+
 ## Known Issues
 
 * [tpfanco][10], normally installed as part of the `thinkpad` role is currently

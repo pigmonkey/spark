@@ -1,0 +1,43 @@
+---
+- name: Install msmtp
+  pacman: name=msmtp-mta state=present
+  tags:
+    - msmtp
+
+- name: Push msmtp configuration file
+  copy: src=msmtprc dest=/etc/msmtprc
+  tags:
+    - msmtp
+
+- name: Verify alias file exists
+  file: path=/etc/aliases state=touch
+  tags:
+    - msmtp
+
+- name: Set root email alias
+  lineinfile: "dest=/etc/aliases
+              regexp=^root
+              state=present
+              line='root: {{ user.email }}'"
+  when: user.email
+  tags:
+    - msmtp
+
+- name: Set user email alias
+  lineinfile: "dest=/etc/aliases
+              regexp=^{{ user.name }}
+              state=present
+              line='{{ user.name }}: {{ user.email }}'"
+  when: user.email
+  tags:
+    - msmtp
+
+- name: Create cronie systemd unit file directory
+  file: path=/etc/systemd/system/cronie.service.d state=directory
+  tags:
+    - msmtp
+
+- name: Override cronie send mail via msmtp
+  copy: src=cronie-service-msmtp.conf dest=/etc/systemd/system/cronie.service.d/msmtp.conf
+  tags:
+    - msmtp
