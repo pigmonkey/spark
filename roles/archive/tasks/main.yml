@@ -1,4 +1,6 @@
 ---
+- include: zip.yml
+- include: rar.yml
 - include: atool.yml
 - include: hashdeep.yml
 - include: par2.yml

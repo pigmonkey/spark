@@ -40,9 +40,6 @@ base_packages:
     - moreutils
     - pass
     - reflector
-    - zip
-    - unzip
-    - unrar
     - bc
     - ranger
     - strace

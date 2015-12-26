@@ -1,8 +1,5 @@
 ---
-- name: Install atool and dependencies
-  pacman: name={{ item }} state=present
-  with_items:
-    - p7zip
-    - atool
+- name: Install atool
+  pacman: name=atool state=present
   tags:
     - atool

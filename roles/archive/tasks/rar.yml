@@ -1,0 +1,5 @@
+---
+- name: Install unrar
+  pacman: name=unrar state=present
+  tags:
+    - unrar
