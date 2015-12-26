@@ -4,11 +4,6 @@
   tags:
     - mbsync
 
-- name: Push mail sync script
-  copy: src=mailsync.sh dest=/usr/local/bin/mailsync mode=755
-  tags:
-    - mbsync
-
 - name: Push mbsync service file
   copy: src=mbsync.service dest=/etc/systemd/system/mbsync@.service
   when: isync
