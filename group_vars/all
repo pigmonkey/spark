@@ -49,6 +49,7 @@ base_packages:
     - lsof
     - sysstat
     - arch-wiki-lite
+    - python-keyring
 
 filesystem_packages:
     - dosfstools
