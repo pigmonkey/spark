@@ -23,6 +23,10 @@ ssh:
     user_key: /root/id_rsa
     enable_sshd: False
 
+isync:
+    boot_delay: 5min
+    sync: 15min
+
 editors:
     - gvim
 

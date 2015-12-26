@@ -1,0 +1,5 @@
+---
+- name: Install OfflineIMAP
+  pacman: name=offlineimap state=present
+  tags:
+    - offlineimap

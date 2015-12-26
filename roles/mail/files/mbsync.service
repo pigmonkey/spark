@@ -1,0 +1,9 @@
+[Unit]
+Description=Mailbox synchronization service for user %I
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/mailsync
+User=%i
+StandardOutput=syslog
+StandardError=syslog

@@ -1,0 +1,11 @@
+# {{ ansible_managed }}
+[Unit]
+Description=Mailbox synchronization timer
+
+[Timer]
+OnBootSec={{ isync.boot_delay }}
+OnUnitActiveSec= {{ isync.sync }}
+Unit=mbsync@%i.service
+
+[Install]
+WantedBy=timers.target
