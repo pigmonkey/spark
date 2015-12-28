@@ -1,0 +1,5 @@
+---
+- name: Install CHIRP
+  aur: name=chirp user={{ user.name }}
+  tags:
+    - aur
