@@ -6,18 +6,18 @@
 
 - name: Push mbsync service file
   copy: src=mbsync.service dest=/etc/systemd/system/mbsync@.service
-  when: isync
+  when: isync is defined
   tags:
     - mbsync
 
 - name: Push mbsync timer file
   template: src=mbsync.timer.j2 dest=/etc/systemd/system/mbsync@.timer
-  when: isync
+  when: isync is defined
   tags:
     - mbsync
 
 - name: Enable and start mbsync timer
   service: name="mbsync@{{ user.name }}.timer" enabled=yes state=started
-  when: isync
+  when: isync is defined
   tags:
     - mbsync

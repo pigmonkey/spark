@@ -19,7 +19,7 @@
               regexp=^root
               state=present
               line='root: {{ user.email }}'"
-  when: user.email
+  when: user.email is defined
   tags:
     - msmtp
 
@@ -28,7 +28,7 @@
               regexp=^{{ user.name }}
               state=present
               line='{{ user.name }}: {{ user.email }}'"
-  when: user.email
+  when: user.email is defined
   tags:
     - msmtp
 
