@@ -61,16 +61,53 @@ AUR packages are installed via the [ansible-aur][7] module. Note that while
 [aura][8], an [AUR helper][9], is installed by default, it will *not* be used
 during any of the provisioning.
 
-## System Mail
+## Mail
+
+### Receiving Mail
+
+Receiving mail is supported by syncing from IMAP servers via both [isync][10]
+and [OfflineIMAP][11]. By default isync is enabled, but this can be changed to
+OfflineIMAP by setting the value of the `mail.sync_tool` variable to
+`offlineimap`.
+
+### Sending Mail
+
+[msmtp][12] is used to send mail. Included as part of msmtp's documentation are
+a set of [msmtpq scripts][13] for queuing mail. These scripts are copied to the
+user's path for use. When calling `msmtpq` instead of `msmtp`, mail is sent
+normally if internet connectivity is available. If the user is offline, the
+mail is saved in a queue, to be sent out when internet connectivity is again
+available. This helps support a seamless workflow, both offline and online.
+
+### System Mail
 
 If the `email.user` variable is defined, the system will be configured to
 forward mail for the user and root to this address. Removing this variable will
 cause no mail aliases to be put in place.
 
+The cron implementation is configured to send mail using `msmtpq`.
+
+### Syncing and Scheduling Mail
+
+A shell script called `mailsync` is included to sync mail, by first sending any
+mail in the msmtp queue and then syncing with the chosen IMAP servers via
+either isync or OfflineIMAP. Before syncing, the script checks for internet
+connectivity using NetworkMananger. `mailsync` may be called directly by the
+user, ie by configuring a hotkey in Mutt.
+
+A [systemd timer][14] is also included to periodically call `mailsync`. By
+default, the timer starts 5 minutes after boot (to allow time for network
+connectivity to be established, configurable through the `mail.sync_boot_delay`
+variable) and syncs every 15 minutes (configurable through the `mail.sync_time`
+variable).
+
+If the `mail.sync_time` variable is not defined, neither the synchronization
+service nor timer will be installed.
+
 ## Known Issues
 
-* [tpfanco][10], normally installed as part of the `thinkpad` role is currently
-  [unavailable in the AUR][11]. No ThinkPad fan control software is currently
+* [tpfanco][15], normally installed as part of the `thinkpad` role is currently
+  [unavailable in the AUR][16]. No ThinkPad fan control software is currently
   installed.
 
 
@@ -83,5 +120,10 @@ cause no mail aliases to be put in place.
 [7]: https://github.com/pigmonkey/ansible-aur
 [8]: https://github.com/aurapm/aura
 [9]: https://wiki.archlinux.org/index.php/AUR_helpers
-[10]: https://code.google.com/p/tpfanco/
-[11]: https://aur.archlinux.org/packages/?O=0&K=tpfanco
+[10]: http://isync.sourceforge.net/
+[11]: http://offlineimap.org/
+[12]: http://msmtp.sourceforge.net/
+[13]: http://sourceforge.net/p/msmtp/code/ci/master/tree/scripts/msmtpq/README.msmtpq
+[14]: https://wiki.archlinux.org/index.php/Systemd/Timers
+[15]: https://code.google.com/p/tpfanco/
+[16]: https://aur.archlinux.org/packages/?O=0&K=tpfanco

@@ -24,9 +24,10 @@ ssh:
     user_key: /root/id_rsa
     enable_sshd: False
 
-isync:
-    boot_delay: 5min
-    sync: 15min
+mail:
+    sync_tool: isync
+    sync_time: 15min
+    sync_boot_delay: 5min
 
 editors:
     - gvim

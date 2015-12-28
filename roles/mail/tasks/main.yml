@@ -12,10 +12,8 @@
 - name: Install notmuch
   pacman: name=notmuch state=present
 
-- name: Push mail sync script
-  copy: src=mailsync.sh dest=/usr/local/bin/mailsync mode=755
-
 - include: msmtp.yml
 - include: isync.yml
 - include: offlineimap.yml
+- include: mailsync.yml
 - include: contacts.yml

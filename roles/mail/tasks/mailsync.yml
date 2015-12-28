@@ -1,0 +1,23 @@
+---
+- name: Push mail sync script
+  template: src=mailsync.sh.j2 dest=/usr/local/bin/mailsync mode=755
+  tags:
+    - mailsync
+
+- name: Push mailsync service file
+  copy: src=mailsync.service dest=/etc/systemd/system/mailsync@.service
+  when: mail.sync_time is defined
+  tags:
+    - mailsync
+
+- name: Push mailsync timer file
+  template: src=mailsync.timer.j2 dest=/etc/systemd/system/mailsync@.timer
+  when: mail.sync_time is defined
+  tags:
+    - mailsync
+
+- name: Enable and start mailsync timer
+  service: name="mailsync@{{ user.name }}.timer" enabled=yes state=started
+  when: mail.sync_time is defined
+  tags:
+    - mailsync

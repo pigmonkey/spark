@@ -3,9 +3,9 @@
 Description=Mailbox synchronization timer
 
 [Timer]
-OnBootSec={{ isync.boot_delay }}
-OnUnitActiveSec= {{ isync.sync }}
-Unit=mbsync@%i.service
+OnBootSec={{ mail.sync_boot_delay }}
+OnUnitActiveSec= {{ mail.sync_time }}
+Unit=mailsync@%i.service
 
 [Install]
 WantedBy=timers.target

@@ -1,4 +1,5 @@
 #!/bin/sh
+# {{ ansible_managed }}
 # Original source: http://bit.ly/1Ztk5wg
 # Send and receive mail when full internet connectivity is available.
 
@@ -7,7 +8,11 @@ STATE=`nmcli networking connectivity`
 if [ $STATE = 'full' ]
 then
     /usr/local/bin/msmtp-queue -r
+{% if mail.sync_tool == "isync" %}
     /usr/bin/mbsync -a
+{% elif mail.sync_tool == "offlineimap" %}
+    /usr/bin/offlineimap -o
+{% endif %}
     exit $?
 fi
 echo "No internet connection."
