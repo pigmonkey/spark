@@ -56,3 +56,12 @@
   file: path=/home/{{ user.name }}/.msmtp.queue state=directory mode=0700 owner={{ user.name }} group={{ user.group }}
   tags:
     - msmtp
+
+- name: Set msmtpq log dir
+  lineinfile: "dest=/usr/local/bin/msmtpq
+              regexp=^LOG=
+              state=present
+              line='LOG=/home/{{ user.name }}/{{ user.log_dir }}/msmtp.queue.log'"
+  when: user.log_dir is defined
+  tags:
+    - msmtp
