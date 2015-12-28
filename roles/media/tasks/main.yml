@@ -21,4 +21,5 @@
     - gst-libav
     - gst-plugins-good
     - exiv2
+    - perl-image-exiftool
     - opus-tools
