@@ -3,6 +3,7 @@ user:
     group: pigmonkey
     shell: /usr/bin/zsh
     email:  peter@havenaut.net
+    log_dir: log
 
 dotfiles:
     url: git@github.com:pigmonkey/dotfiles.git
