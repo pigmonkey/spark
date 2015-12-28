@@ -15,3 +15,8 @@
 
 - name: Install Simple Scan
   pacman: name=simple-scan state=present
+
+- name: Install pandoc
+  aur: name=pandoc-bin user={{ user.name }}
+  tags:
+    - aur
