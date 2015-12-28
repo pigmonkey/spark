@@ -53,8 +53,6 @@
     - msmtp
 
 - name: Create msmtp queue directory
-  file: path=/home/{{ user.name }}/.msmtp.queue state=directory mode=0700
-  become: yes
-  become_user: "{{ user.name }}"
+  file: path=/home/{{ user.name }}/.msmtp.queue state=directory mode=0700 owner={{ user.name }} group={{ user.group }}
   tags:
     - msmtp
