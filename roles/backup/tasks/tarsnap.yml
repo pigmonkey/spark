@@ -1,0 +1,22 @@
+---
+- name: Install Tarsnap
+  pacman: name=tarsnap state=present
+  tags:
+    - tarsnap
+
+- name: Copy default Tarsnap config
+  copy: src=/etc/tarsnap/tarsnap.conf.sample dest=/etc/tarsnap/tarsnap.conf
+  tags:
+    - tarsnap
+
+- name: Create Tarsnap cache dir
+  file: path=/usr/local/tarsnap-cache state=directory
+  tags:
+    - tarsnap
+
+- name: Humanize Tarsnap numbers
+  lineinfile: dest=/etc/tarsnap/tarsnap.conf
+              state=present
+              line=humanize-numbers
+  tags:
+    - tarsnap
