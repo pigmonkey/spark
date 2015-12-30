@@ -85,7 +85,7 @@ If the `email.user` variable is defined, the system will be configured to
 forward mail for the user and root to this address. Removing this variable will
 cause no mail aliases to be put in place.
 
-The cron implementation is configured to send mail using `msmtpq`.
+The cron implementation is configured to send mail using `msmtp`.
 
 ### Syncing and Scheduling Mail
 
