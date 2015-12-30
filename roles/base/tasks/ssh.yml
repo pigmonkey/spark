@@ -52,6 +52,13 @@
   tags:
     - ssh
 
+- name: Export SSH_ASKPASS environment variable
+  lineinfile: dest=/etc/profile
+              state=present
+              line="export SSH_ASKPASS=\"/usr/lib/ssh/x11-ssh-askpass\""
+  tags:
+    - ssh
+
 - name: Make directory for user SSH key
   file: path=/home/{{ user.name }}/.ssh state=directory owner={{ user.name }} group={{ user.group }}
   tags:
