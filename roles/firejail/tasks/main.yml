@@ -3,3 +3,6 @@
   aur: name=firejail user={{ user.name }}
   tags:
     - aur
+
+- name: Install firewarden.sh script
+  copy: src=firewarden/firewarden.sh dest=/usr/local/bin/firewarden mode=0755
