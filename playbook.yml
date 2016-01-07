@@ -8,6 +8,7 @@
     - { role: i3, tags: ['i3'] }
     - { role: network, tags: ['network'] }
     - { role: ntp, tags: ['ntp'] }
+    - { role: firejail, tags: ['firejail'] }
     - { role: unbound, tags: ['unbound'] }
     - { role: editors, tags: ['editors'] }
     - { role: browsers, tags: ['browsers'] }
