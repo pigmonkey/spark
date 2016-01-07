@@ -1,0 +1,5 @@
+---
+- name: Install firejail
+  aur: name=firejail user={{ user.name }}
+  tags:
+    - aur
