@@ -14,7 +14,8 @@
     - { role: browsers, tags: ['browsers'] }
     - { role: media, tags: ['media'] }
     - { role: laptop, tags: ['laptop'] }
-    - { role: thinkpad, tags: ['thinkpad'] }
+    - { role: thinkpad, tags: ['thinkpad'], when: "'ThinkPad' in ansible_product_version" }
+    - { role: macbook, tags: ['macbook'], when: "'MacBook' in ansible_product_name" }
     - { role: screensaver, tags: ['screensaver'] }
     - { role: chat, tags: ['chat'] }
     - { role: git-annex, tags: ['git-annex'] }
