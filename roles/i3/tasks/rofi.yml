@@ -14,3 +14,8 @@
   pacman: name=i3-wm state=present
   tags:
     - rofi
+
+- name: Push rofi browser chooser
+  template: src=browser.sh.j2 dest=/usr/local/bin/browser mode=0755
+  tags:
+    - rofi
