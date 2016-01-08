@@ -6,3 +6,6 @@
 
 - name: Install firewarden.sh script
   copy: src=firewarden/firewarden.sh dest=/usr/local/bin/firewarden mode=0755
+
+- name: Install disposable.sh script
+  copy: src=disposable/disposable.sh dest=/usr/local/bin/disposable mode=0755
