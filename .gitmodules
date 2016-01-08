@@ -4,3 +4,6 @@
 [submodule "roles/firejail/files/firewarden"]
 	path = roles/firejail/files/firewarden
 	url = https://github.com/pigmonkey/firewarden.git
+[submodule "roles/firejail/files/disposable"]
+	path = roles/firejail/files/disposable
+	url = https://github.com/pigmonkey/disposable.git
