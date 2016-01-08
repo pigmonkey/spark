@@ -57,3 +57,8 @@ filesystem_packages:
     - dosfstools
     - hfsprogs
     - ntfs-3g
+
+browser_choices:
+    - firefox -P default
+    - firefox -P work
+    - disposable chromium

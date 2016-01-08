@@ -1,0 +1,6 @@
+#!/bin/sh
+# {{ ansible_managed }}
+
+menu=$(echo -e "{% for browser in browser_choices %}{{ browser }}\n{% endfor %}" | rofi -dmenu -p "browser ")
+
+eval $menu \"$@\" > /dev/null 2>&1 &
