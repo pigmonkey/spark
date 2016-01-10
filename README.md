@@ -18,6 +18,9 @@ First, sync mirrors and install Ansible.
 
     $ pacman -Syy python2-passlib ansible
 
+Second, install and update submodules:
+    $ git submodule init && git submodule update
+
 Run the playbook as root.
 
     # ansible-playbook -i localhost playbook.yml
