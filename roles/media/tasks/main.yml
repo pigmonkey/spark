@@ -5,6 +5,7 @@
 - include: abcde.yml
 - include: xfburn.yml
 - include: imagemagick.yml
+- include: inkscape.yml
 - include: gimp.yml
 - include: gthumb.yml
 - include: feh.yml
