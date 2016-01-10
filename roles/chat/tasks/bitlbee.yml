@@ -31,12 +31,6 @@
     - bitlbee
     - firejail
 
-- name: Push Bitlbee Firejail profile
-  copy: src=bitlbee.profile dest=/etc/firejail/bitlbee.profile
-  tags:
-    - bitlbee
-    - firejail
-
 - name: Enable and start Bitlbee
   service: name=bitlbee enabled=yes state=started
   tags:
