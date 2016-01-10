@@ -20,3 +20,8 @@
   aur: name=pandoc-bin user={{ user.name }}
   tags:
     - aur
+
+- name: Install masterpdfeditor-qt5
+  aur: name=masterpdfeditor-qt5 user={{ user.name }}
+  tags:
+    - aur

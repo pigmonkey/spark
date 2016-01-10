@@ -13,6 +13,7 @@
 - include: pianobar.yml
 - include: teiler.yml
 - include: flac2all.yml
+- include: darktable.yml
 
 - name: Install misc media codecs and helpers
   pacman: name={{ item }} state=present
