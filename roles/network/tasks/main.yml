@@ -17,6 +17,9 @@
 - name: Install netcat
   pacman: name=gnu-netcat state=present
 
+- name: Install lftp
+  pacman: name=lftp state=present
+
 - name: Install NetworkManager
   pacman: name=networkmanager state=present
 
