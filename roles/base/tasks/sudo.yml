@@ -10,6 +10,6 @@
     - sudo
 
 - name: Copy sudo configuration
-  copy: src=sudoers dest=/etc/sudoers mode=440
+  template: src=sudoers.j2 dest=/etc/sudoers mode=440
   tags:
     - sudo

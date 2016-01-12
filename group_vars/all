@@ -62,3 +62,6 @@ browser_choices:
     - firefox -P default
     - firefox -P work
     - disposable chromium
+
+passwordless_sudo:
+    - /bin/openvpn*

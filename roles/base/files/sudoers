@@ -1,6 +1,0 @@
-##
-## User privilege specification
-##
-root ALL=(ALL) ALL
-
-%wheel ALL=(ALL) ALL
