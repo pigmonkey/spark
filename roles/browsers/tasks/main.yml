@@ -7,3 +7,4 @@
 
 - include: firefox.yml
 - include: chromium.yml
+- include: chooser.yml
