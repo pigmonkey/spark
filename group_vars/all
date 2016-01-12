@@ -64,4 +64,4 @@ browser_choices:
     - disposable chromium
 
 passwordless_sudo:
-    - /bin/openvpn*
+    - /usr/bin/openvpn*
