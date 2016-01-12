@@ -42,3 +42,4 @@
   service: name=NetworkManager-dispatcher.service enabled=yes state=started
 
 - include: pdsh.yml
+- include: firewall.yml
