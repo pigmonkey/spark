@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Browser Chooser
+GenericName=Web Browser
+Exec=browser %U
+Terminal=false
+Type=Application
+MimeType=text/html;text/xml;application/xml;application/xhtml+xml;text/mml;x-scheme-handler/http;x-scheme-handler/https;

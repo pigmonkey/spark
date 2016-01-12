@@ -19,3 +19,18 @@
   template: src=browser.sh.j2 dest=/usr/local/bin/browser mode=0755
   tags:
     - rofi
+
+- name: Create local desktop application dir
+  file: path=/usr/local/share/applications state=directory
+  tags:
+    - rofi
+
+- name: Push rofi browser chooser desktop file
+  copy: src=browser.desktop dest=/usr/local/share/applications/browser.desktop
+  tags:
+    - rofi
+
+- name: Set rofi browser chooser as default application for relevant mimetypes
+  copy: src=mimeapps.list dest=/etc/xdg/mimeapps.list
+  tags:
+    - rofi
