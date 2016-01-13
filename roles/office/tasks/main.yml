@@ -25,3 +25,6 @@
   aur: name=masterpdfeditor-qt5 user={{ user.name }}
   tags:
     - aur
+
+- name: Install pdfgrep
+  pacman: name=pdfgrep state=present
