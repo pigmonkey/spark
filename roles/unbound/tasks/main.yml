@@ -11,5 +11,15 @@
 - name: Copy Unbound configuration file
   copy: src=unbound.conf dest=/etc/unbound/unbound.conf
 
+- name: Create Unbound systemd unit file directory
+  file: path=/etc/systemd/system/unbound.service.d state=directory
+  tags:
+    - firejail
+
+- name: Push Unbound socket unit file
+  copy: src=unbound-service-override.conf dest=/etc/systemd/system/unbound.service.d/override.conf
+  tags:
+    - firejail
+
 - name: Enable and start Unbound
   service: name=unbound.service enabled=yes state=started
