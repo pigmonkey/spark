@@ -67,19 +67,37 @@ AUR packages are installed via the [ansible-aur][7] module. Note that while
 [aura][8], an [AUR helper][9], is installed by default, it will *not* be used
 during any of the provisioning.
 
+## MAC Spoofing
+
+By default, the MAC address of all network interfaces is spoofed at boot,
+before any network services are brought up. This is done with [macchiato][10],
+which uses legitimate OUI prefixes to make the spoofing less recognizable.
+
+MAC spoofing is desirable for greater privacy on public networks, but may be
+inconvenient on home or corporate networks where a consistent (if not real) MAC
+address is wanted for authentication. To work around this, allow `macchiato` to
+randomize the MAC on boot, but tell NetworkManager to clone the real (or a fake
+but consistent) MAC address in its profile for the trusted networks. This can
+be done in the GUI by populating the "Cloned MAC address" field for the
+appropriate profiles, or by setting the `cloned-mac-address` property in the
+profile file at `/etc/NetworkManager/system-connections/`.
+
+Spoofing may be disabled entirely by setting the `network.spoof_mac` variable
+to `False`.
+
 ## Mail
 
 ### Receiving Mail
 
-Receiving mail is supported by syncing from IMAP servers via both [isync][10]
-and [OfflineIMAP][11]. By default isync is enabled, but this can be changed to
+Receiving mail is supported by syncing from IMAP servers via both [isync][11]
+and [OfflineIMAP][12]. By default isync is enabled, but this can be changed to
 OfflineIMAP by setting the value of the `mail.sync_tool` variable to
 `offlineimap`.
 
 ### Sending Mail
 
-[msmtp][12] is used to send mail. Included as part of msmtp's documentation are
-a set of [msmtpq scripts][13] for queuing mail. These scripts are copied to the
+[msmtp][13] is used to send mail. Included as part of msmtp's documentation are
+a set of [msmtpq scripts][14] for queuing mail. These scripts are copied to the
 user's path for use. When calling `msmtpq` instead of `msmtp`, mail is sent
 normally if internet connectivity is available. If the user is offline, the
 mail is saved in a queue, to be sent out when internet connectivity is again
@@ -101,7 +119,7 @@ either isync or OfflineIMAP. Before syncing, the script checks for internet
 connectivity using NetworkMananger. `mailsync` may be called directly by the
 user, ie by configuring a hotkey in Mutt.
 
-A [systemd timer][14] is also included to periodically call `mailsync`. By
+A [systemd timer][15] is also included to periodically call `mailsync`. By
 default, the timer starts 5 minutes after boot (to allow time for network
 connectivity to be established, configurable through the `mail.sync_boot_delay`
 variable) and syncs every 15 minutes (configurable through the `mail.sync_time`
@@ -112,8 +130,8 @@ service nor timer will be installed.
 
 ## Known Issues
 
-* [tpfanco][15], normally installed as part of the `thinkpad` role is currently
-  [unavailable in the AUR][16]. No ThinkPad fan control software is currently
+* [tpfanco][16], normally installed as part of the `thinkpad` role is currently
+  [unavailable in the AUR][17]. No ThinkPad fan control software is currently
   installed.
 
 
@@ -126,10 +144,11 @@ service nor timer will be installed.
 [7]: https://github.com/pigmonkey/ansible-aur
 [8]: https://github.com/aurapm/aura
 [9]: https://wiki.archlinux.org/index.php/AUR_helpers
-[10]: http://isync.sourceforge.net/
-[11]: http://offlineimap.org/
-[12]: http://msmtp.sourceforge.net/
-[13]: http://sourceforge.net/p/msmtp/code/ci/master/tree/scripts/msmtpq/README.msmtpq
-[14]: https://wiki.archlinux.org/index.php/Systemd/Timers
-[15]: https://code.google.com/p/tpfanco/
-[16]: https://aur.archlinux.org/packages/?O=0&K=tpfanco
+[10]: https://github.com/EtiennePerot/macchiato
+[11]: http://isync.sourceforge.net/
+[12]: http://offlineimap.org/
+[13]: http://msmtp.sourceforge.net/
+[14]: http://sourceforge.net/p/msmtp/code/ci/master/tree/scripts/msmtpq/README.msmtpq
+[15]: https://wiki.archlinux.org/index.php/Systemd/Timers
+[16]: https://code.google.com/p/tpfanco/
+[17]: https://aur.archlinux.org/packages/?O=0&K=tpfanco

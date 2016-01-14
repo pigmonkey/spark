@@ -28,6 +28,9 @@ mail:
     sync_time: 15min
     sync_boot_delay: 5min
 
+network:
+    randomize_mac: True
+
 editors:
     - gvim
 
