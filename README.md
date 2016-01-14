@@ -85,6 +85,18 @@ profile file at `/etc/NetworkManager/system-connections/`.
 Spoofing may be disabled entirely by setting the `network.spoof_mac` variable
 to `False`.
 
+## Trusted Networks
+
+Trusted networks are defined using their NetworkManager UUIDs, configured in
+the `network.trusted_uuid` list. NetworkManager UUIDs may be discovered using
+`nmcli con`.
+
+The list of trusted networks is made available at
+`/usr/local/etc/trusted_networks`. Currently this list is only used to start
+and stop mail syncing (see the section below on Syncing and Scheduling Mail),
+however maintaining the list may be useful for starting or stopping other
+services, loading different iptables rules, etc.
+
 ## Mail
 
 ### Receiving Mail
@@ -119,14 +131,23 @@ either isync or OfflineIMAP. Before syncing, the script checks for internet
 connectivity using NetworkMananger. `mailsync` may be called directly by the
 user, ie by configuring a hotkey in Mutt.
 
-A [systemd timer][15] is also included to periodically call `mailsync`. By
-default, the timer starts 5 minutes after boot (to allow time for network
-connectivity to be established, configurable through the `mail.sync_boot_delay`
-variable) and syncs every 15 minutes (configurable through the `mail.sync_time`
-variable).
+A [systemd timer][15] is also included to periodically call `mailsync`. The
+timer includes a 2 minute boot delay (to allow time for network connectivity to
+be established, configurable through the `mail.sync_boot_delay` variable) and
+syncs every 10 minutes (configurable through the `mail.sync_time` variable).
 
-If the `mail.sync_time` variable is not defined, neither the synchronization
-service nor timer will be installed.
+The timer is not started or enabled by default. Instead, a NetworkManager
+dispatcher is installed, which activates the timer whenever a connection is
+established to a trusted network. The timer is stopped when the network goes
+down. This helps to avoid having network tasks that may leak personally
+identifiable information running in the background when connected to untrusted
+networks.
+
+To have the timer activated at boot, change the `mail.sync_on` variable from
+`trusted` to `all`.
+
+If the `mail.sync_on` variable is set to anything other than `trusted` or
+`all`, the timer will never be activated.
 
 ## Known Issues
 

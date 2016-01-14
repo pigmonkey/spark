@@ -25,11 +25,16 @@ ssh:
 
 mail:
     sync_tool: isync
-    sync_time: 15min
-    sync_boot_delay: 5min
+    sync_time: 10min
+    sync_boot_delay: 2min
+    sync_on: trusted
 
 network:
-    randomize_mac: True
+    spoof_mac: True
+    trusted_uuid:
+        - 5eeb3104-5ad5-4072-a342-3691dfbbc27f
+        - 11d2d0a0-d809-406b-b5c1-04bf3837cbf1
+        - e5422190-e8a7-460f-b1ef-196c57036efa
 
 editors:
     - gvim
