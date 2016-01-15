@@ -3,3 +3,9 @@
   aur: name=git-annex-bin user={{ user.name }} skip_pgp=yes
   tags:
     - aur
+
+- name: Push git-annex service file
+  copy: src=git-annex.service dest=/etc/systemd/system/git-annex@.service
+
+- name: Enable and start git-annex service timer
+  service: name="git-annex@{{ user.name }}.service" enabled=yes state=started

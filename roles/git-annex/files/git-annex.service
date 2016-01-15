@@ -1,0 +1,12 @@
+[Unit]
+Description=Git Annex Assistant Service for %I
+
+[Service]
+Type=forking
+ExecStart=/usr/bin/git-annex assistant --foreground --autostart
+User=%i
+StandardOutput=syslog
+StandardError=syslog
+
+[Install]
+WantedBy=multi-user.target
