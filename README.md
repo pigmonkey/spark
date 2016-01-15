@@ -132,9 +132,8 @@ connectivity using NetworkMananger. `mailsync` may be called directly by the
 user, ie by configuring a hotkey in Mutt.
 
 A [systemd timer][15] is also included to periodically call `mailsync`. The
-timer includes a 2 minute boot delay (to allow time for network connectivity to
-be established, configurable through the `mail.sync_boot_delay` variable) and
-syncs every 10 minutes (configurable through the `mail.sync_time` variable).
+timer is set to sync every 10 minutes (configurable through the
+`mail.sync_time` variable).
 
 The timer is not started or enabled by default. Instead, a NetworkManager
 dispatcher is installed, which activates the timer whenever a connection is
