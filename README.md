@@ -186,7 +186,7 @@ If the `tarsnapper.tarsnap.run_on` variable is set to anything other than
 
 [git-annex][19] is installed for file syncing. A systemd service unit for the
 git-annex assistant is enabled and started by default. To prevent this, remove
-the `git-annex` variable from the config.
+the `gitannex` variable from the config.
 
 NetworkManager dispatchers are installed to stop the service when connecting to
 untrusted networks. This helps to avoid having network tasks that may leak
@@ -201,7 +201,7 @@ any network.  Conversely, the git-annex assistant is started by default,
 stopped *before* connecting to an untrusted network, and immediately started
 after disconnecting from any network.
 
-If the `git-annex.stopped_on` variable is set to anything other than
+If the `gitannex.stopped_on` variable is set to anything other than
 `untrusted`, the NetworkManager dispatchers will not be installed, resulting in
 the git-annex assistant service not being stopped on untrusted networks.
 
