@@ -77,6 +77,5 @@ passwordless_sudo:
 tarsnapper:
   deltas: 1h 6h 1d 7d 30d 365d
   timer:
-    boot_delay: 2min
     frequency: 1h
     run_on: trusted

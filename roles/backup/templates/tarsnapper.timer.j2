@@ -3,7 +3,6 @@
 Description=Tarsnapper Synchronization Timer
 
 [Timer]
-OnBootSec={{ tarsnapper.timer.boot_delay }}
 OnUnitActiveSec= {{ tarsnapper.timer.frequency }}
 Unit=tarsnapper.service
 

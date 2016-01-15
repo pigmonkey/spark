@@ -149,10 +149,42 @@ To have the timer activated at boot, change the `mail.sync_on` variable from
 If the `mail.sync_on` variable is set to anything other than `trusted` or
 `all`, the timer will never be activated.
 
+
+## Tarsnap
+
+[Tarsnap][16] is installed with its default configuration file. However,
+setting up Tarsnap is left as an exercise for the user. New Tarsnap users
+should [register their machine and generate a key][17]. Existing users should
+recover their key(s) and cache directory from their backups (or, alternatively,
+recover their key(s) and rebuild the cache directory with `tarsnap --fsck`).
+
+[Tarsnapper][18] is installed to manage backups. A basic configuration file to
+backup `/etc` is included. Tarsnapper is configured to look in
+`/usr/local/etc/tarsnapper.d` for additional jobs. As with with the Tarsnap key
+and cache directory, users should recover their jobs files from backups after
+the Tarsnapper install is complete. See the Tarsnapper documentation for more
+details.
+
+### Scheduling
+
+A systemd unit file and timer are included for Tarsnapper. The timer is set to
+execute Tarsnapper every hour (configurable through the
+`tarsnapper.timer.frequency` variable). However, as with `mailsync` this timer
+is not started or enabled by default. Instead, a NetworkManager dispatcher is
+installed, which activates the timer whenever a connection is established to a
+trusted network. The timer is stopped when the network goes down. This prevents
+Tarsnap backups from executing when connected to untrusted networks.
+
+To have the timer activated at boot, change the `tarsnapper.timer.run_on`
+variable from `trusted` to `all`.
+
+If the `tarsnapper.tarsnap.run_on` variable is set to anything other than
+`trusted` or `all`, the timer will never be activated.
+
 ## Known Issues
 
-* [tpfanco][16], normally installed as part of the `thinkpad` role is currently
-  [unavailable in the AUR][17]. No ThinkPad fan control software is currently
+* [tpfanco][19], normally installed as part of the `thinkpad` role is currently
+  [unavailable in the AUR][20]. No ThinkPad fan control software is currently
   installed.
 
 
@@ -171,5 +203,8 @@ If the `mail.sync_on` variable is set to anything other than `trusted` or
 [13]: http://msmtp.sourceforge.net/
 [14]: http://sourceforge.net/p/msmtp/code/ci/master/tree/scripts/msmtpq/README.msmtpq
 [15]: https://wiki.archlinux.org/index.php/Systemd/Timers
-[16]: https://code.google.com/p/tpfanco/
-[17]: https://aur.archlinux.org/packages/?O=0&K=tpfanco
+[16]: https://www.tarsnap.com/
+[17]: https://www.tarsnap.com/gettingstarted.html
+[18]: https://github.com/miracle2k/tarsnapper
+[19]: https://code.google.com/p/tpfanco/
+[20]: https://aur.archlinux.org/packages/?O=0&K=tpfanco
