@@ -44,3 +44,25 @@
   template: src=tarsnapper.conf.j2 dest=/usr/local/etc/tarsnapper.conf
   tags:
     - tarsnap
+
+- name: Push Tarsnapper service file
+  copy: src=tarsnapper.service dest=/etc/systemd/system/tarsnapper.service
+  tags:
+    - tarsnap
+
+- name: Push Tarsnapper timer file
+  template: src=tarsnapper.timer.j2 dest=/etc/systemd/system/tarsnapper.timer
+  tags:
+    - tarsnap
+
+- name: Enable and start Tarsnapper timer
+  service: name=tarsnapper.timer enabled=yes state=started
+  when: tarsnapper.timer.run_on == "all"
+  tags:
+    - tarsnap
+
+- name: Push dispatcher to activate Tarsnapper timer on trusted networks
+  template: src=tarsnapper_dispatcher.sh.j2 dest=/etc/NetworkManager/dispatcher.d/10tarsnapper mode=0755
+  when: tarsnapper.timer.run_on == "trusted"
+  tags:
+    - tarsnap

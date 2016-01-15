@@ -1,0 +1,9 @@
+[Unit]
+Description=Tarsnapper Backup Service
+After=network.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/tarsnapper -c /usr/local/etc/tarsnapper.conf make
+StandardOutput=syslog
+StandardError=syslog
