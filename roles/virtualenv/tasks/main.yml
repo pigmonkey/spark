@@ -1,0 +1,3 @@
+---
+- name: Install virtualenv and virtualenvwrapper
+  pacman: name=python-virtualenvwrapper state=present

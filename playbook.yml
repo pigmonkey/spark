@@ -26,6 +26,7 @@
     - { role: rtorrent, tags: ['rtorrent'] }
     - { role: vm, tags: ['vm'] }
     - { role: yubikey, tags: ['yubikey'] }
+    - { role: virtualenv, tags: ['virtualenv'] }
     - { role: development, tags: ['development'] }
     - { role: backup, tags: ['backup'] }
     - { role: mapping, tags: ['mapping'] }

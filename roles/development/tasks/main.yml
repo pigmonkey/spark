@@ -1,9 +1,4 @@
 ---
-- name: Install virtualenv and virtualenvwrapper
-  pacman: name=python-virtualenvwrapper state=present
-  tags:
-    - python-dev
-
 - name: Install fabric
   pacman: name=fabric state=present
   tags:
