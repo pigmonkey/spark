@@ -9,11 +9,6 @@
   tags:
     - user
 
-- name: Create user bin
-  file: path=/home/{{ user.name }}/bin state=directory owner={{ user.name }} group={{ user.group }}
-  tags:
-    - user
-
 - name: Create user log dir
   file: path=/home/{{ user.name }}/{{ user.log_dir }} state=directory owner={{ user.name }} group={{ user.group }}
   when: user.log_dir is defined
