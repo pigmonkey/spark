@@ -34,3 +34,13 @@
         state=link
   tags:
     - tarsnap
+
+- name: Create Tarsnapper config include dir
+  file: path=/usr/local/etc/tarsnapper.d/ state=directory
+  tags:
+    - tarsnap
+
+- name: Push Tarsnapper config
+  template: src=tarsnapper.conf.j2 dest=/usr/local/etc/tarsnapper.conf
+  tags:
+    - tarsnap
