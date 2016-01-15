@@ -5,7 +5,7 @@ action="$2"
 
 case $action in
     up)
-        if grep -q $CONNECTION_UUID /usr/local/etc/trusted_networks; then
+        if grep -q \^$CONNECTION_UUID\$ /usr/local/etc/trusted_networks; then
             systemctl start tarsnapper.timer
         fi
         ;;
