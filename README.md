@@ -93,9 +93,10 @@ the `network.trusted_uuid` list. NetworkManager UUIDs may be discovered using
 
 The list of trusted networks is made available at
 `/usr/local/etc/trusted_networks`. Currently this list is only used to start
-and stop mail syncing (see the section below on Syncing and Scheduling Mail),
-however maintaining the list may be useful for starting or stopping other
-services, loading different iptables rules, etc.
+and stop mail syncing (see the section below on Syncing and Scheduling Mail)
+and Tarsnap backups (see the section below on Scheduling Tarsnap), however
+maintaining the list may be useful for starting or stopping other services,
+loading different iptables rules, etc.
 
 ## Mail
 
@@ -164,7 +165,7 @@ and cache directory, users should recover their jobs files from backups after
 the Tarsnapper install is complete. See the Tarsnapper documentation for more
 details.
 
-### Scheduling
+### Scheduling Tarsnap
 
 A systemd unit file and timer are included for Tarsnapper. The timer is set to
 execute Tarsnapper every hour (configurable through the
