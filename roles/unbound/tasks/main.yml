@@ -21,5 +21,12 @@
   tags:
     - firejail
 
+- name: Remove Unbound systemd unit PID file line
+  lineinfile: dest=/usr/lib/systemd/system/unbound.service
+              state=absent
+              line="PIDFile=/run/unbound.pid"
+  tags:
+    - firejail
+
 - name: Enable and start Unbound
   service: name=unbound.service enabled=yes state=started
