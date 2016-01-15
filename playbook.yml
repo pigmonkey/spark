@@ -1,6 +1,6 @@
 ---
 - hosts: localhost
-  sudo: yes
+  become: yes
   roles:
     - { role: base, tags: ['base'] }
     - { role: fonts, tags: ['fonts'] }
