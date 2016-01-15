@@ -14,17 +14,17 @@
        virtualenv=/usr/local/env/pim
        virtualenv_command=virtualenv-2.7
 
-- name: Link vdirsyncer to user bin
+- name: Link vdirsyncer to bin
   file: src=/usr/local/env/pim/bin/vdirsyncer
         dest=/usr/local/bin/vdirsyncer
         state=link
 
-- name: Link khard to user bin
+- name: Link khard to bin
   file: src=/usr/local/env/pim/bin/khard
         dest=/usr/local/bin/khard
         state=link
 
-- name: Link khal to user bin
+- name: Link khal to bin
   file: src=/usr/local/env/pim/bin/khal
         dest=/usr/local/bin/khal
         state=link
