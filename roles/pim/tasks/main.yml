@@ -1,43 +1,30 @@
 ---
 - name: Install vdirsyncer into virtual environment
   pip: name=vdirsyncer
-       virtualenv=/home/{{ user.name }}/.virtualenvs/pim
+       virtualenv=/usr/local/env/pim
        virtualenv_command=virtualenv-2.7
-  become: yes
-  become_user: "{{ user.name }}"
 
 - name: Install khard into virtual environment
   pip: name=khard
-       virtualenv=/home/{{ user.name }}/.virtualenvs/pim
+       virtualenv=/usr/local/env/pim
        virtualenv_command=virtualenv-2.7
-  become: yes
-  become_user: "{{ user.name }}"
 
 - name: Install khal into virtual environment
   pip: name=khal
-       virtualenv=/home/{{ user.name }}/.virtualenvs/pim
+       virtualenv=/usr/local/env/pim
        virtualenv_command=virtualenv-2.7
-  become: yes
-  become_user: "{{ user.name }}"
-
-- name: Check if user bin exists
-  stat: path=/home/{{ user.name }}/bin
-  register: check_bin
 
 - name: Link vdirsyncer to user bin
-  file: src=/home/{{ user.name }}/.virtualenvs/pim/bin/vdirsyncer
-        dest=/home/{{ user.name }}/bin/vdirsyncer
+  file: src=/usr/local/env/pim/bin/vdirsyncer
+        dest=/usr/local/bin/vdirsyncer
         state=link
-  when: check_bin.stat.exists
 
 - name: Link khard to user bin
-  file: src=/home/{{ user.name }}/.virtualenvs/pim/bin/khard
-        dest=/home/{{ user.name }}/bin/khard
+  file: src=/usr/local/env/pim/bin/khard
+        dest=/usr/local/bin/khard
         state=link
-  when: check_bin.stat.exists
 
 - name: Link khal to user bin
-  file: src=/home/{{ user.name }}/.virtualenvs/pim/bin/khal
-        dest=/home/{{ user.name }}/bin/khal
+  file: src=/usr/local/env/pim/bin/khal
+        dest=/usr/local/bin/khal
         state=link
-  when: check_bin.stat.exists
