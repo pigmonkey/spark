@@ -78,3 +78,6 @@ tarsnapper:
   timer:
     frequency: 1h
     run_on: trusted
+
+git-annex:
+    stopped_on: untrusted

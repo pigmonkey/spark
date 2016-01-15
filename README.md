@@ -92,11 +92,12 @@ the `network.trusted_uuid` list. NetworkManager UUIDs may be discovered using
 `nmcli con`.
 
 The list of trusted networks is made available at
-`/usr/local/etc/trusted_networks`. Currently this list is only used to start
-and stop mail syncing (see the section below on Syncing and Scheduling Mail)
-and Tarsnap backups (see the section below on Scheduling Tarsnap), however
-maintaining the list may be useful for starting or stopping other services,
-loading different iptables rules, etc.
+`/usr/local/etc/trusted_networks`. Currently this list is used to start and
+stop mail syncing (see the section below on Syncing and Scheduling Mail),
+Tarsnap backups (see the section below on Scheduling Tarsnap), and the
+git-annex assistant (see the section below on git-annex). Maintaining this list
+may be useful for starting or stopping additional services, loading different
+iptables rules, etc.
 
 ## Mail
 
@@ -181,10 +182,33 @@ variable from `trusted` to `all`.
 If the `tarsnapper.tarsnap.run_on` variable is set to anything other than
 `trusted` or `all`, the timer will never be activated.
 
+## git-annex
+
+[git-annex][19] is installed for file syncing. A systemd service unit for the
+git-annex assistant is enabled and started by default. To prevent this, remove
+the `git-annex` variable from the config.
+
+NetworkManager dispatchers are installed to stop the service when connecting to
+untrusted networks. This helps to avoid having network tasks that may leak
+personally identifiable information running in the background when connected to
+untrusted networks.
+
+Note that this behaviour is slightly different than that of the NetworkManager
+dispatchers included for syncing mail and performing Tarsnap backups. Those
+timers are disabled by default, only started *after* a connection to a trusted
+network has been established, and immediately stopped after disconnecting from
+any network.  Conversely, the git-annex assistant is started by default,
+stopped *before* connecting to an untrusted network, and immediately started
+after disconnecting from any network.
+
+If the `git-annex.stopped_on` variable is set to anything other than
+`untrusted`, the NetworkManager dispatchers will not be installed, resulting in
+the git-annex assistant service not being stopped on untrusted networks.
+
 ## Known Issues
 
-* [tpfanco][19], normally installed as part of the `thinkpad` role is currently
-  [unavailable in the AUR][20]. No ThinkPad fan control software is currently
+* [tpfanco][20], normally installed as part of the `thinkpad` role is currently
+  [unavailable in the AUR][21]. No ThinkPad fan control software is currently
   installed.
 
 
@@ -206,5 +230,6 @@ If the `tarsnapper.tarsnap.run_on` variable is set to anything other than
 [16]: https://www.tarsnap.com/
 [17]: https://www.tarsnap.com/gettingstarted.html
 [18]: https://github.com/miracle2k/tarsnapper
-[19]: https://code.google.com/p/tpfanco/
-[20]: https://aur.archlinux.org/packages/?O=0&K=tpfanco
+[19]: https://git-annex.branchable.com/
+[20]: https://code.google.com/p/tpfanco/
+[21]: https://aur.archlinux.org/packages/?O=0&K=tpfanco

@@ -1,0 +1,8 @@
+#!/bin/sh
+# {{ ansible_managed }}
+
+if ! grep -q $CONNECTION_UUID /usr/local/etc/trusted_networks; then
+    systemctl stop git-annex@{{ user.name }}.service
+fi
+
+exit 0
