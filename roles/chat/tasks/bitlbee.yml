@@ -33,5 +33,12 @@
 
 - name: Enable and start Bitlbee
   service: name=bitlbee enabled=yes state=started
+  when: bitlbee.run_on == "all"
+  tags:
+    - bitlbee
+
+- name: Push dispatcher to activate Bitlbee on trusted networks
+  template: src=bitlbee_dispatcher.sh.j2 dest=/etc/NetworkManager/dispatcher.d/10bitlbee mode=0755
+  when: bitlbee.run_on == "trusted"
   tags:
     - bitlbee

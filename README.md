@@ -92,12 +92,16 @@ the `network.trusted_uuid` list. NetworkManager UUIDs may be discovered using
 `nmcli con`.
 
 The list of trusted networks is made available at
-`/usr/local/etc/trusted_networks`. Currently this list is used to start and
-stop mail syncing (see the section below on Syncing and Scheduling Mail),
-Tarsnap backups (see the section below on Scheduling Tarsnap), and the
-git-annex assistant (see the section below on git-annex). Maintaining this list
-may be useful for starting or stopping additional services, loading different
-iptables rules, etc.
+`/usr/local/etc/trusted_networks`. In conjunction with NetworkManager
+dispatchers, this list is used to start and stop certain services when
+connecting to trusted or untrusted networks. This helps to avoid leaking
+personal information on untrusted networks, by ensuring that certain network
+tasks are not running in the background.
+
+Currently, this is implemented for mail syncing (see the section below on
+Syncing and Scheduling Mail), Tarsnap backups (see the section below on
+Scheduling Tarsnap), the git-annex assistant (see the section below on
+git-annex), and BitlBee (see the section below on BitlBee).
 
 ## Mail
 
@@ -140,9 +144,7 @@ timer is set to sync every 10 minutes (configurable through the
 The timer is not started or enabled by default. Instead, a NetworkManager
 dispatcher is installed, which activates the timer whenever a connection is
 established to a trusted network. The timer is stopped when the network goes
-down. This helps to avoid having network tasks that may leak personally
-identifiable information running in the background when connected to untrusted
-networks.
+down.
 
 To have the timer activated at boot, change the `mail.sync_on` variable from
 `trusted` to `all`.
@@ -173,8 +175,7 @@ execute Tarsnapper every hour (configurable through the
 `tarsnapper.timer.frequency` variable). However, as with `mailsync` this timer
 is not started or enabled by default. Instead, a NetworkManager dispatcher is
 installed, which activates the timer whenever a connection is established to a
-trusted network. The timer is stopped when the network goes down. This prevents
-Tarsnap backups from executing when connected to untrusted networks.
+trusted network. The timer is stopped when the network goes down.
 
 To have the timer activated at boot, change the `tarsnapper.timer.run_on`
 variable from `trusted` to `all`.
@@ -182,15 +183,27 @@ variable from `trusted` to `all`.
 If the `tarsnapper.tarsnap.run_on` variable is set to anything other than
 `trusted` or `all`, the timer will never be activated.
 
+## BitlBee
+
+[BitlBee][19] and [WeeChat][20] are used to provide chat services. A systemd
+service unit for BitlBee is installed, but not enabled or started by default.
+Instead, a NetworkManager dispatcher is installed, which activates the service
+when a connection is established to a trusted network. The service is stopped
+when the network goes down.
+
+To have the service activated at boot, change the `bitlbee.run_on` variable
+from `trusted` to `all`.
+
+If the `bitlbee.run_on` variable is set to anything other than `trusted` or
+`all`, the service will never be activated.
+
 ## git-annex
 
-[git-annex][19] is installed for file syncing. A systemd service unit for the
+[git-annex][21] is installed for file syncing. A systemd service unit for the
 git-annex assistant is enabled and started by default. To prevent this, remove
 the `gitannex` variable from the config.
 
 NetworkManager dispatchers are installed to stop the service when connecting to
-untrusted networks. This helps to avoid having network tasks that may leak
-personally identifiable information running in the background when connected to
 untrusted networks.
 
 Note that this behaviour is slightly different than that of the NetworkManager
@@ -207,8 +220,8 @@ the git-annex assistant service not being stopped on untrusted networks.
 
 ## Known Issues
 
-* [tpfanco][20], normally installed as part of the `thinkpad` role is currently
-  [unavailable in the AUR][21]. No ThinkPad fan control software is currently
+* [tpfanco][22], normally installed as part of the `thinkpad` role is currently
+  [unavailable in the AUR][23]. No ThinkPad fan control software is currently
   installed.
 
 
@@ -230,6 +243,8 @@ the git-annex assistant service not being stopped on untrusted networks.
 [16]: https://www.tarsnap.com/
 [17]: https://www.tarsnap.com/gettingstarted.html
 [18]: https://github.com/miracle2k/tarsnapper
-[19]: https://git-annex.branchable.com/
-[20]: https://code.google.com/p/tpfanco/
-[21]: https://aur.archlinux.org/packages/?O=0&K=tpfanco
+[19]: https://www.bitlbee.org/main.php/news.r.html
+[20]: https://weechat.org/
+[21]: https://git-annex.branchable.com/
+[22]: https://code.google.com/p/tpfanco/
+[23]: https://aur.archlinux.org/packages/?O=0&K=tpfanco
