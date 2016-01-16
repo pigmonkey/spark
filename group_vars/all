@@ -9,8 +9,6 @@ dotfiles:
     url: git@github.com:pigmonkey/dotfiles.git
     rcup_flags: -x README.md
 
-hostname: nous
-
 aur:
     dir: aur
     packages:
