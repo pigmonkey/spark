@@ -26,6 +26,7 @@ ssh:
 mail:
     sync_tool: isync
     sync_time: 10min
+    sync_boot_delay: 2min
     sync_on: trusted
 
 network:
