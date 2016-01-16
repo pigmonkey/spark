@@ -171,11 +171,11 @@ details.
 ### Scheduling Tarsnap
 
 A systemd unit file and timer are included for Tarsnapper. The timer is set to
-execute Tarsnapper every hour (configurable through the
-`tarsnapper.timer.frequency` variable). However, as with `mailsync` this timer
-is not started or enabled by default. Instead, a NetworkManager dispatcher is
-installed, which activates the timer whenever a connection is established to a
-trusted network. The timer is stopped when the network goes down.
+execute Tarsnapper hourly (configurable through the `tarsnapper.timer.schedule`
+variable). However, as with `mailsync` this timer is not started or enabled by
+default. Instead, a NetworkManager dispatcher is installed, which activates the
+timer whenever a connection is established to a trusted network. The timer is
+stopped when the network goes down.
 
 To have the timer activated at boot, change the `tarsnapper.timer.run_on`
 variable from `trusted` to `all`.

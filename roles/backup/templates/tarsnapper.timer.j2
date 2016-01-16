@@ -3,8 +3,9 @@
 Description=Tarsnapper Synchronization Timer
 
 [Timer]
-OnUnitActiveSec={{ tarsnapper.timer.frequency }}
 Unit=tarsnapper.service
+OnCalendar={{ tarsnapper.timer.schedule }}
+Persistent=True
 
 [Install]
 WantedBy=timers.target
