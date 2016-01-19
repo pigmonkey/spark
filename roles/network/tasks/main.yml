@@ -47,12 +47,16 @@
 - name: Install GNOME Keyring
   pacman: name=gnome-keyring state=present
 
+- name: Install pdsh
+  aur: name=pdsh user={{ user.name }}
+  tags:
+    - aur
+
 - name: Enable and start NetworkManager
   service: name=NetworkManager.service enabled=yes state=started
 
 - name: Enable and start NetworkManager dispatcher
   service: name=NetworkManager-dispatcher.service enabled=yes state=started
 
-- include: pdsh.yml
 - include: firewall.yml
 - include: macchiato.yml
