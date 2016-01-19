@@ -11,12 +11,3 @@
   pacman: name=ruby state=present
   tags:
     - ruby-dev
-
-- name: Install Compass and dependencies
-  aur: name={{ item }} user={{ user.name }}
-  with_items:
-    - ruby-bundler
-    - ruby-compass
-  tags:
-    - ruby-dev
-    - aur
