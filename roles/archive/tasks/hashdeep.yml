@@ -1,6 +1,0 @@
----
-- name: Install hashdeep
-  aur: name=hashdeep user={{ user.name }}
-  tags:
-    - aur
-    - hashdeep

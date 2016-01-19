@@ -1,5 +1,0 @@
----
-- name: Install par2cmdline
-  pacman: name=par2cmdline state=present
-  tags:
-    - par2

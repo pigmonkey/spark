@@ -1,9 +1,0 @@
----
-- name: Install zip archive utilities
-  pacman: name={{ item }} state=present
-  with_items:
-    - zip
-    - unzip
-    - p7zip
-  tags:
-    - zip
