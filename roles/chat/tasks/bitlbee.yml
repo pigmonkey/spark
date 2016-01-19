@@ -38,7 +38,9 @@
     - bitlbee
 
 - name: Push dispatcher to activate Bitlbee on trusted networks
-  template: src=bitlbee_dispatcher.sh.j2 dest=/etc/NetworkManager/dispatcher.d/10bitlbee mode=0755
+  lineinfile: dest=/usr/local/etc/trusted_units
+              state=present
+              line=bitlbee.service
   when: bitlbee.run_on == "trusted"
   tags:
     - bitlbee

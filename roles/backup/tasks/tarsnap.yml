@@ -61,8 +61,10 @@
   tags:
     - tarsnap
 
-- name: Push dispatcher to activate Tarsnapper timer on trusted networks
-  template: src=tarsnapper_dispatcher.sh.j2 dest=/etc/NetworkManager/dispatcher.d/10tarsnapper mode=0755
+- name: Add tarsnapper to trusted unit list
+  lineinfile: dest=/usr/local/etc/trusted_units
+              state=present
+              line=tarsnapper.timer
   when: tarsnapper.timer.run_on == "trusted"
   tags:
     - tarsnap

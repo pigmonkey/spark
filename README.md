@@ -89,19 +89,27 @@ to `False`.
 
 Trusted networks are defined using their NetworkManager UUIDs, configured in
 the `network.trusted_uuid` list. NetworkManager UUIDs may be discovered using
-`nmcli con`.
+`nmcli con`. The list of trusted networks is made available at
+`/usr/local/etc/trusted_networks`.
 
-The list of trusted networks is made available at
-`/usr/local/etc/trusted_networks`. In conjunction with NetworkManager
-dispatchers, this list is used to start and stop certain services when
-connecting to trusted or untrusted networks. This helps to avoid leaking
-personal information on untrusted networks, by ensuring that certain network
-tasks are not running in the background.
+A list of systemd units which should be enabled when connected to a trusted
+network, but disabled when there is no network or any time a connection to an
+untrusted network is established, is maintained at
+`/usr/local/etc/trusted_units`. A script, `toggle_units` is provided to analyze
+the current network connections and toggle the trusted units as appropriate.
+Finally, a NetworkManager dispatcher is installed to call this script anytime a
+network interface has been activated or deactivated.
 
+This design helps to avoid leaking personal information on untrusted networks,
+by ensuring that certain network tasks are not running in the background.
 Currently, this is implemented for mail syncing (see the section below on
 Syncing and Scheduling Mail), Tarsnap backups (see the section below on
-Scheduling Tarsnap), the git-annex assistant (see the section below on
-git-annex), and BitlBee (see the section below on BitlBee).
+Scheduling Tarsnap), and BitlBee (see the section below on BitlBee). The
+git-annex assistant is also toggled based on the state of the trusted network,
+but does not use the same dispatcher or `toggle_units` script as the other
+units due to its slightly different requirements (see the section below on
+git-annex).
+
 
 ## Mail
 
@@ -141,10 +149,11 @@ A [systemd timer][15] is also included to periodically call `mailsync`. The
 timer is set to sync every 10 minutes (configurable through the
 `mail.sync_time` variable).
 
-The timer is not started or enabled by default. Instead, a NetworkManager
-dispatcher is installed, which activates the timer whenever a connection is
-established to a trusted network. The timer is stopped when the network goes
-down.
+The timer is not started or enabled by default. Instead, the timer is added to
+`/usr/local/etc/trusted_units`, causing the NetworkManager trusted unit
+dispatcher to activate the timer whenever a connection is established to a
+trusted network. The timer is stopped whenever the network goes down or a
+connection is established to an untrusted network.
 
 To have the timer activated at boot, change the `mail.sync_on` variable from
 `trusted` to `all`.
@@ -173,9 +182,10 @@ details.
 A systemd unit file and timer are included for Tarsnapper. The timer is set to
 execute Tarsnapper hourly (configurable through the `tarsnapper.timer.schedule`
 variable). However, as with `mailsync` this timer is not started or enabled by
-default. Instead, a NetworkManager dispatcher is installed, which activates the
-timer whenever a connection is established to a trusted network. The timer is
-stopped when the network goes down.
+default. Instead, the timer is added to `/usr/local/etc/trusted_units`, causing
+the NetworkManager trusted unit dispatcher to activate the timer whenever a
+connection is established to a trusted network. The timer is stopped whenever
+the network goes down or a connection is established to an untrusted network.
 
 To have the timer activated at boot, change the `tarsnapper.timer.run_on`
 variable from `trusted` to `all`.
@@ -187,9 +197,10 @@ If the `tarsnapper.tarsnap.run_on` variable is set to anything other than
 
 [BitlBee][19] and [WeeChat][20] are used to provide chat services. A systemd
 service unit for BitlBee is installed, but not enabled or started by default.
-Instead, a NetworkManager dispatcher is installed, which activates the service
-when a connection is established to a trusted network. The service is stopped
-when the network goes down.
+Instead, the service is added to `/usr/local/etc/trusted_units`, causing the
+NetworkManager trusted unit dispatcher to activate the service whenever a
+connection is established to a trusted network. The service is stopped whenever
+the network goes down or a connection is established to an untrusted network.
 
 To have the service activated at boot, change the `bitlbee.run_on` variable
 from `trusted` to `all`.
@@ -207,12 +218,12 @@ NetworkManager dispatchers are installed to stop the service when connecting to
 untrusted networks.
 
 Note that this behaviour is slightly different than that of the NetworkManager
-dispatchers included for syncing mail and performing Tarsnap backups. Those
-timers are disabled by default, only started *after* a connection to a trusted
-network has been established, and immediately stopped after disconnecting from
-any network.  Conversely, the git-annex assistant is started by default,
-stopped *before* connecting to an untrusted network, and immediately started
-after disconnecting from any network.
+dispatcher used for syncing mail, performing Tarsnap backups, and toggling
+BitlBee. Those units are disabled by default, only started *after* a connection
+to a trusted network has been established, and immediately stopped after
+disconnecting from any network.  Conversely, the git-annex assistant is started
+by default, stopped *before* connecting to an untrusted network, and
+immediately started after disconnecting from any network.
 
 If the `gitannex.stopped_on` variable is set to anything other than
 `untrusted`, the NetworkManager dispatchers will not be installed, resulting in

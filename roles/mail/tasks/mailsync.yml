@@ -20,8 +20,10 @@
   tags:
     - mailsync
 
-- name: Push dispatcher to activate mailsync timer on trusted networks
-  template: src=mailsync_dispatcher.sh.j2 dest=/etc/NetworkManager/dispatcher.d/10mailsync mode=0755
+- name: Add mailsync to trusted unit list
+  lineinfile: dest=/usr/local/etc/trusted_units
+              state=present
+              line="mailsync@{{ user.name }}.timer"
   when: mail.sync_on == "trusted"
   tags:
     - mailsync
