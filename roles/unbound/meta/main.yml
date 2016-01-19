@@ -1,4 +1,3 @@
 ---
 dependencies:
-  - { role: base }
-  - { role: network }
+  - { role: firejail }
