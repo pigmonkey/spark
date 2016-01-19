@@ -1,2 +1,8 @@
 ---
-- include: mtrack-git.yml
+- name: Copy mtrack-git configuration file
+  copy: src=50-mtrack-git.conf dest=/etc/X11/xorg.conf.d/50-mtrack-git.conf
+
+- name: Install xf86-input-mtrack-git
+  aur: name=xf86-input-mtrack-git user={{ user.name }}
+  tags:
+    - aur
