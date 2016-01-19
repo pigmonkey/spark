@@ -95,10 +95,10 @@ the `network.trusted_uuid` list. NetworkManager UUIDs may be discovered using
 A list of systemd units which should be enabled when connected to a trusted
 network, but disabled when there is no network or any time a connection to an
 untrusted network is established, is maintained at
-`/usr/local/etc/trusted_units`. A script, `toggle_units` is provided to analyze
-the current network connections and toggle the trusted units as appropriate.
-Finally, a NetworkManager dispatcher is installed to call this script anytime a
-network interface has been activated or deactivated.
+`/usr/local/etc/trusted_units`. A script, `toggle_units`, is provided to
+analyze the current network connections and toggle the trusted units as
+appropriate.  Finally, a NetworkManager dispatcher is installed to call this
+script anytime a network interface has been activated or deactivated.
 
 This design helps to avoid leaking personal information on untrusted networks,
 by ensuring that certain network tasks are not running in the background.
