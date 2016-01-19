@@ -30,6 +30,7 @@
     - { role: virtualenv, tags: ['virtualenv'] }
     - { role: development, tags: ['development'] }
     - { role: backup, tags: ['backup'] }
+    - { role: tarsnap, tags: ['tarsnap'] }
     - { role: mapping, tags: ['mapping'] }
     - { role: sound, tags: ['sound'] }
     - { role: archive, tags: ['archive'] }

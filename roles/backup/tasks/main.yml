@@ -11,5 +11,3 @@
   aur: name=atticmatic user={{ user.name }}
   tags:
     - aur
-
-- include: tarsnap.yml
