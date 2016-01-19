@@ -5,6 +5,7 @@
     - { role: base, tags: ['base'] }
     - { role: fonts, tags: ['fonts'] }
     - { role: x, tags: ['x'] }
+    - { role: slim, tags: ['slim'] }
     - { role: i3, tags: ['i3'] }
     - { role: network, tags: ['network'] }
     - { role: networkmanager, tags: ['networkmanager'] }

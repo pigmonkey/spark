@@ -24,7 +24,6 @@
 - name: Add user to video group
   user: name={{ user.name }} groups=video append=yes
 
-- include: slim.yml
 - include: sxhkd.yml
 - include: unclutter.yml
 - include: volwheel.yml
