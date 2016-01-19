@@ -28,7 +28,6 @@
     - { role: vm, tags: ['vm'] }
     - { role: yubikey, tags: ['yubikey'] }
     - { role: virtualenv, tags: ['virtualenv'] }
-    - { role: development, tags: ['development'] }
     - { role: backup, tags: ['backup'] }
     - { role: tarsnap, tags: ['tarsnap'] }
     - { role: mapping, tags: ['mapping'] }

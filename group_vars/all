@@ -58,6 +58,9 @@ base_packages:
     - sysstat
     - arch-wiki-lite
     - python-keyring
+    - fabric
+    - tig
+    - ruby
 
 filesystem_packages:
     - dosfstools
