@@ -1,0 +1,27 @@
+---
+- name: Install NetworkManager and dependencies
+  pacman: name={{ item }} state=present
+  with_items:
+      - networkmanager
+      - networkmanager-openvpn
+      - network-manager-applet
+      - xfce4-notifyd
+      - gnome-keyring
+
+- name: Push trusted network list
+  template: src=trusted_networks.j2 dest=/usr/local/etc/trusted_networks
+
+- name: Verify trusted unit list exists
+  file: path=/usr/local/etc/trusted_units state=touch
+
+- name: Push trusted unit toggler
+  copy: src=toggle_units.sh dest=/usr/local/bin/toggle_units mode=0755
+
+- name: Push network trust dispatcher
+  copy: src=trust_dispatcher.sh dest=/etc/NetworkManager/dispatcher.d/10trust mode=0755
+
+- name: Enable and start NetworkManager
+  service: name=NetworkManager.service enabled=yes state=started
+
+- name: Enable and start NetworkManager dispatcher
+  service: name=NetworkManager-dispatcher.service enabled=yes state=started

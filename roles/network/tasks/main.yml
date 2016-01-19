@@ -1,16 +1,4 @@
 ---
-- name: Push trusted network list
-  template: src=trusted_networks.j2 dest=/usr/local/etc/trusted_networks
-
-- name: Verify trusted unit list exists
-  file: path=/usr/local/etc/trusted_units state=touch
-
-- name: Push trusted unit toggler
-  copy: src=toggle_units.sh dest=/usr/local/bin/toggle_units mode=0755
-
-- name: Push network trust dispatcher
-  copy: src=trust_dispatcher.sh dest=/etc/NetworkManager/dispatcher.d/10trust mode=0755
-
 - name: Install OpenVPN
   pacman: name=openvpn state=present
 
@@ -32,31 +20,10 @@
 - name: Install lftp
   pacman: name=lftp state=present
 
-- name: Install NetworkManager
-  pacman: name=networkmanager state=present
-
-- name: Install NetworkManager OpenVPN plugin
-  pacman: name=networkmanager-openvpn state=present
-
-- name: Install NetworkManager applet
-  pacman: name=network-manager-applet state=present
-
-- name: Install Xfce notification daemon
-  pacman: name=xfce4-notifyd state=present
-
-- name: Install GNOME Keyring
-  pacman: name=gnome-keyring state=present
-
 - name: Install pdsh
   aur: name=pdsh user={{ user.name }}
   tags:
     - aur
-
-- name: Enable and start NetworkManager
-  service: name=NetworkManager.service enabled=yes state=started
-
-- name: Enable and start NetworkManager dispatcher
-  service: name=NetworkManager-dispatcher.service enabled=yes state=started
 
 - include: firewall.yml
 - include: macchiato.yml
