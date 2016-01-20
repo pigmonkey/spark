@@ -1,0 +1,9 @@
+---
+- name: Install Grsecurity
+  pacman: name=linux-grsec state=present
+
+- name: Install PaX
+  pacman: name={{ item }} state=present
+  with_items:
+      - paxd
+      - pax-utils

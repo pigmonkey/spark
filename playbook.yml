@@ -3,6 +3,7 @@
   become: yes
   roles:
     - { role: base, tags: ['base'] }
+    - { role: grsec, tags: ['grsec'] }
     - { role: fonts, tags: ['fonts'] }
     - { role: x, tags: ['x'] }
     - { role: slim, tags: ['slim'] }
