@@ -26,3 +26,18 @@
   tags:
     - aur
     - packages
+
+- name: Push pacman cache cleanup service
+  copy: src=paccache.service dest=/etc/systemd/system/paccache.service
+  tags:
+    - packages
+
+- name: Push pacman cache cleanup timer
+  copy: src=paccache.timer dest=/etc/systemd/system/paccache.timer
+  tags:
+    - packages
+
+- name: Enable and start pacman cache cleanup timer
+  service: name=paccache.timer enabled=yes state=started
+  tags:
+    - packages
