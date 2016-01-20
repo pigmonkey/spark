@@ -1,0 +1,10 @@
+[Unit]
+Description=Clean-up Old Pacman Files
+
+[Timer]
+OnCalendar=daily
+AccuracySec=1h
+Persistent=True
+
+[Install]
+WantedBy=multi-user.target
