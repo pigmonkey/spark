@@ -1,6 +1,9 @@
 ---
 - name: Install Grsecurity
-  pacman: name=linux-grsec state=present
+  pacman: name={{ item }} state=present
+  with_items:
+      - linux-grsec
+      - linux-grsec-headers
   notify:
     - rebuild grub
 
