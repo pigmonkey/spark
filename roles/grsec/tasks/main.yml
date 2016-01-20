@@ -9,3 +9,4 @@
   with_items:
       - paxd
       - pax-utils
+      - paxtest
