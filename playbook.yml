@@ -4,6 +4,8 @@
   roles:
     - { role: base, tags: ['base'] }
     - { role: grsec, tags: ['grsec'] }
+    - { role: ssh, tags: ['ssh'] }
+    - { role: dotfiles, tags: ['dotfiles'] }
     - { role: fonts, tags: ['fonts'] }
     - { role: x, tags: ['x'] }
     - { role: slim, tags: ['slim'] }
