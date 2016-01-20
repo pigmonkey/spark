@@ -21,14 +21,12 @@
   tags:
     - virtualbox
     - grsec
-    - debug
 
 - name: Build VirtualBox kernel modules
   command: /root/build_vbox_modules.sh
   tags:
     - virtualbox
     - grsec
-    - debug
 
 - name: Copy kernel modules to load
   copy: src=modules.conf dest=/etc/modules-load.d/virtualbox.conf
