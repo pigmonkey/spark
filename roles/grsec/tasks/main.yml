@@ -1,6 +1,8 @@
 ---
 - name: Install Grsecurity
   pacman: name=linux-grsec state=present
+  notify:
+    - rebuild grub
 
 - name: Install PaX
   pacman: name={{ item }} state=present
