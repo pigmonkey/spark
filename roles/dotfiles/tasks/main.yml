@@ -4,20 +4,15 @@
   when: dotfiles is defined
   tags:
     - aur
-    - dotfiles
 
 - name: Clone user dotfiles
   git: repo={{ dotfiles.url }} dest=/home/{{ user.name }}/.dotfiles accept_hostkey=yes update=no
   when: dotfiles is defined
   become: yes
   become_user: "{{ user.name }}"
-  tags:
-    - dotfiles
 
 - name: Install user dotfiles
   command: rcup {{ dotfiles.rcup_flags }}
   when: dotfiles is defined
   become: yes
   become_user: "{{ user.name }}"
-  tags:
-    - dotfiles
