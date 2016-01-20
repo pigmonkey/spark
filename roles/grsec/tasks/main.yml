@@ -10,3 +10,4 @@
       - paxd
       - pax-utils
       - paxtest
+      - checksec
