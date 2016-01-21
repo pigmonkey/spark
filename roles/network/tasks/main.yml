@@ -20,10 +20,22 @@
 - name: Install lftp
   pacman: name=lftp state=present
 
+- name: Install nmap
+  pacman: name=nmap state=present
+
+- name: Install tcpdump
+  pacman: name=tcpdump state=present
+
 - name: Install pdsh
   aur: name=pdsh user={{ user.name }}
   tags:
     - aur
+
+- name: Install wireshark
+  pacman: name=wireshark-qt state=present
+
+- name: Add user to wireshark group
+  user: name={{ user.name }} groups=wireshark append=yes
 
 - include: firewall.yml
 - include: macchiato.yml
