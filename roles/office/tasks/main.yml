@@ -17,9 +17,7 @@
   pacman: name=simple-scan state=present
 
 - name: Install pandoc
-  aur: name=pandoc-bin user={{ user.name }}
-  tags:
-    - aur
+  pacman: name=pandoc state=present
 
 - name: Install masterpdfeditor-qt5
   aur: name=masterpdfeditor-qt5 user={{ user.name }}

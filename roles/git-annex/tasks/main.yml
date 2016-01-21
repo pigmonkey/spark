@@ -1,8 +1,6 @@
 ---
 - name: Install git-annex
-  aur: name=git-annex-bin user={{ user.name }} skip_pgp=yes
-  tags:
-    - aur
+  pacman: name=git-annex state=present
 
 - name: Push git-annex assistant service file
   copy: src=git-annex.service dest=/etc/systemd/system/git-annex@.service
