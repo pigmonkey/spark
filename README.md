@@ -87,43 +87,37 @@ to `False`.
 
 ## Trusted Networks
 
+The trusted network framework provided by [nmtrust][11] is leveraged to start
+certain systemd units when connected to trusted networks, and stop them
+elsewhere.
+
+This helps to avoid leaking personal information on untrusted networks by
+ensuring that certain network tasks are not running in the background.
+Currently, this is used for mail syncing (see the section below on Syncing and
+Scheduling Mail), Tarsnap backups (see the section below on Scheduling
+Tarsnap), and BitlBee (see the section below on BitlBee). The git-annex
+assistant is also toggled based on the state of the trusted network, but does
+not use the same tools provided by `nmcli` due to its slightly different
+requirements (see the section below on git-annex).
+
 Trusted networks are defined using their NetworkManager UUIDs, configured in
 the `network.trusted_uuid` list. NetworkManager UUIDs may be discovered using
-`nmcli con`. The list of trusted networks is made available at
-`/usr/local/etc/trusted_networks`.
-
-A list of systemd units which should be enabled when connected to a trusted
-network, but disabled when there is no network or any time a connection to an
-untrusted network is established, is maintained at
-`/usr/local/etc/trusted_units`. A script, `toggle_units`, is provided to
-analyze the current network connections and toggle the trusted units as
-appropriate.  Finally, a NetworkManager dispatcher is installed to call this
-script anytime a network interface has been activated or deactivated.
-
-This design helps to avoid leaking personal information on untrusted networks,
-by ensuring that certain network tasks are not running in the background.
-Currently, this is implemented for mail syncing (see the section below on
-Syncing and Scheduling Mail), Tarsnap backups (see the section below on
-Scheduling Tarsnap), and BitlBee (see the section below on BitlBee). The
-git-annex assistant is also toggled based on the state of the trusted network,
-but does not use the same dispatcher or `toggle_units` script as the other
-units due to its slightly different requirements (see the section below on
-git-annex).
+`nmcli con`.
 
 
 ## Mail
 
 ### Receiving Mail
 
-Receiving mail is supported by syncing from IMAP servers via both [isync][11]
-and [OfflineIMAP][12]. By default isync is enabled, but this can be changed to
+Receiving mail is supported by syncing from IMAP servers via both [isync][12]
+and [OfflineIMAP][13]. By default isync is enabled, but this can be changed to
 OfflineIMAP by setting the value of the `mail.sync_tool` variable to
 `offlineimap`.
 
 ### Sending Mail
 
-[msmtp][13] is used to send mail. Included as part of msmtp's documentation are
-a set of [msmtpq scripts][14] for queuing mail. These scripts are copied to the
+[msmtp][14] is used to send mail. Included as part of msmtp's documentation are
+a set of [msmtpq scripts][15] for queuing mail. These scripts are copied to the
 user's path for use. When calling `msmtpq` instead of `msmtp`, mail is sent
 normally if internet connectivity is available. If the user is offline, the
 mail is saved in a queue, to be sent out when internet connectivity is again
@@ -145,7 +139,7 @@ either isync or OfflineIMAP. Before syncing, the script checks for internet
 connectivity using NetworkMananger. `mailsync` may be called directly by the
 user, ie by configuring a hotkey in Mutt.
 
-A [systemd timer][15] is also included to periodically call `mailsync`. The
+A [systemd timer][16] is also included to periodically call `mailsync`. The
 timer is set to sync every 10 minutes (configurable through the
 `mail.sync_time` variable).
 
@@ -164,13 +158,13 @@ If the `mail.sync_on` variable is set to anything other than `trusted` or
 
 ## Tarsnap
 
-[Tarsnap][16] is installed with its default configuration file. However,
+[Tarsnap][17] is installed with its default configuration file. However,
 setting up Tarsnap is left as an exercise for the user. New Tarsnap users
-should [register their machine and generate a key][17]. Existing users should
+should [register their machine and generate a key][18]. Existing users should
 recover their key(s) and cache directory from their backups (or, alternatively,
 recover their key(s) and rebuild the cache directory with `tarsnap --fsck`).
 
-[Tarsnapper][18] is installed to manage backups. A basic configuration file to
+[Tarsnapper][19] is installed to manage backups. A basic configuration file to
 backup `/etc` is included. Tarsnapper is configured to look in
 `/usr/local/etc/tarsnapper.d` for additional jobs. As with with the Tarsnap key
 and cache directory, users should recover their jobs files from backups after
@@ -195,7 +189,7 @@ If the `tarsnapper.tarsnap.run_on` variable is set to anything other than
 
 ## BitlBee
 
-[BitlBee][19] and [WeeChat][20] are used to provide chat services. A systemd
+[BitlBee][20] and [WeeChat][21] are used to provide chat services. A systemd
 service unit for BitlBee is installed, but not enabled or started by default.
 Instead, the service is added to `/usr/local/etc/trusted_units`, causing the
 NetworkManager trusted unit dispatcher to activate the service whenever a
@@ -210,7 +204,7 @@ If the `bitlbee.run_on` variable is set to anything other than `trusted` or
 
 ## git-annex
 
-[git-annex][21] is installed for file syncing. A systemd service unit for the
+[git-annex][22] is installed for file syncing. A systemd service unit for the
 git-annex assistant is enabled and started by default. To prevent this, remove
 the `gitannex` variable from the config.
 
@@ -231,8 +225,8 @@ the git-annex assistant service not being stopped on untrusted networks.
 
 ## Known Issues
 
-* [tpfanco][22], normally installed as part of the `thinkpad` role is currently
-  [unavailable in the AUR][23]. No ThinkPad fan control software is currently
+* [tpfanco][23], normally installed as part of the `thinkpad` role is currently
+  [unavailable in the AUR][24]. No ThinkPad fan control software is currently
   installed.
 
 
@@ -246,16 +240,17 @@ the git-annex assistant service not being stopped on untrusted networks.
 [8]: https://github.com/aurapm/aura
 [9]: https://wiki.archlinux.org/index.php/AUR_helpers
 [10]: https://github.com/EtiennePerot/macchiato
-[11]: http://isync.sourceforge.net/
-[12]: http://offlineimap.org/
-[13]: http://msmtp.sourceforge.net/
-[14]: http://sourceforge.net/p/msmtp/code/ci/master/tree/scripts/msmtpq/README.msmtpq
-[15]: https://wiki.archlinux.org/index.php/Systemd/Timers
-[16]: https://www.tarsnap.com/
-[17]: https://www.tarsnap.com/gettingstarted.html
-[18]: https://github.com/miracle2k/tarsnapper
-[19]: https://www.bitlbee.org/main.php/news.r.html
-[20]: https://weechat.org/
-[21]: https://git-annex.branchable.com/
-[22]: https://code.google.com/p/tpfanco/
-[23]: https://aur.archlinux.org/packages/?O=0&K=tpfanco
+[11]: https://github.com/pigmonkey/nmtrust
+[12]: http://isync.sourceforge.net/
+[13]: http://offlineimap.org/
+[14]: http://msmtp.sourceforge.net/
+[15]: http://sourceforge.net/p/msmtp/code/ci/master/tree/scripts/msmtpq/README.msmtpq
+[16]: https://wiki.archlinux.org/index.php/Systemd/Timers
+[17]: https://www.tarsnap.com/
+[18]: https://www.tarsnap.com/gettingstarted.html
+[19]: https://github.com/miracle2k/tarsnapper
+[20]: https://www.bitlbee.org/main.php/news.r.html
+[21]: https://weechat.org/
+[22]: https://git-annex.branchable.com/
+[23]: https://code.google.com/p/tpfanco/
+[24]: https://aur.archlinux.org/packages/?O=0&K=tpfanco
