@@ -6,6 +6,7 @@
     - { role: grsec, tags: ['grsec'] }
     - { role: ssh, tags: ['ssh'] }
     - { role: dotfiles, tags: ['dotfiles'] }
+    - { role: ssd, tags: ['ssd'] }
     - { role: fonts, tags: ['fonts'] }
     - { role: x, tags: ['x'] }
     - { role: slim, tags: ['slim'] }
