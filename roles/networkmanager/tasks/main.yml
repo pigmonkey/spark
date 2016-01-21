@@ -14,11 +14,14 @@
 - name: Verify trusted unit list exists
   file: path=/usr/local/etc/trusted_units state=touch
 
-- name: Push trusted unit toggler
-  copy: src=toggle_units.sh dest=/usr/local/bin/toggle_units mode=0755
+- name: Push trusted network checker
+  copy: src=nmtrust/nmtrust dest=/usr/local/bin/nmtrust mode=0755
 
-- name: Push network trust dispatcher
-  copy: src=trust_dispatcher.sh dest=/etc/NetworkManager/dispatcher.d/10trust mode=0755
+- name: Push trusted unit toggler
+  copy: src=nmtrust/ttoggle dest=/usr/local/bin/ttoggle mode=0755
+
+- name: Push trusted network dispatcher
+  copy: src=nmtrust/dispatcher/10trust dest=/etc/NetworkManager/dispatcher.d/10trust mode=0755
 
 - name: Enable and start NetworkManager
   service: name=NetworkManager.service enabled=yes state=started
