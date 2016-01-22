@@ -26,6 +26,9 @@
 - name: Install tcpdump
   pacman: name=tcpdump state=present
 
+- name: Install sshuttle
+  pacman: name=sshuttle state=present
+
 - name: Install pdsh
   aur: name=pdsh user={{ user.name }}
   tags:
