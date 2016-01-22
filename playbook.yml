@@ -12,7 +12,7 @@
     - { role: slim, tags: ['slim'] }
     - { role: i3, tags: ['i3'] }
     - { role: iptables, tags: ['iptables'] }
-    - { role: network, tags: ['network'] }
+    - { role: nettools, tags: ['nettools'] }
     - { role: networkmanager, tags: ['networkmanager'] }
     - { role: macchiato, tags: ['macchiato'] }
     - { role: ntp, tags: ['ntp'] }
