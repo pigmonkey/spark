@@ -11,6 +11,7 @@
     - { role: x, tags: ['x'] }
     - { role: slim, tags: ['slim'] }
     - { role: i3, tags: ['i3'] }
+    - { role: iptables, tags: ['iptables'] }
     - { role: network, tags: ['network'] }
     - { role: networkmanager, tags: ['networkmanager'] }
     - { role: ntp, tags: ['ntp'] }
