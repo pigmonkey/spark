@@ -95,10 +95,8 @@ This helps to avoid leaking personal information on untrusted networks by
 ensuring that certain network tasks are not running in the background.
 Currently, this is used for mail syncing (see the section below on Syncing and
 Scheduling Mail), Tarsnap backups (see the section below on Scheduling
-Tarsnap), and BitlBee (see the section below on BitlBee). The git-annex
-assistant is also toggled based on the state of the trusted network, but does
-not use the same tools provided by `nmcli` due to its slightly different
-requirements (see the section below on git-annex).
+Tarsnap), BitlBee (see the section below on BitlBee), and git-annex (see the
+section below on git-annex).
 
 Trusted networks are defined using their NetworkManager UUIDs, configured in
 the `network.trusted_uuid` list. NetworkManager UUIDs may be discovered using
@@ -208,16 +206,14 @@ If the `bitlbee.run_on` variable is set to anything other than `trusted` or
 git-annex assistant is enabled and started by default. To prevent this, remove
 the `gitannex` variable from the config.
 
-NetworkManager dispatchers are installed to stop the service when connecting to
-untrusted networks.
-
-Note that this behaviour is slightly different than that of the NetworkManager
-dispatcher used for syncing mail, performing Tarsnap backups, and toggling
-BitlBee. Those units are disabled by default, only started *after* a connection
-to a trusted network has been established, and immediately stopped after
-disconnecting from any network.  Conversely, the git-annex assistant is started
-by default, stopped *before* connecting to an untrusted network, and
-immediately started after disconnecting from any network.
+Additionally, the git-annex unit is added to `/usr/local/etc/trusted_units`,
+causing the NetworkManager trusted unit dispatcher to activate the service
+whenever a connection is established to a trusted network. The service is
+stopped whenever a connection is established to an untrusted network. Unlike
+other units using the trusted network framework, the git-annex unit is also
+activated when there are no active network connections. This allows the
+git-annex assistant to be used when on trusted networks and when offline, but
+not when on untrusted networks.
 
 If the `gitannex.stopped_on` variable is set to anything other than
 `untrusted`, the NetworkManager dispatchers will not be installed, resulting in

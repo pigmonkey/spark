@@ -9,10 +9,8 @@
   service: name="git-annex@{{ user.name }}.service" enabled=yes state=started
   when: gitannex is defined
 
-- name: Push dispatcher to disable git-annex assistant on untrusted networks
-  template: src=gitannex_disabler.sh.j2 dest=/etc/NetworkManager/dispatcher.d/pre-up.d/10gitannex_disabler mode=0755
-  when: gitannex.stopped_on == "untrusted"
-
-- name: Push dispatcher to activate git-annex assistant on network disconnect
-  template: src=gitannex_enabler.sh.j2 dest=/etc/NetworkManager/dispatcher.d/10gitannex mode=0755
+- name: Add git-annex to trusted unit list
+  lineinfile: dest=/usr/local/etc/trusted_units
+              state=present
+              line="git-annex@{{ user.name }}.service,allow_offline"
   when: gitannex.stopped_on == "untrusted"
