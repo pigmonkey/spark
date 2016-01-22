@@ -14,6 +14,7 @@
     - { role: iptables, tags: ['iptables'] }
     - { role: network, tags: ['network'] }
     - { role: networkmanager, tags: ['networkmanager'] }
+    - { role: macchiato, tags: ['macchiato'] }
     - { role: ntp, tags: ['ntp'] }
     - { role: firejail, tags: ['firejail'] }
     - { role: unbound, tags: ['unbound'] }
