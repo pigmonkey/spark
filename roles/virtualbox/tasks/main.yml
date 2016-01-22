@@ -7,33 +7,24 @@
     - virtualbox-guest-iso
     - virtualbox
     - virtualbox-host-dkms
-  tags:
-    - virtualbox
 
 - name: Install VirtualBox extensions
   aur: name=virtualbox-ext-oracle user={{ user.name }}
   tags:
     - aur
-    - virtualbox
 
 - name: Push VirtualBox kernel module build script
   copy: src=build_vbox_modules.sh dest=/root/build_vbox_modules.sh mode=0700
   tags:
-    - virtualbox
     - grsec
 
 - name: Build VirtualBox kernel modules
   command: /root/build_vbox_modules.sh
   tags:
-    - virtualbox
     - grsec
 
 - name: Copy kernel modules to load
   copy: src=modules.conf dest=/etc/modules-load.d/virtualbox.conf
-  tags:
-    - virtualbox
 
 - name: Add the user to vboxusers group
   user: name={{ user.name }} groups=vboxusers append=yes
-  tags:
-    - virtualbox

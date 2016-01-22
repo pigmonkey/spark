@@ -32,7 +32,8 @@
     - { role: office, tags: ['office'] }
     - { role: redshift, tags: ['redshift'] }
     - { role: rtorrent, tags: ['rtorrent'] }
-    - { role: vm, tags: ['vm'] }
+    - { role: virtualbox, tags: ['virtualbox'] }
+    - { role: vagrant, tags: ['vagrant'] }
     - { role: yubikey, tags: ['yubikey'] }
     - { role: virtualenv, tags: ['virtualenv'] }
     - { role: backup, tags: ['backup'] }
