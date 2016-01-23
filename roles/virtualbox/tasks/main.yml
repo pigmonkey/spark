@@ -13,16 +13,6 @@
   tags:
     - aur
 
-- name: Push VirtualBox kernel module build script
-  copy: src=build_vbox_modules.sh dest=/root/build_vbox_modules.sh mode=0700
-  tags:
-    - grsec
-
-- name: Build VirtualBox kernel modules
-  command: /root/build_vbox_modules.sh
-  tags:
-    - grsec
-
 - name: Copy kernel modules to load
   copy: src=modules.conf dest=/etc/modules-load.d/virtualbox.conf
 
