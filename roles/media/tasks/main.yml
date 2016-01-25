@@ -25,3 +25,12 @@
     - exiv2
     - perl-image-exiftool
     - opus-tools
+
+- name: Install Metadata Anonymisation Toolkit and dependencies
+  aur: name={{ item }} user={{ user.name }}
+  with_items:
+    - hachoir-core
+    - hachoir-parser
+    - mat
+  tags:
+    - aur
