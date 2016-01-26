@@ -86,3 +86,5 @@ gitannex:
 
 bitlbee:
     run_on: trusted
+
+bootloader: grub

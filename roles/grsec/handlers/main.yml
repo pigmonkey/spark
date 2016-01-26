@@ -1,3 +1,4 @@
 ---
 - name: rebuild grub
   command: grub-mkconfig -o /boot/grub/grub.cfg
+  when: bootloader == "grub"
