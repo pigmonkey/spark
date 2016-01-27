@@ -4,8 +4,9 @@
   with_items:
     - net-tools
     - qt4
-    - virtualbox-guest-iso
     - virtualbox
+    - virtualbox-guest-iso
+    - virtualbox-guest-utils
     - virtualbox-host-dkms
 
 - name: Install VirtualBox extensions
