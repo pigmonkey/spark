@@ -1,0 +1,16 @@
+---
+- name: Install rtl-sdr-git
+  aur: name=rtl-sdr-git user={{ user.name }}
+  tags:
+    - aur
+    - radio
+
+- name: Install gr-osmosdr-git
+  aur: name={{ item }} user={{ user.name }}
+  with_items:
+    - libmirisdr-git
+    - libosmosdr-git
+    - airspy-git
+  tags:
+    - aur
+    - radio
