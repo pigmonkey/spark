@@ -61,6 +61,8 @@ base_packages:
     - fabric
     - tig
     - ruby
+    - pv
+    - minicom
 
 filesystem_packages:
     - dosfstools
