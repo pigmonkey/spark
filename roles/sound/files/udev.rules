@@ -1,4 +1,4 @@
- Set USB device as default sound card when plugged in
+# Set USB device as default sound card when plugged in
 KERNEL=="pcmC[D0-9cp]*", ACTION=="add", PROGRAM="/bin/sh -c 'K=%k; K=$${K#pcmC}; K=$${K%%D*}; echo defaults.ctl.card $$K > /etc/asound.conf; echo defaults.pcm.card $$K >>/etc/asound.conf'"
 
 # Restore default sound card when USB device unplugged
