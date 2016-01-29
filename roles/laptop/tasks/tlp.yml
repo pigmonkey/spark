@@ -5,7 +5,10 @@
     - tlp
 
 - name: Install TLP
-  pacman: name=tlp state=present
+  pacman: name={{ item }} state=present
+  with_items:
+      - ethtool
+      - tlp
   tags:
     - tlp
 
