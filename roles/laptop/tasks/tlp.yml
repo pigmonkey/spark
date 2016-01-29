@@ -18,7 +18,7 @@
     - tlp
 
 - name: Mask systemd radio service
-  command: systemctl mask systemd-rfkill@.service
+  command: systemctl mask systemd-rfkill.service
   tags:
     - tlp
 
