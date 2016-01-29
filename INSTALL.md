@@ -65,14 +65,14 @@ Add a key file to decrypt the volume and properly set the hooks.
     $ cryptsetup luksAddKey /dev/sda1 /crypto_keyfile.bin
     $ chmod 000 /crypto_keyfile.bin
     $ sed -i 's/^FILES=.*/FILES="\/crypto_keyfile.bin"/' /etc/mkinitcpio.conf
-    $ sed -i 's/^HOOKS=.*/HOOKS="base udev autodetect modconf block keyboard encrypt lvm2 filesystems fsck"/' /etc/mkinitcpio.conf
+    $ sed -i 's/^HOOKS=.*/HOOKS="base udev autodetect modconf block keyboard encrypt lvm2 resume filesystems fsck"/' /etc/mkinitcpio.conf
     $ mkinitcpio -p linux
 
 Install GRUB.
 
     $ pacman -S grub
     $ echo GRUB_ENABLE_CRYPTODISK=y >> /etc/default/grub
-    $ sed -i 's/^GRUB_CMDLINE_LINUX=.*/GRUB_CMDLINE_LINUX="cryptdevice=\/dev\/sda1:lvm:allow-discards"/' /etc/default/grub
+    $ sed -i 's/^GRUB_CMDLINE_LINUX=.*/GRUB_CMDLINE_LINUX="cryptdevice=\/dev\/sda1:lvm:allow-discards resume=\/dev\/mapper\/arch-swap"/' /etc/default/grub
     $ grub-mkconfig -o /boot/grub/grub.cfg
     $ grub-install /dev/sda
     $ chmod -R g-rwx,o-rwx /boot
