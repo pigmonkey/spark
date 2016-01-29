@@ -4,3 +4,6 @@
 
 - name: Copy logind configuration file
   copy: src=logind.conf dest=/etc/systemd/logind.conf
+
+- name: Push udev rule to suspend on low battery
+  copy: src=udev.rules dest=/etc/udev/rules.d/99-lowbat.rules
