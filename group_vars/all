@@ -84,7 +84,7 @@ tarsnapper:
     run_on: trusted
 
 gitannex:
-    stopped_on: untrusted
+    stop_on_untrusted: True
 
 bitlbee:
     run_on: trusted

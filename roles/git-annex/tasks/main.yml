@@ -9,8 +9,18 @@
   service: name="git-annex@{{ user.name }}.service" enabled=yes state=started
   when: gitannex is defined
 
+- name: Disable and stop git-annex assistant service
+  service: name="git-annex@{{ user.name }}.service" enabled=no state=stopped
+  when: gitannex is not defined
+
 - name: Add git-annex to trusted unit list
   lineinfile: dest=/usr/local/etc/trusted_units
               state=present
               line="git-annex@{{ user.name }}.service,allow_offline"
-  when: gitannex.stopped_on == "untrusted"
+  when: gitannex is defined and gitannex.stop_on_untrusted is defined and gitannex.stop_on_untrusted == True
+
+- name: Remove git-annex from trusted unit list
+  lineinfile: dest=/usr/local/etc/trusted_units
+              state=absent
+              line="git-annex@{{ user.name }}.service,allow_offline"
+  when: gitannex is not defined or gitannex.stop_on_untrusted is not defined or gitannex.stop_on_untrusted != True

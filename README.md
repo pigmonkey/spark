@@ -215,9 +215,10 @@ activated when there are no active network connections. This allows the
 git-annex assistant to be used when on trusted networks and when offline, but
 not when on untrusted networks.
 
-If the `gitannex.stopped_on` variable is set to anything other than
-`untrusted`, the NetworkManager dispatchers will not be installed, resulting in
-the git-annex assistant service not being stopped on untrusted networks.
+If the `gitannex.stop_on_untrusted` variable is set to anything other than
+`True` or is not defined, the git-annex unit will not be added to the trusted
+unit file, resulting in the git-annex assistant not being stopped on untrusted
+networks.
 
 ## Known Issues
 
