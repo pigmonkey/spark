@@ -1,6 +1,4 @@
 ---
-- include: cups.yml
-
 - name: Install LibreOffice
   pacman: name=libreoffice-fresh state=present
 

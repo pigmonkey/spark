@@ -29,6 +29,7 @@
     - { role: git-annex, tags: ['git-annex'] }
     - { role: ledger, tags: ['ledger'] }
     - { role: mail, tags: ['mail'] }
+    - { role: cups, tags: ['cups'] }
     - { role: office, tags: ['office'] }
     - { role: redshift, tags: ['redshift'] }
     - { role: rtorrent, tags: ['rtorrent'] }
