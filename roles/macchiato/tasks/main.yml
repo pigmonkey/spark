@@ -11,3 +11,7 @@
 - name: Enable and start macchiato
   service: name=macchiato.service enabled=yes state=started
   when: network.spoof_mac == True
+
+- name: Disable and stop macchiato
+  service: name=macchiato.service enabled=no state=stopped
+  when: network.spoof_mac == False

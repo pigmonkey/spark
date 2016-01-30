@@ -20,6 +20,20 @@
   tags:
     - mailsync
 
+- name: Remove mailsync from trusted unit list
+  lineinfile: dest=/usr/local/etc/trusted_units
+              state=absent
+              line="mailsync@{{ user.name }}.timer"
+  when: mail.sync_on == "all"
+  tags:
+    - mailsync
+
+- name: Disable mailsync timer
+  service: name="mailsync@{{ user.name }}.timer" enabled=no
+  when: mail.sync_on == "trusted"
+  tags:
+    - mailsync
+
 - name: Add mailsync to trusted unit list
   lineinfile: dest=/usr/local/etc/trusted_units
               state=present

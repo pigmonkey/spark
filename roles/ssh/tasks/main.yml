@@ -17,6 +17,10 @@
   service: name=sshd.socket enabled=yes state=started
   when: ssh.enable_sshd == True
 
+- name: Disable and stop OpenSSH
+  service: name=sshd.socket enabled=no state=stopped
+  when: ssh.enable_sshd == False
+
 - name: Install sshfs
   pacman: name=sshfs state=present
 

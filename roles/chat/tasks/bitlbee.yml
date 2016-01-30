@@ -37,7 +37,21 @@
   tags:
     - bitlbee
 
-- name: Push dispatcher to activate Bitlbee on trusted networks
+- name: Remove Bitlbee from trusted unit list
+  lineinfile: dest=/usr/local/etc/trusted_units
+              state=absent
+              line=bitlbee.service
+  when: bitlbee.run_on == "all"
+  tags:
+    - bitlbee
+
+- name: Disable Bitlbee
+  service: name=bitlbee enabled=no
+  when: bitlbee.run_on == "trusted"
+  tags:
+    - bitlbee
+
+- name: Add Bitlbee to trusted unit list
   lineinfile: dest=/usr/local/etc/trusted_units
               state=present
               line=bitlbee.service

@@ -39,7 +39,17 @@
   service: name=tarsnapper.timer enabled=yes state=started
   when: tarsnapper.timer.run_on == "all"
 
-- name: Add tarsnapper to trusted unit list
+- name: Remove Tarsnapper from trusted unit list
+  lineinfile: dest=/usr/local/etc/trusted_units
+              state=absent
+              line=tarsnapper.timer
+  when: tarsnapper.timer.run_on == "all"
+
+- name: Disable Tarsnapper timer
+  service: name=tarsnapper.timer enabled=no
+  when: tarsnapper.timer.run_on == "trusted"
+
+- name: Add Tarsnapper to trusted unit list
   lineinfile: dest=/usr/local/etc/trusted_units
               state=present
               line=tarsnapper.timer
