@@ -10,6 +10,8 @@
 
 - name: Copy Unbound configuration file
   copy: src=unbound.conf dest=/etc/unbound/unbound.conf
+  notify:
+    - restart unbound
 
 - name: Create Unbound systemd unit file directory
   file: path=/etc/systemd/system/unbound.service.d state=directory
@@ -18,6 +20,9 @@
 
 - name: Push Unbound socket unit file
   copy: src=unbound-service-override.conf dest=/etc/systemd/system/unbound.service.d/override.conf
+  notify:
+    - reload systemd config
+    - restart unbound
   tags:
     - firejail
 
@@ -25,6 +30,9 @@
   lineinfile: dest=/usr/lib/systemd/system/unbound.service
               state=absent
               line="PIDFile=/run/unbound.pid"
+  notify:
+    - reload systemd config
+    - restart unbound
   tags:
     - firejail
 

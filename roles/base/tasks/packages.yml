@@ -29,11 +29,16 @@
 
 - name: Push pacman cache cleanup service
   copy: src=paccache.service dest=/etc/systemd/system/paccache.service
+  notify:
+    - reload systemd config
   tags:
     - packages
 
 - name: Push pacman cache cleanup timer
   copy: src=paccache.timer dest=/etc/systemd/system/paccache.timer
+  notify:
+    - reload systemd config
+    - restart paccache
   tags:
     - packages
 

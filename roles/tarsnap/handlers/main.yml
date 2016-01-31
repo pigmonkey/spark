@@ -1,0 +1,4 @@
+---
+- name: restart tarsnapper
+  service: name=tarsnapper.timer state=restarted
+  when: tarsnapper.timer.run_on == "all"

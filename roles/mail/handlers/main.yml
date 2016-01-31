@@ -1,0 +1,4 @@
+---
+- name: restart mailsync
+  service: name="mailsync@{{ user.name }}.timer" state=restarted
+  when: mail.sync_on == "all"

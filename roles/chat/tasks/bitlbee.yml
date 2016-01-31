@@ -27,6 +27,9 @@
 
 - name: Push Bitlbee socket unit file
   copy: src=bitlbee-service-override.conf dest=/etc/systemd/system/bitlbee.service.d/override.conf
+  notify:
+    - reload systemd config
+    - restart bitlbee
   tags:
     - bitlbee
     - firejail

@@ -1,0 +1,4 @@
+---
+- name: restart git-annex
+  service: name="git-annex@{{ user.name }}.service" state=restarted
+  when: gitannex is defined

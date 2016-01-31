@@ -4,6 +4,9 @@
 
 - name: Push git-annex assistant service file
   copy: src=git-annex.service dest=/etc/systemd/system/git-annex@.service
+  notify:
+    - reload systemd config
+    - restart git-annex
 
 - name: Enable and start git-annex assistant service
   service: name="git-annex@{{ user.name }}.service" enabled=yes state=started
