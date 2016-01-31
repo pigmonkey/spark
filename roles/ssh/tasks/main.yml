@@ -7,11 +7,9 @@
 
 - name: Create OpenSSH systemd unit file directory
   file: path=/etc/systemd/system/sshd.socket.d state=directory
-  when: ssh.enable_sshd == True
 
 - name: Push OpenSSH socket unit file
   template: src=sshd-socket-override.conf.j2 dest=/etc/systemd/system/sshd.socket.d/override.conf
-  when: ssh.enable_sshd == True
 
 - name: Enable and start OpenSSH
   service: name=sshd.socket enabled=yes state=started
