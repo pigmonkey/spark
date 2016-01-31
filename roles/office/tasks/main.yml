@@ -8,6 +8,11 @@
     - zathura-pdf-mupdf
     - zathura-ps
 
+- name: Jail Zathura
+  copy: src=zathura.sh dest=/usr/local/bin/zathura mode=0755
+  tags:
+    - firejail
+
 - name: Install enscript
   pacman: name=enscript state=present
 
