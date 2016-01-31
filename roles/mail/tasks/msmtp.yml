@@ -36,11 +36,16 @@
   file: path=/etc/systemd/system/cronie.service.d state=directory
   tags:
     - msmtp
+    - cron
 
 - name: Override cronie send mail via msmtp
   copy: src=cronie-service-msmtp.conf dest=/etc/systemd/system/cronie.service.d/msmtp.conf
+  notify:
+    - reload systemd config
+    - restart cron
   tags:
     - msmtp
+    - cron
 
 - name: Copy msmtpq script
   copy: src=/usr/share/doc/msmtp/msmtpq/msmtpq dest=/usr/local/bin/ mode=0755

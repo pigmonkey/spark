@@ -1,0 +1,3 @@
+---
+- name: restart cron
+  service: name=cronie.service state=restarted
