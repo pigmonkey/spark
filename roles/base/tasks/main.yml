@@ -13,4 +13,3 @@
 - include: user.yml
 - include: sudo.yml
 - include: packages.yml
-- include: cron.yml
