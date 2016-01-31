@@ -1,14 +1,10 @@
 ---
-- name: Install tlp-rdw for radio management
-  pacman: name=tlp-rdw state=present
-  tags:
-    - tlp
-
 - name: Install TLP
   pacman: name={{ item }} state=present
   with_items:
       - ethtool
       - tlp
+      - tlp-rdw
   tags:
     - tlp
 
