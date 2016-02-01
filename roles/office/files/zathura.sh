@@ -8,4 +8,4 @@ if [ $? -eq 0 ]; then
     FIREJAIL=firejail
 fi
 
-$FIREJAIL /usr/bin/zathura "$@"
+$FIREJAIL /usr/bin/zathura \"$@\"
