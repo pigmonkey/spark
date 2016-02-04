@@ -22,3 +22,6 @@
               regexp=^sessionstop_cmd
               state=present
               line="sessionstop_cmd   /usr/bin/sessreg -d -l tty$(fgconsole) %user"
+
+- name: Push SLiM background
+  copy: src=onosendai.jpg dest=/usr/share/slim/themes/default/background.jpg
