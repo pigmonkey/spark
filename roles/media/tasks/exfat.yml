@@ -1,0 +1,8 @@
+---
+- name: Install exfat utils for media player
+  pacman: name={{ item }} state=present
+  with_items:
+    - fuse-exfat
+    - exfat-utils
+  tags:
+    - exfat

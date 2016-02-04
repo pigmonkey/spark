@@ -3,6 +3,7 @@
 - include: mpd.yml
 - include: beets.yml
 - include: abcde.yml
+- include: exfat.yml
 - include: xfburn.yml
 - include: imagemagick.yml
 - include: inkscape.yml
