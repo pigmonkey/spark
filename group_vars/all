@@ -73,6 +73,7 @@ browser_choices:
     - firefox -P default
     - firefox -P work
     - firewarden chromium
+    - qcode
 
 passwordless_sudo:
     - /usr/bin/openvpn*
