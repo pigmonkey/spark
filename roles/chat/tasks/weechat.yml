@@ -10,7 +10,9 @@
     - weechat
 
 - name: Jail weechat
-  copy: src=weechat.sh dest=/usr/local/bin/weechat mode=0755
+  file: src=/usr/bin/firejail
+        dest=/usr/local/bin/weechat
+        state=link
   tags:
     - weechat
     - firejail

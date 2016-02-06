@@ -3,6 +3,8 @@
   pacman: name=rtorrent state=present
 
 - name: Jail rtorrent
-  copy: src=rtorrent.sh dest=/usr/local/bin/rtorrent mode=0755
+  file: src=/usr/bin/firejail
+        dest=/usr/local/bin/rtorrent
+        state=link
   tags:
     - firejail

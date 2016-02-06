@@ -5,7 +5,9 @@
     - firefox
 
 - name: Jail Firefox
-  copy: src=firefox.sh dest=/usr/local/bin/firefox mode=0755
+  file: src=/usr/bin/firejail
+        dest=/usr/local/bin/firefox
+        state=link
   tags:
     - firefox
     - firejail

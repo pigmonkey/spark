@@ -5,7 +5,9 @@
     - chromium
 
 - name: Jail Chromium
-  copy: src=chromium.sh dest=/usr/local/bin/chromium mode=0755
+  file: src=/usr/bin/firejail
+        dest=/usr/local/bin/chromium
+        state=link
   tags:
     - chromium
     - firejail
