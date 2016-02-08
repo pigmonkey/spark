@@ -4,6 +4,7 @@
   with_items:
     - python2-pylast
     - python2-requests
+    - python2-pyacoustid
     - gstreamer0.10-bad-plugins
     - gstreamer0.10-good-plugins
     - gstreamer0.10-ffmpeg
