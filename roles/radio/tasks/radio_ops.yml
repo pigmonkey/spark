@@ -1,0 +1,27 @@
+---
+- name: Install fldigi
+  aur: name={{ item }} user={{ user.name }}
+  with_items:
+    - cty
+    - fldigi
+  tags:
+    - aur
+    - radio
+
+- name: Install wsjtx
+  aur: name={{ item }} user={{ user.name }}
+  with_items:
+    - kvasd-bin
+    - wsjtx
+  tags:
+    - aur
+    - radio
+
+- name: Install tucnak3
+  aur: name={{ item }} user={{ user.name }}
+  with_items:
+    - libzia3
+    - tucnak3
+  tags:
+    - aur
+    - radio
