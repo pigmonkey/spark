@@ -11,6 +11,7 @@
     - libmirisdr-git
     - libosmosdr-git
     - airspy-git
+    - gr-osmosdr-git
   tags:
     - aur
     - radio
