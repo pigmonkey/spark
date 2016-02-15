@@ -43,8 +43,8 @@ get_capacity() {
 }
 
 check_capacity() {
-    # If the capacity is between 5 and 10, it is low.
-    if [ "$CAPACITY" -gt 5 -a "$CAPACITY" -le 10 ]; then
+    # If the capacity is between 5 and 12, it is low.
+    if [ "$CAPACITY" -gt 5 -a "$CAPACITY" -le 12 ]; then
         low
     # If the capacity is 5 or less, it is critical.
     elif [ "$CAPACITY" -le 5 ]; then

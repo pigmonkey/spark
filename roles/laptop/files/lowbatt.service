@@ -1,0 +1,13 @@
+[Unit]
+Description=Low battery monitoring service
+ConditionACPower=false
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/lowbatt
+StandardOutput=syslog
+StandardError=syslog
+Environment=DISPLAY=:0
+
+[Install]
+WantedBy=multi-user.target
