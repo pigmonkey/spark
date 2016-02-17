@@ -1,5 +1,6 @@
 user:
     name: pigmonkey
+    uid: 1000
     group: pigmonkey
     shell: /usr/bin/zsh
     email:  peter@havenaut.net
