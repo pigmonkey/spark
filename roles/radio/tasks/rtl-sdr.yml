@@ -15,3 +15,9 @@
   tags:
     - aur
     - radio
+
+- name: Install gr-ais-git
+  aur: name=gr-ais-git user={{ user.name }}
+  tags:
+    - aur
+    - radio

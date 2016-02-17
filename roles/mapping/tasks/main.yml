@@ -1,8 +1,17 @@
 ---
 - name: Install Viking
   pacman: name=viking state=present
+  tags:
+    - mapping
 
 - name: Install gpxpy
   aur: name=python-gpxpy user={{ user.name }}
   tags:
     - aur
+    - mapping
+
+- name: Install OpenCPN
+  aur: name=opencpn-git user={{ user.name }}
+  tags:
+    - aur
+    - mapping
