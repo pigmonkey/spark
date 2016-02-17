@@ -3,4 +3,3 @@
   aur: name=chirp user={{ user.name }}
   tags:
     - aur
-    - radio
