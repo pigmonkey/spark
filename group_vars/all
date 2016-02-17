@@ -59,7 +59,7 @@ base_packages:
     - sysstat
     - arch-wiki-lite
     - python-keyring
-    - python-keyrings-alt
+    - python-secretstorage
     - fabric
     - tig
     - ruby
