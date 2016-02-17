@@ -1,6 +1,6 @@
 # {{ ansible_managed }}
 
-/home/{{ user.name }}/{{ user.log_dir }}/* {
+/home/{{ user.name }}/{{ user.log_dir }}/*.log {
     missingok
     noolddir
 }
