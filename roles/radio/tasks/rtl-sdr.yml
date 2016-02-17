@@ -3,7 +3,6 @@
   aur: name=rtl-sdr-git user={{ user.name }}
   tags:
     - aur
-    - radio
 
 - name: Install gr-osmosdr-git
   aur: name={{ item }} user={{ user.name }}
@@ -14,4 +13,8 @@
     - gr-osmosdr-git
   tags:
     - aur
-    - radio
+
+- name: Install gr-ais-git
+  aur: name=gr-ais-git user={{ user.name }}
+  tags:
+    - aur

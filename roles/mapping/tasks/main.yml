@@ -6,3 +6,8 @@
   aur: name=python-gpxpy user={{ user.name }}
   tags:
     - aur
+
+- name: Install OpenCPN
+  aur: name=opencpn-git user={{ user.name }}
+  tags:
+    - aur

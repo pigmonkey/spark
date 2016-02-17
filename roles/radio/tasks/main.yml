@@ -1,8 +1,6 @@
 ---
 - name: Install GNUradio
   pacman: name=gnuradio state=present
-  tags:
-    - radio
 
 - name: Install hamlib
   aur: name={{ item }} user={{ user.name }}
@@ -11,7 +9,6 @@
     - hamlib
   tags:
     - aur
-    - radio
 
 - include: rtl-sdr.yml
 - include: radio_mgmt.yml
