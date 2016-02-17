@@ -5,7 +5,7 @@
     - mailsync
 
 - name: Push mailsync service file
-  copy: src=mailsync.service dest=/etc/systemd/system/mailsync@.service
+  template: src=mailsync.service.j2 dest=/etc/systemd/system/mailsync@.service
   tags:
     - mailsync
   notify:

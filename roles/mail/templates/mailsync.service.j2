@@ -8,3 +8,4 @@ ExecStart=/usr/local/bin/mailsync
 User=%i
 StandardOutput=syslog
 StandardError=syslog
+Environment=DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/{{ user.uid }}/bus
