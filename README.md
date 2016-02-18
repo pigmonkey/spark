@@ -220,10 +220,24 @@ If the `gitannex.stop_on_untrusted` variable is set to anything other than
 unit file, resulting in the git-annex assistant not being stopped on untrusted
 networks.
 
+## PostgreSQL
+
+[PostgreSQL][23] is installed and enabled by default. If the
+`postgresql.enable` variable is set to anything other than `True` or is not
+defined, the service will not be started or enabled.
+
+This is intended for local development. PostgreSQL is configured to only listen
+on localhost and no additional ports are opened in the default firewall. This
+configuration means that PostgreSQL is not a network service. As such, the
+PostgreSQL service is not added to `/usr/local/etc/trusted_units`.
+
+Additional configuration options are set which improve performance but make the
+database service inappropriate for production use.
+
 ## Known Issues
 
-* [tpfanco][23], normally installed as part of the `thinkpad` role is currently
-  [unavailable in the AUR][24]. No ThinkPad fan control software is currently
+* [tpfanco][24], normally installed as part of the `thinkpad` role is currently
+  [unavailable in the AUR][25]. No ThinkPad fan control software is currently
   installed.
 
 
@@ -249,5 +263,6 @@ networks.
 [20]: https://www.bitlbee.org/main.php/news.r.html
 [21]: https://weechat.org/
 [22]: https://git-annex.branchable.com/
-[23]: https://code.google.com/p/tpfanco/
-[24]: https://aur.archlinux.org/packages/?O=0&K=tpfanco
+[23]: http://www.postgresql.org/
+[24]: https://code.google.com/p/tpfanco/
+[25]: https://aur.archlinux.org/packages/?O=0&K=tpfanco
