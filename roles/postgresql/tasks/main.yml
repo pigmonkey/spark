@@ -1,0 +1,23 @@
+---
+- name: Install PostgreSQL
+  pacman: name=postgresql state=present
+
+- name: Install psycopg2
+  pacman: name=python2-psycopg2 state=present
+
+- name: Initialize database cluster
+  command: initdb --locale en_US.UTF-8 -E UTF8 -D /var/lib/postgres/data creates=/var/lib/postgres/data/postgresql.conf
+  become: yes
+  become_user: postgres
+
+- name: Disable and stop PostgreSQL
+  service: name=postgresql.service enabled=no state=stopped
+  when: postgresql is not defined or postgresql.enable is not defined or postgresql.enable != True
+
+- name: Enable and start PostgreSQL
+  service: name=postgresql.service enabled=yes state=started
+  when: postgresql is defined and postgresql.enable is defined and postgresql.enable == True
+
+- name: Create the PostgreSQL user
+  postgresql_user: name={{ user.name }} role_attr_flags=CREATEDB,NOSUPERUSER
+  when: postgresql is defined and postgresql.enable is defined and postgresql.enable == True
