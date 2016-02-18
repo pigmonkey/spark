@@ -1,0 +1,4 @@
+---
+- name: restart postgresql
+  service: name=postgresql.service state=restarted
+  when: postgresql is defined and postgresql.enable is defined and postgresql.enable == True

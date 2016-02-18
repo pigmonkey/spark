@@ -10,6 +10,14 @@
   become: yes
   become_user: postgres
 
+- name: Disable synchronous commits
+  lineinfile: dest=/var/lib/postgres/data/postgresql.conf
+              regexp=^synchronous_commit
+              state=present
+              line="synchronous_commit = off"
+  notify:
+    - restart postgresql
+
 - name: Disable and stop PostgreSQL
   service: name=postgresql.service enabled=no state=stopped
   when: postgresql is not defined or postgresql.enable is not defined or postgresql.enable != True
