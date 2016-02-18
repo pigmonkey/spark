@@ -18,6 +18,14 @@
   notify:
     - restart postgresql
 
+- name: Prevent disk writes when idle
+  lineinfile: dest=/var/lib/postgres/data/postgresql.conf
+              regexp=^stats_temp_directory
+              state=present
+              line="stats_temp_directory = '/run/postgresql'"
+  notify:
+    - restart postgresql
+
 - name: Disable and stop PostgreSQL
   service: name=postgresql.service enabled=no state=stopped
   when: postgresql is not defined or postgresql.enable is not defined or postgresql.enable != True
