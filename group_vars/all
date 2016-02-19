@@ -65,6 +65,7 @@ base_packages:
     - ruby
     - pv
     - minicom
+    - jq
 
 filesystem_packages:
     - dosfstools
