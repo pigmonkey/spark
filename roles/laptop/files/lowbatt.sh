@@ -2,11 +2,23 @@
 
 BATTERY="BAT0"
 
+usage() {
+    echo "Usage: lowbatt [OPTION...]
+
+Options:
+    -b      specify the battery that should be checked
+    -u      the user who should be notified if the battery is low"
+}
+
 low() {
     # Warn if the battery is low.
     message="Battery $BATTERY is at $CAPACITY%. We need more power, Scotty!"
     systemd-cat -t 'lowbatt' -p warning echo "$message"
-    notify-send --urgency=critical "Low Battery" "$message"
+    if [ -n "$NOTIFYUSER" ]; then
+        su $NOTIFYUSER -c "notify-send --urgency=critical \"Low Battery\" \"$message\""
+    else
+        notify-send --urgency=critical "Low Battery" "$message"
+    fi
     wall "Battery is low. $message"
 }
 
@@ -52,10 +64,20 @@ check_capacity() {
     fi
 }
 
-# Allow the user to specify a different battery.
-if [ -n "$1" ]; then
-    BATTERY="$1"
-fi
+while getopts "u:b:h" opt; do
+    case $opt in
+        u)
+            NOTIFYUSER=$OPTARG
+            ;;
+        b)
+            BATTERY=$OPTARG
+            ;;
+        h)
+            usage
+            exit
+            ;;
+    esac
+done
 
 get_status
 get_capacity

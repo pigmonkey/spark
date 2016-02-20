@@ -9,7 +9,7 @@
   copy: src=lowbatt.sh dest=/usr/local/bin/lowbatt mode=0755
 
 - name: Push low battery warning service file
-  copy: src=lowbatt.service dest=/etc/systemd/system/lowbatt.service
+  template: src=lowbatt.service.j2 dest=/etc/systemd/system/lowbatt.service
   notify:
     - reload systemd config
 
