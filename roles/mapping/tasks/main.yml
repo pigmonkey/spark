@@ -20,3 +20,6 @@
   file: src=/usr/local/env/mapbox/bin/mapbox
         dest=/usr/local/bin/mapbox
         state=link
+
+- name: Push showme script
+  copy: src=showme.sh dest=/usr/local/bin/showme mode=0755
