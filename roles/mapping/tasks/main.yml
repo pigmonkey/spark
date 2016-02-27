@@ -11,3 +11,12 @@
   aur: name=opencpn-git user={{ user.name }}
   tags:
     - aur
+
+- name: Install mapboxcli into virtualenv
+  pip: name=mapboxcli
+       virtualenv=/usr/local/env/mapbox
+
+- name: Link mapboxcli to bin
+  file: src=/usr/local/env/mapbox/bin/mapbox
+        dest=/usr/local/bin/mapbox
+        state=link
