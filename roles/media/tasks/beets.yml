@@ -5,6 +5,7 @@
     - python2-pylast
     - python2-requests
     - python2-pyacoustid
+    - python2-beautifulsoup4
     - gstreamer0.10-bad-plugins
     - gstreamer0.10-good-plugins
     - gstreamer0.10-ffmpeg
