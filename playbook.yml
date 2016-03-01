@@ -44,6 +44,7 @@
     - { role: sound, tags: ['sound'] }
     - { role: archive, tags: ['archive'] }
     - { role: filesystems, tags: ['filesystems'] }
+    - { role: udisks, tags: ['udisks'] }
     - { role: pim, tags: ['pim'] }
     - { role: radio, tags: ['radio'] }
     - { role: formd, tags: ['formd'] }

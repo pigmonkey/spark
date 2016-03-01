@@ -14,7 +14,6 @@ aur:
     dir: aur
     packages:
         - aura-bin
-        - pmount
         - orpie
 
 ssh:
