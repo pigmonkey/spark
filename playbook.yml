@@ -35,7 +35,7 @@
     - { role: redshift, tags: ['redshift'] }
     - { role: rtorrent, tags: ['rtorrent'] }
     - { role: virtualbox, tags: ['virtualbox'] }
-    - { role: vagrant, tags: ['vagrant'] }
+    - { role: hashicorp, tags: ['hashicorp'] }
     - { role: yubikey, tags: ['yubikey'] }
     - { role: virtualenv, tags: ['virtualenv'] }
     - { role: backup, tags: ['backup'] }
