@@ -7,5 +7,8 @@
   tags:
     - aur
 
+- name: Push lock script
+  copy: src=lock.sh dest=/usr/local/bin/lock mode=0755
+
 - name: Push sleep lock script
-  template: src=lock.sh.j2 dest=/usr/lib/systemd/system-sleep/lock.sh mode=755
+  copy: src=sleeplock.sh dest=/usr/lib/systemd/system-sleep/lock.sh mode=0755

@@ -2,7 +2,5 @@
 # {{ ansible_managed }}
 
 if [ "$1" = "post" ]; then
-	if ! pidof physlock > /dev/null; then
-		/usr/sbin/physlock -m
-	fi
+    /usr/local/bin/lock
 fi
