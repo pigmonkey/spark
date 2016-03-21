@@ -4,4 +4,5 @@
 
 - include: firefox.yml
 - include: chromium.yml
+- include: tor-browser.yml
 - include: chooser.yml
