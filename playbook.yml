@@ -49,6 +49,7 @@
     - { role: radio, tags: ['radio'] }
     - { role: formd, tags: ['formd'] }
     - { role: postgresql, tags: ['postgresql'] }
+    - { role: calibre, tags: ['calibre'] }
   vars_prompt:
     - name: user_password
       prompt: "Enter desired user password"

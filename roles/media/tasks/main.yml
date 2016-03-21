@@ -9,7 +9,6 @@
 - include: gimp.yml
 - include: gthumb.yml
 - include: feh.yml
-- include: calibre.yml
 - include: pianobar.yml
 - include: teiler.yml
 - include: flac2all.yml

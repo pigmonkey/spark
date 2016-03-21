@@ -1,0 +1,10 @@
+---
+- name: Install calibre
+  pacman: name=calibre state=present
+
+- name: Jail calibre
+  file: src=/usr/bin/firejail
+        dest=/usr/local/bin/calibre
+        state=link
+  tags:
+    - firejail

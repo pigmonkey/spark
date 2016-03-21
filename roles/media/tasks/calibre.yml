@@ -1,5 +1,0 @@
----
-- name: Install calibre
-  pacman: name=calibre state=present
-  tags:
-    - calibre
