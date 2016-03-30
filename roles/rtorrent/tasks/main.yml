@@ -8,3 +8,8 @@
         state=link
   tags:
     - firejail
+
+- name: Push rtorrent firejail profile
+  copy: src=firejail/rtorrent.profile dest=/usr/local/etc/firejail/rtorrent.profile
+  tags:
+    - firejail
