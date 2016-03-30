@@ -67,10 +67,34 @@ AUR packages are installed via the [ansible-aur][7] module. Note that while
 [aura][8], an [AUR helper][9], is installed by default, it will *not* be used
 during any of the provisioning.
 
+## Firejail
+
+Many applications are sandboxed with [Firejail][10]. This behavior should be
+largely invisible to the user.
+
+Where appropriate, custom security profiles have been provided for certain
+applications. These are automatically installed to `/usr/local/etc/firejail`.
+Note that Firejail does not look in this directory by default. To use these
+security profiles, they must either be specified on the command-line or
+included in an appropriately named profile located in `~/.config/firejail/`.
+This latter option is the preferred method.
+
+    # Example 1:
+    # Launch Firefox using the custom profile by specifying the full path of the profile.
+    $ firejail --profile=/usr/local/etc/firejail/firefox.profile /usr/bin/firefox
+    # Example 2:
+    # Launch Firefox using the custom profile by specifying its directory.
+    $ firejail --profile-path=/usr/local/etc/firejail /usr/bin/firefox
+    # Example 3:
+    # Include the profile  in ~./config/firejail
+    $ mkdir -p ~/.config/firejail
+    $ echo 'include /usr/local/etc/firejail/firefox.profile' > ~/.config/firejail/firefox.profile
+    $ firejail /usr/bin/firefox
+
 ## MAC Spoofing
 
 By default, the MAC address of all network interfaces is spoofed at boot,
-before any network services are brought up. This is done with [macchiato][10],
+before any network services are brought up. This is done with [macchiato][11],
 which uses legitimate OUI prefixes to make the spoofing less recognizable.
 
 MAC spoofing is desirable for greater privacy on public networks, but may be
@@ -87,7 +111,7 @@ to `False`.
 
 ## Trusted Networks
 
-The trusted network framework provided by [nmtrust][11] is leveraged to start
+The trusted network framework provided by [nmtrust][12] is leveraged to start
 certain systemd units when connected to trusted networks, and stop them
 elsewhere.
 
@@ -107,15 +131,15 @@ the `network.trusted_uuid` list. NetworkManager UUIDs may be discovered using
 
 ### Receiving Mail
 
-Receiving mail is supported by syncing from IMAP servers via both [isync][12]
-and [OfflineIMAP][13]. By default isync is enabled, but this can be changed to
+Receiving mail is supported by syncing from IMAP servers via both [isync][13]
+and [OfflineIMAP][14]. By default isync is enabled, but this can be changed to
 OfflineIMAP by setting the value of the `mail.sync_tool` variable to
 `offlineimap`.
 
 ### Sending Mail
 
-[msmtp][14] is used to send mail. Included as part of msmtp's documentation are
-a set of [msmtpq scripts][15] for queuing mail. These scripts are copied to the
+[msmtp][15] is used to send mail. Included as part of msmtp's documentation are
+a set of [msmtpq scripts][16] for queuing mail. These scripts are copied to the
 user's path for use. When calling `msmtpq` instead of `msmtp`, mail is sent
 normally if internet connectivity is available. If the user is offline, the
 mail is saved in a queue, to be sent out when internet connectivity is again
@@ -137,7 +161,7 @@ either isync or OfflineIMAP. Before syncing, the script checks for internet
 connectivity using NetworkMananger. `mailsync` may be called directly by the
 user, ie by configuring a hotkey in Mutt.
 
-A [systemd timer][16] is also included to periodically call `mailsync`. The
+A [systemd timer][17] is also included to periodically call `mailsync`. The
 timer is set to sync every 10 minutes (configurable through the
 `mail.sync_time` variable).
 
@@ -156,13 +180,13 @@ If the `mail.sync_on` variable is set to anything other than `trusted` or
 
 ## Tarsnap
 
-[Tarsnap][17] is installed with its default configuration file. However,
+[Tarsnap][18] is installed with its default configuration file. However,
 setting up Tarsnap is left as an exercise for the user. New Tarsnap users
-should [register their machine and generate a key][18]. Existing users should
+should [register their machine and generate a key][19]. Existing users should
 recover their key(s) and cache directory from their backups (or, alternatively,
 recover their key(s) and rebuild the cache directory with `tarsnap --fsck`).
 
-[Tarsnapper][19] is installed to manage backups. A basic configuration file to
+[Tarsnapper][20] is installed to manage backups. A basic configuration file to
 backup `/etc` is included. Tarsnapper is configured to look in
 `/usr/local/etc/tarsnapper.d` for additional jobs. As with with the Tarsnap key
 and cache directory, users should recover their jobs files from backups after
@@ -187,7 +211,7 @@ If the `tarsnapper.tarsnap.run_on` variable is set to anything other than
 
 ## BitlBee
 
-[BitlBee][20] and [WeeChat][21] are used to provide chat services. A systemd
+[BitlBee][21] and [WeeChat][22] are used to provide chat services. A systemd
 service unit for BitlBee is installed, but not enabled or started by default.
 Instead, the service is added to `/usr/local/etc/trusted_units`, causing the
 NetworkManager trusted unit dispatcher to activate the service whenever a
@@ -202,7 +226,7 @@ If the `bitlbee.run_on` variable is set to anything other than `trusted` or
 
 ## git-annex
 
-[git-annex][22] is installed for file syncing. A systemd service unit for the
+[git-annex][23] is installed for file syncing. A systemd service unit for the
 git-annex assistant is enabled and started by default. To prevent this, remove
 the `gitannex` variable from the config.
 
@@ -222,7 +246,7 @@ networks.
 
 ## PostgreSQL
 
-[PostgreSQL][23] is installed and enabled by default. If the
+[PostgreSQL][24] is installed and enabled by default. If the
 `postgresql.enable` variable is set to anything other than `True` or is not
 defined, the service will not be started or enabled.
 
@@ -236,8 +260,8 @@ database service inappropriate for production use.
 
 ## Known Issues
 
-* [tpfanco][24], normally installed as part of the `thinkpad` role is currently
-  [unavailable in the AUR][25]. No ThinkPad fan control software is currently
+* [tpfanco][25], normally installed as part of the `thinkpad` role is currently
+  [unavailable in the AUR][26]. No ThinkPad fan control software is currently
   installed.
 
 
@@ -250,19 +274,20 @@ database service inappropriate for production use.
 [7]: https://github.com/pigmonkey/ansible-aur
 [8]: https://github.com/aurapm/aura
 [9]: https://wiki.archlinux.org/index.php/AUR_helpers
-[10]: https://github.com/EtiennePerot/macchiato
-[11]: https://github.com/pigmonkey/nmtrust
-[12]: http://isync.sourceforge.net/
-[13]: http://offlineimap.org/
-[14]: http://msmtp.sourceforge.net/
-[15]: http://sourceforge.net/p/msmtp/code/ci/master/tree/scripts/msmtpq/README.msmtpq
-[16]: https://wiki.archlinux.org/index.php/Systemd/Timers
-[17]: https://www.tarsnap.com/
-[18]: https://www.tarsnap.com/gettingstarted.html
-[19]: https://github.com/miracle2k/tarsnapper
-[20]: https://www.bitlbee.org/main.php/news.r.html
-[21]: https://weechat.org/
-[22]: https://git-annex.branchable.com/
-[23]: http://www.postgresql.org/
-[24]: https://code.google.com/p/tpfanco/
-[25]: https://aur.archlinux.org/packages/?O=0&K=tpfanco
+[10]: https://firejail.wordpress.com/
+[11]: https://github.com/EtiennePerot/macchiato
+[12]: https://github.com/pigmonkey/nmtrust
+[13]: http://isync.sourceforge.net/
+[14]: http://offlineimap.org/
+[15]: http://msmtp.sourceforge.net/
+[16]: http://sourceforge.net/p/msmtp/code/ci/master/tree/scripts/msmtpq/README.msmtpq
+[17]: https://wiki.archlinux.org/index.php/Systemd/Timers
+[18]: https://www.tarsnap.com/
+[19]: https://www.tarsnap.com/gettingstarted.html
+[20]: https://github.com/miracle2k/tarsnapper
+[21]: https://www.bitlbee.org/main.php/news.r.html
+[22]: https://weechat.org/
+[23]: https://git-annex.branchable.com/
+[24]: http://www.postgresql.org/
+[25]: https://code.google.com/p/tpfanco/
+[26]: https://aur.archlinux.org/packages/?O=0&K=tpfanco

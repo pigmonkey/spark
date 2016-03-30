@@ -6,3 +6,6 @@
 
 - name: Install firewarden.sh script
   copy: src=firewarden/firewarden dest=/usr/local/bin/firewarden mode=0755
+
+- name: Create firejail profile directory
+  file: path=/usr/local/etc/firejail state=directory

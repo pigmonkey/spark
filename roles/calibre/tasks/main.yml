@@ -8,3 +8,8 @@
         state=link
   tags:
     - firejail
+
+- name: Push calibre firejail profile
+  copy: src=firejail/calibre.profile dest=/usr/local/etc/firejail/calibre.profile
+  tags:
+    - firejail

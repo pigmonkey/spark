@@ -15,6 +15,12 @@
     - firefox
     - firejail
 
+- name: Push Firefox firejail profile
+  copy: src=firejail/firefox.profile dest=/usr/local/etc/firejail/firefox.profile
+  tags:
+    - firefox
+    - firejail
+
 - name: Install Chromium
   pacman: name=chromium state=present
   tags:

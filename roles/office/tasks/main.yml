@@ -3,9 +3,14 @@
   pacman: name=libreoffice-fresh state=present
 
 - name: Jail LibreOffice
-  file: src=/usr/bin/libreoffice
+  file: src=/usr/bin/firejail
         dest=/usr/local/bin/libreoffice
         state=link
+  tags:
+    - firejail
+
+- name: Push LibreOffice firejail profile
+  copy: src=firejail/libreoffice.profile dest=/usr/local/etc/firejail/libreoffice.profile
   tags:
     - firejail
 
