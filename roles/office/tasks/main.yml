@@ -2,6 +2,13 @@
 - name: Install LibreOffice
   pacman: name=libreoffice-fresh state=present
 
+- name: Jail LibreOffice
+  file: src=/usr/bin/libreoffice
+        dest=/usr/local/bin/libreoffice
+        state=link
+  tags:
+    - firejail
+
 - name: Install Zathura and dependencies
   pacman: name={{ item }} state=present
   with_items:
