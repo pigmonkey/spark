@@ -1,0 +1,12 @@
+---
+- name: Install go
+  pacman: name=go state=present
+
+- name: Create system go group
+  group: name=golang state=present
+
+- name: Add user to system golang group
+  user: name={{ user.name }} groups=golang append=yes
+
+- name: Create system go dir
+  file: path=/usr/local/go state=directory group=golang mode=0775

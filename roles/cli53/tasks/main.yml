@@ -1,0 +1,24 @@
+---
+- name: Download cli53
+  command: go get github.com/barnybug/cli53
+           creates=/usr/local/go/cli53
+  environment:
+    GO15VENDOREXPERIMENT: 1
+    GOPATH: /usr/local/go/cli53
+  become: yes
+  become_user: "{{ user.name }}"
+
+- name: Make cli53
+  command: make install
+           chdir=/usr/local/go/cli53/src/github.com/barnybug/cli53
+           creates=/usr/local/go/cli53/bin/cli53
+  environment:
+    GO15VENDOREXPERIMENT: 1
+    GOPATH: /usr/local/go/cli53
+  become: yes
+  become_user: "{{ user.name }}"
+
+- name: Link cli53 to bin
+  file: src=/usr/local/go/cli53/bin/cli53
+        dest=/usr/local/bin/cli53
+        state=link
