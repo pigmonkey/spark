@@ -31,3 +31,15 @@
 
 - name: Install ncmpcpp
   pacman: name=ncmpcpp state=present
+
+- name: Jail ncmpcpp
+  file: src=/usr/bin/firejail
+        dest=/usr/local/bin/ncmpcpp
+        state=link
+  tags:
+    - firejail
+
+- name: Push ncmpcpp firejail profile
+  copy: src=firejail/ncmpcpp.profile dest=/usr/local/etc/firejail/ncmpcpp.profile
+  tags:
+    - firejail
