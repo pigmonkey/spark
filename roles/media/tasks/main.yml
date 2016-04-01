@@ -1,5 +1,4 @@
 ---
-- include: mpv.yml
 - include: mpd.yml
 - include: beets.yml
 - include: abcde.yml
@@ -9,7 +8,6 @@
 - include: gimp.yml
 - include: gthumb.yml
 - include: feh.yml
-- include: pianobar.yml
 - include: teiler.yml
 - include: flac2all.yml
 - include: darktable.yml
@@ -34,3 +32,6 @@
     - mat
   tags:
     - aur
+
+- name: Install youtube-dl
+  pacman: name=youtube-dl state=present

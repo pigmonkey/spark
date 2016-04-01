@@ -22,6 +22,7 @@
     - { role: editors, tags: ['editors'] }
     - { role: browsers, tags: ['browsers'] }
     - { role: media, tags: ['media'] }
+    - { role: pianobar, tags: ['pianobar'] }
     - { role: laptop, tags: ['laptop'] }
     - { role: thinkpad, tags: ['thinkpad'], when: "'ThinkPad' in ansible_product_version" }
     - { role: macbook, tags: ['macbook'], when: "'MacBook' in ansible_product_name" }

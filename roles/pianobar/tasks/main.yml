@@ -1,0 +1,15 @@
+---
+- name: Install pianobar
+  pacman: name=pianobar state=present
+
+- name: Jail pianobar
+  file: src=/usr/bin/firejail
+        dest=/usr/local/bin/pianobar
+        state=link
+  tags:
+    - firejail
+
+- name: Push pianobar firejail profile
+  copy: src=firejail/pianobar.profile dest=/usr/local/etc/firejail/pianobar.profile
+  tags:
+    - firejail

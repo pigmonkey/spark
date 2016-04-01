@@ -1,5 +1,0 @@
----
-- name: Install pianobar
-  pacman: name=pianobar state=present
-  tags:
-    - pianobar
