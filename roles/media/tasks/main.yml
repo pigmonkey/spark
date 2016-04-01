@@ -1,5 +1,4 @@
 ---
-- include: mpd.yml
 - include: beets.yml
 - include: abcde.yml
 - include: xfburn.yml

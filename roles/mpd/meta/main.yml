@@ -1,0 +1,4 @@
+---
+dependencies:
+  - { role: firejail }
+  - { role: systemd }

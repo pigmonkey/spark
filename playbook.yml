@@ -22,6 +22,7 @@
     - { role: editors, tags: ['editors'] }
     - { role: browsers, tags: ['browsers'] }
     - { role: media, tags: ['media'] }
+    - { role: mpd, tags: ['mpd'] }
     - { role: mpv, tags: ['mpv'] }
     - { role: pianobar, tags: ['pianobar'] }
     - { role: laptop, tags: ['laptop'] }

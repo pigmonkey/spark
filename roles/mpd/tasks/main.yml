@@ -1,0 +1,33 @@
+---
+- name: Install mpd
+  pacman: name=mpd state=present
+
+- name: Jail mpd
+  file: src=/usr/bin/firejail
+        dest=/usr/local/bin/mpd
+        state=link
+  tags:
+    - firejail
+
+- name: Push mpd firejail profile
+  copy: src=firejail/mpd.profile dest=/usr/local/etc/firejail/mpd.profile
+  tags:
+    - firejail
+
+- name: Create mpd systemd unit file directory
+  file: path=/etc/systemd/user/mpd.service.d state=directory
+  tags:
+    - firejail
+
+- name: Push mpd socket unit file
+  copy: src=mpd-service-override.conf dest=/etc/systemd/user/mpd.service.d/override.conf
+  notify:
+    - reload systemd config
+  tags:
+    - firejail
+
+- name: Install mpc
+  pacman: name=mpc state=present
+
+- name: Install ncmpcpp
+  pacman: name=ncmpcpp state=present
