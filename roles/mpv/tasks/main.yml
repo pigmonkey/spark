@@ -1,0 +1,15 @@
+---
+- name: Install mpv
+  pacman: name=mpv state=present
+
+- name: Jail mpv
+  file: src=/usr/bin/firejail
+        dest=/usr/local/bin/mpv
+        state=link
+  tags:
+    - firejail
+
+- name: Push mpv firejail profile
+  copy: src=firejail/mpv.profile dest=/usr/local/etc/firejail/mpv.profile
+  tags:
+    - firejail

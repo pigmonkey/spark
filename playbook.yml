@@ -22,6 +22,7 @@
     - { role: editors, tags: ['editors'] }
     - { role: browsers, tags: ['browsers'] }
     - { role: media, tags: ['media'] }
+    - { role: mpv, tags: ['mpv'] }
     - { role: pianobar, tags: ['pianobar'] }
     - { role: laptop, tags: ['laptop'] }
     - { role: thinkpad, tags: ['thinkpad'], when: "'ThinkPad' in ansible_product_version" }
@@ -55,4 +56,3 @@
   vars_prompt:
     - name: user_password
       prompt: "Enter desired user password"
-
