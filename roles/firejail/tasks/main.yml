@@ -9,3 +9,8 @@
 
 - name: Create firejail profile directory
   file: path=/usr/local/etc/firejail state=directory
+
+- name: Push generic firejail profile
+  copy: src=generic.profile dest=/usr/local/etc/firejail/generic.profile
+  tags:
+    - firejail
