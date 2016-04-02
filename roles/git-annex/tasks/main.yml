@@ -8,9 +8,13 @@
     - reload systemd config
     - restart git-annex
 
+- name: Check if git-annex autostart file exists
+  stat: path=/home/{{ user.name }}/.config/git-annex/autostart
+  register: autostart
+
 - name: Enable and start git-annex assistant service
   service: name="git-annex@{{ user.name }}.service" enabled=yes state=started
-  when: gitannex is defined
+  when: gitannex is defined and autostart.stat is defined and autostart.stat.size > 0
 
 - name: Disable and stop git-annex assistant service
   service: name="git-annex@{{ user.name }}.service" enabled=no state=stopped
