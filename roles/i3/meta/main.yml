@@ -2,4 +2,3 @@
 dependencies:
   - { role: base }
   - { role: x }
-  - { role: fonts }
