@@ -33,6 +33,7 @@ network:
         - 5eeb3104-5ad5-4072-a342-3691dfbbc27f
         - 11d2d0a0-d809-406b-b5c1-04bf3837cbf1
         - e5422190-e8a7-460f-b1ef-196c57036efa
+        - 77d44bb8-2427-4dfc-9a97-75f545c18fee
 
 editors:
     - gvim
