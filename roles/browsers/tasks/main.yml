@@ -51,7 +51,7 @@
     - chromium
 
 - name: Install tor-browser-en
-  aur: name=tor-browser-en user={{ user.name }}
+  aur: name=tor-browser-en user={{ user.name }} skip_pgp=yes
   tags:
     - tor-browser
     - aur
