@@ -16,7 +16,7 @@
 - name: Install Tarsnapper into virtual environment
   pip: name=tarsnapper
        virtualenv=/usr/local/env/tarsnapper
-       virtualenv_command=virtualenv-2.7
+       virtualenv_command=virtualenv2
 
 - name: Link Tarsnapper to bin
   file: src=/usr/local/env/tarsnapper/bin/tarsnapper

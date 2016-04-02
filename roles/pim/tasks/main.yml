@@ -2,17 +2,17 @@
 - name: Install vdirsyncer into virtual environment
   pip: name=vdirsyncer
        virtualenv=/usr/local/env/pim
-       virtualenv_command=virtualenv-2.7
+       virtualenv_command=virtualenv2
 
 - name: Install khard into virtual environment
   pip: name=khard
        virtualenv=/usr/local/env/pim
-       virtualenv_command=virtualenv-2.7
+       virtualenv_command=virtualenv2
 
 - name: Install khal into virtual environment
   pip: name=khal
        virtualenv=/usr/local/env/pim
-       virtualenv_command=virtualenv-2.7
+       virtualenv_command=virtualenv2
 
 - name: Link vdirsyncer to bin
   file: src=/usr/local/env/pim/bin/vdirsyncer
