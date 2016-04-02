@@ -11,5 +11,7 @@
 
 - name: Push calibre firejail profile
   copy: src=firejail/calibre.profile dest=/usr/local/etc/firejail/calibre.profile
+  notify:
+    - activate firejail profiles
   tags:
     - firejail

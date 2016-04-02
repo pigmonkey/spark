@@ -11,6 +11,8 @@
 
 - name: Push mpd firejail profile
   copy: src=firejail/mpd.profile dest=/usr/local/etc/firejail/mpd.profile
+  notify:
+    - activate firejail profiles
   tags:
     - firejail
 
@@ -41,5 +43,7 @@
 
 - name: Push ncmpcpp firejail profile
   copy: src=firejail/ncmpcpp.profile dest=/usr/local/etc/firejail/ncmpcpp.profile
+  notify:
+    - activate firejail profiles
   tags:
     - firejail

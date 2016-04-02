@@ -72,12 +72,11 @@ during any of the provisioning.
 Many applications are sandboxed with [Firejail][10]. This behavior should be
 largely invisible to the user.
 
-Where appropriate, custom security profiles have been provided for certain
-applications. These are automatically installed to `/usr/local/etc/firejail`.
-Note that Firejail does not look in this directory by default. To use these
-security profiles, they must either be specified on the command-line or
-included in an appropriately named profile located in `~/.config/firejail/`.
-This latter option is the preferred method.
+Custom security profiles are provided for certain applications. These are
+installed to `/usr/local/etc/firejail`. Firejail does not look in this
+directory by default. To use the security profiles, they must either be
+specified on the command-line or included in an appropriately named profile
+located in `~/.config/firejail`.
 
     # Example 1:
     # Launch Firefox using the custom profile by specifying the full path of the profile.
@@ -90,6 +89,12 @@ This latter option is the preferred method.
     $ mkdir -p ~/.config/firejail
     $ echo 'include /usr/local/etc/firejail/firefox.profile' > ~/.config/firejail/firefox.profile
     $ firejail /usr/bin/firefox
+
+The script `profile-activate` is provided to automatically include the profiles
+when appropriate. For every profile located in `/usr/local/etc/firejail`, the
+script looks for a profile with the same name in `~/.config/firejail`. If one
+is not found, it will create a profile that simply includes the system profile,
+as in the third example above. It will not modify any existing user profiles.
 
 ## MAC Spoofing
 

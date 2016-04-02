@@ -11,5 +11,7 @@
 
 - name: Push pianobar firejail profile
   copy: src=firejail/pianobar.profile dest=/usr/local/etc/firejail/pianobar.profile
+  notify:
+    - activate firejail profiles
   tags:
     - firejail

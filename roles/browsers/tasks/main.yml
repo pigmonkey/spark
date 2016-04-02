@@ -17,6 +17,8 @@
 
 - name: Push Firefox firejail profile
   copy: src=firejail/firefox.profile dest=/usr/local/etc/firejail/firefox.profile
+  notify:
+    - activate firejail profiles
   tags:
     - firefox
     - firejail
@@ -36,6 +38,8 @@
 
 - name: Push Chromium firejail profile
   copy: src=firejail/chromium.profile dest=/usr/local/etc/firejail/chromium.profile
+  notify:
+    - activate firejail profiles
   tags:
     - chromium
     - firejail

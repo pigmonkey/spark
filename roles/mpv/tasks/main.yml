@@ -11,5 +11,7 @@
 
 - name: Push mpv firejail profile
   copy: src=firejail/mpv.profile dest=/usr/local/etc/firejail/mpv.profile
+  notify:
+    - activate firejail profiles
   tags:
     - firejail
