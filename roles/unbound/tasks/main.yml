@@ -2,8 +2,8 @@
 - name: Install Unbound
   pacman: name=unbound state=present
 
-- name: Download root hints
-  get_url: url=ftp://FTP.INTERNIC.NET/domain/named.cache dest=/etc/unbound/root.hints
+- name: Push root hints
+  copy: src=root.hints dest=/etc/unbound/root.hints
 
 - name: Copy ad blocking hosts file
   copy: src=local-blocking-data.conf dest=/etc/unbound/local-blocking-data.conf
