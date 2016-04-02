@@ -34,6 +34,12 @@
     - chromium
     - firejail
 
+- name: Push Chromium firejail profile
+  copy: src=firejail/chromium.profile dest=/usr/local/etc/firejail/chromium.profile
+  tags:
+    - chromium
+    - firejail
+
 - name: Install Chromium Pepper Flash
   aur: name=chromium-pepper-flash user={{ user.name }}
   tags:
