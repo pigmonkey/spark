@@ -23,7 +23,9 @@
     - zathura-ps
 
 - name: Jail Zathura
-  copy: src=zathura.sh dest=/usr/local/bin/zathura mode=0755
+  file: src=/usr/bin/firejail
+        dest=/usr/local/bin/zathura
+        state=link
   tags:
     - firejail
 
