@@ -30,10 +30,9 @@ mail:
 network:
     spoof_mac: True
     trusted_uuid:
-        - 5eeb3104-5ad5-4072-a342-3691dfbbc27f
-        - 11d2d0a0-d809-406b-b5c1-04bf3837cbf1
-        - e5422190-e8a7-460f-b1ef-196c57036efa
-        - 77d44bb8-2427-4dfc-9a97-75f545c18fee
+        - b21284e6-01af-492f-8bea-45a69ef22a23
+        - 4ddd6988-aad1-4927-b650-ea7d24e0138b
+        - f9b3c62c-2d9f-450a-ac9b-528ba4c85ded
 
 editors:
     - gvim
