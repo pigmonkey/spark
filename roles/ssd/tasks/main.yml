@@ -1,4 +1,7 @@
 ---
+- name: Install hdparm
+  pacman: name=hdparm state=present
+
 - name: Check for TRIM support
   shell: "hdparm -I /dev/sda | grep TRIM"
   register: hdparm
