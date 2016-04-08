@@ -1,8 +1,6 @@
 ---
 - name: Install YubiKey Personalization GUI
-  aur: name=yubikey-personalization-gui-git user={{ user.name }}
-  tags:
-    - aur
+  pacman: name=yubikey-personalization-gui state=present
 
 - name: Install smartcard libs/tools
   pacman: name={{ item }} state=present
