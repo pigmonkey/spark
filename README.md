@@ -267,12 +267,6 @@ PostgreSQL service is not added to `/usr/local/etc/trusted_units`.
 Additional configuration options are set which improve performance but make the
 database service inappropriate for production use.
 
-## Known Issues
-
-* [tpfanco][26], normally installed as part of the `thinkpad` role is currently
-  [unavailable in the AUR][27]. No ThinkPad fan control software is currently
-  installed.
-
 
 [1]: http://www.ansible.com
 [2]: https://www.archlinux.org
@@ -299,5 +293,3 @@ database service inappropriate for production use.
 [23]: https://weechat.org/
 [24]: https://git-annex.branchable.com/
 [25]: http://www.postgresql.org/
-[26]: https://code.google.com/p/tpfanco/
-[27]: https://aur.archlinux.org/packages/?O=0&K=tpfanco
