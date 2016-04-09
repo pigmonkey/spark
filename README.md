@@ -167,8 +167,8 @@ connectivity using NetworkMananger. `mailsync` may be called directly by the
 user, ie by configuring a hotkey in Mutt.
 
 A [systemd timer][17] is also included to periodically call `mailsync`. The
-timer is set to sync every 10 minutes (configurable through the
-`mail.sync_time` variable).
+timer is set to sync every 5 minutes (configurable through the `mail.sync_time`
+variable).
 
 The timer is not started or enabled by default. Instead, the timer is added to
 `/usr/local/etc/trusted_units`, causing the NetworkManager trusted unit
