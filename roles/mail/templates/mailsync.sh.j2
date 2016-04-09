@@ -13,6 +13,9 @@ then
 {% elif mail.sync_tool == "offlineimap" %}
     /usr/bin/offlineimap -o
 {% endif %}
+{% if mail.sync_pim %}
+    vdirsyncer sync
+{% endif %}
     exit $?
 fi
 echo "No internet connection."

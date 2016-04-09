@@ -162,11 +162,15 @@ The cron implementation is configured to send mail using `msmtp`.
 
 A shell script called `mailsync` is included to sync mail, by first sending any
 mail in the msmtp queue and then syncing with the chosen IMAP servers via
-either isync or OfflineIMAP. Before syncing, the script checks for internet
-connectivity using NetworkMananger. `mailsync` may be called directly by the
-user, ie by configuring a hotkey in Mutt.
+either isync or OfflineIMAP. The script will also attempt to sync contacts and
+calendars via [vdirsyncer][17]. To disable this behavior, set the
+`mail.sync_pim` variable to `False`.
 
-A [systemd timer][17] is also included to periodically call `mailsync`. The
+Before syncing, the `mailsync` script checks for internet connectivity using
+NetworkMananger. `mailsync` may be called directly by the user, ie by
+configuring a hotkey in Mutt.
+
+A [systemd timer][18] is also included to periodically call `mailsync`. The
 timer is set to sync every 5 minutes (configurable through the `mail.sync_time`
 variable).
 
@@ -185,13 +189,13 @@ If the `mail.sync_on` variable is set to anything other than `trusted` or
 
 ## Tarsnap
 
-[Tarsnap][18] is installed with its default configuration file. However,
+[Tarsnap][19] is installed with its default configuration file. However,
 setting up Tarsnap is left as an exercise for the user. New Tarsnap users
-should [register their machine and generate a key][19]. Existing users should
+should [register their machine and generate a key][20]. Existing users should
 recover their key(s) and cache directory from their backups (or, alternatively,
 recover their key(s) and rebuild the cache directory with `tarsnap --fsck`).
 
-[Tarsnapper][20] is installed to manage backups. A basic configuration file to
+[Tarsnapper][21] is installed to manage backups. A basic configuration file to
 backup `/etc` is included. Tarsnapper is configured to look in
 `/usr/local/etc/tarsnapper.d` for additional jobs. As with with the Tarsnap key
 and cache directory, users should recover their jobs files from backups after
@@ -216,7 +220,7 @@ If the `tarsnapper.tarsnap.run_on` variable is set to anything other than
 
 ## BitlBee
 
-[BitlBee][21] and [WeeChat][22] are used to provide chat services. A systemd
+[BitlBee][22] and [WeeChat][23] are used to provide chat services. A systemd
 service unit for BitlBee is installed, but not enabled or started by default.
 Instead, the service is added to `/usr/local/etc/trusted_units`, causing the
 NetworkManager trusted unit dispatcher to activate the service whenever a
@@ -231,7 +235,7 @@ If the `bitlbee.run_on` variable is set to anything other than `trusted` or
 
 ## git-annex
 
-[git-annex][23] is installed for file syncing. A systemd service unit for the
+[git-annex][24] is installed for file syncing. A systemd service unit for the
 git-annex assistant is enabled and started by default. To prevent this, remove
 the `gitannex` variable from the config.
 
@@ -251,7 +255,7 @@ networks.
 
 ## PostgreSQL
 
-[PostgreSQL][24] is installed and enabled by default. If the
+[PostgreSQL][25] is installed and enabled by default. If the
 `postgresql.enable` variable is set to anything other than `True` or is not
 defined, the service will not be started or enabled.
 
@@ -265,8 +269,8 @@ database service inappropriate for production use.
 
 ## Known Issues
 
-* [tpfanco][25], normally installed as part of the `thinkpad` role is currently
-  [unavailable in the AUR][26]. No ThinkPad fan control software is currently
+* [tpfanco][26], normally installed as part of the `thinkpad` role is currently
+  [unavailable in the AUR][27]. No ThinkPad fan control software is currently
   installed.
 
 
@@ -286,13 +290,14 @@ database service inappropriate for production use.
 [14]: http://offlineimap.org/
 [15]: http://msmtp.sourceforge.net/
 [16]: http://sourceforge.net/p/msmtp/code/ci/master/tree/scripts/msmtpq/README.msmtpq
-[17]: https://wiki.archlinux.org/index.php/Systemd/Timers
-[18]: https://www.tarsnap.com/
-[19]: https://www.tarsnap.com/gettingstarted.html
-[20]: https://github.com/miracle2k/tarsnapper
-[21]: https://www.bitlbee.org/main.php/news.r.html
-[22]: https://weechat.org/
-[23]: https://git-annex.branchable.com/
-[24]: http://www.postgresql.org/
-[25]: https://code.google.com/p/tpfanco/
-[26]: https://aur.archlinux.org/packages/?O=0&K=tpfanco
+[17]: https://github.com/pimutils/vdirsyncer
+[18]: https://wiki.archlinux.org/index.php/Systemd/Timers
+[19]: https://www.tarsnap.com/
+[20]: https://www.tarsnap.com/gettingstarted.html
+[21]: https://github.com/miracle2k/tarsnapper
+[22]: https://www.bitlbee.org/main.php/news.r.html
+[23]: https://weechat.org/
+[24]: https://git-annex.branchable.com/
+[25]: http://www.postgresql.org/
+[26]: https://code.google.com/p/tpfanco/
+[27]: https://aur.archlinux.org/packages/?O=0&K=tpfanco
