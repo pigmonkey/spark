@@ -19,3 +19,16 @@
   tags:
     - aur
     - battery
+
+- name: Install fprintd
+  pacman: name=fprintd state=present
+  tags:
+    - fingerprint
+
+- name: Enable sudo fingerprint authentication
+  lineinfile: dest=/etc/pam.d/sudo
+              state=present
+              insertbefore=BOF
+              line="auth            sufficient      pam_fprintd.so"
+  tags:
+    - fingerprint
