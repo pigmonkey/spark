@@ -32,3 +32,8 @@
               line="auth            sufficient      pam_fprintd.so"
   tags:
     - fingerprint
+
+- name: Enable i3lock fingerprint authentication
+  copy: src=i3lock dest=/etc/pam.d/i3lock
+  tags:
+    - fingerprint
