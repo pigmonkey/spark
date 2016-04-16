@@ -15,3 +15,6 @@
     - activate firejail profiles
   tags:
     - firejail
+
+- name: Push play script
+  copy: src=play.sh dest=/usr/local/bin/play mode=0755

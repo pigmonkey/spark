@@ -78,6 +78,7 @@ browser_choices:
     - firefox -P work
     - firewarden chromium
     - tor-browser-en
+    - play
     - qcode
 
 passwordless_sudo:
