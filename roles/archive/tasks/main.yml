@@ -28,3 +28,8 @@
   pacman: name=par2cmdline state=present
   tags:
     - par2
+
+- name: Install ddrescue
+  pacman: name=ddrescue state=present
+  tags:
+    - ddrescue
