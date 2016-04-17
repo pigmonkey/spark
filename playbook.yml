@@ -4,6 +4,7 @@
   roles:
     - { role: base, tags: ['base'] }
     - { role: cron, tags: ['cron'] }
+    - { role: microcode, tags: ['microcode'], when: "'GenuineIntel' in ansible_processor" }
     - { role: grsec, tags: ['grsec'] }
     - { role: ssh, tags: ['ssh'] }
     - { role: dotfiles, tags: ['dotfiles'] }
