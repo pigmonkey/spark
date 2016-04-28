@@ -31,3 +31,9 @@
               state=absent
               line="git-annex@{{ user.name }}.service,allow_offline"
   when: gitannex is not defined or gitannex.stop_on_untrusted is not defined or gitannex.stop_on_untrusted != True
+
+- name: Increase the amount of inotify watchers
+  copy: src=99-max_watches.conf dest=/etc/sysctl.d/99-max_watches.conf
+  when: gitannex is defined
+  notify:
+    - reload sysctl
