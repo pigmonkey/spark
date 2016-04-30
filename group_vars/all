@@ -14,6 +14,7 @@ aur:
     dir: aur
     packages:
         - aura-bin
+        - downgrade
         - orpie
 
 ssh:
