@@ -1,6 +1,6 @@
 ---
 - name: Install mutt
-  aur: name=mutt-sidebar user={{ user.name }}
+  aur: name=neomutt user={{ user.name }}
   tags:
     - aur
 
