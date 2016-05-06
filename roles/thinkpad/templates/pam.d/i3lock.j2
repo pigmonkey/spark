@@ -1,3 +1,7 @@
+{% if fingerprint == True %}
 auth required    pam_env.so
 auth sufficient  pam_unix.so try_first_pass likeauth nullok
 auth sufficient  pam_fprintd.so
+{% else %}
+auth include system-auth
+{% endif %}

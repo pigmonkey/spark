@@ -25,15 +25,12 @@
   tags:
     - fingerprint
 
-- name: Enable sudo fingerprint authentication
-  lineinfile: dest=/etc/pam.d/sudo
-              state=present
-              insertbefore=BOF
-              line="auth            sufficient      pam_fprintd.so"
+- name: Push sudo authentication file
+  template: src=pam.d/sudo.j2 dest=/etc/pam.d/sudo
   tags:
     - fingerprint
 
-- name: Enable i3lock fingerprint authentication
-  copy: src=i3lock dest=/etc/pam.d/i3lock
+- name: Push i3lock authentication file
+  template: src=pam.d/i3lock.j2 dest=/etc/pam.d/i3lock
   tags:
     - fingerprint

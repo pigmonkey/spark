@@ -1,0 +1,6 @@
+{% if fingerprint == True %}
+auth            sufficient      pam_fprintd.so
+{% endif %}
+auth            include         system-auth
+account         include         system-auth
+session         include         system-auth

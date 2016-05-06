@@ -102,3 +102,5 @@ bootloader: grub
 
 postgresql:
     enable: True
+
+fingerprint: False
