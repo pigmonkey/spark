@@ -2,4 +2,9 @@
 - name: Install i3
   pacman: name=i3 state=present
 
+- name: Install py3status
+  aur: name=py3status user={{ user.name }}
+  tags:
+    - aur
+
 - include: rofi.yml
