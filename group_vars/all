@@ -74,6 +74,7 @@ filesystem_packages:
     - dosfstools
     - hfsprogs
     - ntfs-3g
+    - exfat-utils
 
 browser_choices:
     - firefox -P default
