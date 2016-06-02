@@ -5,7 +5,7 @@
     - rofi
 
 - name: Install rofi-pass
-  aur: name=rofi-pass-git user={{ user.name }}
+  aur: name=rofi-pass user={{ user.name }}
   tags:
     - aur
     - rofi
