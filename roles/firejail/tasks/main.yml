@@ -1,8 +1,6 @@
 ---
 - name: Install firejail
-  aur: name=firejail user={{ user.name }}
-  tags:
-    - aur
+  pacman: name=firejail state=present
 
 - name: Install firejail profile update script
   copy: src=profile-activate.sh dest=/usr/local/bin/profile-activate mode=0755
