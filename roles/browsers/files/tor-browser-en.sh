@@ -16,11 +16,11 @@ if [ $? -eq 0 ]; then
 fi
 
 # Attempt to run tor-browser-en.
-$FIREJAIL $TBB
+$FIREJAIL $TBB "$@"
 
 # If it failed with exit code 139, set the PaX flags and run again.
 if [ $? -eq 139 ]; then
     echo 'setting PAX flags'
     setfattr -n user.pax.flags -v "m" "$BROWSER"
-    $FIREJAIL $TBB
+    $FIREJAIL $TBB "$@"
 fi
