@@ -15,20 +15,12 @@ if [ $? -eq 0 ]; then
     FIREJAIL=firejail
 fi
 
-# If the executable does not exist, run tor-browser-en once to extract the
-# files.
-if [ ! -f "$BROWSER" ]; then
-    echo 'extracting files'
-    $FIREJAIL $TBB
-fi
+# Attempt to run tor-browser-en.
+$FIREJAIL $TBB
 
-# Check the PAX flags on the browser, setting them if necessary.
-echo 'checking PAX flags'
-getfattr -n user.pax.flags "$BROWSER" | grep -q '^user.pax.flags=".*m.*"'
-if [ $? -ne 0 ]; then
+# If it failed with exit code 139, set the PaX flags and run again.
+if [ $? -eq 139 ]; then
     echo 'setting PAX flags'
     setfattr -n user.pax.flags -v "m" "$BROWSER"
+    $FIREJAIL $TBB
 fi
-
-# Launch the browser
-$FIREJAIL $TBB "$@"
