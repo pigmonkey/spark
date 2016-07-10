@@ -10,7 +10,7 @@ if ! pidof physlock > /dev/null; then
         light -O
         light -S 10
     fi
-    /usr/sbin/physlock -m
+    /usr/sbin/physlock -md
     if [ "$BRIGHTNESS" = true ]; then
         light -I
     fi
