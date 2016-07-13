@@ -8,3 +8,8 @@
   pacman: name=gimp state=present
   tags:
     - gimp
+
+- name: Install GIMP raw support
+  pacman: name=gimp-ufraw state=present
+  tags:
+    - gimp
