@@ -72,7 +72,7 @@ Install GRUB.
 
     $ pacman -S grub
     $ echo GRUB_ENABLE_CRYPTODISK=y >> /etc/default/grub
-    $ sed -i 's/^GRUB_CMDLINE_LINUX=.*/GRUB_CMDLINE_LINUX="cryptdevice=\/dev\/sda1:lvm:allow-discards resume=\/dev\/mapper\/arch-swap intel_pstate=no_hwp"/' /etc/default/grub
+    $ sed -i 's/^GRUB_CMDLINE_LINUX=.*/GRUB_CMDLINE_LINUX="cryptdevice=\/dev\/sda1:lvm:allow-discards resume=\/dev\/mapper\/arch-swap"/' /etc/default/grub
     $ grub-mkconfig -o /boot/grub/grub.cfg
     $ grub-install /dev/sda
     $ chmod -R g-rwx,o-rwx /boot
