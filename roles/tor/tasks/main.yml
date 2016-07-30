@@ -1,0 +1,18 @@
+---
+- name: Install Tor
+  pacman: name={{ item }} state=present
+  with_items:
+    - tor
+    - torsocks
+
+- name: Create Tor systemd unit file directory
+  file: path=/etc/systemd/system/tor.service.d state=directory
+  tags:
+    - firejail
+
+- name: Push Tor socket unit file
+  copy: src=tor-service-override.conf dest=/etc/systemd/system/tor.service.d/override.conf
+  notify:
+    - reload systemd config
+  tags:
+    - firejail
