@@ -104,3 +104,6 @@ postgresql:
     enable: True
 
 fingerprint: False
+
+tor:
+    run_on: trusted
