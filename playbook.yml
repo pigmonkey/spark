@@ -56,6 +56,7 @@
     - { role: calibre, tags: ['calibre'] }
     - { role: cli53, tags: ['cli53'] }
     - { role: tor, tags: ['tor'] }
+    - { role: parcimonie, tags: ['parcimonie'] }
   vars_prompt:
     - name: user_password
       prompt: "Enter desired user password"
