@@ -5,9 +5,19 @@ It will provide a system with full-disk encryption using [LVM on LUKS][4].
 There is no separate `/boot` partition. The entire installation is encrypted
 and booted via [Grub's crypto hooks][5].
 
+On newer systems, disable UEFI / enable BIOS ("legacy") mode.
+
+On some newer systems (e.g. Dell XPS 15), set SATA operation mode to AHCI.
+
 Boot into the Arch installer.
 
-Verify that the [system clock is up to date][6].
+If your console font is tiny ([HiDPI][6] systems), set a new font.
+
+    $ setfont sun12x22
+
+Connect to the Internet.
+
+Verify that the [system clock is up to date][7].
 
     $ timedatectl set-ntp true
     
@@ -25,6 +35,7 @@ Create and mount the encrypted filesystem.
     $ lvcreate -L 8G arch -n swap
     $ lvcreate -L 30G arch -n root
     $ lvcreate -l +100%FREE arch -n home
+    $ lvdisplay
     $ mkswap -L swap /dev/mapper/arch-swap
     $ mkfs.ext4 /dev/mapper/arch-root
     $ mkfs.ext4 /dev/mapper/arch-home
@@ -33,20 +44,20 @@ Create and mount the encrypted filesystem.
     $ mount /dev/mapper/arch-home /mnt/home
     $ swapon /dev/mapper/arch-swap
 
-Optionally [edit the mirror list][7].
+Optionally [edit the mirror list][8].
 
     $ vi /etc/pacman.d/mirrorlist
 
-Install the [base system][8].
+Install the [base system][9].
 
-    $ pacstrap -i /mnt base base-devel
+    $ pacstrap -i /mnt base base-devel net-tools wireless_tools dialog wpa_supplicant git
 
-Generate and verify [fstab][9].
+Generate and verify [fstab][10].
 
     $ genfstab -U -p /mnt >> /mnt/etc/fstab
     $ less /mnt/etc/fstab
 
-Change root into the base install and perform [base configuration tasks][10].
+Change root into the base install and perform [base configuration tasks][11].
 
     $ arch-chroot /mnt /bin/bash
     $ echo en_US.UTF-8 UTF-8 >> /etc/locale.gen
@@ -91,8 +102,9 @@ Run ansible!
 [3]: https://wiki.archlinux.org/index.php/Installation_guide
 [4]: https://wiki.archlinux.org/index.php/Encrypted_LVM#LVM_on_LUKS
 [5]: http://www.pavelkogan.com/2014/05/23/luks-full-disk-encryption/
-[6]: https://wiki.archlinux.org/index.php/Beginners'_guide#Update_the_system_clock
-[7]: https://wiki.archlinux.org/index.php/Beginners'_Guide#Select_a_mirror
-[8]: https://wiki.archlinux.org/index.php/Beginners'_Guide#Install_the_base_system
-[9]: https://wiki.archlinux.org/index.php/Beginners'_guide#Generate_an_fstab
-[10]: https://wiki.archlinux.org/index.php/Beginners'_guide#Configure_the_base_system
+[6]: https://wiki.archlinux.org/index.php/HiDPI
+[7]: https://wiki.archlinux.org/index.php/Beginners'_guide#Update_the_system_clock
+[8]: https://wiki.archlinux.org/index.php/Beginners'_Guide#Select_a_mirror
+[9]: https://wiki.archlinux.org/index.php/Beginners'_Guide#Install_the_base_system
+[10]: https://wiki.archlinux.org/index.php/Beginners'_guide#Generate_an_fstab
+[11]: https://wiki.archlinux.org/index.php/Beginners'_guide#Configure_the_base_system
