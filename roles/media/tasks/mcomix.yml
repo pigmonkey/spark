@@ -1,0 +1,5 @@
+---
+- name: Install mcomix
+  pacman: name=mcomix state=present
+  tags:
+    - mcomix

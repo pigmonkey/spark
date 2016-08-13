@@ -8,6 +8,7 @@
 - include: gthumb.yml
 - include: feh.yml
 - include: imv.yml
+- include: mcomix.yml
 - include: teiler.yml
 - include: flac2all.yml
 - include: darktable.yml
