@@ -1,20 +1,15 @@
 ---
 - name: Install aspell English dictionary
   pacman: name=aspell-en state=present
-  tags:
-    - weechat
 
 - name: Install weechat
   pacman: name=weechat state=present
-  tags:
-    - weechat
 
 - name: Jail weechat
   file: src=/usr/bin/firejail
         dest=/usr/local/bin/weechat
         state=link
   tags:
-    - weechat
     - firejail
 
 - name: Push weechat firejail profile
@@ -22,10 +17,7 @@
   notify:
     - activate firejail profiles
   tags:
-    - weechat
     - firejail
 
 - name: Install dunst
   pacman: name=dunst state=present
-  tags:
-    - weechat

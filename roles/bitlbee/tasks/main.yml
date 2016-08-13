@@ -1,28 +1,19 @@
 ---
 - name: Install libOTR
   pacman: name=libotr state=present
-  tags:
-    - bitlbee
 
 - name: Install Bitlbee
   pacman: name=bitlbee state=present
-  tags:
-    - bitlbee
 
 - name: Copy Bitlbee configuration file
   copy: src=bitlbee.conf dest=/etc/bitlbee/bitlbee.conf
-  tags:
-    - bitlbee
 
 - name: Ensure proper ownership of configuration directory
   file: path=/var/lib/bitlbee group=bitlbee owner=bitlbee
-  tags:
-    - bitlbee
 
 - name: Create Bitlbee systemd unit file directory
   file: path=/etc/systemd/system/bitlbee.service.d state=directory
   tags:
-    - bitlbee
     - firejail
 
 - name: Push Bitlbee socket unit file
@@ -31,33 +22,24 @@
     - reload systemd config
     - restart bitlbee
   tags:
-    - bitlbee
     - firejail
 
 - name: Enable and start Bitlbee
   service: name=bitlbee enabled=yes state=started
   when: bitlbee.run_on == "all"
-  tags:
-    - bitlbee
 
 - name: Remove Bitlbee from trusted unit list
   lineinfile: dest=/usr/local/etc/trusted_units
               state=absent
               line=bitlbee.service
   when: bitlbee.run_on == "all"
-  tags:
-    - bitlbee
 
 - name: Disable Bitlbee
   service: name=bitlbee enabled=no
   when: bitlbee.run_on == "trusted"
-  tags:
-    - bitlbee
 
 - name: Add Bitlbee to trusted unit list
   lineinfile: dest=/usr/local/etc/trusted_units
               state=present
               line=bitlbee.service
   when: bitlbee.run_on == "trusted"
-  tags:
-    - bitlbee
