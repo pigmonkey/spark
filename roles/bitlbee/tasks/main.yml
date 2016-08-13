@@ -5,8 +5,8 @@
 - name: Install Bitlbee
   pacman: name=bitlbee state=present
 
-- name: Copy Bitlbee configuration file
-  copy: src=bitlbee.conf dest=/etc/bitlbee/bitlbee.conf
+- name: Push Bitlbee configuration file
+  template: src=bitlbee.conf.j2 dest=/etc/bitlbee/bitlbee.conf
 
 - name: Ensure proper ownership of configuration directory
   file: path=/var/lib/bitlbee group=bitlbee owner=bitlbee

@@ -97,6 +97,7 @@ gitannex:
 
 bitlbee:
     run_on: trusted
+    torify: True
 
 bootloader: grub
 
