@@ -75,7 +75,7 @@ Optionally [edit the mirror list][9].
 
 Install the [base system][10].
 
-    $ pacstrap -i /mnt base base-devel net-tools wireless_tools dialog wpa_supplicant git grub
+    $ pacstrap -i /mnt base base-devel net-tools wireless_tools dialog wpa_supplicant git grub ansible
     (UEFI mode) $ pacstrap /mnt efibootmgr
 
 Generate and verify [fstab][11].
