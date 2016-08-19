@@ -35,7 +35,7 @@
     - { role: macbook, tags: ['macbook'], when: "'MacBook' in ansible_product_name" }
     - { role: screensaver, tags: ['screensaver'] }
     - { role: chat, tags: ['chat'] }
-    - { role: git-annex, tags: ['git-annex'] }
+    - { role: git-annex, tags: ['git-annex'], when: "gitannex is defined" }
     - { role: ledger, tags: ['ledger'] }
     - { role: mail, tags: ['mail'] }
     - { role: cups, tags: ['cups'] }
