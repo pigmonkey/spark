@@ -2,6 +2,11 @@
 - name: Install git-annex
   pacman: name=git-annex state=present
 
+- name: Install git-annex-remote-rclone
+  aur: name=git-annex-remote-rclone user={{ user.name }}
+  tags:
+    - aur
+
 - name: Push git-annex assistant service file
   copy: src=git-annex.service dest=/etc/systemd/system/git-annex@.service
   notify:
