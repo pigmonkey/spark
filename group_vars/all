@@ -68,6 +68,8 @@ base_packages:
     - pv
     - minicom
     - jq
+    - python-docs
+    - python2-docs
 
 filesystem_packages:
     - dosfstools
