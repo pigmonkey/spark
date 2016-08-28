@@ -2,10 +2,12 @@
 - name: Install vagrant
   pacman: name=vagrant state=present
 
-- name: Install consul and vault
+- name: Install consul
+  pacman: name=consul state=present
+
+- name: Install vault
   aur: name={{ item }} user={{ user.name }}
   with_items:
-    - consul
     - vault-bin
   tags:
     - aur
