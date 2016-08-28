@@ -15,10 +15,11 @@
   tags:
     - aur
 
-- name: Install tucnak3
-  aur: name={{ item }} user={{ user.name }}
-  with_items:
-    - libzia3
-    - tucnak3
-  tags:
-    - aur
+# tucnak3 replaced by tucnak4 upstream but no AUR package yet
+#- name: Install tucnak3
+#  aur: name={{ item }} user={{ user.name }}
+#  with_items:
+#    - libzia3
+#    - tucnak3
+#  tags:
+#    - aur

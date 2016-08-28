@@ -2,12 +2,12 @@
 - name: Install rsnapshot
   pacman: name=rsnapshot state=present
 
-- name: Install attic
-  aur: name=attic user={{ user.name }}
+- name: Install borg
+  aur: name=borg user={{ user.name }}
   tags:
     - aur
 
-- name: Install atticmatic
-  aur: name=atticmatic user={{ user.name }}
+- name: Install borgmatic
+  aur: name=borgmatic user={{ user.name }}
   tags:
     - aur
