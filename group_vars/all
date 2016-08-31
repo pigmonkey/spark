@@ -15,8 +15,7 @@ aur:
     packages:
         - aura-bin
         - downgrade
-        # mirror is down
-        #- orpie
+        - orpie
 
 ssh:
     port: 22
