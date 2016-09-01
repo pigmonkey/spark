@@ -1,0 +1,11 @@
+---
+- name: Install cli53
+  aur: name=cli53 user={{ user.name }}
+  tags:
+    - aur
+    - cli53
+
+- name: Install aws-cli
+  pacman: name=aws-cli state=present
+  tags:
+    - aws-cli

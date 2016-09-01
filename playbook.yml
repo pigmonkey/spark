@@ -54,7 +54,7 @@
     - { role: formd, tags: ['formd'] }
     - { role: postgresql, tags: ['postgresql'] }
     - { role: calibre, tags: ['calibre'] }
-    - { role: cli53, tags: ['cli53'] }
+    - { role: aws, tags: ['aws'] }
   vars_prompt:
     - name: user_password
       prompt: "Enter desired user password"
