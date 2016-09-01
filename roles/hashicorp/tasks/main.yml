@@ -2,11 +2,13 @@
 - name: Install vagrant
   pacman: name=vagrant state=present
 
-- name: Install terraform, consul, and vault
+- name: Install consul
+  pacman: name=consul state=present
+
+- name: Install vault and terraform
   aur: name={{ item }} user={{ user.name }}
   with_items:
-    - terraform-bin
-    - consul
     - vault-bin
+    - terraform
   tags:
     - aur
