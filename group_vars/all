@@ -16,6 +16,7 @@ aur:
         - aura-bin
         - downgrade
         - orpie
+        - overdue
 
 ssh:
     port: 22
