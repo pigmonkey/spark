@@ -5,6 +5,17 @@
   tags:
     - packages
 
+- name: Create pacman hook directory
+  file: path=/etc/pacman.d/hooks
+        state=directory
+  tags:
+    - packages
+
+- name: Push pacman mirror list update hook
+  copy: src=mirrorlist.hook dest=/etc/pacman.d/hooks/mirrorlist.hook
+  tags:
+    - packages
+
 - name: Create AUR directory
   file: path=/home/{{ user.name }}/{{ aur.dir }}
         state=directory

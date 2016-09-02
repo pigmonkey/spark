@@ -1,0 +1,10 @@
+[Trigger]
+Operation = Upgrade
+Type = Package
+Target = pacman-mirrorlist
+
+[Action]
+Description = Updating mirror list...
+When = PostTransaction
+Depends = reflector
+Exec = /usr/bin/bash -c "/usr/bin/reflector --latest 15 --sort rate --save /etc/pacman.d/mirrorlist && if [[ -f /etc/pacman.d/mirrorlist.pacnew ]] ; then rm /etc/pacman.d/mirrorlist.pacnew ; fi"
