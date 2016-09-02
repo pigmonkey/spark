@@ -19,6 +19,7 @@
     - { role: macchiato, tags: ['macchiato'] }
     - { role: ntp, tags: ['ntp'] }
     - { role: firejail, tags: ['firejail'] }
+    - { role: tor, tags: ['tor'], when: "tor is defined" }
     - { role: unbound, tags: ['unbound'] }
     - { role: editors, tags: ['editors'] }
     - { role: filesystems, tags: ['filesystems'] }
@@ -34,8 +35,9 @@
     - { role: thinkpad, tags: ['thinkpad'], when: "'ThinkPad' in ansible_product_version" }
     - { role: macbook, tags: ['macbook'], when: "'MacBook' in ansible_product_name" }
     - { role: screensaver, tags: ['screensaver'] }
-    - { role: chat, tags: ['chat'] }
-    - { role: git-annex, tags: ['git-annex'], when: "gitannex is defined" }
+    - { role: bitlbee, tags: ['bitlbee'] }
+    - { role: weechat, tags: ['weechat'] }
+    - { role: git-annex, tags: ['git-annex'] }
     - { role: ledger, tags: ['ledger'] }
     - { role: mail, tags: ['mail'] }
     - { role: cups, tags: ['cups'] }
@@ -55,6 +57,7 @@
     - { role: postgresql, tags: ['postgresql'] }
     - { role: calibre, tags: ['calibre'] }
     - { role: aws, tags: ['aws'] }
+    - { role: parcimonie, tags: ['parcimonie'], when: "tor is defined" }
   vars_prompt:
     - name: user_password
       prompt: "Enter desired user password"

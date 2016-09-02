@@ -1,0 +1,6 @@
+---
+dependencies:
+  - { role: networkmanager }
+  - { role: firejail }
+  - { role: systemd }
+  - { role: tor }

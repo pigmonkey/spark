@@ -1,0 +1,9 @@
+[settings]
+RunMode = ForkDaemon
+User = bitlbee
+{% if tor and bitlbee.torify %}
+Proxy = socks5://localhost:9050
+{% endif %}
+
+[defaults]
+private = 1

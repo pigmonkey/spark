@@ -1,0 +1,28 @@
+---
+- name: Install parcimonie.sh
+  aur: name=parcimonie-sh-git user={{ user.name }}
+  tags:
+    - aur
+
+- name: Push parcimonie.sh user configuration
+  template: src=user.conf.j2 dest=/etc/parcimonie.sh.d/{{ user.name }}.conf
+
+- name: Enable and start parcimione.sh
+  service: name="parcimonie.sh@{{ user.name }}.service" enabled=yes state=started
+  when: tor.run_on == "all"
+
+- name: Remove parcimione.sh from trusted unit list
+  lineinfile: dest=/usr/local/etc/trusted_units
+              state=absent
+              line="parcimonie.sh@{{ user.name }}.service"
+  when: tor.run_on == "all"
+
+- name: Disable parcimione.sh
+  service: name="parcimonie.sh@{{ user.name }}.service" enabled=no
+  when: tor.run_on == "trusted"
+
+- name: Add parcimione.sh to trusted unit list
+  lineinfile: dest=/usr/local/etc/trusted_units
+              state=present
+              line="parcimonie.sh@{{ user.name }}.service"
+  when: tor.run_on == "trusted"

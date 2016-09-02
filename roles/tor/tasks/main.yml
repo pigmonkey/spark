@@ -1,0 +1,38 @@
+---
+- name: Install Tor
+  pacman: name={{ item }} state=present
+  with_items:
+    - tor
+    - torsocks
+
+- name: Create Tor systemd unit file directory
+  file: path=/etc/systemd/system/tor.service.d state=directory
+  tags:
+    - firejail
+
+- name: Push Tor socket unit file
+  copy: src=tor-service-override.conf dest=/etc/systemd/system/tor.service.d/override.conf
+  notify:
+    - reload systemd config
+  tags:
+    - firejail
+
+- name: Enable and start Tor
+  service: name=tor enabled=yes state=started
+  when: tor.run_on == "all"
+
+- name: Remove Tor from trusted unit list
+  lineinfile: dest=/usr/local/etc/trusted_units
+              state=absent
+              line=tor.service
+  when: tor.run_on == "all"
+
+- name: Disable Tor
+  service: name=tor enabled=no
+  when: tor.run_on == "trusted"
+
+- name: Add Tor to trusted unit list
+  lineinfile: dest=/usr/local/etc/trusted_units
+              state=present
+              line=tor.service
+  when: tor.run_on == "trusted"
