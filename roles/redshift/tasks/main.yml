@@ -6,3 +6,12 @@
     - python-gobject
     - python-xdg
     - redshift
+
+- name: Allow RedShift to access geoclue
+  blockinfile:
+    dest: /etc/geoclue/geoclue.conf
+    block: |
+      [redshift]
+      allowed=true
+      system=false
+      users=
