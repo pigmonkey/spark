@@ -1,0 +1,25 @@
+---
+- name: Install localtime
+  aur: name=localtime-git user={{ user.name }}
+  tags:
+    - aur
+
+- name: Enable and start localtime
+  service: name=localtime enabled=yes state=started
+  when: localtime.run_on == "all"
+
+- name: Remove localtime from trusted unit list
+  lineinfile: dest=/usr/local/etc/trusted_units
+              state=absent
+              line=localtime.service
+  when: localtime.run_on == "all"
+
+- name: Disable localtime
+  service: name=localtime enabled=no
+  when: localtime.run_on == "trusted"
+
+- name: Add localtime to trusted unit list
+  lineinfile: dest=/usr/local/etc/trusted_units
+              state=present
+              line=localtime.service
+  when: localtime.run_on == "trusted"

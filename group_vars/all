@@ -111,3 +111,6 @@ fingerprint: False
 
 tor:
     run_on: trusted
+
+localtime:
+    run_on: trusted
