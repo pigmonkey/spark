@@ -9,7 +9,7 @@
   copy: src=local-blocking-data.conf dest=/etc/unbound/local-blocking-data.conf
 
 - name: Copy Unbound configuration file
-  copy: src=unbound.conf dest=/etc/unbound/unbound.conf
+  template: src=unbound.conf.j2 dest=/etc/unbound/unbound.conf
   notify:
     - restart unbound
 
