@@ -114,3 +114,8 @@ tor:
 
 localtime:
     run_on: trusted
+
+nameservers:
+    - 8.8.8.8        # Google
+    - 205.171.3.25   # Qwest
+    - 74.82.42.42    # Hurricane Electric

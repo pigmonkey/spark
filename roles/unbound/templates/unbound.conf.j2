@@ -21,9 +21,11 @@ server:
   private-address: fd00::/8
   private-address: fe80::/10
 
+{% if nameservers %}
   # Define DNS servers to forward queries to.
   forward-zone:
     name: "."
-    forward-addr: 8.8.8.8        # Google
-    forward-addr: 205.171.3.25   # Qwest
-    forward-addr: 74.82.42.42    # Hurricane Electric
+    {% for nameserver in nameservers %}
+    forward-addr: {{ nameserver }}
+    {% endfor %}
+{% endif %}
