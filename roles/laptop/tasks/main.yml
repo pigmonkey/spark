@@ -21,3 +21,11 @@
 
 - name: Enable and start lowbatt timer
   service: name=lowbatt.timer enabled=yes state=started
+
+- name: Block the bluetooth service
+  service: name="rfkill-block@bluetooth.service" enabled=yes state=started
+  when: bluetooth == False
+
+- name: Unblock the bluetooth service
+  service: name="rfkill-block@bluetooth.service" enabled=no state=stopped
+  when: bluetooth == True
