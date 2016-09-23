@@ -44,8 +44,8 @@
     - chromium
     - firejail
 
-- name: Install Chromium Pepper Flash
-  aur: name=chromium-pepper-flash user={{ user.name }}
+- name: Install Pepper Flash
+  aur: name=pepper-flash user={{ user.name }}
   tags:
     - aur
     - chromium
