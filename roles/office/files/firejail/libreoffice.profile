@@ -1,6 +1,6 @@
-include /usr/local/etc/firejail/generic.profile
+include /usr/local/etc/firejail/disable-more.inc
+include /etc/firejail/libreoffice.profile
 
 net none
-private-dev
 private-etc libreoffice,fonts,passwd
 shell none
