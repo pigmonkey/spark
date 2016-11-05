@@ -16,6 +16,9 @@ then
 {% if mail.sync_pim %}
     vdirsyncer sync
 {% endif %}
+{% if mail.sync_taskwarrior %}
+    task sync
+{% endif %}
     exit $?
 fi
 echo "No internet connection."
