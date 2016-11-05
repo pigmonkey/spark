@@ -1,0 +1,5 @@
+---
+- name: refresh holidays
+  command: /usr/share/doc/timew/doc/holidays/refresh
+  args:
+      chdir: /usr/share/doc/timew/doc/holidays

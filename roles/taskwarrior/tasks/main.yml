@@ -1,0 +1,8 @@
+---
+- name: Install taskwarrior
+  pacman: name=task state=present
+
+- name: Install timewarrior
+  pacman: name=timew state=present
+  notify:
+    - refresh holidays

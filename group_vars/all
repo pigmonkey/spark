@@ -51,7 +51,6 @@ base_packages:
     - gnupg
     - rsync
     - glances
-    - task
     - coreutils
     - moreutils
     - pass
