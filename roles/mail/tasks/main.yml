@@ -4,6 +4,13 @@
   tags:
     - aur
 
+- name: Jail mutt
+  file: src=/usr/bin/firejail
+        dest=/usr/local/bin/mutt
+        state=link
+  tags:
+    - firejail
+
 - name: Install urlview
   aur: name=urlview user={{ user.name }}
   tags:
