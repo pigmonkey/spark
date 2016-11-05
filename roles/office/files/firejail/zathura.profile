@@ -1,5 +1,4 @@
-include /usr/local/etc/firejail/generic.profile
+include /usr/local/etc/firejail/disable-more.inc
+include /etc/firejail/zathura.profile
 
 net none
-private-dev
-shell none
