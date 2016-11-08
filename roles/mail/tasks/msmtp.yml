@@ -62,6 +62,14 @@
   tags:
     - msmtp
 
+- name: Disable msmtpq connectivity test
+  lineinfile: "dest=/usr/local/bin/msmtpq
+              regexp=^EMAIL_CONN_TEST=
+              state=present
+              line='EMAIL_CONN_TEST=x'"
+  tags:
+    - msmtp
+
 - name: Set msmtpq log dir
   lineinfile: "dest=/usr/local/bin/msmtpq
               regexp=^LOG=
