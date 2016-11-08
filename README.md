@@ -96,6 +96,13 @@ script looks for a profile with the same name in `~/.config/firejail`. If one
 is not found, it will create a profile that simply includes the system profile,
 as in the third example above. It will not modify any existing user profiles.
 
+### Blacklisting
+
+The `firejail.blacklist` variable is used to generate a list of blacklisted
+files and directories at `/usr/local/etc/firejail/disable-more.inc`. This file
+is included in most of the provided security profiles, causing those locations
+to be inaccessible to jailed programs.
+
 ## MAC Spoofing
 
 By default, the MAC address of all network interfaces is spoofed at boot,

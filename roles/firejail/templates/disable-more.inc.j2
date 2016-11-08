@@ -1,0 +1,4 @@
+# {{ ansible_managed }}
+{% for file in firejail.blacklist %}
+blacklist {{ file }}
+{% endfor %}
