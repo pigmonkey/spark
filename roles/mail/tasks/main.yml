@@ -11,6 +11,13 @@
   tags:
     - firejail
 
+- name: Push mutt firejail profile
+  copy: src=firejail/mutt.profile dest=/usr/local/etc/firejail/mutt.profile
+  notify:
+    - activate firejail profiles
+  tags:
+    - firejail
+
 - name: Install urlview
   aur: name=urlview user={{ user.name }}
   tags:
