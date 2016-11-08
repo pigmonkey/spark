@@ -4,6 +4,7 @@ blacklist ${HOME}/.keys
 
 # Ledger
 blacklist ${HOME}/ledger
+blacklist ${HOME}/library/ledger
 
 # Mail
 blacklist ${HOME}/.offlineimaprc
