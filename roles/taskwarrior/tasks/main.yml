@@ -6,3 +6,8 @@
   pacman: name=timew state=present
   notify:
     - refresh holidays
+
+- name: Install taskopen
+  aur: name=taskopen user={{ user.name }}
+  tags:
+    - aur
