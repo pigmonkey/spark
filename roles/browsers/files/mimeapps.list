@@ -1,8 +1,0 @@
-[Default Applications]
-text/html=browser.desktop
-text/xml=browser.desktop
-text/mml=browser.desktop
-application/xhtml+xml=browser.desktop
-application/xml=browser.desktop
-x-scheme-handler/http=browser.desktop
-x-scheme-handler/https=browser.desktop

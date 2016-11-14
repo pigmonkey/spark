@@ -82,7 +82,15 @@
     - chooser
 
 - name: Set rofi browser chooser as default application for relevant mimetypes
-  copy: src=mimeapps.list dest=/etc/xdg/mimeapps.list
-  tags:
-    - rofi
-    - chooser
+  lineinfile:
+    dest: /etc/xdg/mimeapps.list
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+  with_items:
+    - { regexp: '^text/html=', line: 'text/html=browser.desktop' }
+    - { regexp: '^text/xml=', line: 'text/xml=browser.desktop' }
+    - { regexp: '^text/mml=', line: 'text/mml=browser.desktop' }
+    - { regexp: '^application/xhtml\+xml=', line: 'application/xhtml+xml=browser.desktop' }
+    - { regexp: '^application/xml=', line: 'application/xml=browser.desktop' }
+    - { regexp: '^x-scheme-handler/http=', line: 'x-scheme-handler/http=browser.desktop' }
+    - { regexp: '^x-scheme-handler/https=', line: 'x-scheme-handler/https=browser.desktop' }
