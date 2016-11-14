@@ -22,6 +22,12 @@
     - zathura-pdf-mupdf
     - zathura-ps
 
+- name: Set Zathura as default PDF viewer
+  lineinfile: dest=/etc/xdg/mimeapps.list
+              regexp=^application/pdf
+              state=present
+              line="application/pdf=zathura.desktop"
+
 - name: Jail Zathura
   file: src=/usr/bin/firejail
         dest=/usr/local/bin/zathura
