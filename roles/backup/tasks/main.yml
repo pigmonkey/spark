@@ -3,9 +3,7 @@
   pacman: name=rsnapshot state=present
 
 - name: Install borg
-  aur: name=borg user={{ user.name }}
-  tags:
-    - aur
+  pacman: name=borg state=present
 
 - name: Install borgmatic
   aur: name=borgmatic user={{ user.name }}
