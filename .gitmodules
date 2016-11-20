@@ -10,3 +10,6 @@
 [submodule "roles/backup/files/backitup"]
 	path = roles/backup/files/backitup
 	url = https://github.com/pigmonkey/backitup
+[submodule "roles/backup/files/cryptshot"]
+	path = roles/backup/files/cryptshot
+	url = https://github.com/pigmonkey/cryptshot
