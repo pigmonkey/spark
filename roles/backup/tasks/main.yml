@@ -11,3 +11,6 @@
   aur: name=borgmatic user={{ user.name }}
   tags:
     - aur
+
+- name: Install backitup.sh script
+  copy: src=backitup/backitup.sh dest=/usr/local/bin/backitup mode=0755
