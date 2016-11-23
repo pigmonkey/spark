@@ -13,12 +13,8 @@
 
 - name: Push firejail blacklist include
   template: src=disable-more.inc.j2 dest=/usr/local/etc/firejail/disable-more.inc
-  tags:
-    - firejail
 
 - name: Push generic firejail profile
   copy: src=generic.profile dest=/usr/local/etc/firejail/generic.profile
   notify:
     - activate firejail profiles
-  tags:
-    - firejail
