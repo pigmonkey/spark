@@ -7,9 +7,9 @@
 [submodule "roles/networkmanager/files/nmtrust"]
 	path = roles/networkmanager/files/nmtrust
 	url = https://github.com/pigmonkey/nmtrust.git
-[submodule "roles/backup/files/backitup"]
-	path = roles/backup/files/backitup
+[submodule "roles/cryptshot/files/backitup"]
+	path = roles/cryptshot/files/backitup
 	url = https://github.com/pigmonkey/backitup
-[submodule "roles/backup/files/cryptshot"]
-	path = roles/backup/files/cryptshot
+[submodule "roles/cryptshot/files/cryptshot"]
+	path = roles/cryptshot/files/cryptshot
 	url = https://github.com/pigmonkey/cryptshot
