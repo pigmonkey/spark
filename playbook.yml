@@ -48,7 +48,7 @@
     - { role: virtualbox, tags: ['virtualbox'] }
     - { role: hashicorp, tags: ['hashicorp'] }
     - { role: virtualenv, tags: ['virtualenv'] }
-    - { role: backup, tags: ['backup'] }
+    - { role: cryptshot, tags: ['cryptshot'] }
     - { role: borg, tags: ['borg'] }
     - { role: tarsnap, tags: ['tarsnap'] }
     - { role: mapping, tags: ['mapping'] }
