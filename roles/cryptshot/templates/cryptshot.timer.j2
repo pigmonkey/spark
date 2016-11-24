@@ -1,8 +1,8 @@
 [Unit]
-Description=Cryptshot Timer: {{ target.name|capitalize }}
+Description=Cryptshot Backup Timer
 
 [Timer]
-Unit=cryptshot-{{ target.name }}.service
+Unit=cryptshot.service
 OnCalendar=hourly
 Persistent=True
 

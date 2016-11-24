@@ -21,3 +21,20 @@
   with_items: "{{ cryptshot }}"
   loop_control:
     loop_var: target
+
+- name: Push cryptshot execution script
+  template: src=cryptshot.sh.j2 dest=/usr/local/bin/cryptshot-execute mode=0755
+
+- name: Push cryptshot service file
+  template: src=cryptshot.service.j2 dest=/etc/systemd/system/cryptshot.service
+  notify:
+    - reload systemd config
+
+- name: Push cryptshot timer file
+  template: src=cryptshot.timer.j2 dest=/etc/systemd/system/cryptshot.timer
+  notify:
+    - reload systemd config
+    - restart cryptshot
+
+- name: Enable and start cryptshot timer
+  service: name=cryptshot.timer enabled=yes state=started
