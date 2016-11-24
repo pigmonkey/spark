@@ -1,0 +1,4 @@
+---
+- name: restart cryptshot
+  service: name=cryptshot-{{ item.name }}.timer state=restarted
+  with_items: "{{ cryptshot }}"

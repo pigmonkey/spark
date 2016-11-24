@@ -1,0 +1,10 @@
+[Unit]
+Description=Cryptshot Timer: {{ target.name|capitalize }}
+
+[Timer]
+Unit=cryptshot-{{ target.name }}.service
+OnCalendar=hourly
+Persistent=True
+
+[Install]
+WantedBy=timers.target

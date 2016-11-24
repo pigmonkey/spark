@@ -1,0 +1,7 @@
+Description=Cryptshot Backup Service: {{ target.name|capitalize }}
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/cryptshot-{{ target.name }}
+StandardOutput=syslog
+StandardError=syslog
