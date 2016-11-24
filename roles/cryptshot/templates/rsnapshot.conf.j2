@@ -133,8 +133,8 @@ lockfile	/var/run/rsnapshot-{{ target.name }}.pid
 
 # Default rsync args. All rsync commands have at least these options set.
 #
-#rsync_short_args	-a
-#rsync_long_args	--delete --numeric-ids --relative --delete-excluded
+rsync_short_args	-av
+rsync_long_args	--delete --numeric-ids --relative --delete-excluded
 
 # ssh has no args passed by default, but you can specify some here.
 #
