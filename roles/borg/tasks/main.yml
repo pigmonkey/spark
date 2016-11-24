@@ -1,0 +1,8 @@
+---
+- name: Install borg
+  pacman: name=borg state=present
+
+- name: Install borgmatic
+  aur: name=borgmatic user={{ user.name }}
+  tags:
+    - aur

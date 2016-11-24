@@ -49,6 +49,7 @@
     - { role: hashicorp, tags: ['hashicorp'] }
     - { role: virtualenv, tags: ['virtualenv'] }
     - { role: backup, tags: ['backup'] }
+    - { role: borg, tags: ['borg'] }
     - { role: tarsnap, tags: ['tarsnap'] }
     - { role: mapping, tags: ['mapping'] }
     - { role: sound, tags: ['sound'] }
