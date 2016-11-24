@@ -6,6 +6,8 @@ user:
     email:  peter@havenaut.net
     log_dir: log
 
+hostname: nous
+
 dotfiles:
     url: git@github.com:pigmonkey/dotfiles.git
     rcup_flags: -x README.md
@@ -135,3 +137,35 @@ firejail:
         - ~/.password-store
         - ~/.vdirsyncer
         - ~/library/ledger
+
+cryptshot:
+    - name: alpha
+      uuid: 5285f2d8-69fa-4516-990e-eb39caec3f01
+      keyfile: /home/pigmonkey/.keys/usb-alpha.key
+      retain:
+        - level: daily
+          interval: 7
+        - level: weekly
+          interval: 6
+        - level: monthly
+          interval: 3
+    - name: bravo
+      uuid: bfb09df1-1617-4112-b2d0-561bd7aca113
+      keyfile: /home/pigmonkey/.keys/usb-bravo.key
+      retain:
+        - level: daily
+          interval: 7
+        - level: weekly
+          interval: 6
+        - level: monthly
+          interval: 3
+    - name: pilchuck
+      uuid: d96a0fc3-7ea1-42f7-b0d0-42e573c478bd
+      keyfile: /home/pigmonkey/.keys/usb-pilchuck.key
+      retain:
+        - level: daily
+          interval: 7
+        - level: weekly
+          interval: 6
+        - level: monthly
+          interval: 3

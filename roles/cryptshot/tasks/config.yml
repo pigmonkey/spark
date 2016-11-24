@@ -1,0 +1,6 @@
+---
+- name: Push {{ target.name }} rsnapshot config
+  template: src=rsnapshot.conf.j2 dest=/usr/local/etc/rsnapshot/{{ target.name }}.conf
+
+- name: Push {{ target.name }} cryptshot config
+  template: src=cryptshot.conf.j2 dest=/usr/local/etc/cryptshot/{{ target.name }}.conf

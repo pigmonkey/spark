@@ -7,3 +7,14 @@
 
 - name: Install cryptshot.sh script
   copy: src=cryptshot/cryptshot.sh dest=/usr/local/bin/cryptshot mode=0755
+
+- name: Create rsnapshot config directory
+  file: path=/usr/local/etc/rsnapshot state=directory
+
+- name: Create cryptshot config directory
+  file: path=/usr/local/etc/cryptshot state=directory
+
+- include: config.yml
+  with_items: "{{ cryptshot }}"
+  loop_control:
+    loop_var: target
