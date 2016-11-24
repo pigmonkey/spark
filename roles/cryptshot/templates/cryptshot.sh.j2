@@ -1,0 +1,5 @@
+#!/bin/sh
+
+{% for retain in target.retain|sort(attribute='interval') %}
+/usr/local/bin/backitup -l /usr/local/etc/cryptshot/lastrun/{{ target.name }}.{{ retain.level }} -b "/usr/local/bin/cryptshot -c /usr/local/etc/cryptshot/{{ target.name }}.conf -i {{ retain.level }}" -p {{ retain.level|upper }}
+{% endfor %}
