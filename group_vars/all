@@ -13,6 +13,8 @@ dotfiles:
     destination: projects/dotfiles
     rcup_flags: -fx README.md
 
+hostname: obsidian
+
 aur:
     dir: aur
     packages:
@@ -173,8 +175,6 @@ cryptshot:
         - level: monthly
           interval: 3
 
-
-
 journal:
     max_size: 500M
 
@@ -190,3 +190,4 @@ himawaripy:
     run_boot_delay: 2min
     run_on: trusted
     flags: --auto-offset --level 4
+
