@@ -139,9 +139,9 @@ firejail:
         - ~/library/ledger
 
 cryptshot:
-    - name: alpha
-      uuid: 5285f2d8-69fa-4516-990e-eb39caec3f01
-      keyfile: /home/pigmonkey/.keys/usb-alpha.key
+    - name: alta
+      uuid: 0a0db776-84c5-48e1-9079-cacfbc5de8a3
+      keyfile: /home/pigmonkey/.keys/usb-alta.key
       retain:
         - level: daily
           interval: 7
@@ -149,9 +149,9 @@ cryptshot:
           interval: 6
         - level: monthly
           interval: 3
-    - name: bravo
-      uuid: bfb09df1-1617-4112-b2d0-561bd7aca113
-      keyfile: /home/pigmonkey/.keys/usb-bravo.key
+    - name: bishorn
+      uuid: baeb40a2-b19e-4adc-8ef6-44ee720a4d1a
+      keyfile: /home/pigmonkey/.keys/usb-bishorn.key
       retain:
         - level: daily
           interval: 7
