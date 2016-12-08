@@ -140,3 +140,34 @@ firejail:
         - ~/.vdirsyncer
         - ~/library/ledger
 
+cryptshot:
+    - name: alta
+      uuid: 0a0db776-84c5-48e1-9079-cacfbc5de8a3
+      keyfile: /home/pigmonkey/.keys/usb-alta.key
+      retain:
+        - level: daily
+          interval: 7
+        - level: weekly
+          interval: 6
+        - level: monthly
+          interval: 3
+    - name: bishorn
+      uuid: baeb40a2-b19e-4adc-8ef6-44ee720a4d1a
+      keyfile: /home/pigmonkey/.keys/usb-bishorn.key
+      retain:
+        - level: daily
+          interval: 7
+        - level: weekly
+          interval: 6
+        - level: monthly
+          interval: 3
+    - name: pilchuck
+      uuid: d96a0fc3-7ea1-42f7-b0d0-42e573c478bd
+      keyfile: /home/pigmonkey/.keys/usb-pilchuck.key
+      retain:
+        - level: daily
+          interval: 7
+        - level: weekly
+          interval: 6
+        - level: monthly
+          interval: 3

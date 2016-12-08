@@ -5,6 +5,12 @@
     - tor
     - torsocks
 
+- name: Set Tor to run as tor
+  lineinfile: dest=/etc/tor/torrc
+              regexp=^User
+              state=present
+              line="User tor"
+
 - name: Create Tor systemd unit file directory
   file: path=/etc/systemd/system/tor.service.d state=directory
   tags:
