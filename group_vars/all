@@ -6,13 +6,11 @@ user:
     email: brett@librum.org
     log_dir: log
 
-hostname: nous
+hostname: obsidian
 
 dotfiles:
     url: ssh://brett@seki.librum.org/home/brett/archives/dotfiles.git
     rcup_flags: -x README.md
-
-hostname: obsidian
 
 aur:
     dir: aur
