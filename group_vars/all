@@ -13,8 +13,6 @@ dotfiles:
     destination: projects/dotfiles
     rcup_flags: -fx README.md
 
-hostname: obsidian
-
 aur:
     dir: aur
     packages:
