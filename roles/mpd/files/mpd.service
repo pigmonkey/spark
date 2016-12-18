@@ -10,4 +10,4 @@ LimitRTPRIO=50
 LimitRTTIME=infinity
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=default.target
