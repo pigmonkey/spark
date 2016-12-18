@@ -5,7 +5,7 @@
     - journal
 
 - name: Push journal max size config
-  template: src=00-journal-size.conf.j2 dest=/etc/systemd/journald.conf.d/00-journal-size.conf.j2
+  template: src=00-journal-size.conf.j2 dest=/etc/systemd/journald.conf.d/00-journal-size.conf
   when: journal is defined and journal.max_size is defined
   tags:
     - journal
