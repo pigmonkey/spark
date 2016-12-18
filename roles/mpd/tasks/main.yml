@@ -16,13 +16,8 @@
   tags:
     - firejail
 
-- name: Create mpd systemd unit file directory
-  file: path=/etc/systemd/user/mpd.service.d state=directory
-  tags:
-    - firejail
-
-- name: Push mpd socket unit file
-  copy: src=mpd-service-override.conf dest=/etc/systemd/user/mpd.service.d/override.conf
+- name: Push mpd service file
+  copy: src=mpd.service dest=/etc/systemd/user/mpd.service
   notify:
     - reload systemd config
   tags:

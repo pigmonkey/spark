@@ -1,0 +1,19 @@
+---
+- name: Install magic-wormhole
+  aur: name=magic-wormhole user={{ user.name }}
+  tags:
+    - aur
+
+- name: Jail magic-wormhole
+  file: src=/usr/bin/firejail
+        dest=/usr/local/bin/wormhole
+        state=link
+  tags:
+    - firejail
+
+- name: Push magic-wormhole firejail profile
+  copy: src=firejail/wormhole.profile dest=/usr/local/etc/firejail/wormhole.profile
+  notify:
+    - activate firejail profiles
+  tags:
+    - firejail
