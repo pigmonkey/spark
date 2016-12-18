@@ -169,3 +169,6 @@ cryptshot:
           interval: 6
         - level: monthly
           interval: 3
+
+journal:
+    max_size: 500M
