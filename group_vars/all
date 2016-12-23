@@ -19,6 +19,7 @@ aur:
         - downgrade
         - orpie
         - overdue
+        - zplug
 
 ssh:
     port: 22
