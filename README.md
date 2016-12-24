@@ -52,11 +52,7 @@ tasks to be skipped.
 ## Tagging
 
 All tasks are tagged with their role, allowing them to be skipped by tag in
-addition to modifying `playbook.yml`. For instance, a system could be built
-excluding the entire `media` role and the `slim` section of the `x`
-role.
-
-    # ansible-playbook -i localhost playbook.yml --skip-tags "media,slim"
+addition to modifying `playbook.yml`.
 
 ## AUR
 

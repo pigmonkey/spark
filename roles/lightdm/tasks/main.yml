@@ -1,0 +1,33 @@
+---
+- name: Install LightDM
+  pacman: name={{ item }} state=present
+  with_items:
+      - lightdm
+      - lightdm-gtk-greeter
+
+- name: Enable LightDM
+  service: name=lightdm.service enabled=yes
+
+- name: Create background dir
+  file: path=/usr/share/backgrounds state=directory
+
+- name: Push LightDM greeter background
+  copy: src=onosendai.jpg dest=/usr/share/backgrounds/onosendai.jpg
+
+- name: Specify LightDM greeter background
+  lineinfile: dest=/etc/lightdm/lightdm-gtk-greeter.conf
+              regexp="^background="
+              state=present
+              line="background=/usr/share/backgrounds/onosendai.jpg"
+
+- name: Hide user images
+  lineinfile: dest=/etc/lightdm/lightdm-gtk-greeter.conf
+              regexp="^hide-user-image="
+              state=present
+              line="hide-user-image=true"
+
+- name: Force LightDM greeter theme
+  lineinfile: dest=/usr/share/xgreeters/lightdm-gtk-greeter.desktop
+              regexp="^Exec="
+              state=present
+              line="Exec=env GTK_THEME=Adwaita:dark lightdm-gtk-greeter"
