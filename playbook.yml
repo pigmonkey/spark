@@ -11,7 +11,7 @@
     - { role: ssd, tags: ['ssd'] }
     - { role: fonts, tags: ['fonts'] }
     - { role: x, tags: ['x'] }
-    - { role: slim, tags: ['slim'] }
+    - { role: lightdm, tags: ['lightdm'] }
     - { role: i3, tags: ['i3'] }
     - { role: iptables, tags: ['iptables'] }
     - { role: nettools, tags: ['nettools'] }
