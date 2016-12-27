@@ -173,3 +173,7 @@ cryptshot:
 
 journal:
     max_size: 500M
+
+udisks:
+    auto_mount: False
+    shared_mount: True

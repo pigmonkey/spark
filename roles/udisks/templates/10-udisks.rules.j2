@@ -1,0 +1,1 @@
+ACTION=="add|change", SUBSYSTEM=="block", KERNEL=="sd*|sr", ENV{UDISKS_PRESENTATION_HIDE}="{% if udisks.auto_mount %}0{% else %}1{% endif %}"
