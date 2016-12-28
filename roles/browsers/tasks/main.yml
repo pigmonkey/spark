@@ -81,6 +81,12 @@
     - rofi
     - chooser
 
+- name: Verify mimeapps.list exists
+  file: path=/etc/xdg/mimeapps.list state=touch
+  tags:
+    - rofi
+    - chooser
+
 - name: Set rofi browser chooser as default application for relevant mimetypes
   lineinfile:
     dest: /etc/xdg/mimeapps.list
@@ -94,3 +100,6 @@
     - { regexp: '^application/xml=', line: 'application/xml=browser.desktop' }
     - { regexp: '^x-scheme-handler/http=', line: 'x-scheme-handler/http=browser.desktop' }
     - { regexp: '^x-scheme-handler/https=', line: 'x-scheme-handler/https=browser.desktop' }
+  tags:
+    - rofi
+    - chooser
