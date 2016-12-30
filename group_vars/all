@@ -50,6 +50,7 @@ video_drivers:
     - libva-intel-driver
 
 base_packages:
+    - base-devel
     - tmux
     - git
     - gnupg
