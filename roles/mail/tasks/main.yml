@@ -4,13 +4,6 @@
   tags:
     - aur
 
-- name: Jail mutt
-  file: src=/usr/bin/firejail
-        dest=/usr/local/bin/mutt
-        state=link
-  tags:
-    - firejail
-
 - name: Push mutt firejail profile
   copy: src=firejail/mutt.profile dest=/usr/local/etc/firejail/mutt.profile
   notify:
