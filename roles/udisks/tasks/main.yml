@@ -2,14 +2,14 @@
 - name: Install udisks2
   pacman: name=udisks2 state=present
 
-- name: Disable udisks automounting
-  copy: src=10-udisks.rules dest=/etc/udev/rules.d/10-udisks.rules
+- name: Configure auto mount
+  template: src=10-udisks.rules.j2 dest=/etc/udev/rules.d/10-udisks.rules
 
 - name: Verify /media exists
   file: path=/media state=directory
 
-- name: Mount to /media
-  copy: src=99-udisks2.rules dest=/etc/udev/rules.d/99-udisks2.rules
+- name: Configure mount location
+  template: src=99-udisks2.rules.j2 dest=/etc/udev/rules.d/99-udisks2.rules
 
 - name: Install udiskie
   pacman: name=udiskie state=present

@@ -50,6 +50,7 @@ video_drivers:
     - libva-intel-driver
 
 base_packages:
+    - base-devel
     - tmux
     - git
     - gnupg
@@ -173,3 +174,7 @@ cryptshot:
 
 journal:
     max_size: 500M
+
+udisks:
+    auto_mount: False
+    shared_mount: True

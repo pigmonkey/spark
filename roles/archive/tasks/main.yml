@@ -33,3 +33,8 @@
   pacman: name=ddrescue state=present
   tags:
     - ddrescue
+
+- name: Install lesspipe
+  pacman: name=lesspipe state=present
+  tags:
+    - lesspipe
