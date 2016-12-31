@@ -2,8 +2,13 @@
 - name: Install alsa-utils
   pacman: name=alsa-utils state=present
 
-- name: Copy udev rule for USB audio device switching
-  copy: src=udev.rules dest=/etc/udev/rules.d/00-local.rules
+- name: Install PulseAudio
+  pacman: name={{ item }} state=present
+  with_items:
+      - pulseaudio
+      - pulseaudio-alsa
 
-- name: Push volume control script
-  copy: src=volume.sh dest=/usr/local/bin/volume mode=0755
+- name: Switch output to newly connected devices
+  lineinfile: dest=/etc/pulse/default.pa
+              state=present
+              line=load-module module-switch-on-connect
