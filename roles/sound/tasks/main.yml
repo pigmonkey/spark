@@ -18,3 +18,8 @@
   aur: name=pasystray-gtk3-standalone user={{ user.name }}
   tags:
     - aur
+
+- name: Install pulseaudio-ctl
+  aur: name=pulseaudio-ctl user={{ user.name }}
+  tags:
+    - aur
