@@ -7,8 +7,14 @@
   with_items:
       - pulseaudio
       - pulseaudio-alsa
+      - pavucontrol
 
 - name: Switch output to newly connected devices
   lineinfile: dest=/etc/pulse/default.pa
               state=present
               line=load-module module-switch-on-connect
+
+- name: Install pasystray
+  aur: name=pasystray-gtk3-standalone user={{ user.name }}
+  tags:
+    - aur
