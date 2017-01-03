@@ -76,6 +76,7 @@ base_packages:
     - jq
     - python-docs
     - python2-docs
+    - screen
 
 filesystem_packages:
     - dosfstools
