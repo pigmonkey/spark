@@ -1,5 +1,58 @@
 ---
-- include: infinality.yml
+- name: Install freetyp2
+  pacman: name=freetype2 state=present
 
-- name: Install Terminus
-  pacman: name=terminus-font state=present
+- name: Install cairo
+  pacman: name=cairo state=present
+
+- name: Install fontconfig
+  pacman: name=fontconfig state=present
+
+- name: Enable LCD filter
+  file: src=/etc/fonts/conf.avail/11-lcdfilter-default.conf
+        dest=/etc/fonts/conf.d/11-lcdfilter-default.conf
+        state=link
+
+- name: Enable sub-pixel rendering
+  file: src=/etc/fonts/conf.avail/10-sub-pixel-rgb.conf
+        dest=/etc/fonts/conf.d/10-sub-pixel-rgb.conf
+        state=link
+
+- name: Enable hinting
+  file: src=/etc/fonts/conf.avail/10-hinting-slight.conf
+        dest=/etc/fonts/conf.d/10-hinting-slight.conf
+        state=link
+
+- name: Push font substitutions
+  copy: src=local.conf dest=/etc/fonts/local.conf
+
+- name: Install core fonts
+  pacman: name={{ item }} state=present
+  with_items:
+      - terminus-font
+      - cantarell-fonts
+      - noto-fonts
+      - ttf-dejavu
+      - ttf-liberation
+      - ttf-symbola
+      - gsfonts
+      - tex-gyre-fonts
+      - ttf-droid
+      - ttf-ubuntu-font-family
+
+- name: Install AUR fonts
+  aur: name={{ item }} user={{ user.name }}
+  with_items:
+      - ttf-signika
+      - ttf-quintessential
+      - ttf-oswald
+      - ttf-opensans
+      - ttf-merriweather-sans
+      - ttf-merriweather
+      - ttf-impallari-cantora
+      - ttf-carlito
+      - ttf-caladea
+      - ttf-courier-prime
+      - ttf-heuristica
+  tags:
+    - aur
