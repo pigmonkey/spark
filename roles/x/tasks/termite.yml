@@ -1,11 +1,5 @@
 ---
-- name: Install vte3-ng
-  pacman: name=vte3-ng state=present
-  tags:
-    - termite
-
 - name: Install termite
-  aur: name=termite-git user={{ user.name }}
+  pacman: name=termite state=present
   tags:
-    - aur
     - termite
