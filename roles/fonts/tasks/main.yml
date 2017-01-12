@@ -39,3 +39,20 @@
       - tex-gyre-fonts
       - ttf-droid
       - ttf-ubuntu-font-family
+
+- name: Install AUR fonts
+  aur: name={{ item }} user={{ user.name }}
+  with_items:
+      - ttf-signika
+      - ttf-quintessential
+      - ttf-oswald
+      - ttf-opensans
+      - ttf-merriweather-sans
+      - ttf-merriweather
+      - ttf-impallari-cantora
+      - ttf-carlito
+      - ttf-caladea
+      - ttf-courier-prime
+      - ttf-heuristica
+  tags:
+    - aur
