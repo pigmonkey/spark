@@ -1,3 +1,12 @@
 ---
+- name: Install freetyp2
+  pacman: name=freetype2 state=present
+
+- name: Install cairo
+  pacman: name=cairo state=present
+
+- name: Install fontconfig
+  pacman: name=fontconfig state=present
+
 - name: Install Terminus
   pacman: name=terminus-font state=present
