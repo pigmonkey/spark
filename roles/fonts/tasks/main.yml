@@ -13,15 +13,15 @@
 
 - name: Enable LCD filter
   file: src=/etc/fonts/conf.avail/11-lcdfilter-default.conf
-        dest=/etc/fonts/conf.d
+        dest=/etc/fonts/conf.d/11-lcdfilter-default.conf
         state=link
 
 - name: Enable sub-pixel rendering
   file: src=/etc/fonts/conf.avail/10-sub-pixel-rgb.conf
-        dest=/etc/fonts/conf.d
+        dest=/etc/fonts/conf.d/10-sub-pixel-rgb.conf
         state=link
 
 - name: Enable hinting
   file: src=/etc/fonts/conf.avail/10-hinting-slight.conf
-        dest=/etc/fonts/conf.d
+        dest=/etc/fonts/conf.d/10-hinting-slight.conf
         state=link
