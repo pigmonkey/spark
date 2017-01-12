@@ -8,9 +8,6 @@
 - name: Install fontconfig
   pacman: name=fontconfig state=present
 
-- name: Install Terminus
-  pacman: name=terminus-font state=present
-
 - name: Enable LCD filter
   file: src=/etc/fonts/conf.avail/11-lcdfilter-default.conf
         dest=/etc/fonts/conf.d/11-lcdfilter-default.conf
@@ -25,3 +22,20 @@
   file: src=/etc/fonts/conf.avail/10-hinting-slight.conf
         dest=/etc/fonts/conf.d/10-hinting-slight.conf
         state=link
+
+- name: Push font substitutions
+  copy: src=local.conf dest=/etc/fonts/local.conf
+
+- name: Install core fonts
+  pacman: name={{ item }} state=present
+  with_items:
+      - terminus-font
+      - cantarell-fonts
+      - noto-fonts
+      - ttf-dejavu
+      - ttf-liberation
+      - ttf-symbola
+      - gsfonts
+      - tex-gyre-fonts
+      - ttf-droid
+      - ttf-ubuntu-font-family
