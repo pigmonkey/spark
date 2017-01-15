@@ -1,14 +1,4 @@
 ---
-- name: Install Synaptics input driver
-  pacman: name=xf86-input-synaptics state=present
-  tags:
-    - synaptics
-
-- name: Copy Synaptics configuration file
-  copy: src=50-synaptics.conf dest=/etc/X11/xorg.conf.d/50-synaptics.conf
-  tags:
-    - synaptics
-
 - name: Install acpi_call for TLP battery functions
   pacman: name=acpi_call state=present
   tags:
