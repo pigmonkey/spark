@@ -1,0 +1,7 @@
+- name: Block the bluetooth service
+  service: name="rfkill-block@bluetooth.service" enabled=yes state=started
+  when: bluetooth.disable == True
+
+- name: Unblock the bluetooth service
+  service: name="rfkill-block@bluetooth.service" enabled=no state=stopped
+  when: bluetooth.disable == False
