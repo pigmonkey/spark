@@ -60,8 +60,9 @@
     - { role: calibre, tags: ['calibre'] }
     - { role: aws, tags: ['aws'] }
     - { role: parcimonie, tags: ['parcimonie'], when: "tor is defined" }
-    - { role: localtime, tags: ['localtime'], when: "localtime is defined"  }
+    - { role: localtime, tags: ['localtime'], when: "localtime is defined" }
     - { role: wormhole, tags: ['wormhole'] }
+    - { role: bluetooth, tags: ['bluetooth'], when: "bluetooth is defined" }
   vars_prompt:
     - name: user_password
       prompt: "Enter desired user password"

@@ -26,7 +26,6 @@
 
 - include: sxhkd.yml
 - include: unclutter.yml
-- include: volwheel.yml
 - include: autorandr.yml
 - include: srandrd.yml
 - include: termite.yml
