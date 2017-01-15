@@ -2,6 +2,9 @@
 - include: tlp.yml
 - include: light-git.yml
 
+- name: Copy touchpad configuration file
+  copy: src=30-touchpad.conf dest=/etc/X11/xorg.conf.d/30-touchpad.conf
+
 - name: Copy logind configuration file
   copy: src=logind.conf dest=/etc/systemd/logind.conf
 
