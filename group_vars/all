@@ -42,6 +42,7 @@ network:
         - f9b3c62c-2d9f-450a-ac9b-528ba4c85ded
         - b94375d1-70f8-424f-a6d7-dc52d0ab7288
         - f74f2bd5-8748-4e1e-98f9-dae2dd44b916
+        - faeec88c-79ec-4840-ab25-ea356af8a81b
 
 editors:
     - gvim
