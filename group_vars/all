@@ -152,6 +152,7 @@ firejail:
         - ~/library/ledger
 
 cryptshot:
+<<<<<<< HEAD
     - name: darkstar
       uuid: 157bdb7b-d209-4bdb-8a3b-26b5480fa954
       keyfile: /home/brett/.keys/usb-darkstar.key
@@ -172,6 +173,7 @@ cryptshot:
           interval: 6
         - level: monthly
           interval: 3
+
 
 journal:
     max_size: 500M
