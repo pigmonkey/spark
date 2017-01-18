@@ -153,6 +153,17 @@ cryptshot:
           interval: 6
         - level: monthly
           interval: 3
+    - name: trinity
+      uuid: 65733392-e877-4e42-a17b-feb1a3ab49fc
+      keyfile: /home/brett/.keys/usb-trinity.key
+      retain:
+        - level: daily
+          interval: 7
+        - level: weekly
+          interval: 6
+        - level: monthly
+          interval: 3
+
 
 
 journal:
