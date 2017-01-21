@@ -30,3 +30,4 @@
 - include: srandrd.yml
 - include: termite.yml
 - include: autocutsel.yml
+- include: xdg.yml

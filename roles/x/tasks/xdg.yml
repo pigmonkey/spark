@@ -1,0 +1,12 @@
+---
+- name: Install xdg-user-dirs
+  pacman: name=xdg-user-dirs state=present
+  tags:
+    - xdg
+
+- name: Create user directories
+  command: /usr/bin/xdg-user-dirs-update
+  become: yes
+  become_user: "{{ user.name }}"
+  tags:
+    - xdg
