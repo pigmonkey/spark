@@ -1,0 +1,4 @@
+---
+- name: start macchiato
+  service: name=macchiato.service state=started
+  when: network.spoof_mac == True

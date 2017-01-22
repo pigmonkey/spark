@@ -8,9 +8,11 @@
   copy: src=macchiato_default.sh dest=/etc/macchiato.d/{{ item }}.sh
   with_items: "{{ ansible_interfaces }}"
 
-- name: Enable and start macchiato
+- name: Enable macchiato
   service: name=macchiato.service enabled=yes state=started
   when: network.spoof_mac == True
+  notify:
+    - start macchiato
 
 - name: Disable and stop macchiato
   service: name=macchiato.service enabled=no state=stopped
