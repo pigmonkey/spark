@@ -8,7 +8,7 @@
     - aur
 
 - name: Install OpenCPN
-  aur: name=opencpnuser={{ user.name }}
+  aur: name=opencpn user={{ user.name }}
   tags:
     - aur
 
