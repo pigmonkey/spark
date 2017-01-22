@@ -122,6 +122,7 @@ Configure GRUB.
 
     # BIOS mode
     $ sed -i 's/^GRUB_CMDLINE_LINUX=.*/GRUB_CMDLINE_LINUX="cryptdevice=\/dev\/sda1:lvm:allow-discards resume=\/dev\/mapper\/arch-swap"/' /etc/default/grub
+    $ grub-mkconfig -o /boot/grub/grub.cfg
     $ grub-install /dev/sda
     $ chmod -R g-rwx,o-rwx /boot
 
