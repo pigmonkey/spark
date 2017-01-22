@@ -8,10 +8,7 @@
     - aur
 
 - name: Install wsjtx
-  aur: name={{ item }} user={{ user.name }}
-  with_items:
-    - kvasd-bin
-    - wsjtx
+  aur: name=wsjtx user={{ user.name }}
   tags:
     - aur
 

@@ -3,8 +3,8 @@
   aur: name={{ item }} user={{ user.name }}
   with_items:
       - python-hkdf
-      - python-pynacl
       - python-spake2
+      - python-humanize
       - python-tqdm
       - magic-wormhole
   tags:
