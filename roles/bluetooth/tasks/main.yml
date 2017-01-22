@@ -19,7 +19,7 @@
   when: bluetooth.disable == False
 
 - name: Disable and stop the bluetooth service
-  service: name=bluetooth.service enabled=yes state=started
+  service: name=bluetooth.service enabled=no state=stopped
   when: bluetooth.disable == True
 
 - name: Block the bluetooth service
