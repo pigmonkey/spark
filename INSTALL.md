@@ -10,6 +10,10 @@ while only /boot/efi is left unecrypted.
 
 Use your system's setup interface to choose UEFI or legacy/BIOS mode as appropriate.
 
+Note that this guide assumes you are performing the install to `/dev/sda`. In
+some cases, you may find that your USB install disk claimed `/dev/sda` and you
+want to install to `/dev/sdb`. Confirm which disk is which before proceeding.
+
 On some newer systems (e.g. Dell XPS 15), set SATA operation mode to AHCI.
 
 Boot into the Arch installer.
@@ -120,15 +124,16 @@ Configure GRUB.
 
     $ echo GRUB_ENABLE_CRYPTODISK=y >> /etc/default/grub
 
-    # BIOS mode
-    $ sed -i 's/^GRUB_CMDLINE_LINUX=.*/GRUB_CMDLINE_LINUX="cryptdevice=\/dev\/sda1:lvm:allow-discards resume=\/dev\/mapper\/arch-swap"/' /etc/default/grub
+    # BIOS mode - set the UUID of the encrpyted root device
+    $ ROOTUUID=$(blkid /dev/sda1 | awk '{print $2}' | cut -d '"' -f2)
+    $ sed -i "s/^GRUB_CMDLINE_LINUX=.*/GRUB_CMDLINE_LINUX=\"cryptdevice=UUID="$ROOTUUID":lvm:allow-discards resume=\/dev\/mapper\/arch-swap\"/" /etc/default/grub
     $ grub-mkconfig -o /boot/grub/grub.cfg
     $ grub-install /dev/sda
     $ chmod -R g-rwx,o-rwx /boot
 
     # UEFI mode - set the UUID of the encrpyted root device
-    # e.g. blkid /dev/sda3 | awk '{print $3}'
-    $ sed -i 's/^GRUB_CMDLINE_LINUX=.*/GRUB_CMDLINE_LINUX="cryptdevice=UUID=<your-rootdevice-UID>:lvm:allow-discards root=\/dev\/mapper\/arch-root resume=\/dev\/mapper\/arch-swap"/' /etc/default/grub
+    $ ROOTUUID=$(blkid /dev/sda3 | awk '{print $2}' | cut -d '"' -f2)
+    $ sed -i "s/^GRUB_CMDLINE_LINUX=.*/GRUB_CMDLINE_LINUX=\"cryptdevice=UUID="$ROOTUUID":lvm:allow-discards root=\/dev\/mapper\/arch-root resume=\/dev\/mapper\/arch-swap\"/" /etc/default/grub
     $ grub-mkconfig -o /boot/grub/grub.cfg
     $ grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=grub --recheck
     $ chmod -R g-rwx,o-rwx /boot
