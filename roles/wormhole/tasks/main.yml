@@ -6,6 +6,7 @@
       - python-spake2
       - python-humanize
       - python-tqdm
+      - python-ipaddress
       - magic-wormhole
   tags:
     - aur
