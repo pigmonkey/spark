@@ -45,7 +45,7 @@
     - firejail
 
 - name: Install Pepper Flash
-  aur: name=pepper-flash user={{ user.name }}
+  pacman: name=chromium-pepper-flash state=present
   tags:
     - aur
     - chromium

@@ -1,5 +1,6 @@
 ---
 - name: Install darktable
+  when: '"arm" not in ansible_architecture'
   pacman: name=darktable state=present
   tags:
     - darktable

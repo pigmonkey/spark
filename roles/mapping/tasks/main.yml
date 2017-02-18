@@ -7,10 +7,10 @@
   tags:
     - aur
 
-- name: Install OpenCPN
-  aur: name=opencpn user={{ user.name }}
-  tags:
-    - aur
+#- name: Install OpenCPN
+#  aur: name=opencpn user={{ user.name }}
+#  tags:
+#    - aur
 
 - name: Install mapboxcli into virtualenv
   pip: name=mapboxcli
