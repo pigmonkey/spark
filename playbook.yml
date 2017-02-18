@@ -1,3 +1,10 @@
+## todo
+## echo "en_US.UTF-8" > /etc/locale.conf
+## localegen
+## install docs
+## bluetooth
+## opencpn rpi fork
+## kodi
 ---
 - hosts: localhost
   become: yes
@@ -5,7 +12,7 @@
     - { role: base, tags: ['base'] }
     - { role: cron, tags: ['cron'] }
     - { role: microcode, tags: ['microcode'], when: "'GenuineIntel' in ansible_processor" }
-    - { role: grsec, tags: ['grsec'] }
+    - { role: grsec, tags: ['grsec'], when: "'arm' not in ansible_architecture" }
     - { role: ssh, tags: ['ssh'] }
     - { role: dotfiles, tags: ['dotfiles'] }
     - { role: ssd, tags: ['ssd'] }
@@ -32,7 +39,7 @@
     - { role: mpd, tags: ['mpd'] }
     - { role: mpv, tags: ['mpv'] }
     - { role: pianobar, tags: ['pianobar'] }
-    - { role: laptop, tags: ['laptop'] }
+    - { role: laptop, tags: ['laptop'], when: "'arm' not in ansible_architecture" } # no battery etc
     - { role: thinkpad, tags: ['thinkpad'], when: "'ThinkPad' in ansible_product_version" }
     - { role: macbook, tags: ['macbook'], when: "'MacBook' in ansible_product_name" }
     - { role: screensaver, tags: ['screensaver'] }
@@ -40,14 +47,14 @@
     - { role: weechat, tags: ['weechat'] }
     - { role: git-annex, tags: ['git-annex'], when: "gitannex is defined" }
     - { role: taskwarrior, tags: ['taskwarrior'] }
-    - { role: ledger, tags: ['ledger'] }
+    - { role: ledger, tags: ['ledger'], when: "'arm' not in ansible_architecture" } # not enough RAM on rpi3
     - { role: mail, tags: ['mail'] }
     - { role: cups, tags: ['cups'] }
     - { role: office, tags: ['office'] }
     - { role: redshift, tags: ['redshift'] }
     - { role: rtorrent, tags: ['rtorrent'] }
-    - { role: virtualbox, tags: ['virtualbox'] }
-    - { role: hashicorp, tags: ['hashicorp'] }
+    - { role: virtualbox, tags: ['virtualbox'], when: "'arm' not in ansible_architecture" }
+    - { role: hashicorp, tags: ['hashicorp'], when: "'arm' not in ansible_architecture" } # x86 binaries
     - { role: virtualenv, tags: ['virtualenv'] }
     - { role: cryptshot, tags: ['cryptshot'], when: "cryptshot is defined" }
     - { role: borg, tags: ['borg'] }
@@ -65,6 +72,7 @@
     - { role: wormhole, tags: ['wormhole'] }
     - { role: bluetooth, tags: ['bluetooth'], when: "bluetooth is defined" }
     - { role: wttr, tags: ['wttr'] }
+    - { role: rpi, tags: ['rpi'], when: "'arm' in ansible_architecture" }
   vars_prompt:
     - name: user_password
       prompt: "Enter desired user password"

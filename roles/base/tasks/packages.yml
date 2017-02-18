@@ -12,6 +12,7 @@
     - packages
 
 - name: Push pacman mirror list update hook
+  when: '"arm" not in ansible_architecture'
   copy: src=mirrorlist.hook dest=/etc/pacman.d/hooks/mirrorlist.hook
   tags:
     - packages
@@ -26,7 +27,7 @@
     - packages
 
 - name: Install cower
-  aur: name=cower user={{ user.name }} skip_pgp=yes
+  pacman: name=cower state=present
   tags:
     - aur
     - packages

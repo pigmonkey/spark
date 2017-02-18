@@ -22,6 +22,7 @@
   service: name=bluetooth.service enabled=no state=stopped
   when: bluetooth.disable == True
 
-- name: Block the bluetooth service
-  service: name="rfkill-block@bluetooth.service" enabled=yes state=started
-  when: bluetooth.disable == True
+# not present on arm
+#- name: Block the bluetooth service
+#  service: name="rfkill-block@bluetooth.service" enabled=yes state=started
+#  when: bluetooth.disable == True

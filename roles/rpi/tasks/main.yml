@@ -1,0 +1,34 @@
+---
+- name: Disable and stop haveged
+  service: name=haveged.service enabled=no state=stopped
+  tags:
+    - rpi
+
+- name: Copy rngd configuration file
+  copy: src=rngd dest=/etc/conf.d/rngd
+  tags:
+    - rpi
+
+- name: Install rng-tools
+  pacman: name=rng-tools state=present
+  tags:
+    - rpi
+
+- name: Enable and start rngd
+  service: name=rngd.service enabled=yes state=started
+  tags:
+    - rpi
+
+- name: Set RPI GPU mem
+  lineinfile: dest=/boot/config.txt
+              regexp=^gpu_mem=
+              state=present
+              line="gpu_mem={{ rpi.gpu_mem }}"
+  tags:
+    - rpi
+
+- name: Force audio over HDMI
+  lineinfile: dest=/boot/config.txt
+              line="hdmi_drive=2"
+  tags:
+    - rpi

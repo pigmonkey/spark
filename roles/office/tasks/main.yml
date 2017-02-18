@@ -54,8 +54,10 @@
 - name: Install texlive-core
   pacman: name=texlive-core state=present
 
-- name: Install masterpdfeditor-qt5
-  aur: name=masterpdfeditor-qt5 user={{ user.name }}
+# is binary release for intel only
+- name: Install masterpdfeditor
+  when: '"arm" not in ansible_architecture'
+  aur: name=masterpdfeditor user={{ user.name }}
   tags:
     - aur
 

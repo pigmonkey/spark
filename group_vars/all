@@ -1,54 +1,54 @@
 user:
-    name: pigmonkey
-    uid: 1000
-    group: pigmonkey
-    shell: /usr/bin/zsh
-    email:  peter@havenaut.net
+    name: john
+    uid: 1001 # uid 1000 taken by 'alarm' user
+    group: john
+    shell: /usr/bin/bash
+    email:  john@librum.org
     log_dir: log
 
-hostname: nous
+hostname: rpi3-1
 
 dotfiles:
-    url: git@github.com:pigmonkey/dotfiles.git
+    url: /home/john/dotfilesrepo
     rcup_flags: -fx README.md
 
 aur:
     dir: aur
     packages:
-        - aura-bin
+        #- aura-bin .. unavailable on arm
         - downgrade
-        - orpie
+        #- orpie see https://github.com/pelzlpj/orpie/issues/10
         - overdue
         - zplug
 
 ssh:
     port: 22
     user_key: /root/id_rsa
-    enable_sshd: False
+    enable_sshd: True
 
 mail:
     sync_tool: isync
-    sync_pim: True
-    sync_taskwarrior: True
+    sync_pim: False
+    sync_taskwarrior: False
     sync_time: 5min
     sync_boot_delay: 2min
     sync_on: trusted
 
 network:
-    spoof_mac: True
+    spoof_mac: False
     trusted_uuid:
-        - b21284e6-01af-492f-8bea-45a69ef22a23
-        - 4ddd6988-aad1-4927-b650-ea7d24e0138b
-        - f9b3c62c-2d9f-450a-ac9b-528ba4c85ded
-        - b94375d1-70f8-424f-a6d7-dc52d0ab7288
-        - f74f2bd5-8748-4e1e-98f9-dae2dd44b916
-        - faeec88c-79ec-4840-ab25-ea356af8a81b
+         - b21284e6-01af-492f-8bea-45a69ef22a23
+         - 4ddd6988-aad1-4927-b650-ea7d24e0138b
+         - f9b3c62c-2d9f-450a-ac9b-528ba4c85ded
+         - b94375d1-70f8-424f-a6d7-dc52d0ab7288
+         - f74f2bd5-8748-4e1e-98f9-dae2dd44b916
+         - faeec88c-79ec-4840-ab25-ea356af8a81b
 
 editors:
     - gvim
 
 video_drivers:
-    - libva-intel-driver
+    - xf86-video-fbturbo-git
 
 base_packages:
     - base-devel
@@ -60,7 +60,8 @@ base_packages:
     - coreutils
     - moreutils
     - pass
-    - reflector
+    - packer # instead of aura-bin
+    #- reflector unavailable on arm
     - bc
     - ranger
     - strace
@@ -102,25 +103,26 @@ tarsnapper:
     schedule: hourly
     run_on: trusted
 
-gitannex:
-    stop_on_untrusted: True
+# no arm pkg, could use git-annex-git?
+#gitannex:
+#    stop_on_untrusted: True
 
 bitlbee:
-    run_on: trusted
-    torify: True
+    run_on: none
+    torify: False
 
-bootloader: grub
+bootloader: arm
 
 postgresql:
-    enable: True
+    enable: False
 
 fingerprint: False
 
 tor:
-    run_on: trusted
+    run_on: none
 
 localtime:
-    run_on: trusted
+    run_on: all
 
 nameservers:
     - 8.8.8.8       # Google
@@ -128,7 +130,7 @@ nameservers:
     - 74.82.42.42   # Hurricane Electric
 
 bluetooth:
-    disable: False
+    disable: True
 
 firejail:
     blacklist:
@@ -143,37 +145,37 @@ firejail:
         - ~/.vdirsyncer
         - ~/library/ledger
 
-cryptshot:
-    - name: alta
-      uuid: 0a0db776-84c5-48e1-9079-cacfbc5de8a3
-      keyfile: /home/pigmonkey/.keys/usb-alta.key
-      retain:
-        - level: daily
-          interval: 7
-        - level: weekly
-          interval: 6
-        - level: monthly
-          interval: 3
-    - name: bishorn
-      uuid: baeb40a2-b19e-4adc-8ef6-44ee720a4d1a
-      keyfile: /home/pigmonkey/.keys/usb-bishorn.key
-      retain:
-        - level: daily
-          interval: 7
-        - level: weekly
-          interval: 6
-        - level: monthly
-          interval: 3
-    - name: pilchuck
-      uuid: d96a0fc3-7ea1-42f7-b0d0-42e573c478bd
-      keyfile: /home/pigmonkey/.keys/usb-pilchuck.key
-      retain:
-        - level: daily
-          interval: 7
-        - level: weekly
-          interval: 6
-        - level: monthly
-          interval: 3
+#cryptshot:
+#    - name: alta
+#      uuid: 0a0db776-84c5-48e1-9079-cacfbc5de8a3
+#      keyfile: /home/pigmonkey/.keys/usb-alta.key
+#      retain:
+#        - level: daily
+#          interval: 7
+#        - level: weekly
+#          interval: 6
+#        - level: monthly
+#          interval: 3
+#    - name: bishorn
+#      uuid: baeb40a2-b19e-4adc-8ef6-44ee720a4d1a
+#      keyfile: /home/pigmonkey/.keys/usb-bishorn.key
+#      retain:
+#        - level: daily
+#          interval: 7
+#        - level: weekly
+#          interval: 6
+#        - level: monthly
+#          interval: 3
+#    - name: pilchuck
+#      uuid: d96a0fc3-7ea1-42f7-b0d0-42e573c478bd
+#      keyfile: /home/pigmonkey/.keys/usb-pilchuck.key
+#      retain:
+#        - level: daily
+#          interval: 7
+#        - level: weekly
+#          interval: 6
+#        - level: monthly
+#          interval: 3
 
 journal:
     max_size: 500M
@@ -181,3 +183,6 @@ journal:
 udisks:
     auto_mount: False
     shared_mount: True
+
+rpi:
+    gpu_mem: 128
