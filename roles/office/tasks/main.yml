@@ -54,8 +54,8 @@
 - name: Install texlive-core
   pacman: name=texlive-core state=present
 
-- name: Install masterpdfeditor-qt5
-  aur: name=masterpdfeditor-qt5 user={{ user.name }}
+- name: Install masterpdfeditor
+  aur: name=masterpdfeditor user={{ user.name }}
   tags:
     - aur
 
