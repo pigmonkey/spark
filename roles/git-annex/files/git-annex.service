@@ -2,7 +2,7 @@
 Description=Git Annex Assistant Service for %I
 
 [Service]
-Type=forking
+Type=simple
 ExecStart=/usr/bin/git-annex assistant --foreground --autostart
 User=%i
 StandardOutput=syslog
