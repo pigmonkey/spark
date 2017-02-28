@@ -17,7 +17,6 @@ aur:
     packages:
         - aura-bin
         - downgrade
-        - orpie
         - overdue
         - zplug
 
