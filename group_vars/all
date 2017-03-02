@@ -19,6 +19,7 @@ aur:
         - downgrade
         - overdue
         - zplug
+        - dateutils
 
 ssh:
     port: 22
