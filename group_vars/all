@@ -19,6 +19,8 @@ aur:
         - downgrade
         - overdue
         - zplug
+        - dateutils
+        - miller
 
 ssh:
     port: 22
