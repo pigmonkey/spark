@@ -182,3 +182,6 @@ journal:
 udisks:
     auto_mount: False
     shared_mount: True
+
+hostsctl:
+    url: https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
