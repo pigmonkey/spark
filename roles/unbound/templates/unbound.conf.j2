@@ -9,10 +9,6 @@ server:
   # Set root DNS servers.
   root-hints: "/etc/unbound/root.hints"
 
-  # Block hosts serving advertisements, trackers, etc.
-  # https://github.com/jodrell/unbound-block-hosts/
-  include: /etc/unbound/local-blocking-data.conf
-
   # RFC1918 networks are private and should not be returned.
   private-address: 10.0.0.0/8
   private-address: 172.16.0.0/12

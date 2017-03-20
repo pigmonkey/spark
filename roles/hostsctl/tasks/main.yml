@@ -1,0 +1,12 @@
+---
+- name: Install hostsctl script
+  copy: src=hostsctl/hostsctl.sh dest=/usr/local/bin/hostsctl mode=0755
+
+- name: Set hostsctl URL
+  lineinfile: dest=/usr/local/bin/hostsctl
+              regexp=^URL
+              state=present
+              line='URL="{{ hostsctl.url }}"'
+
+- name: Update hostsctl
+  command: hostsctl update

@@ -5,9 +5,6 @@
 - name: Push root hints
   copy: src=root.hints dest=/etc/unbound/root.hints
 
-- name: Copy ad blocking hosts file
-  copy: src=local-blocking-data.conf dest=/etc/unbound/local-blocking-data.conf
-
 - name: Copy Unbound configuration file
   template: src=unbound.conf.j2 dest=/etc/unbound/unbound.conf
   notify:
