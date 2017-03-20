@@ -1,0 +1,19 @@
+---
+- name: Install pass
+  pacman: name=pass state=present
+
+- name: Install pass-otp
+  aur: name=pass-otp user={{ user.name }}
+  tags:
+    - aur
+
+- name: Install pass-update
+  aur: name=pass-update user={{ user.name }}
+  tags:
+    - aur
+
+- name: Install rofi-pass
+  aur: name=rofi-pass user={{ user.name }}
+  tags:
+    - aur
+    - rofi
