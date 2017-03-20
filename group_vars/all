@@ -60,7 +60,6 @@ base_packages:
     - glances
     - coreutils
     - moreutils
-    - pass
     - reflector
     - bc
     - ranger

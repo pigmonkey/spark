@@ -13,6 +13,7 @@
     - { role: x, tags: ['x'] }
     - { role: lightdm, tags: ['lightdm'] }
     - { role: i3, tags: ['i3'] }
+    - { role: pass, tags: ['pass'] }
     - { role: iptables, tags: ['iptables'] }
     - { role: nettools, tags: ['nettools'] }
     - { role: networkmanager, tags: ['networkmanager'] }
