@@ -13,6 +13,3 @@
 [submodule "roles/cryptshot/files/cryptshot"]
 	path = roles/cryptshot/files/cryptshot
 	url = https://github.com/pigmonkey/cryptshot
-[submodule "roles/hostsctl/files/hostsctl"]
-	path = roles/hostsctl/files/hostsctl
-	url = https://github.com/0xl3vi/hostsctl
