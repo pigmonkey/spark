@@ -1,12 +1,11 @@
 ---
-- name: Install hostsctl script
-  copy: src=hostsctl/hostsctl.sh dest=/usr/local/bin/hostsctl mode=0755
+- name: Install hostsctl
+  aur: name=hostsctl-git user={{ user.name }}
+  tags:
+    - aur
 
-- name: Set hostsctl URL
-  lineinfile: dest=/usr/local/bin/hostsctl
-              regexp=^URL
-              state=present
-              line='URL="{{ hostsctl.url }}"'
+- name: Push hostsctl config
+  template: src=hostsctl.conf.j2 dest=/etc/hostsctl.conf
 
 - name: Update hostsctl
   command: hostsctl update
