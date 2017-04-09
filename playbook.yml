@@ -67,6 +67,7 @@
     - { role: bluetooth, tags: ['bluetooth'], when: "bluetooth is defined" }
     - { role: wttr, tags: ['wttr'] }
     - { role: hostsctl, tags: ['hostsctl'], when: "hostsctl is defined" }
+    - { role: himawaripy, tags: ['himawaripy'], when: "himawaripy is defined" }
   vars_prompt:
     - name: user_password
       prompt: "Enter desired user password"

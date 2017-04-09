@@ -297,6 +297,31 @@ PostgreSQL service is not added to `/usr/local/etc/trusted_units`.
 Additional configuration options are set which improve performance but make the
 database service inappropriate for production use.
 
+## Himawaripy
+
+[Himawaripy][28] is provided to fetch near-realtime photos of Earth from the
+Japanese [Himawari 8][29] weather satellite and set them as the user's desktop
+background via feh. This should provide early warning of the presence of any
+Vogon constructor fleets appearing over the Eastern Hemisphere.
+
+A systemd service unit and timer is installed, but not enabled or started by
+default. Instead, the service is added to `/usr/local/etc/trusted_units`,
+causing the NetworkManager trusted unit dispatcher to activate the service
+whenever a connection is established to a trusted network. The service is
+stopped whenever the network goes down or a connection is established to an
+untrusted network.
+
+To have the service activated at boot, change the `himawaripy.run_on` variable
+from `trusted` to `all`.
+
+If the `himawaripy.run_on` variable is set to anything other than `trusted` or
+`all`, the service will never be activated.
+
+By default the timer is scheduled to fetch a new image at 15 minute intervals.
+This can be changed by modifying the `himawaripy.run_time` variable.
+
+By completely removing the `himawaripy` variable, no related tasks will be run.
+
 
 [1]: http://www.ansible.com
 [2]: https://www.archlinux.org
@@ -325,3 +350,5 @@ database service inappropriate for production use.
 [25]: https://weechat.org/
 [26]: https://git-annex.branchable.com/
 [27]: http://www.postgresql.org/
+[28]: https://github.com/boramalper/himawaripy
+[29]: https://en.wikipedia.org/wiki/Himawari_8

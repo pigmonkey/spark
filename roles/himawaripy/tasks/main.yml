@@ -1,0 +1,41 @@
+---
+- name: Install himawaripy into virtual environment
+  pip: name=git+https://github.com/boramalper/himawaripy#egg=himawaripy
+       virtualenv=/usr/local/env/himawaripy
+       virtualenv_command=virtualenv3
+
+- name: Link himawaripy to bin
+  file: src=/usr/local/env/himawaripy/bin/himawaripy
+        dest=/usr/local/bin/himawaripy
+        state=link
+
+- name: Push himawaripy service file
+  template: src=himawaripy.service.j2 dest=/etc/systemd/system/himawaripy@.service
+  notify:
+    - reload systemd config
+
+- name: Push himawaripy timer file
+  template: src=himawaripy.timer.j2 dest=/etc/systemd/system/himawaripy@.timer
+  notify:
+    - reload systemd config
+    - restart himawaripy
+
+- name: Enable and start himawaripy timer
+  service: name="himawaripy@{{ user.name }}.timer" enabled=yes state=started
+  when: himawaripy.run_on == "all"
+
+- name: Remove himawaripy from trusted unit list
+  lineinfile: dest=/usr/local/etc/trusted_units
+              state=absent
+              line="himawaripy@{{ user.name }}.timer"
+  when: himawaripy.run_on == "all"
+
+- name: Disable himawaripy timer
+  service: name="himawaripy@{{ user.name }}.timer" enabled=no
+  when: himawaripy.run_on == "trusted"
+
+- name: Add himawaripy to trusted unit list
+  lineinfile: dest=/usr/local/etc/trusted_units
+              state=present
+              line="himawaripy@{{ user.name }}.timer"
+  when: himawaripy.run_on == "trusted"

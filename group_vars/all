@@ -184,3 +184,9 @@ udisks:
 
 hostsctl:
     url: https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
+
+himawaripy:
+    run_time: 15min
+    run_boot_delay: 2min
+    run_on: trusted
+    flags: --auto-offset --level 4

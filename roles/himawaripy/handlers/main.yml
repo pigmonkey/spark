@@ -1,0 +1,4 @@
+---
+- name: restart himawaripy
+  service: name="himawaripy@{{ user.name }}.timer" state=restarted
+  when: himawaripy.run_on == "all"
