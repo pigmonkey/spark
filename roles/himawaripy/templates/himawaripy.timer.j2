@@ -1,0 +1,11 @@
+# {{ ansible_managed }}
+[Unit]
+Description=Himawaripy satellite imagery timer
+
+[Timer]
+OnBootSec={{ himawaripy.run_boot_delay }}
+OnUnitActiveSec={{ himawaripy.run_time }}
+Unit=himawaripy@%i.service
+
+[Install]
+WantedBy=timers.target
