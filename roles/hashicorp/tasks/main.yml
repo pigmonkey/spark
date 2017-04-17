@@ -10,5 +10,6 @@
   with_items:
     - vault-bin
     - terraform
+    - nomad
   tags:
     - aur
