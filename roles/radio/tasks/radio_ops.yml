@@ -4,6 +4,7 @@
   with_items:
     - cty
     - fldigi
+    - flrig
   tags:
     - aur
 
