@@ -24,3 +24,8 @@
   template: src=pam.d/i3lock.j2 dest=/etc/pam.d/i3lock
   tags:
     - fingerprint
+
+- name: Push trackpoint udev rules
+  copy: src=10-trackpoint.rules dest=/etc/udev/rules.d/10-trackpoint.rules
+  tags:
+    - trackpoint
