@@ -21,6 +21,7 @@ aur:
         - zplug
         - dateutils
         - miller
+        - myrepos
 
 ssh:
     port: 22
