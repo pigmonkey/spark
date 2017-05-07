@@ -6,7 +6,6 @@
     - qt4
     - virtualbox
     - virtualbox-guest-iso
-    - virtualbox-guest-utils
     - virtualbox-host-dkms
 
 - name: Install VirtualBox extensions
