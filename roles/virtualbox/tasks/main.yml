@@ -13,8 +13,5 @@
   tags:
     - aur
 
-- name: Copy kernel modules to load
-  copy: src=modules.conf dest=/etc/modules-load.d/virtualbox.conf
-
 - name: Add the user to vboxusers group
   user: name={{ user.name }} groups=vboxusers append=yes
