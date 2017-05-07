@@ -1,7 +1,8 @@
 ---
 - name: Install acpi_call for TLP battery functions
-  pacman: name=acpi_call state=present
+  aur: name=acpi_call-dkms user={{ user.name }}
   tags:
+    - aur
     - battery
 
 - name: Install tpacpi-bat
