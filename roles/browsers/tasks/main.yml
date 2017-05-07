@@ -57,11 +57,12 @@
     - aur
 
 - name: Jail tor-browser-en
-  copy: src=tor-browser-en.sh dest=/usr/local/bin/tor-browser-en mode=0755
+  file: src=/usr/bin/firejail
+        dest=/usr/local/bin/tor-browser-en
+        state=link
   tags:
     - tor-browser
     - firejail
-    - grsec
 
 - name: Push rofi browser chooser
   template: src=browser.sh.j2 dest=/usr/local/bin/browser mode=0755
