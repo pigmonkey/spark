@@ -68,6 +68,7 @@ base_packages:
     - lsof
     - sysstat
     - arch-wiki-lite
+    - arch-wiki-docs
     - python-keyring
     - python-secretstorage
     - fabric
