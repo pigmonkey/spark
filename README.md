@@ -45,9 +45,11 @@ enabled. By default, sshd is configured but not enabled.
 ## Dotfiles
 
 Ansible expects that the user wishes to clone dotfiles via the git repository
-specified via the `dotfiles.url` variable and install them with [rcm][5]. If
-this is not the case, removing the `dotfiles` variable will cause the relevant
-tasks to be skipped.
+specified via the `dotfiles.url` variable and install them with [rcm][5]. The
+destination to clone the repository to is defined by the `dotfiles.destination`
+variable. This is relative the user's home directory.
+
+These tasks will be skipped if the `dotfiles` variable is not defined.
 
 ## Tagging
 

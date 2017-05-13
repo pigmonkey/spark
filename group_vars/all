@@ -10,6 +10,7 @@ hostname: nous
 
 dotfiles:
     url: git@github.com:pigmonkey/dotfiles.git
+    destination: projects/dotfiles
     rcup_flags: -fx README.md
 
 aur:
