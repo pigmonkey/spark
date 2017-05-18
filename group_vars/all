@@ -10,6 +10,7 @@ hostname: obsidian
 
 dotfiles:
     url: ssh://brett@seki.librum.org/home/brett/archives/dotfiles.git
+    destination: projects/dotfiles
     rcup_flags: -fx README.md
 
 aur:
@@ -68,6 +69,7 @@ base_packages:
     - lsof
     - sysstat
     - arch-wiki-lite
+    - arch-wiki-docs
     - python-keyring
     - python-secretstorage
     - fabric
