@@ -9,4 +9,4 @@
   user: name={{ user.name }} groups=env append=yes
 
 - name: Create system environment dir
-  file: path=/usr/local/env state=directory group=env mode=0775
+  file: path=/usr/local/env state=directory group=env mode=2775
