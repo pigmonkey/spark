@@ -82,6 +82,7 @@ base_packages:
     - python-docs
     - python2-docs
     - screen
+    - units
 
 filesystem_packages:
     - dosfstools
