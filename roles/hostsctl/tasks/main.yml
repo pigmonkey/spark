@@ -1,6 +1,6 @@
 ---
 - name: Install hostsctl
-  aur: name=hostsctl-git user={{ user.name }}
+  aur: name=hostsctl user={{ user.name }}
   tags:
     - aur
 
