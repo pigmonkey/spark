@@ -42,3 +42,6 @@
 
 - name: Install socat
   pacman: name=socat state=present
+
+- name: Install nethogs
+  pacman: name=nethogs state=present
