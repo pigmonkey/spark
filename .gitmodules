@@ -1,9 +1,6 @@
 [submodule "library/ansible-aur"]
 	path = library/ansible-aur
 	url = https://github.com/pigmonkey/ansible-aur.git
-[submodule "roles/firejail/files/firewarden"]
-	path = roles/firejail/files/firewarden
-	url = https://github.com/pigmonkey/firewarden.git
 [submodule "roles/networkmanager/files/nmtrust"]
 	path = roles/networkmanager/files/nmtrust
 	url = https://github.com/pigmonkey/nmtrust.git
