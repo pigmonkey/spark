@@ -3,6 +3,6 @@
   aur: name={{ item }} user={{ user.name }}
   with_items:
       - hamradio-menus
-      - chirp
+      - chirp-hg
   tags:
     - aur
