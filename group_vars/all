@@ -29,6 +29,9 @@ ssh:
     user_key: /root/id_rsa
     enable_sshd: False
 
+gnupg:
+    enable_agent: True
+
 mail:
     sync_tool: isync
     sync_pim: True
