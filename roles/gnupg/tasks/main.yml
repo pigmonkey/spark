@@ -17,3 +17,11 @@
   environment:
     XDG_RUNTIME_DIR: "/run/user/{{ user.uid }}"
   when: gnupg.enable_agent == True
+
+- name: Enable gpg-agent-ssh.socket
+  systemd: name=gpg-agent-ssh.socket user=yes enabled=yes state=started
+  become: yes
+  become_user: "{{ user.name }}"
+  environment:
+    XDG_RUNTIME_DIR: "/run/user/{{ user.uid }}"
+  when: gnupg.enable_agent == True and gnupg.emulate_ssh == True

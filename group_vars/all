@@ -31,6 +31,7 @@ ssh:
 
 gnupg:
     enable_agent: True
+    emulate_ssh: True
 
 mail:
     sync_tool: isync
