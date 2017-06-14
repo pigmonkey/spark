@@ -30,6 +30,10 @@ ssh:
     user_key: /root/id_rsa
     enable_sshd: False
 
+gnupg:
+    enable_agent: True
+    emulate_ssh: True
+
 mail:
     sync_tool: isync
     sync_pim: True
@@ -58,7 +62,6 @@ base_packages:
     - base-devel
     - tmux
     - git
-    - gnupg
     - rsync
     - glances
     - coreutils

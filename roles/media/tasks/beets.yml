@@ -20,3 +20,9 @@
   tags:
     - aur
     - beets
+
+- name: Install mp3val
+  aur: name=mp3val user={{ user.name }}
+  tags:
+    - aur
+    - beets
