@@ -104,9 +104,9 @@ passwordless_sudo:
     - /usr/bin/openvpn*
 
 tarsnapper:
-  deltas: 1h 6h 1d 7d 30d 365d
+  deltas: 1h 1d 7d 30d 365d
   timer:
-    schedule: hourly
+    schedule: daily
     run_on: trusted
 
 gitannex:
