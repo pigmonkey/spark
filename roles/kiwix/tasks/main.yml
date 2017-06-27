@@ -1,0 +1,5 @@
+---
+- name: Install kiwix
+  aur: name=kiwix-cli-git user={{ user.name }}
+  tags:
+    - aur
