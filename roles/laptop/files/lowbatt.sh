@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 CRITICAL=5
 LOW=12
@@ -23,7 +23,7 @@ low() {
     message="Total capacity is at $capacity. We need more power, Scotty!"
     systemd-cat -t 'lowbatt' -p warning echo "$message"
     if [ -n "$NOTIFYUSER" ]; then
-        su $NOTIFYUSER -c "notify-send --urgency=critical \"Low Battery\" \"$message\""
+        su "$NOTIFYUSER" -c "notify-send --urgency=critical \"Low Battery\" \"$message\""
     else
         notify-send --urgency=critical "Low Battery" "$message"
     fi
@@ -59,8 +59,8 @@ find_batteries() {
 
 # Adjust the low and critical levels by the number of batteries.
 adjust_levels() {
-    CRITICAL=$(( $CRITICAL * $num_batteries ))
-    LOW=$(( $LOW * $num_batteries ))
+    CRITICAL=$(( CRITICAL * num_batteries ))
+    LOW=$(( LOW * num_batteries ))
     log "Adjusted critical is <= $CRITICAL"
     log "Adjusted low is <= $LOW"
 }
@@ -69,14 +69,14 @@ adjust_levels() {
 get_capacity() {
     capacity=0
     for i in "${batteries[@]}"; do
-        capacity=$(( $capacity + $(cat "$i"/capacity) ))
+        capacity=$(( capacity + $(cat "$i"/capacity) ))
     done
     log "Total capacity is $capacity"
 }
 
 # Determine if the capacity is low or critical.
 check_capacity() {
-    if [ $capacity -gt "$CRITICAL" -a "$capacity" -le "$LOW" ]; then
+    if [ $capacity -gt "$CRITICAL" ] &&  [ "$capacity" -le "$LOW" ]; then
         low
     elif [ "$capacity" -le "$CRITICAL" ]; then
         critical
