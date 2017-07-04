@@ -1,76 +1,97 @@
-#!/bin/sh
+#!/bin/bash
 
-BATTERY="BAT0"
+CRITICAL=5
+LOW=12
+VERBOSE=false
 
 usage() {
     echo "Usage: lowbatt [OPTION...]
 
 Options:
-    -b      specify the battery that should be checked
-    -u      the user who should be notified if the battery is low"
+    -u      the user who should be notified if the battery is low
+    -v      be verbose"
 }
 
+log() {
+    if [ "$VERBOSE" = true ]; then
+        echo "$1"
+    fi
+}
+
+# Warn if the capacity is low.
 low() {
-    # Warn if the battery is low.
-    message="Battery $BATTERY is at $CAPACITY%. We need more power, Scotty!"
+    message="Total capacity is at $capacity. We need more power, Scotty!"
     systemd-cat -t 'lowbatt' -p warning echo "$message"
     if [ -n "$NOTIFYUSER" ]; then
-        su $NOTIFYUSER -c "notify-send --urgency=critical \"Low Battery\" \"$message\""
+        su "$NOTIFYUSER" -c "notify-send --urgency=critical \"Low Battery\" \"$message\""
     else
         notify-send --urgency=critical "Low Battery" "$message"
     fi
     wall "Battery is low. $message"
 }
 
+# Suspend if the capacity is critical.
 critical() {
-    # Suspend if the battery is critical.
-    systemd-cat -t 'lowbatt' -p warning echo "Battery $BATTERY is critical. Suspending."
+    systemd-cat -t 'lowbatt' -p warning echo "Capacity is critical. Suspending."
     /usr/bin/systemctl suspend
 }
 
+# Determine if the system is on battery or AC power.
 get_status() {
-    # Get the status of the battery.
-    if [ -f /sys/class/power_supply/"$BATTERY"/status ]; then
-        # Get the remaining capacity of the battery.
-        STATUS=`cat /sys/class/power_supply/"$BATTERY"/status`
-    else
-        echo "Could not get status for battery $BATTERY."
-        exit 1
-    fi
-    # If the battery is not discharging, exit silently.
-    if [ "$STATUS" != "Discharging" ]; then
+    if [ "$(cat "/sys/class/power_supply/AC/online")" = "1" ]; then
+        log "System is on AC power"
+        # If the AC is online, exit.
         exit
     fi
+    log "System is on battery power"
 }
 
-get_capacity() {
-    # Only continue if we can get the capacity of the battery.
-    if [ -f /sys/class/power_supply/"$BATTERY"/capacity ]; then
-        # Get the remaining capacity of the battery.
-        CAPACITY=`cat /sys/class/power_supply/"$BATTERY"/capacity`
-    else
-        echo "Could not get capacity for battery $BATTERY."
+# Find all batteries.
+find_batteries() {
+    batteries=($(find /sys/class/power_supply -name 'BAT*'))
+    num_batteries=${#batteries[@]}
+    if [ ${#batteries[@]} -eq 0 ]; then
+        echo 'Failed to find any batteries'
         exit 1
     fi
+    log "Found $num_batteries batteries"
 }
 
+# Adjust the low and critical levels by the number of batteries.
+adjust_levels() {
+    CRITICAL=$(( CRITICAL * num_batteries ))
+    LOW=$(( LOW * num_batteries ))
+    log "Adjusted critical is <= $CRITICAL"
+    log "Adjusted low is <= $LOW"
+}
+
+# Get the total capacity of all batteries.
+get_capacity() {
+    capacity=0
+    for i in "${batteries[@]}"; do
+        capacity=$(( capacity + $(cat "$i"/capacity) ))
+    done
+    log "Total capacity is $capacity"
+}
+
+# Determine if the capacity is low or critical.
 check_capacity() {
-    # If the capacity is between 5 and 12, it is low.
-    if [ "$CAPACITY" -gt 5 -a "$CAPACITY" -le 12 ]; then
+    if [ $capacity -gt "$CRITICAL" ] &&  [ "$capacity" -le "$LOW" ]; then
         low
-    # If the capacity is 5 or less, it is critical.
-    elif [ "$CAPACITY" -le 5 ]; then
+    elif [ "$capacity" -le "$CRITICAL" ]; then
         critical
+    else
+        log "Capacity is within acceptable limits"
     fi
 }
 
-while getopts "u:b:h" opt; do
+while getopts "u:vh" opt; do
     case $opt in
         u)
             NOTIFYUSER=$OPTARG
             ;;
-        b)
-            BATTERY=$OPTARG
+        v)
+            VERBOSE=true
             ;;
         h)
             usage
@@ -80,5 +101,7 @@ while getopts "u:b:h" opt; do
 done
 
 get_status
+find_batteries
+adjust_levels
 get_capacity
 check_capacity
