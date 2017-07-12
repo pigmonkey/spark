@@ -105,9 +105,9 @@ passwordless_sudo:
 
 tarsnapper:
   deltas: 1h 1d 7d 30d 365d
-  timer:
-    schedule: daily
-    run_on: trusted
+  period: DAILY
+  ac_only: True
+  run_on: trusted
 
 gitannex:
     stop_on_untrusted: True
