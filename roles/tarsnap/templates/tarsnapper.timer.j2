@@ -1,10 +1,11 @@
 # {{ ansible_managed }}
 [Unit]
-Description=Tarsnapper Synchronization Timer
+Description=Tarsnapper Backup Service Timer
 
 [Timer]
 Unit=tarsnapper.service
-OnCalendar={{ tarsnapper.timer.schedule }}
+OnCalendar=hourly
+RandomizedDelaySec={{ tarsnapper.random_delay }}
 Persistent=True
 
 [Install]

@@ -30,7 +30,7 @@
   template: src=tarsnapper.conf.j2 dest=/usr/local/etc/tarsnapper.conf
 
 - name: Push Tarsnapper service file
-  copy: src=tarsnapper.service dest=/etc/systemd/system/tarsnapper.service
+  template: src=tarsnapper.service.j2 dest=/etc/systemd/system/tarsnapper.service
   notify:
     - reload systemd config
 
@@ -42,20 +42,20 @@
 
 - name: Enable and start Tarsnapper timer
   service: name=tarsnapper.timer enabled=yes state=started
-  when: tarsnapper.timer.run_on == "all"
+  when: tarsnapper.run_on == "all"
 
 - name: Remove Tarsnapper from trusted unit list
   lineinfile: dest=/usr/local/etc/trusted_units
               state=absent
               line=tarsnapper.timer
-  when: tarsnapper.timer.run_on == "all"
+  when: tarsnapper.run_on == "all"
 
 - name: Disable Tarsnapper timer
   service: name=tarsnapper.timer enabled=no
-  when: tarsnapper.timer.run_on == "trusted"
+  when: tarsnapper.run_on == "trusted"
 
 - name: Add Tarsnapper to trusted unit list
   lineinfile: dest=/usr/local/etc/trusted_units
               state=present
               line=tarsnapper.timer
-  when: tarsnapper.timer.run_on == "trusted"
+  when: tarsnapper.run_on == "trusted"

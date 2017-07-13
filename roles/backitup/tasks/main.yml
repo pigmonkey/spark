@@ -1,0 +1,3 @@
+---
+- name: Install backitup
+  copy: src=backitup/backitup.sh dest=/usr/local/bin/backitup mode=0755

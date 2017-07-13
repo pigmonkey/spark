@@ -2,9 +2,6 @@
 - name: Install rsnapshot
   pacman: name=rsnapshot state=present
 
-- name: Install backitup.sh script
-  copy: src=backitup/backitup.sh dest=/usr/local/bin/backitup mode=0755
-
 - name: Install cryptshot.sh script
   copy: src=cryptshot/cryptshot.sh dest=/usr/local/bin/cryptshot mode=0755
 
