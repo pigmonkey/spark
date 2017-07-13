@@ -108,6 +108,7 @@ tarsnapper:
   period: DAILY
   ac_only: True
   run_on: trusted
+  random_delay: 600
 
 gitannex:
     stop_on_untrusted: True

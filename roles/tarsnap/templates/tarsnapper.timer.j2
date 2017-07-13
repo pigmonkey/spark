@@ -5,6 +5,7 @@ Description=Tarsnapper Backup Service Timer
 [Timer]
 Unit=tarsnapper.service
 OnCalendar=hourly
+RandomizedDelaySec={{ tarsnapper.random_delay }}
 Persistent=True
 
 [Install]
