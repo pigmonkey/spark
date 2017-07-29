@@ -35,13 +35,6 @@
   tags:
     - firejail
 
-- name: Push Zathura firejail profile
-  copy: src=firejail/zathura.profile dest=/usr/local/etc/firejail/zathura.profile
-  notify:
-    - activate firejail profiles
-  tags:
-    - firejail
-
 - name: Install enscript
   pacman: name=enscript state=present
 

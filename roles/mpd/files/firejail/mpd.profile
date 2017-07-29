@@ -1,4 +1,4 @@
-include /usr/local/etc/firejail/disable-more.inc
+include /etc/firejail/globals.local
 include /etc/firejail/disable-devel.inc
 include /etc/firejail/disable-common.inc
 include /etc/firejail/disable-programs.inc

@@ -1,4 +1,3 @@
-include /usr/local/etc/firejail/disable-more.inc
 include /etc/firejail/firefox.profile
 
 # Note that localtime should be added to private-etc if you wish Firefox to be

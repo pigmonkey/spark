@@ -9,12 +9,5 @@
   tags:
     - firejail
 
-- name: Push mpv firejail profile
-  copy: src=firejail/mpv.profile dest=/usr/local/etc/firejail/mpv.profile
-  notify:
-    - activate firejail profiles
-  tags:
-    - firejail
-
 - name: Push play script
   copy: src=play.sh dest=/usr/local/bin/play mode=0755
