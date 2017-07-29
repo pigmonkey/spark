@@ -4,10 +4,22 @@
   tags:
     - aur
 
-- name: Push mutt firejail profile
-  copy: src=firejail/mutt.profile dest=/usr/local/etc/firejail/mutt.profile
-  notify:
-    - activate firejail profiles
+- name: Verify mutt firejail local profile exists
+  file: path=/etc/firejail/mutt.local state=touch
+  tags:
+    - firejail
+
+- name: Whitelist mutt related files
+  blockinfile:
+    dest: /etc/firejail/mutt.local
+    block: |
+        noblacklist ~/.config/vdirsyncer
+        noblacklist ~/.vdirsyncer
+        noblacklist ~/.calendars
+        noblacklist ~/.contacts
+        noblacklist ~/.mbsyncrc
+        noblacklist ~/.offlineimap
+        noblacklist ~/.offlineimaprc
   tags:
     - firejail
 

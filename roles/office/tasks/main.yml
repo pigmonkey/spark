@@ -9,10 +9,24 @@
   tags:
     - firejail
 
-- name: Push LibreOffice firejail profile
-  copy: src=firejail/libreoffice.profile dest=/usr/local/etc/firejail/libreoffice.profile
-  notify:
-    - activate firejail profiles
+- name: Verify LibreOffice firejail local profile exists
+  file: path=/etc/firejail/libreoffice.local state=touch
+  tags:
+    - firejail
+
+- name: Restrict LibreOffice network access
+  lineinfile:
+    dest: /etc/firejail/libreoffice.local
+    regexp: "^net"
+    line: "net none"
+  tags:
+    - firejail
+
+- name: Restrict LibreOffice access to /etc
+  lineinfile:
+    dest: /etc/firejail/libreoffice.local
+    regexp: "^private-etc"
+    line: "private-etc firejail,libreoffice,fonts,passwd"
   tags:
     - firejail
 
