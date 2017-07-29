@@ -21,8 +21,3 @@
               state=present
               line="blacklist {{ item }}"
   with_items: "{{ firejail.blacklist }}"
-
-- name: Push generic firejail profile
-  copy: src=generic.profile dest=/usr/local/etc/firejail/generic.profile
-  notify:
-    - activate firejail profiles
