@@ -96,9 +96,9 @@ as in the third example above. It will not modify any existing user profiles.
 
 ### Blacklisting
 
-The `firejail.blacklist` variable is used to generate a list of blacklisted
-files and directories at `/usr/local/etc/firejail/disable-more.inc`. This file
-is included in most of the provided security profiles, causing those locations
+The `firejail.blacklist` variable is used to populate
+`/etc/firejail/globals.local` with a list of blacklisted files and directories.
+This file is included by all security profiles, causing the specified locations
 to be inaccessible to jailed programs.
 
 ## MAC Spoofing

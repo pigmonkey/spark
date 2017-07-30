@@ -23,6 +23,7 @@ aur:
         - dateutils
         - miller
         - myrepos
+        - ctmg
 
 ssh:
     port: 22

@@ -9,12 +9,5 @@
   tags:
     - firejail
 
-- name: Push weechat firejail profile
-  copy: src=firejail/weechat.profile dest=/usr/local/etc/firejail/weechat.profile
-  notify:
-    - activate firejail profiles
-  tags:
-    - firejail
-
 - name: Install dunst
   pacman: name=dunst state=present

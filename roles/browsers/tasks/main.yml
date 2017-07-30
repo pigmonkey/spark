@@ -15,10 +15,17 @@
     - firefox
     - firejail
 
-- name: Push Firefox firejail profile
-  copy: src=firejail/firefox.profile dest=/usr/local/etc/firejail/firefox.profile
-  notify:
-    - activate firejail profiles
+- name: Verify Firefox firejail local profile exists
+  file: path=/etc/firejail/firefox.local state=touch
+  tags:
+    - firefox
+    - firejail
+
+- name: Restrict Firefox access to /etc
+  lineinfile:
+    dest: /etc/firejail/firefox.local
+    regexp: "^private-etc"
+    line: "private-etc firejail,passwd,group,hostname,hosts,nsswitch.conf,resolv.conf,gtk-2.0,gtk-3.0,fonts,mime.types,asound.conf,pulse,localtime"
   tags:
     - firefox
     - firejail
@@ -36,10 +43,17 @@
     - chromium
     - firejail
 
-- name: Push Chromium firejail profile
-  copy: src=firejail/chromium.profile dest=/usr/local/etc/firejail/chromium.profile
-  notify:
-    - activate firejail profiles
+- name: Verify Chromium firejail local profile exists
+  file: path=/etc/firejail/chromium.local state=touch
+  tags:
+    - chromium
+    - firejail
+
+- name: Restrict Chromium access to /etc
+  lineinfile:
+    dest: /etc/firejail/chromium.local
+    regexp: "^private-etc"
+    line: "private-etc firejail,passwd,group,hostname,hosts,nsswitch.conf,resolv.conf,gtk-2.0,gtk-3.0,fonts,mime.types,asound.conf,pulse,localtime"
   tags:
     - chromium
     - firejail
