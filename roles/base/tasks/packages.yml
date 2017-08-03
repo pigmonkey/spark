@@ -25,6 +25,16 @@
     - aur
     - packages
 
+- name: Install cower dependencies
+  pacman: name={{ item }} state=present
+  with_items:
+    - curl
+    - yajl
+    - perl
+  tags:
+    - aur
+    - packages
+
 - name: Install cower
   aur: name=cower user={{ user.name }} skip_pgp=yes
   tags:
