@@ -44,6 +44,8 @@ mail:
 
 network:
     spoof_mac: True
+    conn_check:
+        interval: 0
     trusted_uuid:
         - b21284e6-01af-492f-8bea-45a69ef22a23
         - 4ddd6988-aad1-4927-b650-ea7d24e0138b
