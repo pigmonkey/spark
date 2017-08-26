@@ -102,6 +102,7 @@ browser_choices:
     - tor-browser-en
     - play
     - qcode
+    - "| xclip -selection c"
 
 passwordless_sudo:
     - /usr/bin/openvpn*
