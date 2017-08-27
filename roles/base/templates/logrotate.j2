@@ -1,6 +1,8 @@
 # {{ ansible_managed }}
 
-/home/{{ user.name }}/{{ user.log_dir }}/*.log {
+/home/{{ user.name }}/{{ user.log.dir }}/*.log {
     missingok
     noolddir
+    {% if user.log.rotate is defined %}rotate {{ user.log.rotate }}
+    {% endif %}
 }

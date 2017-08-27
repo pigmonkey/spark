@@ -10,13 +10,13 @@
     - user
 
 - name: Create user log dir
-  file: path=/home/{{ user.name }}/{{ user.log_dir }} state=directory owner={{ user.name }} group={{ user.group }}
-  when: user.log_dir is defined
+  file: path=/home/{{ user.name }}/{{ user.log.dir }} state=directory owner={{ user.name }} group={{ user.group }}
+  when: user.log.dir is defined
   tags:
     - user
 
 - name: Push logrotate config for user logs
   template: src=logrotate.j2 dest=/etc/logrotate.d/user
-  when: user.log_dir is defined
+  when: user.log.dir is defined
   tags:
     - user
