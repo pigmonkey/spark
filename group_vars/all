@@ -4,7 +4,9 @@ user:
     group: brett
     shell: /usr/bin/zsh
     email: brett@librum.org
-    log_dir: log
+    log:
+        dir: log
+        rotate: 8
 
 hostname: obsidian
 
