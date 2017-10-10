@@ -22,7 +22,6 @@ aur:
         - downgrade
         - overdue
         - zplug
-        - dateutils
         - miller
         - myrepos
         - ctmg
@@ -70,6 +69,7 @@ base_packages:
     - glances
     - coreutils
     - moreutils
+    - dateutils
     - reflector
     - bc
     - ranger
