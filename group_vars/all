@@ -127,6 +127,7 @@ bootloader: grub
 
 postgresql:
     enable: True
+    root: /home/postgres
 
 fingerprint: False
 

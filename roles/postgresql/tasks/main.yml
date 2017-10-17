@@ -5,13 +5,16 @@
 - name: Install psycopg2
   pacman: name=python2-psycopg2 state=present
 
+- name: Create postgres data root
+  file: path={{ postgresql.root }}/data state=directory owner=postgres group=postgres
+
 - name: Initialize database cluster
-  command: initdb --locale en_US.UTF-8 -E UTF8 -D /var/lib/postgres/data creates=/var/lib/postgres/data/postgresql.conf
+  command: initdb --locale en_US.UTF-8 -E UTF8 -D {{ postgresql.root }}/data creates={{ postgresql.root }}/data/postgresql.conf
   become: yes
   become_user: postgres
 
 - name: Disable synchronous commits
-  lineinfile: dest=/var/lib/postgres/data/postgresql.conf
+  lineinfile: dest={{ postgresql.root }}/data/postgresql.conf
               regexp=^synchronous_commit
               state=present
               line="synchronous_commit = off"
@@ -19,11 +22,20 @@
     - restart postgresql
 
 - name: Prevent disk writes when idle
-  lineinfile: dest=/var/lib/postgres/data/postgresql.conf
+  lineinfile: dest={{ postgresql.root }}/data/postgresql.conf
               regexp=^stats_temp_directory
               state=present
               line="stats_temp_directory = '/run/postgresql'"
   notify:
+    - restart postgresql
+
+- name: Create service override directory
+  file: path=/etc/systemd/system/postgresql.service.d state=directory
+
+- name: Push service override file
+  template: src=postgresql-override.conf.j2 dest=/etc/systemd/system/postgresql.service.d/override.conf
+  notify:
+    - reload systemd config
     - restart postgresql
 
 - name: Disable and stop PostgreSQL
