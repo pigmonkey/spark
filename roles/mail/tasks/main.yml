@@ -1,8 +1,6 @@
 ---
-- name: Install mutt
-  aur: name=neomutt user={{ user.name }}
-  tags:
-    - aur
+- name: Install neomutt
+  pacman: name=neomutt state=present
 
 - name: Verify mutt firejail local profile exists
   file: path=/etc/firejail/mutt.local state=touch
