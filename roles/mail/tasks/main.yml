@@ -1,8 +1,11 @@
 ---
-- name: Install mutt
-  aur: name=neomutt user={{ user.name }}
-  tags:
-    - aur
+- name: Install neomutt
+  pacman: name=neomutt state=present
+
+- name: Make neomutt available as mutt
+  file: src=/usr/bin/neomutt
+        dest=/usr/local/bin/mutt
+        state=link
 
 - name: Verify mutt firejail local profile exists
   file: path=/etc/firejail/mutt.local state=touch
