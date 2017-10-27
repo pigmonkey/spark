@@ -1,12 +1,17 @@
 ---
+- name: Install magic-wormhole dependencies
+  pacman: name={{ item }} state=present
+  with_items:
+    - python-humanize
+    - python-tqdm
+
 - name: Install magic-wormhole
   aur: name={{ item }} user={{ user.name }}
   with_items:
       - python-hkdf
       - python-spake2
-      - python-humanize
-      - python-tqdm
       - python-ipaddress
+      - python-txtorcon
       - magic-wormhole
   tags:
     - aur
