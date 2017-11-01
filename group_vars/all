@@ -205,3 +205,5 @@ himawaripy:
     run_boot_delay: 2min
     run_on: trusted
     flags: --auto-offset --level 4
+
+middle_click_scroll: True

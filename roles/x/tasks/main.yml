@@ -24,6 +24,10 @@
 - name: Add user to video group
   user: name={{ user.name }} groups=video append=yes
 
+- name: Enable middle-click scrolling
+  copy: src=30-scroll.conf dest=/etc/X11/xorg.conf.d/30-scroll.conf
+  when: middle_click_scroll is defined and middle_click_scroll == True
+
 - include: sxhkd.yml
 - include: unclutter.yml
 - include: autorandr.yml
