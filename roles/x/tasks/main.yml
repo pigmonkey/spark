@@ -17,6 +17,9 @@
 - name: Install xorg-sessreg
   pacman: name=xorg-sessreg state=present
 
+- name: Install xautomation
+  pacman: name=xautomation state=present
+
 - name: Install video driver(s)
   pacman: name={{ item }} state=present
   with_items: "{{ video_drivers }}"
