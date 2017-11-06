@@ -20,7 +20,6 @@ aur:
     packages:
         - aura-bin
         - downgrade
-        - overdue
         - zplug
         - miller
         - myrepos
