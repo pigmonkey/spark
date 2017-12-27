@@ -23,6 +23,18 @@
   tags:
     - firejail
 
+- name: Verify Tor firejail local profile exists
+  file: path=/etc/firejail/tor.local state=touch
+  tags:
+    - firejail
+
+- name: Allow Tor firejail /dev access
+  lineinfile:
+    dest: /etc/firejail/tor.local
+    line: "ignore private-dev"
+  tags:
+    - firejail
+
 - name: Enable and start Tor
   service: name=tor enabled=yes state=started
   when: tor.run_on == "all"
