@@ -1,6 +1,5 @@
 ---
 - name: Install imv
-  aur: name=imv user={{ user.name }}
+  pacman: name=imv state=present
   tags:
-    - aur
     - imv
