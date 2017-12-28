@@ -7,7 +7,6 @@
       - bluez-utils
       - bluez-firmware
       - blueman
-      - rfkill
   notify:
     - restart pulse as user
 
