@@ -11,14 +11,9 @@
     - python-gobject
     - python-pylast
     - python-requests
+    - python-pyacoustid
     - beets
   tags:
-    - beets
-
-- name: Install python-pyacoustid
-  aur: name=python-pyacoustid user={{ user.name }}
-  tags:
-    - aur
     - beets
 
 - name: Install mp3val
