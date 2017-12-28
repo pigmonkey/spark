@@ -4,8 +4,3 @@
   with_items:
     - python-llfuse
     - borg
-
-- name: Install borgmatic
-  aur: name=borgmatic user={{ user.name }}
-  tags:
-    - aur
