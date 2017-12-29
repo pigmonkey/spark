@@ -4,9 +4,8 @@
   with_items:
       - python-hkdf
       - python-spake2
-      - python-humanize
-      - python-tqdm
       - python-ipaddress
+      - python-txtorcon
       - magic-wormhole
   tags:
     - aur
