@@ -1,6 +1,0 @@
----
-- name: Install light-git
-  aur: name=light-git user={{ user.name }}
-  tags:
-    - aur
-    - light-git
