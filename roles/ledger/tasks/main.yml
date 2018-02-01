@@ -1,5 +1,3 @@
 ---
 - name: Install ledger
-  aur: name=ledger user={{ user.name }}
-  tags:
-    - aur
+  pacman: name=ledger state=present
