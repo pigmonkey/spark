@@ -1,0 +1,10 @@
+---
+- name: Enable dvorak for XOrg libinput
+  copy: src=40-libinput.conf dest=/etc/X11/xorg.conf.d/40-libinput.conf
+
+- name: Add control-caps dvorak keymap
+  copy: src=dvorak-cc.map.gz .conf dest=/usr/share/kbd/keymaps/i386/dvorak-cc.map.gz
+
+- name: Enable dvorak-cc for vconsole
+  copy: src=vconsole.conf dest=/etc/vconsole.conf
+
