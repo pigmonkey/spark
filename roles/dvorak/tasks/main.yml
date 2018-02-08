@@ -6,5 +6,7 @@
   copy: src=dvorak-cc.map.gz .conf dest=/usr/share/kbd/keymaps/i386/dvorak-cc.map.gz
 
 - name: Enable dvorak-cc for vconsole
-  copy: src=vconsole.conf dest=/etc/vconsole.conf
-
+  lineinfile: "dest=/etc/vconsole.conf
+              regexp=^KEYMAP=
+              state=present
+              line='KEYMAP=dvorak-cc'"
