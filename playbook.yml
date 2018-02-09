@@ -71,6 +71,7 @@
     - { role: hostsctl, tags: ['hostsctl'], when: "hostsctl is defined" }
     - { role: himawaripy, tags: ['himawaripy'], when: "himawaripy is defined" }
     - { role: kiwix, tags: ['kiwix'] }
+    - { role: dvorak, tags: ['dvorak'] }
   vars_prompt:
     - name: user_password
       prompt: "Enter desired user password"
