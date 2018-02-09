@@ -71,3 +71,8 @@
 
 - name: Install pdfgrep
   pacman: name=pdfgrep state=present
+
+- name: Install visidata
+  aur: name=visidata-git user={{ user.name }}
+  tags:
+    - aur
