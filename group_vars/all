@@ -89,6 +89,7 @@ base_packages:
     - python2-docs
     - screen
     - units
+    - python-pipenv
 
 filesystem_packages:
     - dosfstools
