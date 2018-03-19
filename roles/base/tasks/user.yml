@@ -20,3 +20,9 @@
   when: user.log.dir is defined
   tags:
     - user
+
+# Lingering is needed to allow to run user service while the user is not logged in.
+- name: Let the user linger
+  command: loginctl enable-linger {{ user.name }}
+  tags:
+    - user
