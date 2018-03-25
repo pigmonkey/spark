@@ -20,3 +20,14 @@
   when: user.log.dir is defined
   tags:
     - user
+
+- name: Create user socket directory
+  file: path=/run/user/{{ user.uid }} state=directory owner={{ user.name }} group={{ user.group }} mode=0700
+  tags:
+    - user
+
+- name: Start user systemd instance
+  service: name="user@{{ user.uid }}" state=started
+  notify: stop systemd per-user instance
+  tags:
+    - user
