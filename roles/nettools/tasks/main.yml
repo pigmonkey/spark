@@ -39,6 +39,8 @@
 
 - name: Add user to wireshark group
   user: name={{ user.name }} groups=wireshark append=yes
+  tags:
+    - user
 
 - name: Install socat
   pacman: name=socat state=present

@@ -26,6 +26,8 @@
 
 - name: Add user to video group
   user: name={{ user.name }} groups=video append=yes
+  tags:
+    - user
 
 - name: Enable middle-click scrolling
   copy: src=30-scroll.conf dest=/etc/X11/xorg.conf.d/30-scroll.conf
