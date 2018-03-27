@@ -23,6 +23,8 @@
 
 - name: Add the user to the print and print admin groups
   user: name={{ user.name }} groups=printadmin,lp append=yes
+  tags:
+    - user
 
 - name: Enable and start CUPS
   service: name=org.cups.cupsd.service enabled=yes state=started

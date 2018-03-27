@@ -15,3 +15,5 @@
 
 - name: Add the user to vboxusers group
   user: name={{ user.name }} groups=vboxusers append=yes
+  tags:
+    - user

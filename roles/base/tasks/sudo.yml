@@ -8,6 +8,7 @@
   user: name={{ user.name }} groups=wheel append=yes
   tags:
     - sudo
+    - user
 
 - name: Copy sudo configuration
   template: src=sudoers.j2 dest=/etc/sudoers mode=440 validate='visudo -cf %s'
