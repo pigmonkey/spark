@@ -1,6 +1,11 @@
 ---
 - name: Install i3
-  pacman: name=i3 state=present
+  pacman: name={{ item }} state=present
+  with_items:
+      - i3-wm
+      - i3blocks
+      - i3lock
+      - i3status
 
 - name: Install py3status
   aur: name=py3status user={{ user.name }}
