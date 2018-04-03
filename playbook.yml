@@ -12,7 +12,8 @@
     - { role: ssd, tags: ['ssd'] }
     - { role: fonts, tags: ['fonts'] }
     - { role: x, tags: ['x'] }
-    - { role: lightdm, tags: ['lightdm'] }
+    - { role: lightdm, tags: ['lightdm'], when: "display_manager == 'lightdm'" }
+    - { role: gdm, tags: ['gdm'], when: "display_manager == 'gdm'" }
     - { role: i3, tags: ['i3'] }
     - { role: pass, tags: ['pass'] }
     - { role: iptables, tags: ['iptables'] }

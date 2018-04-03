@@ -208,3 +208,12 @@ himawaripy:
     flags: --auto-offset --level 4
 
 middle_click_scroll: True
+
+display_manager: lightdm
+gdm:
+    sound: False
+    font_scaling_factor: 1
+    logo_path: False
+    touchpad:
+        tap_to_click: True
+    accessibility_menu: True
