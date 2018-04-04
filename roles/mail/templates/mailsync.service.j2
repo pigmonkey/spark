@@ -1,11 +1,10 @@
 [Unit]
-Description=Mailbox synchronization service for user %I
+Description=Mailbox synchronization service
 After=network.target
 
 [Service]
 Type=oneshot
 ExecStart=/usr/local/bin/mailsync
-User=%i
 StandardOutput=syslog
 StandardError=syslog
 Environment=DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/{{ user.uid }}/bus

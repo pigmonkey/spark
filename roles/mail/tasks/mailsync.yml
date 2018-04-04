@@ -5,14 +5,14 @@
     - mailsync
 
 - name: Push mailsync service file
-  template: src=mailsync.service.j2 dest=/etc/systemd/system/mailsync@.service
+  template: src=mailsync.service.j2 dest=/etc/systemd/user/mailsync.service
   tags:
     - mailsync
   notify:
     - reload systemd config
 
 - name: Push mailsync timer file
-  template: src=mailsync.timer.j2 dest=/etc/systemd/system/mailsync@.timer
+  template: src=mailsync.timer.j2 dest=/etc/systemd/user/mailsync.timer
   tags:
     - mailsync
   notify:
@@ -20,7 +20,11 @@
     - restart mailsync
 
 - name: Enable and start mailsync timer
-  service: name="mailsync@{{ user.name }}.timer" enabled=yes state=started
+  systemd: name=mailsync.timer user=yes enabled=yes state=started
+  become: yes
+  become_user: "{{ user.name }}"
+  environment:
+    XDG_RUNTIME_DIR: "/run/user/{{ user.uid }}"
   when: mail.sync_on == "all"
   tags:
     - mailsync
@@ -28,13 +32,17 @@
 - name: Remove mailsync from trusted unit list
   lineinfile: dest=/usr/local/etc/trusted_units
               state=absent
-              line="mailsync@{{ user.name }}.timer"
+              line="mailsync.timer,user:{{ user.name }}"
   when: mail.sync_on == "all"
   tags:
     - mailsync
 
 - name: Disable mailsync timer
-  service: name="mailsync@{{ user.name }}.timer" enabled=no
+  systemd: name=mailsync.timer user=yes enabled=no
+  become: yes
+  become_user: "{{ user.name }}"
+  environment:
+    XDG_RUNTIME_DIR: "/run/user/{{ user.uid }}"
   when: mail.sync_on == "trusted"
   tags:
     - mailsync
@@ -42,7 +50,7 @@
 - name: Add mailsync to trusted unit list
   lineinfile: dest=/usr/local/etc/trusted_units
               state=present
-              line="mailsync@{{ user.name }}.timer"
+              line="mailsync.timer,user:{{ user.name }}"
   when: mail.sync_on == "trusted"
   tags:
     - mailsync
