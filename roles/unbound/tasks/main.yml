@@ -2,8 +2,8 @@
 - name: Install Unbound
   pacman: name=unbound state=present
 
-- name: Push root hints
-  copy: src=root.hints dest=/etc/unbound/root.hints
+- name: Download root hints
+  get_url: url=https://www.internic.net/domain/named.cache dest=/etc/unbound/root.hints force=yes
 
 - name: Copy Unbound configuration file
   template: src=unbound.conf.j2 dest=/etc/unbound/unbound.conf

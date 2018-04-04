@@ -10,32 +10,40 @@
         state=link
 
 - name: Push himawaripy service file
-  template: src=himawaripy.service.j2 dest=/etc/systemd/system/himawaripy@.service
+  template: src=himawaripy.service.j2 dest=/etc/systemd/user/himawaripy.service
   notify:
     - reload systemd config
 
 - name: Push himawaripy timer file
-  template: src=himawaripy.timer.j2 dest=/etc/systemd/system/himawaripy@.timer
+  template: src=himawaripy.timer.j2 dest=/etc/systemd/user/himawaripy.timer
   notify:
     - reload systemd config
     - restart himawaripy
 
 - name: Enable and start himawaripy timer
-  service: name="himawaripy@{{ user.name }}.timer" enabled=yes state=started
+  systemd: name=himawaripy.timer user=yes enabled=yes state=started
+  become: yes
+  become_user: "{{ user.name }}"
+  environment:
+    XDG_RUNTIME_DIR: "/run/user/{{ user.uid }}"
   when: himawaripy.run_on == "all"
 
 - name: Remove himawaripy from trusted unit list
   lineinfile: dest=/usr/local/etc/trusted_units
               state=absent
-              line="himawaripy@{{ user.name }}.timer"
+              line="himawaripy.timer,user:{{ user.name }}"
   when: himawaripy.run_on == "all"
 
 - name: Disable himawaripy timer
-  service: name="himawaripy@{{ user.name }}.timer" enabled=no
+  systemd: name=himawaripy.timer user=yes enabled=no
+  become: yes
+  become_user: "{{ user.name }}"
+  environment:
+    XDG_RUNTIME_DIR: "/run/user/{{ user.uid }}"
   when: himawaripy.run_on == "trusted"
 
 - name: Add himawaripy to trusted unit list
   lineinfile: dest=/usr/local/etc/trusted_units
               state=present
-              line="himawaripy@{{ user.name }}.timer"
+              line="himawaripy.timer,user:{{ user.name }}"
   when: himawaripy.run_on == "trusted"
