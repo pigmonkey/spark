@@ -1,8 +1,7 @@
 # {{ ansible_managed }}
 [Unit]
-Description=Update desktop background with satellite imagery for user %I
+Description=Update desktop background with satellite imagery
 
 [Service]
 Type=oneshot
 ExecStart=/usr/local/bin/himawaripy {{ himawaripy.flags }}
-User=%i
