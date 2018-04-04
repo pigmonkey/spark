@@ -137,10 +137,11 @@ tor:
 localtime:
     run_on: trusted
 
-nameservers:
-    - 8.8.8.8       # Google
-    - 209.244.0.3   # Level 3
-    - 74.82.42.42   # Hurricane Electric
+unbound:
+    nameservers:
+        - 8.8.8.8       # Google
+        - 209.244.0.3   # Level 3
+        - 74.82.42.42   # Hurricane Electric
 
 bluetooth:
     disable: False

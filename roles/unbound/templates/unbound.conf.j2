@@ -17,11 +17,11 @@ server:
   private-address: fd00::/8
   private-address: fe80::/10
 
-{% if nameservers %}
+{% if unbound.nameservers %}
   # Define DNS servers to forward queries to.
   forward-zone:
     name: "."
-    {% for nameserver in nameservers %}
+    {% for nameserver in unbound.nameservers %}
     forward-addr: {{ nameserver }}
     {% endfor %}
 {% endif %}
