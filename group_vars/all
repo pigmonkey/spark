@@ -138,10 +138,10 @@ localtime:
     run_on: trusted
 
 unbound:
+    tls: True
     nameservers:
-        - 8.8.8.8       # Google
-        - 209.244.0.3   # Level 3
-        - 74.82.42.42   # Hurricane Electric
+        - 1.1.1.1@853  # Cloudflare
+        - 9.9.9.9@853  # Quad9
 
 bluetooth:
     disable: False
