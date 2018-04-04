@@ -1,10 +1,9 @@
 [Unit]
-Description=Git Annex Assistant Service for %I
+Description=Git Annex Assistant Service
 
 [Service]
 Type=simple
 ExecStart=/usr/bin/git-annex assistant --foreground --autostart
-User=%i
 StandardOutput=syslog
 StandardError=syslog
 

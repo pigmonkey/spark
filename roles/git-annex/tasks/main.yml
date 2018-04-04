@@ -8,7 +8,7 @@
     - aur
 
 - name: Push git-annex assistant service file
-  copy: src=git-annex.service dest=/etc/systemd/system/git-annex@.service
+  copy: src=git-annex.service dest=/etc/systemd/user/git-annex.service
   notify:
     - reload systemd config
     - restart git-annex
@@ -18,19 +18,23 @@
   register: autostart
 
 - name: Enable and start git-annex assistant service
-  service: name="git-annex@{{ user.name }}.service" enabled=yes state=started
+  systemd: name=git-annex.service user=yes enabled=yes state=started
+  become: yes
+  become_user: "{{ user.name }}"
+  environment:
+    XDG_RUNTIME_DIR: "/run/user/{{ user.uid }}"
   when: autostart.stat is defined and autostart.stat.size > 0
 
 - name: Add git-annex to trusted unit list
   lineinfile: dest=/usr/local/etc/trusted_units
               state=present
-              line="git-annex@{{ user.name }}.service,allow_offline"
+              line="git-annex.service,user:{{ user.name }},allow_offline"
   when: gitannex.stop_on_untrusted is defined and gitannex.stop_on_untrusted == True
 
 - name: Remove git-annex from trusted unit list
   lineinfile: dest=/usr/local/etc/trusted_units
               state=absent
-              line="git-annex@{{ user.name }}.service,allow_offline"
+              line="git-annex.service,user:{{ user.name }},allow_offline"
   when: gitannex.stop_on_untrusted is not defined or gitannex.stop_on_untrusted != True
 
 - name: Increase the amount of inotify watchers
