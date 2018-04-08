@@ -217,3 +217,28 @@ gdm:
     touchpad:
         tap_to_click: True
     accessibility_menu: True
+
+base_fonts:
+    - terminus-font
+    - cantarell-fonts
+    - noto-fonts
+    - ttf-dejavu
+    - ttf-liberation
+    - ttf-symbola
+    - gsfonts
+    - tex-gyre-fonts
+    - ttf-droid
+    - ttf-ubuntu-font-family
+    - ttf-inconsolata
+
+aur_fonts:
+    - ttf-signika
+    - ttf-quintessential
+    - ttf-oswald
+    - ttf-opensans
+    - ttf-merriweather-sans
+    - ttf-merriweather
+    - ttf-carlito
+    - ttf-caladea
+    - ttf-courier-prime
+    - ttf-heuristica
