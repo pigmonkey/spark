@@ -3,9 +3,7 @@
   pacman: name=xautolock state=present
 
 - name: Install physlock
-  aur: name=physlock user={{ user.name }}
-  tags:
-    - aur
+  pacman: name=physlock state=present
 
 - name: Push lock script
   copy: src=lock.sh dest=/usr/local/bin/lock mode=0755
