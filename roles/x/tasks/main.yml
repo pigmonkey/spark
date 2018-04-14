@@ -32,10 +32,14 @@
 - name: Enable middle-click scrolling
   template: src=30-scroll.conf dest=/etc/X11/xorg.conf.d/30-scroll.conf
   when: libinput.middle_click_scroll is defined
+  tags:
+    - libinput
 
 - name: Remap mouse buttons
   template: src=30-button_mapping.conf dest=/etc/X11/xorg.conf.d/30-button_mapping.conf
   when: libinput.button_mapping is defined
+  tags:
+    - libinput
 
 - include: sxhkd.yml
 - include: unclutter.yml
