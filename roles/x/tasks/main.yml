@@ -31,7 +31,7 @@
 
 - name: Enable middle-click scrolling
   template: src=30-scroll.conf dest=/etc/X11/xorg.conf.d/30-scroll.conf
-  when: middle_click_scroll is defined
+  when: libinput.middle_click_scroll is defined
 
 - include: sxhkd.yml
 - include: unclutter.yml

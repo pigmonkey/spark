@@ -207,7 +207,8 @@ himawaripy:
     run_on: trusted
     flags: --auto-offset --level 4
 
-middle_click_scroll: 12
+libinput:
+    middle_click_scroll: 12
 
 display_manager: lightdm
 gdm:
