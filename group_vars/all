@@ -242,3 +242,6 @@ aur_fonts:
     - ttf-caladea
     - ttf-courier-prime
     - ttf-heuristica
+
+syncthing:
+    run_on: trusted
