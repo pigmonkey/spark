@@ -195,7 +195,9 @@ himawaripy:
     run_on: trusted
     flags: --auto-offset --level 4
 
-middle_click_scroll: True
+libinput:
+    middle_click_scroll: 12
+    button_mapping: "1 2 3 4 5 6 7 8 9 10 11 2"
 
 display_manager: lightdm
 gdm:
@@ -230,3 +232,6 @@ aur_fonts:
     - ttf-caladea
     - ttf-courier-prime
     - ttf-heuristica
+
+syncthing:
+    run_on: trusted

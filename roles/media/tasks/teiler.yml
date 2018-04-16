@@ -3,7 +3,7 @@
   aur: name={{ item }} user={{ user.name }}
   with_items:
     - xininfo-git
-    - copyq-git
+    - copyq
     - teiler-git
   tags:
     - aur
