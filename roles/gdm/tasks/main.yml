@@ -5,7 +5,10 @@
 - name: Enable GDM
   service: name=gdm.service enabled=yes
 
-- name: Creating DConf configuratioin profile
+- name: Creating DConf configuration directory
+  file: path=/etc/dconf/profile state=directory recurse=yes
+
+- name: Creating DConf configuration profile
   copy: src=profile/gdm dest=/etc/dconf/profile/gdm
 
 - name: Creating gdm.d directory for DConf
