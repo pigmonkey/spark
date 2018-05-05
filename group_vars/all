@@ -93,7 +93,6 @@ base_packages:
 
 filesystem_packages:
     - dosfstools
-    - hfsprogs
     - ntfs-3g
     - exfat-utils
 
