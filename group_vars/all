@@ -220,6 +220,41 @@ gdm:
         tap_to_click: True
     accessibility_menu: True
 
+desktop_environment: i3
+gnome:
+    night_light:
+        enabled: True
+        color_temperature: 4000 # in Kelvin
+    date_time:
+        show_date_in_clock: True
+        show_weeks_in_calendar: True
+    battery:
+        show_percentage: True
+    power:
+        sleep_timeout_when_computer_on_ac: 3600 # in seconds
+        timeout_action_when_computer_on_ac: suspend
+        sleep_timeout_when_computer_on_battery: 1800 # in seconds
+        timeout_action_when_computer_on_battery: suspend
+        power_button_action: suspend
+    touchpad:
+        tap_to_click: True
+        natural_scrolling: True
+        disabled_while_typing: True
+    online_accounts_support: True
+    lock_screen:
+        automatic_lock: True
+        lock_screen_after_blank_for: 0 # in seconds
+        show_notifications: True
+        show_full_name_of_user: True
+    theme:
+        theme_name: Adwaita
+        icon_theme_name: Adwaita
+        font_name: Dejavu Sans 13
+        dark_variant: True
+    gnome_shell:
+        disable_top_left_hot_corner: False
+        extensions_support: True
+
 base_fonts:
     - terminus-font
     - cantarell-fonts
