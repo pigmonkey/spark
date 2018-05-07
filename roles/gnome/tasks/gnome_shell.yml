@@ -1,0 +1,16 @@
+---
+- name: Disabling GNOME Shell top left hot corner
+  aur: name=gnome-shell-extension-no-topleft-hot-corner user={{ user.name }}
+  when: "gnome.gnome_shell.disable_top_left_hot_corner"
+  tags:
+    - aur
+
+- name: Enabling GNOME Shell top left hot corner
+  pacman: name=gnome-shell-extension-no-topleft-hot-corner state=absent
+  when: "not gnome.gnome_shell.disable_top_left_hot_corner"
+
+- name: Configuring GNOME Shell Extensions support
+  pacman: name={{ item }} state={{ "present" if gnome.gnome_shell.extensions_support else "absent" }}
+  with_items:
+    - gnome-shell-extensions
+    - chrome-gnome-shell

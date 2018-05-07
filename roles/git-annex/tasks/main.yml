@@ -23,7 +23,7 @@
   become_user: "{{ user.name }}"
   environment:
     XDG_RUNTIME_DIR: "/run/user/{{ user.uid }}"
-  when: autostart.stat is defined and autostart.stat.size > 0
+  when: autostart.stat is defined and autostart.stat.exists
 
 - name: Add git-annex to trusted unit list
   lineinfile: dest=/usr/local/etc/trusted_units

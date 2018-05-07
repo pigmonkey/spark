@@ -19,9 +19,8 @@
     - atool
 
 - name: Install hashdeep
-  aur: name=hashdeep user={{ user.name }}
+  pacman: name=hashdeep state=present
   tags:
-    - aur
     - hashdeep
 
 - name: Install par2cmdline

@@ -14,7 +14,8 @@
     - { role: x, tags: ['x'] }
     - { role: lightdm, tags: ['lightdm'], when: "display_manager == 'lightdm'" }
     - { role: gdm, tags: ['gdm'], when: "display_manager == 'gdm'" }
-    - { role: i3, tags: ['i3'] }
+    - { role: i3, tags: ['i3'], when: "desktop_environment == 'i3'" }
+    - { role: gnome, tags: ['gnome'], when: "desktop_environment == 'gnome'" }
     - { role: pass, tags: ['pass'] }
     - { role: iptables, tags: ['iptables'] }
     - { role: nettools, tags: ['nettools'] }
