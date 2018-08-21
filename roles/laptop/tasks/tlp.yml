@@ -21,6 +21,11 @@
   tags:
     - tlp
 
+- name: Mask systemd radio socket
+  command: systemctl mask systemd-rfkill.socket
+  tags:
+    - tlp
+
 - name: Enable TLP
   service: name=tlp.service enabled=yes
   tags:
