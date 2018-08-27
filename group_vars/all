@@ -62,6 +62,7 @@ video_drivers:
 base_packages:
     - base-devel
     - pacman-contrib
+    - fwupd
     - tmux
     - git
     - rsync

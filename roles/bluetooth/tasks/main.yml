@@ -10,6 +10,11 @@
   notify:
     - restart pulse as user
 
+- name: Do not auto power on the bluetooth device
+  command: gsettings set org.blueman.plugins.powermanager auto-power-on false
+  become: yes
+  become_user: "{{ user.name }}"
+
 - name: Unblock the bluetooth service
   service: name="rfkill-block@bluetooth.service" enabled=no state=stopped
   when: bluetooth.disable == False
