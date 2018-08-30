@@ -27,7 +27,7 @@ Connect to the Internet.
 Verify that the [system clock is up to date][8].
 
     $ timedatectl set-ntp true
-    
+
 (BIOS mode) Create a single partition for LUKS.
 
     $ parted -s /dev/sda mklabel msdos
