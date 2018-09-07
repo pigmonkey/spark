@@ -37,3 +37,9 @@
   pacman: name=lesspipe state=present
   tags:
     - lesspipe
+
+- name: Install geteltorito
+  aur: name=geteltorito user={{ user.name }}
+  tags:
+    - aur
+    - geteltorito
