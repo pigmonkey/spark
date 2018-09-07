@@ -272,3 +272,5 @@ aur_fonts:
 
 syncthing:
     run_on: trusted
+
+kernel_parameters: "quiet consoleblank=60 i915.enable_psr=2"

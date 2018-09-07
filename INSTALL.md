@@ -27,7 +27,7 @@ Connect to the Internet.
 Verify that the [system clock is up to date][8].
 
     $ timedatectl set-ntp true
-    
+
 (BIOS mode) Create a single partition for LUKS.
 
     $ parted -s /dev/sda mklabel msdos
@@ -124,14 +124,14 @@ Configure GRUB.
 
     $ echo GRUB_ENABLE_CRYPTODISK=y >> /etc/default/grub
 
-    # BIOS mode - set the UUID of the encrpyted root device
+    # BIOS mode - set the UUID of the encrypted root device
     $ ROOTUUID=$(blkid /dev/sda1 | awk '{print $2}' | cut -d '"' -f2)
     $ sed -i "s/^GRUB_CMDLINE_LINUX=.*/GRUB_CMDLINE_LINUX=\"cryptdevice=UUID="$ROOTUUID":lvm:allow-discards resume=\/dev\/mapper\/arch-swap\"/" /etc/default/grub
     $ grub-mkconfig -o /boot/grub/grub.cfg
     $ grub-install /dev/sda
     $ chmod -R g-rwx,o-rwx /boot
 
-    # UEFI mode - set the UUID of the encrpyted root device
+    # UEFI mode - set the UUID of the encrypted root device
     $ ROOTUUID=$(blkid /dev/sda3 | awk '{print $2}' | cut -d '"' -f2)
     $ sed -i "s/^GRUB_CMDLINE_LINUX=.*/GRUB_CMDLINE_LINUX=\"cryptdevice=UUID="$ROOTUUID":lvm:allow-discards root=\/dev\/mapper\/arch-root resume=\/dev\/mapper\/arch-swap\"/" /etc/default/grub
     $ grub-mkconfig -o /boot/grub/grub.cfg
