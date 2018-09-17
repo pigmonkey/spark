@@ -1,3 +1,6 @@
 ---
 - name: restart iptables
   service: name=iptables.service state=restarted
+
+- name: restart ip6tables
+  service: name=ip6tables.service state=restarted

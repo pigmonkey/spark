@@ -1,8 +1,16 @@
 ---
-- name: Push firewall config
+- name: Push ipv4 firewall config
   template: src=iptables.rules.j2 dest=/etc/iptables/iptables.rules
   notify:
     - restart iptables
 
 - name: Enable and start iptables
   service: name=iptables.service enabled=yes state=started
+
+- name: Push ipv6 firewall config
+  template: src=ip6tables.rules.j2 dest=/etc/iptables/ip6tables.rules
+  notify:
+    - restart ip6tables
+
+- name: Enable and start ip6tables
+  service: name=ip6tables.service enabled=yes state=started
