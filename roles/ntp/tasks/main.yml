@@ -1,6 +1,17 @@
 ---
-- name: Copy systemd-timesyncd configuration file
-  copy: src=timesyncd.conf dest=/etc/systemd/timesyncd.conf
+- name: Install chrony
+  pacman: name=chrony state=present
 
-- name: Enable systemd-timesyncd
-  command: timedatectl set-ntp true
+- name: Install chrony networkmanager dispatcher
+  aur: name=networkmanager-dispatcher-chrony user={{ user.name }}
+  tags:
+    - aur
+    - networkmanager
+
+- name: Push chrony configuration file
+  copy: src=chrony.conf dest=/etc/chrony.conf
+  notify:
+    - restart chrony
+
+- name: Enable and start chrony
+  service: name=chronyd.service enabled=yes state=started
