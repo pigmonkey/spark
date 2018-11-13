@@ -81,7 +81,6 @@ base_packages:
     - arch-wiki-docs
     - python-keyring
     - python-secretstorage
-    - fabric
     - tig
     - ruby
     - pv
