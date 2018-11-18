@@ -38,4 +38,3 @@
 - include: isync.yml
 - include: offlineimap.yml
 - include: mailsync.yml
-- include: contacts.yml

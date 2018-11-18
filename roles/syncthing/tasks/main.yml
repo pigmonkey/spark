@@ -2,30 +2,8 @@
 - name: Install syncthing
   pacman: name=syncthing state=present
 
-- name: Enable and start syncthing service
-  systemd: name=syncthing.service user=yes enabled=yes state=started
-  become: yes
-  become_user: "{{ user.name }}"
-  environment:
-    XDG_RUNTIME_DIR: "/run/user/{{ user.uid }}"
-  when: syncthing.run_on == "all"
-
-- name: Remove syncthing from trusted unit list
-  lineinfile: dest=/usr/local/etc/trusted_units
-              state=absent
-              line="syncthing.service,user:{{ user.name }}"
-  when: syncthing.run_on == "all"
-
-- name: Disable syncthing service
-  systemd: name=syncthing.service user=yes enabled=no
-  become: yes
-  become_user: "{{ user.name }}"
-  environment:
-    XDG_RUNTIME_DIR: "/run/user/{{ user.uid }}"
-  when: syncthing.run_on == "trusted"
-
-- name: Add syncthing to trusted unit list
-  lineinfile: dest=/usr/local/etc/trusted_units
-              state=present
-              line="syncthing.service,user:{{ user.name }}"
-  when: syncthing.run_on == "trusted"
+- include_tasks: roles/nmtrust/tasks/unit.yml
+  vars:
+      unit: syncthing.service
+      run_on: "{{ syncthing.run_on }}"
+      user_unit: true

@@ -19,38 +19,10 @@
     - reload systemd config
     - restart mailsync
 
-- name: Enable and start mailsync timer
-  systemd: name=mailsync.timer user=yes enabled=yes state=started
-  become: yes
-  become_user: "{{ user.name }}"
-  environment:
-    XDG_RUNTIME_DIR: "/run/user/{{ user.uid }}"
-  when: mail.sync_on == "all"
-  tags:
-    - mailsync
-
-- name: Remove mailsync from trusted unit list
-  lineinfile: dest=/usr/local/etc/trusted_units
-              state=absent
-              line="mailsync.timer,user:{{ user.name }}"
-  when: mail.sync_on == "all"
-  tags:
-    - mailsync
-
-- name: Disable mailsync timer
-  systemd: name=mailsync.timer user=yes enabled=no
-  become: yes
-  become_user: "{{ user.name }}"
-  environment:
-    XDG_RUNTIME_DIR: "/run/user/{{ user.uid }}"
-  when: mail.sync_on == "trusted"
-  tags:
-    - mailsync
-
-- name: Add mailsync to trusted unit list
-  lineinfile: dest=/usr/local/etc/trusted_units
-              state=present
-              line="mailsync.timer,user:{{ user.name }}"
-  when: mail.sync_on == "trusted"
+- include_tasks: roles/nmtrust/tasks/unit.yml
+  vars:
+      unit: mailsync.timer
+      run_on: "{{ mail.sync_on }}"
+      user_unit: true
   tags:
     - mailsync

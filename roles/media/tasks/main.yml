@@ -36,3 +36,6 @@
 
 - name: Install youtube-dl
   pacman: name=youtube-dl state=present
+
+- name: Install zbar
+  pacman: name=zbar state=present

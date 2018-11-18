@@ -1,0 +1,36 @@
+---
+- name: Install reflector
+  pacman:
+      name: reflector
+      state: present
+
+- name: Push reflector update script
+  copy:
+      src: reflector-update.sh
+      dest: /usr/local/bin/reflector-update
+      mode: 0755
+
+- name: Push pacman mirror list update hook
+  copy:
+      src: mirrorlist.hook
+      dest: /etc/pacman.d/hooks/mirrorlist.hook
+
+- name: Push reflector update service file
+  copy:
+      src: reflector-update.service
+      dest: /etc/systemd/system/
+  notify:
+    - reload systemd config
+
+- name: Push reflector update timer file
+  copy:
+      src: reflector-update.timer
+      dest: /etc/systemd/system/
+  notify:
+    - reload systemd config
+    - restart reflector update
+
+- include_tasks: roles/nmtrust/tasks/unit.yml
+  vars:
+      unit: reflector-update.timer
+      run_on: "{{ mirrorlist.run_on }}"

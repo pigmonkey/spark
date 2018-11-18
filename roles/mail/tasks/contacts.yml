@@ -1,6 +1,0 @@
----
-- name: Install goobook-git
-  aur: name=goobook-git user={{ user.name }}
-  tags:
-    - aur
-    - contacts

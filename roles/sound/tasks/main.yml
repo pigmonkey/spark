@@ -21,3 +21,6 @@
   aur: name=pulseaudio-ctl user={{ user.name }}
   tags:
     - aur
+
+- name: Push pamute
+  copy: src=pamute/pamute dest=/usr/local/bin/pamute mode=0755

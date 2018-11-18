@@ -70,7 +70,6 @@ base_packages:
     - coreutils
     - moreutils
     - dateutils
-    - reflector
     - bc
     - ranger
     - strace
@@ -80,7 +79,6 @@ base_packages:
     - arch-wiki-docs
     - python-keyring
     - python-secretstorage
-    - fabric
     - tig
     - ruby
     - pv
@@ -272,5 +270,8 @@ aur_fonts:
 
 syncthing:
     run_on: trusted
+
+mirrorlist:
+  run_on: trusted
 
 kernel_parameters: "quiet consoleblank=60 i915.enable_psr=2"

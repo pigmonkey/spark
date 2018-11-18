@@ -1,5 +1,5 @@
 ---
 dependencies:
   - { role: virtualenv }
-  - { role: networkmanager }
+  - { role: nmtrust }
   - { role: backitup }

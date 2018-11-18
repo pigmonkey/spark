@@ -24,22 +24,7 @@
   tags:
     - firejail
 
-- name: Enable and start Bitlbee
-  service: name=bitlbee enabled=yes state=started
-  when: bitlbee.run_on == "all"
-
-- name: Remove Bitlbee from trusted unit list
-  lineinfile: dest=/usr/local/etc/trusted_units
-              state=absent
-              line=bitlbee.service
-  when: bitlbee.run_on == "all"
-
-- name: Disable Bitlbee
-  service: name=bitlbee enabled=no
-  when: bitlbee.run_on == "trusted"
-
-- name: Add Bitlbee to trusted unit list
-  lineinfile: dest=/usr/local/etc/trusted_units
-              state=present
-              line=bitlbee.service
-  when: bitlbee.run_on == "trusted"
+- include_tasks: roles/nmtrust/tasks/unit.yml
+  vars:
+      unit: bitlbee.service
+      run_on: "{{ bitlbee.run_on }}"

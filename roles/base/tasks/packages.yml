@@ -1,18 +1,14 @@
 ---
 - name: Install universal base packages
-  pacman: name={{ item }} state=present
-  with_items: "{{ base_packages }}"
+  pacman:
+      name: "{{ base_packages }}"
+      state: present
   tags:
     - packages
 
 - name: Create pacman hook directory
   file: path=/etc/pacman.d/hooks
         state=directory
-  tags:
-    - packages
-
-- name: Push pacman mirror list update hook
-  copy: src=mirrorlist.hook dest=/etc/pacman.d/hooks/mirrorlist.hook
   tags:
     - packages
 
