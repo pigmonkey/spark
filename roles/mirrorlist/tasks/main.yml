@@ -30,29 +30,7 @@
     - reload systemd config
     - restart reflector update
 
-- name: Enable and start reflector timer
-  service:
-      name: reflector-update.timer
-      enabled: yes
-      state: started
-  when: mirrorlist.run_on == "all"
-
-- name: Remove reflector from trusted unit list
-  lineinfile:
-      dest: /etc/nmtrust/trusted_units
-      state: absent
-      line: reflector-update.timer
-  when: mirrorlist.run_on == "all"
-
-- name: Disable reflector timer
-  service:
-      name: reflector-update.timer
-      enabled: no
-  when: mirrorlist.run_on == "trusted"
-
-- name: Add reflector to trusted unit list
-  lineinfile:
-      dest: /etc/nmtrust/trusted_units
-      state: present
-      line: reflector-update.timer
-  when: mirrorlist.run_on == "trusted"
+- include_tasks: roles/nmtrust/tasks/unit.yml
+  vars:
+      unit: reflector-update.timer
+      run_on: "{{ mirrorlist.run_on }}"

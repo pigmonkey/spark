@@ -35,22 +35,7 @@
   tags:
     - firejail
 
-- name: Enable and start Tor
-  service: name=tor enabled=yes state=started
-  when: tor.run_on == "all"
-
-- name: Remove Tor from trusted unit list
-  lineinfile: dest=/etc/nmtrust/trusted_units
-              state=absent
-              line=tor.service
-  when: tor.run_on == "all"
-
-- name: Disable Tor
-  service: name=tor enabled=no
-  when: tor.run_on == "trusted"
-
-- name: Add Tor to trusted unit list
-  lineinfile: dest=/etc/nmtrust/trusted_units
-              state=present
-              line=tor.service
-  when: tor.run_on == "trusted"
+- include_tasks: roles/nmtrust/tasks/unit.yml
+  vars:
+      unit: tor.service
+      run_on: "{{ tor.run_on }}"

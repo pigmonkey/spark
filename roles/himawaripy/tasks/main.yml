@@ -20,30 +20,8 @@
     - reload systemd config
     - restart himawaripy
 
-- name: Enable and start himawaripy timer
-  systemd: name=himawaripy.timer user=yes enabled=yes state=started
-  become: yes
-  become_user: "{{ user.name }}"
-  environment:
-    XDG_RUNTIME_DIR: "/run/user/{{ user.uid }}"
-  when: himawaripy.run_on == "all"
-
-- name: Remove himawaripy from trusted unit list
-  lineinfile: dest=/etc/nmtrust/trusted_units
-              state=absent
-              line="himawaripy.timer,user:{{ user.name }}"
-  when: himawaripy.run_on == "all"
-
-- name: Disable himawaripy timer
-  systemd: name=himawaripy.timer user=yes enabled=no
-  become: yes
-  become_user: "{{ user.name }}"
-  environment:
-    XDG_RUNTIME_DIR: "/run/user/{{ user.uid }}"
-  when: himawaripy.run_on == "trusted"
-
-- name: Add himawaripy to trusted unit list
-  lineinfile: dest=/etc/nmtrust/trusted_units
-              state=present
-              line="himawaripy.timer,user:{{ user.name }}"
-  when: himawaripy.run_on == "trusted"
+- include_tasks: roles/nmtrust/tasks/unit.yml
+  vars:
+      unit: himawaripy.timer
+      run_on: "{{ himawaripy.run_on }}"
+      user_unit: true

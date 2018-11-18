@@ -40,22 +40,7 @@
     - reload systemd config
     - restart tarsnapper
 
-- name: Enable and start Tarsnapper timer
-  service: name=tarsnapper.timer enabled=yes state=started
-  when: tarsnapper.run_on == "all"
-
-- name: Remove Tarsnapper from trusted unit list
-  lineinfile: dest=/etc/nmtrust/trusted_units
-              state=absent
-              line=tarsnapper.timer
-  when: tarsnapper.run_on == "all"
-
-- name: Disable Tarsnapper timer
-  service: name=tarsnapper.timer enabled=no
-  when: tarsnapper.run_on == "trusted"
-
-- name: Add Tarsnapper to trusted unit list
-  lineinfile: dest=/etc/nmtrust/trusted_units
-              state=present
-              line=tarsnapper.timer
-  when: tarsnapper.run_on == "trusted"
+- include_tasks: roles/nmtrust/tasks/unit.yml
+  vars:
+      unit: tarsnapper.timer
+      run_on: "{{ tarsnapper.run_on }}"

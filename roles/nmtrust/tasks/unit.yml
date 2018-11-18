@@ -1,0 +1,63 @@
+- name: Enable and start {{ unit }}
+  systemd:
+      name: "{{ unit }}"
+      enabled: yes
+      state: started
+  when: run_on == "all" and user_unit is not defined
+
+- name: Remove {{ unit }} from trusted unit list
+  lineinfile:
+      dest: /etc/nmtrust/trusted_units
+      state: absent
+      line: "{{ unit }}"
+  when: run_on == "all" and user_unit is not defined
+
+- name: Disable {{ unit }}
+  systemd:
+      name: "{{ unit }}"
+      enabled: no
+  when: run_on == "trusted" and user_unit is not defined
+
+- name: Add {{ unit }} to trusted unit list
+  lineinfile:
+      dest: /etc/nmtrust/trusted_units
+      state: present
+      line: "{{ unit }}"
+  when: run_on == "trusted" and user_unit is not defined
+
+- name: Enable and start {{ unit }} for user
+  systemd:
+      name: "{{ unit }}"
+      enabled: yes
+      state: started
+      user: yes
+  become: yes
+  become_user: "{{ user.name }}"
+  environment:
+    XDG_RUNTIME_DIR: "/run/user/{{ user.uid }}"
+  when: run_on == "all" and user_unit is defined and user_unit == true
+
+- name: Remove {{ unit }} for user from trusted unit list
+  lineinfile:
+      dest: /etc/nmtrust/trusted_units
+      state: absent
+      line: "{{ unit }},user:{{ user.name }}"
+  when: run_on == "all" and user_unit is defined and user_unit == true
+
+- name: Disable user {{ unit }} for user
+  systemd:
+      name: "{{ unit }}"
+      enabled: no
+      user: yes
+  become: yes
+  become_user: "{{ user.name }}"
+  environment:
+    XDG_RUNTIME_DIR: "/run/user/{{ user.uid }}"
+  when: run_on == "trusted" and user_unit is defined and user_unit == true
+
+- name: Add {{ unit }} for user to trusted unit list
+  lineinfile:
+      dest: /etc/nmtrust/trusted_units
+      state: present
+      line: "{{ unit }},user:{{ user.name }}"
+  when: run_on == "trusted" and user_unit is defined and user_unit == true
