@@ -1,0 +1,22 @@
+---
+- name: Install nmtrust
+  aur:
+      name: nmtrust-git
+      user: "{{ user.name }}"
+  tags:
+    - aur
+
+- name: Create nmtrust config directory
+  file:
+      path: /etc/nmtrust
+      state: directory
+
+- name: Push trusted network list
+  template:
+      src: trusted_networks.j2
+      dest: /etc/nmtrust/trusted_networks
+
+- name: Verify trusted unit list exists
+  file:
+      path: /etc/nmtrust/trusted_units
+      state: touch

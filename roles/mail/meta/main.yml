@@ -1,6 +1,6 @@
 ---
 dependencies:
-  - { role: networkmanager }
+  - { role: nmtrust }
   - { role: systemd }
   - { role: cron }
   - { role: firejail }
