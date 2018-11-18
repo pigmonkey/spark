@@ -8,21 +8,6 @@
       - xfce4-notifyd
       - gnome-keyring
 
-- name: Push trusted network list
-  template: src=trusted_networks.j2 dest=/usr/local/etc/trusted_networks
-
-- name: Verify trusted unit list exists
-  file: path=/usr/local/etc/trusted_units state=touch
-
-- name: Push trusted network checker
-  copy: src=nmtrust/nmtrust dest=/usr/local/bin/nmtrust mode=0755
-
-- name: Push trusted unit toggler
-  copy: src=nmtrust/ttoggle dest=/usr/local/bin/ttoggle mode=0755
-
-- name: Push trusted network dispatcher
-  copy: src=nmtrust/dispatcher/10trust dest=/etc/NetworkManager/dispatcher.d/10trust mode=0755
-
 - name: Push connectivity check config
   template: src=connectivity.conf.j2 dest=/etc/NetworkManager/conf.d/20-connectivity.conf
   when: network.conn_check is defined
@@ -32,3 +17,25 @@
 
 - name: Enable and start NetworkManager dispatcher
   service: name=NetworkManager-dispatcher.service enabled=yes state=started
+
+- name: Install nmtrust
+  aur:
+      name: nmtrust-git
+      user: "{{ user.name }}"
+  tags:
+    - aur
+
+- name: Create nmtrust config directory
+  file:
+      path: /etc/nmtrust
+      state: directory
+
+- name: Push trusted network list
+  template:
+      src: trusted_networks.j2
+      dest: /etc/nmtrust/trusted_networks
+
+- name: Verify trusted unit list exists
+  file:
+      path: /etc/trusted_units
+      state: touch

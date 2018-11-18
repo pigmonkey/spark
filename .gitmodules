@@ -1,9 +1,6 @@
 [submodule "library/ansible-aur"]
 	path = library/ansible-aur
 	url = https://github.com/pigmonkey/ansible-aur.git
-[submodule "roles/networkmanager/files/nmtrust"]
-	path = roles/networkmanager/files/nmtrust
-	url = https://github.com/pigmonkey/nmtrust.git
 [submodule "roles/backitup/files/backitup"]
 	path = roles/backitup/files/backitup
 	url = https://github.com/pigmonkey/backitup
