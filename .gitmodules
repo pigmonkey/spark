@@ -10,3 +10,6 @@
 [submodule "roles/cryptshot/files/cryptshot"]
 	path = roles/cryptshot/files/cryptshot
 	url = https://github.com/pigmonkey/cryptshot
+[submodule "roles/sound/files/pamute"]
+	path = roles/sound/files/pamute
+	url = https://gist.github.com/jvalrog/7f3954ef56524be196edd29c3ac2dab1
