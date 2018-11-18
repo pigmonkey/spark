@@ -1,0 +1,7 @@
+[Unit]
+Description=Reflector Update Service
+After=network.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/reflector-update

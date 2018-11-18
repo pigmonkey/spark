@@ -1,0 +1,58 @@
+---
+- name: Install reflector
+  pacman:
+      name: reflector
+      state: present
+
+- name: Push reflector update script
+  copy:
+      src: reflector-update.sh
+      dest: /usr/local/bin/reflector-update
+      mode: 0755
+
+- name: Push pacman mirror list update hook
+  copy:
+      src: mirrorlist.hook
+      dest: /etc/pacman.d/hooks/mirrorlist.hook
+
+- name: Push reflector update service file
+  copy:
+      src: reflector-update.service
+      dest: /etc/systemd/system/
+  notify:
+    - reload systemd config
+
+- name: Push reflector update timer file
+  copy:
+      src: reflector-update.timer
+      dest: /etc/systemd/system/
+  notify:
+    - reload systemd config
+    - restart reflector update
+
+- name: Enable and start reflector timer
+  service:
+      name: reflector-update.timer
+      enabled: yes
+      state: started
+  when: mirrorlist.run_on == "all"
+
+- name: Remove reflector from trusted unit list
+  lineinfile:
+      dest: /usr/local/etc/trusted_units
+      state: absent
+      line: reflector-update.timer
+  when: mirrorlist.run_on == "all"
+
+- name: Disable reflector timer
+  service:
+      name: reflector-update.timer
+      enabled: no
+  when: mirrorlist.run_on == "trusted"
+
+- name: Add reflector to trusted unit list
+  lineinfile:
+      dest: /usr/local/etc/trusted_units
+      state: present
+      line: reflector-update.timer
+  when: mirrorlist.run_on == "trusted"

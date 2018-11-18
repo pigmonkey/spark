@@ -6,22 +6,9 @@
   tags:
     - packages
 
-- name: Push reflector update script
-  copy:
-      src: reflector-update.sh
-      dest: /usr/local/bin/reflector-update
-      mode: 0755
-  tags:
-    - packages
-
 - name: Create pacman hook directory
   file: path=/etc/pacman.d/hooks
         state=directory
-  tags:
-    - packages
-
-- name: Push pacman mirror list update hook
-  copy: src=mirrorlist.hook dest=/etc/pacman.d/hooks/mirrorlist.hook
   tags:
     - packages
 

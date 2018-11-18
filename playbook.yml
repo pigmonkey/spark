@@ -74,6 +74,7 @@
     - { role: himawaripy, tags: ['himawaripy'], when: "himawaripy is defined" }
     - { role: kiwix, tags: ['kiwix'] }
     - { role: syncthing, tags: ['syncthing'], when: "syncthing is defined" }
+    - { role: mirrorlist, tags: ['mirrorlist'], when: "mirrorlist is defined" }
   vars_prompt:
     - name: user_password
       prompt: "Enter desired user password"
