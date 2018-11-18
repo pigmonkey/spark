@@ -5,6 +5,14 @@
   tags:
     - packages
 
+- name: Push reflector update script
+  copy:
+      src: reflector-update.sh
+      dest: /usr/local/bin/reflector-update
+      mode: 0755
+  tags:
+    - packages
+
 - name: Create pacman hook directory
   file: path=/etc/pacman.d/hooks
         state=directory
