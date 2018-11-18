@@ -12,7 +12,7 @@
   when: tor.run_on == "all"
 
 - name: Remove parcimione.sh from trusted unit list
-  lineinfile: dest=/usr/local/etc/trusted_units
+  lineinfile: dest=/etc/nmtrust/trusted_units
               state=absent
               line="parcimonie.sh@{{ user.name }}.service"
   when: tor.run_on == "all"
@@ -22,7 +22,7 @@
   when: tor.run_on == "trusted"
 
 - name: Add parcimione.sh to trusted unit list
-  lineinfile: dest=/usr/local/etc/trusted_units
+  lineinfile: dest=/etc/nmtrust/trusted_units
               state=present
               line="parcimonie.sh@{{ user.name }}.service"
   when: tor.run_on == "trusted"

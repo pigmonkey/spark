@@ -9,7 +9,7 @@
   when: localtime.run_on == "all"
 
 - name: Remove localtime from trusted unit list
-  lineinfile: dest=/usr/local/etc/trusted_units
+  lineinfile: dest=/etc/nmtrust/trusted_units
               state=absent
               line=localtime.service
   when: localtime.run_on == "all"
@@ -19,7 +19,7 @@
   when: localtime.run_on == "trusted"
 
 - name: Add localtime to trusted unit list
-  lineinfile: dest=/usr/local/etc/trusted_units
+  lineinfile: dest=/etc/nmtrust/trusted_units
               state=present
               line=localtime.service
   when: localtime.run_on == "trusted"

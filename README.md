@@ -180,7 +180,7 @@ timer is set to sync every 5 minutes (configurable through the `mail.sync_time`
 variable).
 
 The timer is not started or enabled by default. Instead, the timer is added to
-`/usr/local/etc/trusted_units`, causing the NetworkManager trusted unit
+`/etc/nmtrust/trusted_units`, causing the NetworkManager trusted unit
 dispatcher to activate the timer whenever a connection is established to a
 trusted network. The timer is stopped whenever the network goes down or a
 connection is established to an untrusted network.
@@ -223,10 +223,10 @@ Tarsnapper when it detects the machine ison AC power. To allow Tarsnapper to
 run when on battery, set the `tarsnapper.ac_only` variable to `False`.
 
 As with `mailsync`, the timer is not started or enabled by default. Instead,
-the timer is added to `/usr/local/etc/trusted_units`, causing the
-NetworkManager trusted unit dispatcher to activate the timer whenever a
-connection is established to a trusted network. The timer is stopped whenever
-the network goes down or a connection is established to an untrusted network.
+the timer is added to `/etc/nmtrust/trusted_units`, causing the NetworkManager
+trusted unit dispatcher to activate the timer whenever a connection is
+established to a trusted network. The timer is stopped whenever the network
+goes down or a connection is established to an untrusted network.
 
 To have the timer activated at boot, change the `tarsnapper.run_on` variable
 from `trusted` to `all`.
@@ -239,7 +239,7 @@ If the `tarsnapper.run_on` variable is set to anything other than `trusted` or
 
 [Tor][23] is installed by default. A systemd service unit for Tor is installed,
 but not enabled or started. instead, the service is added to
-`/usr/local/etc/trusted_units`, causing the NetworkManager trusted unit
+`/etc/nmtrust/trusted_units`, causing the NetworkManager trusted unit
 dispatcher to activate the service whenever a connection is established to a
 trusted network. The service is stopped whenever the network goes down or a
 connection is established to an untrusted network.
@@ -254,14 +254,14 @@ configuration.
 
 [parcimonie.sh][24] is provided to periodically refresh entries in the user's
 GnuPG keyring over the Tor network. The service is added to
-`/usr/local/etc/trusted_units` and respects the `tor.run_on` variable.
+`/etc/nmtrust/trusted_units` and respects the `tor.run_on` variable.
 
 
 ## BitlBee
 
 [BitlBee][25] and [WeeChat][26] are used to provide chat services. A systemd
 service unit for BitlBee is installed, but not enabled or started by default.
-Instead, the service is added to `/usr/local/etc/trusted_units`, causing the
+Instead, the service is added to `/etc/nmtrust/trusted_units`, causing the
 NetworkManager trusted unit dispatcher to activate the service whenever a
 connection is established to a trusted network. The service is stopped whenever
 the network goes down or a connection is established to an untrusted network.
@@ -282,7 +282,7 @@ remove the `bitlebee.torify` variable or disable Tor entirely by removing the
 git-annex assistant is enabled and started by default. To prevent this, remove
 the `gitannex` variable from the config.
 
-Additionally, the git-annex unit is added to `/usr/local/etc/trusted_units`,
+Additionally, the git-annex unit is added to `/etc/nmtrust/trusted_units`,
 causing the NetworkManager trusted unit dispatcher to activate the service
 whenever a connection is established to a trusted network. The service is
 stopped whenever a connection is established to an untrusted network. Unlike
@@ -305,7 +305,7 @@ defined, the service will not be started or enabled.
 This is intended for local development. PostgreSQL is configured to only listen
 on localhost and no additional ports are opened in the default firewall. This
 configuration means that PostgreSQL is not a network service. As such, the
-PostgreSQL service is not added to `/usr/local/etc/trusted_units`.
+PostgreSQL service is not added to `/etc/nmtrust/trusted_units`.
 
 Additional configuration options are set which improve performance but make the
 database service inappropriate for production use.
@@ -318,11 +318,10 @@ background via feh. This should provide early warning of the presence of any
 Vogon constructor fleets appearing over the Eastern Hemisphere.
 
 A systemd service unit and timer is installed, but not enabled or started by
-default. Instead, the service is added to `/usr/local/etc/trusted_units`,
-causing the NetworkManager trusted unit dispatcher to activate the service
-whenever a connection is established to a trusted network. The service is
-stopped whenever the network goes down or a connection is established to an
-untrusted network.
+default. Instead, the service is added to `/etc/nmtrust/trusted_units`, causing
+the NetworkManager trusted unit dispatcher to activate the service whenever a
+connection is established to a trusted network. The service is stopped whenever
+the network goes down or a connection is established to an untrusted network.
 
 To have the service activated at boot, change the `himawaripy.run_on` variable
 from `trusted` to `all`.

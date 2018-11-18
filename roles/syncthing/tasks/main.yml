@@ -11,7 +11,7 @@
   when: syncthing.run_on == "all"
 
 - name: Remove syncthing from trusted unit list
-  lineinfile: dest=/usr/local/etc/trusted_units
+  lineinfile: dest=/etc/nmtrust/trusted_units
               state=absent
               line="syncthing.service,user:{{ user.name }}"
   when: syncthing.run_on == "all"
@@ -25,7 +25,7 @@
   when: syncthing.run_on == "trusted"
 
 - name: Add syncthing to trusted unit list
-  lineinfile: dest=/usr/local/etc/trusted_units
+  lineinfile: dest=/etc/nmtrust/trusted_units
               state=present
               line="syncthing.service,user:{{ user.name }}"
   when: syncthing.run_on == "trusted"

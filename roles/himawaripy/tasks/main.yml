@@ -29,7 +29,7 @@
   when: himawaripy.run_on == "all"
 
 - name: Remove himawaripy from trusted unit list
-  lineinfile: dest=/usr/local/etc/trusted_units
+  lineinfile: dest=/etc/nmtrust/trusted_units
               state=absent
               line="himawaripy.timer,user:{{ user.name }}"
   when: himawaripy.run_on == "all"
@@ -43,7 +43,7 @@
   when: himawaripy.run_on == "trusted"
 
 - name: Add himawaripy to trusted unit list
-  lineinfile: dest=/usr/local/etc/trusted_units
+  lineinfile: dest=/etc/nmtrust/trusted_units
               state=present
               line="himawaripy.timer,user:{{ user.name }}"
   when: himawaripy.run_on == "trusted"

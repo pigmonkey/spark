@@ -29,7 +29,7 @@
   when: bitlbee.run_on == "all"
 
 - name: Remove Bitlbee from trusted unit list
-  lineinfile: dest=/usr/local/etc/trusted_units
+  lineinfile: dest=/etc/nmtrust/trusted_units
               state=absent
               line=bitlbee.service
   when: bitlbee.run_on == "all"
@@ -39,7 +39,7 @@
   when: bitlbee.run_on == "trusted"
 
 - name: Add Bitlbee to trusted unit list
-  lineinfile: dest=/usr/local/etc/trusted_units
+  lineinfile: dest=/etc/nmtrust/trusted_units
               state=present
               line=bitlbee.service
   when: bitlbee.run_on == "trusted"

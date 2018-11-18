@@ -30,7 +30,7 @@
     - mailsync
 
 - name: Remove mailsync from trusted unit list
-  lineinfile: dest=/usr/local/etc/trusted_units
+  lineinfile: dest=/etc/nmtrust/trusted_units
               state=absent
               line="mailsync.timer,user:{{ user.name }}"
   when: mail.sync_on == "all"
@@ -48,7 +48,7 @@
     - mailsync
 
 - name: Add mailsync to trusted unit list
-  lineinfile: dest=/usr/local/etc/trusted_units
+  lineinfile: dest=/etc/nmtrust/trusted_units
               state=present
               line="mailsync.timer,user:{{ user.name }}"
   when: mail.sync_on == "trusted"

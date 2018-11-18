@@ -39,7 +39,7 @@
 
 - name: Remove reflector from trusted unit list
   lineinfile:
-      dest: /usr/local/etc/trusted_units
+      dest: /etc/nmtrust/trusted_units
       state: absent
       line: reflector-update.timer
   when: mirrorlist.run_on == "all"
@@ -52,7 +52,7 @@
 
 - name: Add reflector to trusted unit list
   lineinfile:
-      dest: /usr/local/etc/trusted_units
+      dest: /etc/nmtrust/trusted_units
       state: present
       line: reflector-update.timer
   when: mirrorlist.run_on == "trusted"

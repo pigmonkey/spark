@@ -40,7 +40,7 @@
   when: tor.run_on == "all"
 
 - name: Remove Tor from trusted unit list
-  lineinfile: dest=/usr/local/etc/trusted_units
+  lineinfile: dest=/etc/nmtrust/trusted_units
               state=absent
               line=tor.service
   when: tor.run_on == "all"
@@ -50,7 +50,7 @@
   when: tor.run_on == "trusted"
 
 - name: Add Tor to trusted unit list
-  lineinfile: dest=/usr/local/etc/trusted_units
+  lineinfile: dest=/etc/nmtrust/trusted_units
               state=present
               line=tor.service
   when: tor.run_on == "trusted"
