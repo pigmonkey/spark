@@ -64,11 +64,6 @@
 - name: Install texlive-latexextra
   pacman: name=texlive-latexextra state=present
 
-- name: Install masterpdfeditor
-  aur: name=masterpdfeditor user={{ user.name }}
-  tags:
-    - aur
-
 - name: Install pdfgrep
   pacman: name=pdfgrep state=present
 
