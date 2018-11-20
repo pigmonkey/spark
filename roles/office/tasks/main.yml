@@ -76,3 +76,6 @@
   aur: name=visidata user={{ user.name }}
   tags:
     - aur
+
+- name: Install qalculate
+  pacman: name=qalculate-gtk state=present
