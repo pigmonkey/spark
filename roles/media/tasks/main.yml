@@ -25,14 +25,11 @@
     - perl-image-exiftool
     - opus-tools
 
-- name: Install Metadata Anonymisation Toolkit and dependencies
-  aur: name={{ item }} user={{ user.name }}
-  with_items:
-    - hachoir-core
-    - hachoir-parser
-    - mat
+- name: Install Metadata Anonymisation Toolkit
+  aur: name=mat2 user={{ user.name }}
   tags:
     - aur
+    - mat
 
 - name: Install youtube-dl
   pacman: name=youtube-dl state=present
