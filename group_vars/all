@@ -18,7 +18,7 @@ dotfiles:
 aur:
     dir: aur
     packages:
-        - aura-bin
+        - yay
         - downgrade
         - zplug
         - miller
