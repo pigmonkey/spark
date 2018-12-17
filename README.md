@@ -62,7 +62,7 @@ All tasks involving the [AUR][6] are tagged `aur`. To provision an AUR-free
 system, pass this tag to ansible's `--skip-tag`.
 
 AUR packages are installed via the [ansible-aur][7] module. Note that while
-[aura][8], an [AUR helper][9], is installed by default, it will *not* be used
+[yay][8], an [AUR helper][9], is installed by default, it will *not* be used
 during any of the provisioning.
 
 ## Firejail
@@ -342,7 +342,7 @@ By completely removing the `himawaripy` variable, no related tasks will be run.
 [5]: https://thoughtbot.github.io/rcm/
 [6]: https://aur.archlinux.org
 [7]: https://github.com/pigmonkey/ansible-aur
-[8]: https://github.com/aurapm/aura
+[8]: https://github.com/Jguer/yay
 [9]: https://wiki.archlinux.org/index.php/AUR_helpers
 [10]: https://firejail.wordpress.com/
 [11]: https://github.com/EtiennePerot/macchiato
