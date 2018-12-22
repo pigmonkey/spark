@@ -6,7 +6,7 @@
       - python-spake2
       - python-ipaddress
       - python-txtorcon
-      - magic-wormhole
+      - magic-wormhole-git
   tags:
     - aur
 

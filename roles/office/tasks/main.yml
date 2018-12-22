@@ -74,3 +74,8 @@
 
 - name: Install qalculate
   pacman: name=qalculate-gtk state=present
+
+- name: Install undertime
+  aur: name=python-undertime user={{ user.name }}
+  tags:
+    - aur
