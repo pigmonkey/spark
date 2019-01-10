@@ -64,6 +64,7 @@ base_packages:
     - base-devel
     - pacman-contrib
     - fwupd
+    - dmidecode
     - tmux
     - git
     - rsync
