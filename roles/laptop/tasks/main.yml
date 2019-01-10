@@ -27,7 +27,6 @@
   service: name=lowbatt.timer enabled=yes state=started
 
 - name: Install light
-  aur: name=light user={{ user.name }}
+  pacman: name=light state=present
   tags:
-    - aur
     - light
