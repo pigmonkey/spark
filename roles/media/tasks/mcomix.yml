@@ -6,3 +6,21 @@
     - mupdf-tools
   tags:
     - mcomix
+
+- name: Set mcomix as default cbr viewer
+  lineinfile:
+      dest: /etc/xdg/mimeapps.list
+      regexp: ^application/vnd.comicbook-rar
+      state: present
+      line: "application/vnd.comicbook-rar=mcomix.desktop"
+  tags:
+    - mcomix
+
+- name: Set mcomix as default cbz viewer
+  lineinfile:
+      dest: /etc/xdg/mimeapps.list
+      regexp: ^application/vnd.comicbook+zip
+      state: present
+      line: "application/vnd.comicbook+zip=mcomix.desktop"
+  tags:
+    - mcomix
