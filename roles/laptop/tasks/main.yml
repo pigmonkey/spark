@@ -28,5 +28,11 @@
 
 - name: Install light
   pacman: name=light state=present
+
+- name: Install powertop
+  pacman: name=powertop state=present
+
+- name: Install powerstat
+  aur: name=powerstat-git user={{ user.name }}
   tags:
-    - light
+    - aur
