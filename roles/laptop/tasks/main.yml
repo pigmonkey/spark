@@ -27,7 +27,12 @@
   service: name=lowbatt.timer enabled=yes state=started
 
 - name: Install light
-  aur: name=light user={{ user.name }}
+  pacman: name=light state=present
+
+- name: Install powertop
+  pacman: name=powertop state=present
+
+- name: Install powerstat
+  aur: name=powerstat-git user={{ user.name }}
   tags:
     - aur
-    - light

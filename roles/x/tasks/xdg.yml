@@ -10,3 +10,8 @@
   become_user: "{{ user.name }}"
   tags:
     - xdg
+
+- name: Install perl-file-mimeinfo
+  pacman: name=perl-file-mimeinfo state=present
+  tags:
+    - xdg
