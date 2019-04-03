@@ -4,7 +4,6 @@
   with_items:
       - python-hkdf
       - python-spake2
-      - python-ipaddress
       - python-txtorcon
       - magic-wormhole
   tags:
