@@ -30,6 +30,39 @@
   tags:
     - firejail
 
+- name: Install Okular
+  pacman:
+      name: okular
+      state: present
+  tags:
+    - okular
+
+- name: Jail Okular
+  file:
+      src: /usr/bin/firejail
+      dest: /usr/local/bin/okular
+      state: link
+  tags:
+    - firejail
+    - okular
+
+- name: Verify Okular firejail local profile exists
+  file:
+      path: /etc/firejail/okular.local
+      state: touch
+  tags:
+    - firejail
+    - okular
+
+- name: Restrict Okular network access
+  lineinfile:
+    dest: /etc/firejail/okular.local
+    regexp: "^net"
+    line: "net none"
+  tags:
+    - firejail
+    - okular
+
 - name: Install Zathura and dependencies
   pacman: name={{ item }} state=present
   with_items:
