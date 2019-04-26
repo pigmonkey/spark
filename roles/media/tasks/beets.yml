@@ -1,18 +1,19 @@
 ---
 - name: Install beets and dependencies
-  pacman: name={{ item }} state=present
-  with_items:
-    - gst-libav
-    - gst-plugins-bad
-    - gst-plugins-good
-    - gst-plugins-ugly
-    - gst-python
-    - python-beautifulsoup4
-    - python-gobject
-    - python-pylast
-    - python-requests
-    - python-pyacoustid
-    - beets
+  pacman:
+    name:
+      - gst-libav
+      - gst-plugins-bad
+      - gst-plugins-good
+      - gst-plugins-ugly
+      - gst-python
+      - python-beautifulsoup4
+      - python-gobject
+      - python-pylast
+      - python-requests
+      - python-pyacoustid
+      - beets
+    state: present
   tags:
     - beets
 

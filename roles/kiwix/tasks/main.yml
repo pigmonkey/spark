@@ -1,9 +1,10 @@
 ---
 - name: Install kiwix
-  aur: name={{ item }} user={{ user.name }}
-  with_items:
-    - zimlib-git
-    - ctpp2
-    - kiwix-cli-git
+  aur:
+    name:
+      - zimlib-git
+      - ctpp2
+      - kiwix-cli-git
+    user: "{{ user.name }}"
   tags:
     - aur

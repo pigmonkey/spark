@@ -1,10 +1,11 @@
 ---
 - name: Install fldigi
-  aur: name={{ item }} user={{ user.name }}
-  with_items:
-    - cty
-    - fldigi
-    - flrig
+  aur:
+    name:
+      - cty
+      - fldigi
+      - flrig
+    user: "{{ user.name }}"
   tags:
     - aur
 

@@ -15,15 +15,16 @@
 - include: qcode.yml
 
 - name: Install misc media codecs and helpers
-  pacman: name={{ item }} state=present
-  with_items:
-    - flac
-    - lame
-    - gst-libav
-    - gst-plugins-good
-    - exiv2
-    - perl-image-exiftool
-    - opus-tools
+  pacman:
+    name:
+      - flac
+      - lame
+      - gst-libav
+      - gst-plugins-good
+      - exiv2
+      - perl-image-exiftool
+      - opus-tools
+    state: present
 
 - name: Install Metadata Anonymisation Toolkit
   aur: name=mat2 user={{ user.name }}

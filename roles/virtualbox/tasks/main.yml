@@ -1,12 +1,13 @@
 ---
 - name: Install VirtualBox and dependencies
-  pacman: name={{ item }} state=present
-  with_items:
-    - net-tools
-    - qt4
-    - virtualbox
-    - virtualbox-guest-iso
-    - virtualbox-host-dkms
+  pacman:
+    name:
+      - net-tools
+      - qt4
+      - virtualbox
+      - virtualbox-guest-iso
+      - virtualbox-host-dkms
+    state: present
 
 - name: Install VirtualBox extensions
   aur: name=virtualbox-ext-oracle user={{ user.name }}

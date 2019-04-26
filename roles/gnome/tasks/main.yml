@@ -1,11 +1,12 @@
 ---
 - name: Install GNOME
-  pacman: name={{ item }} state=present
-  with_items:
-    - gnome
-    - gnome-extra
-    - gnome-tweaks
-    - xorg-server-xwayland
+  pacman:
+    name:
+      - gnome
+      - gnome-extra
+      - gnome-tweaks
+      - xorg-server-xwayland
+    state: present
 
 - include: dconf.yml
 - include: gtk.yml

@@ -1,11 +1,12 @@
 ---
 - name: Install TLP
-  pacman: name={{ item }} state=present
-  with_items:
+  pacman:
+    name:
       - x86_energy_perf_policy
       - ethtool
       - tlp
       - tlp-rdw
+    state: present
   tags:
     - tlp
 

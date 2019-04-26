@@ -1,9 +1,10 @@
 ---
 - name: Install mcomix and dependencies
-  pacman: name={{ item }} state=present
-  with_items:
-    - mcomix
-    - mupdf-tools
+  pacman:
+    name:
+      - mcomix
+      - mupdf-tools
+    state: present
   tags:
     - mcomix
 

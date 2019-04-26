@@ -3,11 +3,12 @@
   pacman: name=alsa-utils state=present
 
 - name: Install PulseAudio
-  pacman: name={{ item }} state=present
-  with_items:
+  pacman:
+    name:
       - pulseaudio
       - pulseaudio-alsa
       - pavucontrol
+    state: present
 
 - name: Switch output to newly connected devices
   lineinfile: dest=/etc/pulse/default.pa

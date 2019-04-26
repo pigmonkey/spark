@@ -1,12 +1,13 @@
 ---
 - name: Install NetworkManager and dependencies
-  pacman: name={{ item }} state=present
-  with_items:
+  pacman:
+    name:
       - networkmanager
       - networkmanager-openvpn
       - network-manager-applet
       - xfce4-notifyd
       - gnome-keyring
+    state: present
 
 - name: Push connectivity check config
   template:

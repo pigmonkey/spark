@@ -10,7 +10,8 @@
   when: "not gnome.gnome_shell.disable_top_left_hot_corner"
 
 - name: Configuring GNOME Shell Extensions support
-  pacman: name={{ item }} state={{ "present" if gnome.gnome_shell.extensions_support else "absent" }}
-  with_items:
-    - gnome-shell-extensions
-    - chrome-gnome-shell
+  pacman:
+    name:
+      - gnome-shell-extensions
+      - chrome-gnome-shell
+    state: "{{ 'present' if gnome.gnome_shell.extensions_support else 'absent' }}"

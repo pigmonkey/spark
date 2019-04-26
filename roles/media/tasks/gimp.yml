@@ -5,10 +5,11 @@
     - gimp
 
 - name: Install GIMP
-  pacman: name={{ item }} state=present
-  with_items:
-    - gimp
-    - gimp-plugin-gmic
+  pacman:
+    name:
+      - gimp
+      - gimp-plugin-gmic
+    state: present
   tags:
     - gimp
 

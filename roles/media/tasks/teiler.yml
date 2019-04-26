@@ -1,10 +1,11 @@
 ---
 - name: Install teiler and dependencies
-  aur: name={{ item }} user={{ user.name }}
-  with_items:
-    - xininfo-git
-    - copyq
-    - teiler-git
+  aur:
+    name:
+      - xininfo-git
+      - copyq
+      - teiler-git
+    user: "{{ user.name }}"
   tags:
     - aur
     - teiler

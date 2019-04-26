@@ -1,16 +1,18 @@
 ---
 - name: Install Bash
-  pacman: name={{ item }} state=present
-  with_items:
-    - bash
-    - bash-completion
+  pacman:
+    name:
+      - bash
+      - bash-completion
+    state: present
   tags:
     - shell
 
 - name: Install ZSH
-  pacman: name={{ item }} state=present
-  with_items:
-    - zsh
-    - zsh-completions
+  pacman:
+    name:
+      - zsh
+      - zsh-completions
+    state: present
   tags:
     - shell
