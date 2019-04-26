@@ -30,59 +30,6 @@
   tags:
     - firejail
 
-- name: Install Okular
-  pacman:
-      name: okular
-      state: present
-  tags:
-    - okular
-
-- name: Jail Okular
-  file:
-      src: /usr/bin/firejail
-      dest: /usr/local/bin/okular
-      state: link
-  tags:
-    - firejail
-    - okular
-
-- name: Verify Okular firejail local profile exists
-  file:
-      path: /etc/firejail/okular.local
-      state: touch
-  tags:
-    - firejail
-    - okular
-
-- name: Restrict Okular network access
-  lineinfile:
-    dest: /etc/firejail/okular.local
-    regexp: "^net"
-    line: "net none"
-  tags:
-    - firejail
-    - okular
-
-- name: Install Zathura and dependencies
-  pacman: name={{ item }} state=present
-  with_items:
-    - zathura-pdf-mupdf
-    - zathura-ps
-
-- name: Set Zathura as default PDF viewer
-  lineinfile:
-      dest: /etc/xdg/mimeapps.list
-      regexp: ^application/pdf
-      state: present
-      line: "application/pdf=org.pwmt.zathura-pdf-mupdf.desktop"
-
-- name: Jail Zathura
-  file: src=/usr/bin/firejail
-        dest=/usr/local/bin/zathura
-        state=link
-  tags:
-    - firejail
-
 - name: Install enscript
   pacman: name=enscript state=present
 
@@ -97,9 +44,6 @@
 
 - name: Install texlive-latexextra
   pacman: name=texlive-latexextra state=present
-
-- name: Install pdfgrep
-  pacman: name=pdfgrep state=present
 
 - name: Install visidata
   aur: name=visidata user={{ user.name }}
