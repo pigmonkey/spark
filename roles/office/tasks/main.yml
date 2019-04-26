@@ -1,16 +1,21 @@
 ---
 - name: Install LibreOffice
-  pacman: name=libreoffice-fresh state=present
+  pacman:
+    name: libreoffice-fresh
+    state: present
 
 - name: Jail LibreOffice
-  file: src=/usr/bin/firejail
-        dest=/usr/local/bin/libreoffice
-        state=link
+  file:
+    src: /usr/bin/firejail
+    dest: /usr/local/bin/libreoffice
+    state: link
   tags:
     - firejail
 
 - name: Verify LibreOffice firejail local profile exists
-  file: path=/etc/firejail/libreoffice.local state=touch
+  file:
+    path: /etc/firejail/libreoffice.local
+    state: touch
   tags:
     - firejail
 
@@ -31,29 +36,45 @@
     - firejail
 
 - name: Install enscript
-  pacman: name=enscript state=present
+  pacman:
+    name: enscript
+    state: present
 
 - name: Install Simple Scan
-  pacman: name=simple-scan state=present
+  pacman:
+    name: simple-scan
+    state: present
 
 - name: Install pandoc
-  pacman: name=pandoc state=present
+  pacman:
+    name: pandoc
+    state: present
 
 - name: Install texlive-core
-  pacman: name=texlive-core state=present
+  pacman:
+    name: texlive-core
+    state: present
 
 - name: Install texlive-latexextra
-  pacman: name=texlive-latexextra state=present
+  pacman:
+    name: texlive-latexextra
+    state: present
 
 - name: Install visidata
-  aur: name=visidata user={{ user.name }}
+  aur:
+    name: visidata
+    user: "{{ user.name }}"
   tags:
     - aur
 
 - name: Install qalculate
-  pacman: name=qalculate-gtk state=present
+  pacman:
+    name: qalculate-gtk
+    state: present
 
 - name: Install undertime
-  aur: name=python-undertime user={{ user.name }}
+  aur:
+    name: python-undertime
+    user: "{{ user.name }}"
   tags:
     - aur
