@@ -3,7 +3,7 @@
   pacman:
     name:
       - hunspell
-      - hunspell-en
+      - hunspell-en_US
     state: present
   tags:
     - hunspell
