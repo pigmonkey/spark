@@ -1,0 +1,68 @@
+---
+- name: Install Okular
+  pacman:
+    name: okular
+    state: present
+  tags:
+    - okular
+
+- name: Jail Okular
+  file:
+    src: /usr/bin/firejail
+    dest: /usr/local/bin/okular
+    state: link
+  tags:
+    - okular
+    - firejail
+
+- name: Verify Okular firejail local profile exists
+  file:
+    path: /etc/firejail/okular.local
+    state: touch
+  tags:
+    - okular
+    - firejail
+
+- name: Restrict Okular network access
+  lineinfile:
+    dest: /etc/firejail/okular.local
+    regexp: "^net"
+    line: "net none"
+  tags:
+    - okular
+    - firejail
+
+- name: Install Zathura and dependencies
+  pacman:
+    name:
+      - zathura-pdf-mupdf
+      - zathura-ps
+    state: present
+  tags:
+    - zathura
+
+- name: Set Zathura as default PDF viewer
+  lineinfile:
+    dest: /etc/xdg/mimeapps.list
+    regexp: "^application/pdf"
+    state: present
+    line: "application/pdf=org.pwmt.zathura-pdf-mupdf.desktop"
+  tags:
+    - zathura
+
+- name: Jail Zathura
+  file:
+    src: /usr/bin/firejail
+    dest: /usr/local/bin/zathura
+    state: link
+  tags:
+    - zathura
+    - firejail
+
+
+- name: Install pdfgrep
+  pacman:
+    name: pdfgrep
+    state: present
+  tags:
+    - pdfgrep

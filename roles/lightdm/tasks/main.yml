@@ -1,9 +1,10 @@
 ---
 - name: Install LightDM
-  pacman: name={{ item }} state=present
-  with_items:
+  pacman:
+    name:
       - lightdm
       - lightdm-gtk-greeter
+    state: present
 
 - name: Enable LightDM
   service: name=lightdm.service enabled=yes

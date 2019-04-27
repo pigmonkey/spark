@@ -3,8 +3,9 @@
   pacman: name=yubikey-personalization-gui state=present
 
 - name: Install smartcard libs/tools
-  pacman: name={{ item }} state=present
-  with_items:
-    - pcsclite
-    - libusb-compat
-    - ccid
+  pacman:
+    name:
+      - pcsclite
+      - libusb-compat
+      - ccid
+    state: present

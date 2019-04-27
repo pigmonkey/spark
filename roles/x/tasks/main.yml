@@ -21,8 +21,9 @@
   pacman: name=xautomation state=present
 
 - name: Install video driver(s)
-  pacman: name={{ item }} state=present
-  with_items: "{{ video_drivers }}"
+  pacman:
+    name: "{{ video_drivers }}"
+    state: present
 
 - name: Add user to video group
   user: name={{ user.name }} groups=video append=yes

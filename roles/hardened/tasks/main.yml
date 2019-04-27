@@ -1,8 +1,9 @@
 ---
 - name: Install linux-hardened
-  pacman: name={{ item }} state=present
-  with_items:
+  pacman:
+    name:
       - linux-hardened
       - linux-hardened-headers
+    state: present
   notify:
     - rebuild grub

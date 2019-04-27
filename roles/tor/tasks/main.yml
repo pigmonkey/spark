@@ -1,9 +1,10 @@
 ---
 - name: Install Tor
-  pacman: name={{ item }} state=present
-  with_items:
-    - tor
-    - torsocks
+  pacman:
+    name:
+      - tor
+      - torsocks
+    state: present
 
 - name: Set Tor to run as tor
   lineinfile: dest=/etc/tor/torrc

@@ -27,11 +27,13 @@
   copy: src=local.conf dest=/etc/fonts/local.conf
 
 - name: Install base fonts
-  pacman: name={{ item }} state=present
-  with_items: "{{ base_fonts }}"
+  pacman:
+    name: "{{ base_fonts }}"
+    state: present
 
 - name: Install AUR fonts
-  aur: name={{ item }} user={{ user.name }}
-  with_items: "{{ aur_fonts }}"
+  aur:
+    name: "{{ aur_fonts }}"
+    user: "{{ user.name }}"
   tags:
     - aur

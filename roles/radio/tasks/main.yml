@@ -3,10 +3,11 @@
   pacman: name=gnuradio state=present
 
 - name: Install hamlib
-  aur: name={{ item }} user={{ user.name }}
-  with_items:
-    - perl-opcodes
-    - hamlib
+  aur:
+    name:
+      - perl-opcodes
+      - hamlib
+    user: "{{ user.name }}"
   tags:
     - aur
 

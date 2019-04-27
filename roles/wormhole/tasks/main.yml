@@ -1,12 +1,12 @@
 ---
 - name: Install magic-wormhole
-  aur: name={{ item }} user={{ user.name }}
-  with_items:
+  aur:
+    name:
       - python-hkdf
       - python-spake2
-      - python-ipaddress
       - python-txtorcon
       - magic-wormhole
+    user: "{{ user.name }}"
   tags:
     - aur
 

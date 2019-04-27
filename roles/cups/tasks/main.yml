@@ -1,14 +1,15 @@
 ---
 - name: Install CUPS and drivers
-  pacman: name={{ item }} state=present
-  with_items:
-    - ghostscript
-    - gsfonts
-    - cups
-    - cups-pdf
-    - gutenprint
-    - hplip
-    - gtk3-print-backends
+  pacman:
+    name:
+      - ghostscript
+      - gsfonts
+      - cups
+      - cups-pdf
+      - gutenprint
+      - hplip
+      - gtk3-print-backends
+    state: present
 
 - name: Add a print admin group
   group: name=printadmin state=present
