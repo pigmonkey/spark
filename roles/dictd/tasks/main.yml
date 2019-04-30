@@ -17,3 +17,10 @@
     user: "{{ user.name }}"
   tags:
     - aur
+
+- name: Install Moby thesaurus
+  aur:
+    name: dict-moby-thesaurus
+    user: "{{ user.name }}"
+  tags:
+    - aur
