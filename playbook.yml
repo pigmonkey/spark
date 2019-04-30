@@ -50,6 +50,7 @@
     - { role: cups, tags: ['cups'] }
     - { role: office, tags: ['office'] }
     - { role: pdf, tags: ['pdf'] }
+    - { role: dictd, tags: ['dictd'] }
     - { role: redshift, tags: ['redshift'] }
     - { role: rtorrent, tags: ['rtorrent'] }
     - { role: virtualbox, tags: ['virtualbox'] }

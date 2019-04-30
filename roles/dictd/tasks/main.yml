@@ -1,0 +1,19 @@
+---
+- name: Install dictd
+  pacman:
+    name: dictd
+    state: present
+
+- name: Install GNU Collaborative International Dictionary of English
+  aur:
+    name: dict-gcide
+    user: "{{ user.name }}"
+  tags:
+    - aur
+
+- name: Install WordNet database
+  aur:
+    name: dict-wn
+    user: "{{ user.name }}"
+  tags:
+    - aur
