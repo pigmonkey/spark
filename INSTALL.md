@@ -39,8 +39,7 @@ Verify that the [system clock is up to date][8].
     $ parted -s /dev/sda mkpart primary fat32 1MiB 513MiB
     $ parted -s /dev/sda set 1 boot on
     $ parted -s /dev/sda set 1 esp on
-    $ parted -s /dev/sda mkpart primary 513MiB 1024MiB
-    $ parted -s /dev/sda mkpart primary 1024MiB 100%
+    $ parted -s /dev/sda mkpart primary 513MiB 100%
     $ mkfs.vfat -F32 /dev/nvme0n1p1
 
 Create and mount the encrypted root filesystem. Note that for UEFI systems
@@ -51,15 +50,11 @@ this will be partition 3.
     $ pvcreate /dev/mapper/lvm
     $ vgcreate arch /dev/mapper/lvm
     $ lvcreate -L 8G arch -n swap
-    $ lvcreate -L 30G arch -n root
-    $ lvcreate -l +100%FREE arch -n home
+    $ lvcreate -l +100%FREE arch -n root
     $ lvdisplay
     $ mkswap -L swap /dev/mapper/arch-swap
     $ mkfs.ext4 /dev/mapper/arch-root
-    $ mkfs.ext4 /dev/mapper/arch-home
     $ mount /dev/mapper/arch-root /mnt
-    $ mkdir /mnt/home
-    $ mount /dev/mapper/arch-home /mnt/home
     $ swapon /dev/mapper/arch-swap
 
 (UEFI mode) Encrypt the boot partition using a separate passphrase from
