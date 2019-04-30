@@ -45,7 +45,7 @@ Verify that the [system clock is up to date][8].
 Create and mount the encrypted root filesystem. Note that for UEFI systems
 this will be partition 3.
 
-    $ cryptsetup luksFormat /dev/sda1
+    $ cryptsetup luksFormat --type luks1 /dev/sda1
     $ cryptsetup luksOpen /dev/sda1 lvm
     $ pvcreate /dev/mapper/lvm
     $ vgcreate arch /dev/mapper/lvm
@@ -60,7 +60,7 @@ this will be partition 3.
 (UEFI mode) Encrypt the boot partition using a separate passphrase from
 the root partition, then mount the boot and EFI partitions.
 
-    $ cryptsetup luksFormat /dev/sda2
+    $ cryptsetup luksFormat --type luks1 /dev/sda2
     $ cryptsetup luksOpen /dev/sda2 cryptboot
     $ mkfs.ext4 /dev/mapper/cryptboot
     $ mkdir /mnt/boot
