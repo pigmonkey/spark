@@ -122,8 +122,8 @@ Configure GRUB.
     # BIOS mode - set the UUID of the encrypted root device
     $ ROOTUUID=$(blkid /dev/sda1 | awk '{print $2}' | cut -d '"' -f2)
     $ sed -i "s/^GRUB_CMDLINE_LINUX=.*/GRUB_CMDLINE_LINUX=\"cryptdevice=UUID="$ROOTUUID":lvm:allow-discards resume=\/dev\/mapper\/arch-swap\"/" /etc/default/grub
-    $ grub-mkconfig -o /boot/grub/grub.cfg
     $ grub-install /dev/sda
+    $ grub-mkconfig -o /boot/grub/grub.cfg
     $ chmod -R g-rwx,o-rwx /boot
 
     # UEFI mode - set the UUID of the encrypted root device
