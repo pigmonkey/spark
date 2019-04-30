@@ -97,7 +97,7 @@ Change root into the base install and perform [base configuration tasks][12].
 
 Set your mkinitcpio encrypt/lvm2 hooks and rebuild.
 
-    $ sed -i 's/^HOOKS=.*/HOOKS="base udev autodetect modconf block keyboard encrypt lvm2 resume filesystems fsck"/' /etc/mkinitcpio.conf
+    $ sed -i 's/^HOOKS=.*/HOOKS=(base udev autodetect modconf block keyboard encrypt lvm2 resume filesystems fsck)/' /etc/mkinitcpio.conf
     $ mkinitcpio -p linux
 
 (BIOS mode) Add a keyfile to decrypt the root volume and properly set the hooks.
@@ -105,7 +105,7 @@ Set your mkinitcpio encrypt/lvm2 hooks and rebuild.
     $ dd bs=512 count=8 if=/dev/urandom of=/crypto_keyfile.bin
     $ cryptsetup luksAddKey /dev/sda1 /crypto_keyfile.bin
     $ chmod 000 /crypto_keyfile.bin
-    $ sed -i 's/^FILES=.*/FILES="\/crypto_keyfile.bin"/' /etc/mkinitcpio.conf
+    $ sed -i 's/^FILES=.*/FILES=(\/crypto_keyfile.bin)/' /etc/mkinitcpio.conf
     $ mkinitcpio -p linux
 
 (UEFI mode) Add a keyfile to decrypt and mount the boot volume during startup.
