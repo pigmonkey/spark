@@ -3,7 +3,6 @@
   aur:
     name:
       - xininfo-git
-      - copyq
       - teiler-git
     user: "{{ user.name }}"
   tags:
