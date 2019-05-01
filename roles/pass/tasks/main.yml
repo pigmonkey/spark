@@ -1,22 +1,33 @@
 ---
 - name: Install pass
-  pacman: name=pass state=present
+  pacman:
+    name: pass
+    state: present
 
 - name: Install pass-otp
-  pacman: name=pass-otp state=present
+  pacman:
+    name: pass-otp
+    state: present
 
 - name: Install pass-update
-  aur: name=pass-update user={{ user.name }}
+  aur:
+    name: pass-update
+    user: "{{ user.name }}"
+    skip_pgp: yes
   tags:
     - aur
 
 - name: Install rofi-pass
-  aur: name=rofi-pass user={{ user.name }}
+  aur:
+    name: rofi-pass
+    user: "{{ user.name }}"
   tags:
     - aur
     - rofi
 
 - name: Install pwgen-passphrase
-  aur: name=rofi-pass user={{ user.name }}
+  aur:
+    name: rofi-pass
+    user: "{{ user.name }}"
   tags:
     - aur
