@@ -30,7 +30,7 @@
       name: "{{ unit }}"
       enabled: yes
       state: started
-      user: yes
+      scope: user
   become: yes
   become_user: "{{ user.name }}"
   environment:
@@ -48,7 +48,7 @@
   systemd:
       name: "{{ unit }}"
       enabled: no
-      user: yes
+      scope: user
   become: yes
   become_user: "{{ user.name }}"
   environment:

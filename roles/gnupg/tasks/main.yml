@@ -1,9 +1,15 @@
 ---
 - name: Install gnupg
-  pacman: name=gnupg state=present
+  pacman:
+    name: gnupg
+    state: present
 
 - name: Enable gpg-agent.socket
-  systemd: name=gpg-agent.socket user=yes enabled=yes state=started
+  systemd:
+    name: gpg-agent.socket
+    scope: user
+    enabled: yes
+    state: started
   become: yes
   become_user: "{{ user.name }}"
   environment:
@@ -11,7 +17,11 @@
   when: gnupg.enable_agent == True
 
 - name: Enable dirmngr.socket
-  systemd: name=dirmngr.socket user=yes enabled=yes state=started
+  systemd:
+    name: dirmngr.socket
+    scope: user
+    enabled: yes
+    state: started
   become: yes
   become_user: "{{ user.name }}"
   environment:
@@ -19,7 +29,11 @@
   when: gnupg.enable_agent == True
 
 - name: Enable gpg-agent-ssh.socket
-  systemd: name=gpg-agent-ssh.socket user=yes enabled=yes state=started
+  systemd:
+    name: gpg-agent-ssh.socket
+    scope: user
+    enabled: yes
+    state: started
   become: yes
   become_user: "{{ user.name }}"
   environment:
