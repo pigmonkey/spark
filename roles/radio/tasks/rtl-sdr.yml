@@ -4,17 +4,6 @@
   tags:
     - aur
 
-- name: Install gr-osmosdr-git
-  aur:
-    name:
-      - libmirisdr-git
-      - libosmosdr-git
-      - airspy-git
-      - gr-osmosdr-git
-    user: "{{ user.name }}"
-  tags:
-    - aur
-
 - name: Install gr-ais-git
   aur: name=gr-ais-git user={{ user.name }}
   tags:
