@@ -1,15 +1,12 @@
 ---
 - name: Install GNUradio
-  pacman: name=gnuradio state=present
+  pacman:
+    name: gnuradio
+    state: present
 
 - name: Install hamlib
-  aur:
-    name:
-      - perl-opcodes
-      - hamlib
-    user: "{{ user.name }}"
-  tags:
-    - aur
+    name: hamlib
+    state: present
 
 - include: rtl-sdr.yml
 - include: radio_mgmt.yml
