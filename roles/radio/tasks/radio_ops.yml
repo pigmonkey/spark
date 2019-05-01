@@ -3,6 +3,7 @@
   aur:
     name:
       - cty
+      - flxmlrpc
       - fldigi
       - flrig
     user: "{{ user.name }}"
