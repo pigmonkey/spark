@@ -1,33 +1,56 @@
 ---
 - name: Create user group
-  group: name={{ user.group }} state=present
+  group:
+    name: "{{ user.group }}"
+    state: present
   tags:
     - user
 
 - name: Create user and assign to group
-  user: name={{ user.name }} group={{ user.group }} password={{ user_password|password_hash('sha512') }} shell={{ user.shell }} update_password=on_create uid={{ user.uid }} groups=uucp append=yes
+  user:
+    name: "{{ user.name }}"
+    group: "{{ user.group }}"
+    password: "{{ user_password|password_hash('sha512') }}"
+    shell: "{{ user.shell }}"
+    update_password: on_create
+    uid: "{{ user.uid }}"
+    groups: uucp
+    append: yes
   tags:
     - user
 
 - name: Create user log dir
-  file: path=/home/{{ user.name }}/{{ user.log.dir }} state=directory owner={{ user.name }} group={{ user.group }}
+  file:
+    path: /home/{{ user.name }}/{{ user.log.dir }}
+    state: directory
+    owner: "{{ user.name }}"
+    group: "{{ user.group }}"
   when: user.log.dir is defined
   tags:
     - user
 
 - name: Push logrotate config for user logs
-  template: src=logrotate.j2 dest=/etc/logrotate.d/user
+  template:
+    src: logrotate.j2
+    dest: /etc/logrotate.d/user
   when: user.log.dir is defined
   tags:
     - user
 
 - name: Create user socket directory
-  file: path=/run/user/{{ user.uid }} state=directory owner={{ user.name }} group={{ user.group }} mode=0700
+  file:
+    path: /run/user/{{ user.uid }}
+    state: directory
+    owner: "{{ user.name }}"
+    group: "{{ user.group }}"
+    mode: 0700
   tags:
     - user
 
 - name: Start user systemd instance
-  service: name="user@{{ user.uid }}" state=started
+  service:
+    name: "user@{{ user.uid }}"
+    state: started
   notify: stop systemd per-user instance
   tags:
     - user

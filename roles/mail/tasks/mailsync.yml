@@ -1,18 +1,25 @@
 ---
 - name: Push mail sync script
-  template: src=mailsync.sh.j2 dest=/usr/local/bin/mailsync mode=755
+  template:
+    src: mailsync.sh.j2
+    dest: /usr/local/bin/mailsync
+    mode: 755
   tags:
     - mailsync
 
 - name: Push mailsync service file
-  template: src=mailsync.service.j2 dest=/etc/systemd/user/mailsync.service
+  template:
+    src: mailsync.service.j2
+    dest: /etc/systemd/user/mailsync.service
   tags:
     - mailsync
   notify:
     - reload systemd config
 
 - name: Push mailsync timer file
-  template: src=mailsync.timer.j2 dest=/etc/systemd/user/mailsync.timer
+  template:
+    src: mailsync.timer.j2
+    dest: /etc/systemd/user/mailsync.timer
   tags:
     - mailsync
   notify:
