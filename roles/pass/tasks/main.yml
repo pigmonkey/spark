@@ -27,7 +27,7 @@
 
 - name: Install pwgen-passphrase
   aur:
-    name: rofi-pass
+    name: pwgen-passphrase
     user: "{{ user.name }}"
   tags:
     - aur
