@@ -261,6 +261,7 @@ base_fonts:
     - noto-fonts
     - terminus-font
     - tex-gyre-fonts
+    - ttf-carlito
     - ttf-dejavu
     - ttf-droid
     - ttf-inconsolata
@@ -270,7 +271,6 @@ base_fonts:
 
 aur_fonts:
     - ttf-caladea
-    - ttf-carlito
     - ttf-courier-prime
     - ttf-heuristica
     - ttf-merriweather
