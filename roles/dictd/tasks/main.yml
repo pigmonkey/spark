@@ -8,6 +8,7 @@
   aur:
     name: dict-gcide
     user: "{{ user.name }}"
+    skip_pgp: yes
   tags:
     - aur
 
