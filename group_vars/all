@@ -256,29 +256,29 @@ gnome:
         extensions_support: True
 
 base_fonts:
-    - terminus-font
     - cantarell-fonts
-    - noto-fonts
-    - ttf-dejavu
-    - ttf-liberation
-    - ttf-symbola
     - gsfonts
+    - noto-fonts
+    - terminus-font
     - tex-gyre-fonts
+    - ttf-dejavu
     - ttf-droid
-    - ttf-ubuntu-font-family
     - ttf-inconsolata
+    - ttf-liberation
+    - ttf-ubuntu-font-family
 
 aur_fonts:
-    - ttf-signika
-    - ttf-quintessential
-    - ttf-oswald
-    - ttf-opensans
-    - ttf-merriweather-sans
-    - ttf-merriweather
-    - ttf-carlito
     - ttf-caladea
+    - ttf-carlito
     - ttf-courier-prime
     - ttf-heuristica
+    - ttf-merriweather
+    - ttf-merriweather-sans
+    - ttf-opensans
+    - ttf-oswald
+    - ttf-quintessential
+    - ttf-signika
+    - ttf-symbola
 
 syncthing:
     run_on: trusted
