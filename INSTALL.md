@@ -39,33 +39,28 @@ Verify that the [system clock is up to date][8].
     $ parted -s /dev/sda mkpart primary fat32 1MiB 513MiB
     $ parted -s /dev/sda set 1 boot on
     $ parted -s /dev/sda set 1 esp on
-    $ parted -s /dev/sda mkpart primary 513MiB 1024MiB
-    $ parted -s /dev/sda mkpart primary 1024MiB 100%
+    $ parted -s /dev/sda mkpart primary 513MiB 100%
     $ mkfs.vfat -F32 /dev/nvme0n1p1
 
 Create and mount the encrypted root filesystem. Note that for UEFI systems
 this will be partition 3.
 
-    $ cryptsetup luksFormat /dev/sda1
+    $ cryptsetup luksFormat --type luks1 /dev/sda1
     $ cryptsetup luksOpen /dev/sda1 lvm
     $ pvcreate /dev/mapper/lvm
     $ vgcreate arch /dev/mapper/lvm
     $ lvcreate -L 8G arch -n swap
-    $ lvcreate -L 30G arch -n root
-    $ lvcreate -l +100%FREE arch -n home
+    $ lvcreate -l +100%FREE arch -n root
     $ lvdisplay
     $ mkswap -L swap /dev/mapper/arch-swap
     $ mkfs.ext4 /dev/mapper/arch-root
-    $ mkfs.ext4 /dev/mapper/arch-home
     $ mount /dev/mapper/arch-root /mnt
-    $ mkdir /mnt/home
-    $ mount /dev/mapper/arch-home /mnt/home
     $ swapon /dev/mapper/arch-swap
 
 (UEFI mode) Encrypt the boot partition using a separate passphrase from
 the root partition, then mount the boot and EFI partitions.
 
-    $ cryptsetup luksFormat /dev/sda2
+    $ cryptsetup luksFormat --type luks1 /dev/sda2
     $ cryptsetup luksOpen /dev/sda2 cryptboot
     $ mkfs.ext4 /dev/mapper/cryptboot
     $ mkdir /mnt/boot
@@ -102,7 +97,7 @@ Change root into the base install and perform [base configuration tasks][12].
 
 Set your mkinitcpio encrypt/lvm2 hooks and rebuild.
 
-    $ sed -i 's/^HOOKS=.*/HOOKS="base udev autodetect modconf block keyboard encrypt lvm2 resume filesystems fsck"/' /etc/mkinitcpio.conf
+    $ sed -i 's/^HOOKS=.*/HOOKS=(base udev autodetect modconf block keyboard encrypt lvm2 resume filesystems fsck)/' /etc/mkinitcpio.conf
     $ mkinitcpio -p linux
 
 (BIOS mode) Add a keyfile to decrypt the root volume and properly set the hooks.
@@ -110,7 +105,7 @@ Set your mkinitcpio encrypt/lvm2 hooks and rebuild.
     $ dd bs=512 count=8 if=/dev/urandom of=/crypto_keyfile.bin
     $ cryptsetup luksAddKey /dev/sda1 /crypto_keyfile.bin
     $ chmod 000 /crypto_keyfile.bin
-    $ sed -i 's/^FILES=.*/FILES="\/crypto_keyfile.bin"/' /etc/mkinitcpio.conf
+    $ sed -i 's/^FILES=.*/FILES=(\/crypto_keyfile.bin)/' /etc/mkinitcpio.conf
     $ mkinitcpio -p linux
 
 (UEFI mode) Add a keyfile to decrypt and mount the boot volume during startup.
@@ -127,8 +122,8 @@ Configure GRUB.
     # BIOS mode - set the UUID of the encrypted root device
     $ ROOTUUID=$(blkid /dev/sda1 | awk '{print $2}' | cut -d '"' -f2)
     $ sed -i "s/^GRUB_CMDLINE_LINUX=.*/GRUB_CMDLINE_LINUX=\"cryptdevice=UUID="$ROOTUUID":lvm:allow-discards resume=\/dev\/mapper\/arch-swap\"/" /etc/default/grub
-    $ grub-mkconfig -o /boot/grub/grub.cfg
     $ grub-install /dev/sda
+    $ grub-mkconfig -o /boot/grub/grub.cfg
     $ chmod -R g-rwx,o-rwx /boot
 
     # UEFI mode - set the UUID of the encrypted root device

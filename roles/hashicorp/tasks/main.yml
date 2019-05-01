@@ -1,17 +1,27 @@
 ---
 - name: Install vagrant
-  pacman: name=vagrant state=present
+  pacman:
+    name: vagrant
+    state: present
 
 - name: Install consul
-  pacman: name=consul state=present
+  pacman:
+    name: consul
+    state: present
 
 - name: Install terraform
-  pacman: name=terraform state=present
+  pacman:
+    name: terraform
+    state: present
 
-- name: Install vault and nomad
+- name: Install vault
+  pacman:
+    name: vault
+    state: present
+
+- name: Install nomad
   aur:
     name:
-      - vault-bin
       - nomad
     user: "{{ user.name }}"
   tags:

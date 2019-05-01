@@ -1,6 +1,9 @@
 ---
 - name: restart pulse as user
-  systemd: name=pulseaudio.service user=yes state=restarted
+  systemd:
+    name: pulseaudio.service
+    scope: user
+    state: restarted
   become: yes
   become_user: "{{ user.name }}"
   environment:

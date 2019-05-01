@@ -1,24 +1,35 @@
 ---
 - name: Install git-annex
-  pacman: name=git-annex state=present
+  pacman:
+    name: git-annex
+    state: present
 
 - name: Install git-annex-remote-rclone
-  aur: name=git-annex-remote-rclone user={{ user.name }}
+  aur:
+    name: git-annex-remote-rclone
+    user: "{{ user.name }}"
   tags:
     - aur
 
 - name: Push git-annex assistant service file
-  copy: src=git-annex.service dest=/etc/systemd/user/git-annex.service
+  copy:
+    src: git-annex.service
+    dest: /etc/systemd/user/git-annex.service
   notify:
     - reload systemd config
     - restart git-annex
 
 - name: Check if git-annex autostart file exists
-  stat: path=/home/{{ user.name }}/.config/git-annex/autostart
+  stat:
+    path: /home/{{ user.name }}/.config/git-annex/autostart
   register: autostart
 
 - name: Enable and start git-annex assistant service
-  systemd: name=git-annex.service user=yes enabled=yes state=started
+  systemd:
+    name: git-annex.service
+    scope: user
+    enabled: yes
+    state: started
   become: yes
   become_user: "{{ user.name }}"
   environment:
@@ -26,18 +37,22 @@
   when: autostart.stat is defined and autostart.stat.exists
 
 - name: Add git-annex to trusted unit list
-  lineinfile: dest=/etc/nmtrust/trusted_units
-              state=present
-              line="git-annex.service,user:{{ user.name }},allow_offline"
+  lineinfile:
+    dest: /etc/nmtrust/trusted_units
+    state: present
+    line: "git-annex.service,user:{{ user.name }},allow_offline"
   when: gitannex.stop_on_untrusted is defined and gitannex.stop_on_untrusted == True
 
 - name: Remove git-annex from trusted unit list
-  lineinfile: dest=/etc/nmtrust/trusted_units
-              state=absent
-              line="git-annex.service,user:{{ user.name }},allow_offline"
+  lineinfile:
+    dest: /etc/nmtrust/trusted_units
+    state: absent
+    line: "git-annex.service,user:{{ user.name }},allow_offline"
   when: gitannex.stop_on_untrusted is not defined or gitannex.stop_on_untrusted != True
 
 - name: Increase the amount of inotify watchers
-  copy: src=99-max_watches.conf dest=/etc/sysctl.d/99-max_watches.conf
+  copy:
+    src: 99-max_watches.conf
+    dest: /etc/sysctl.d/99-max_watches.conf
   notify:
     - reload sysctl

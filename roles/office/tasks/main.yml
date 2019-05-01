@@ -72,9 +72,11 @@
     name: qalculate-gtk
     state: present
 
-- name: Install undertime
+- name: Install undertime and dependencies
   aur:
-    name: python-undertime
+    name:
+      - python-dateparser
+      - python-undertime
     user: "{{ user.name }}"
   tags:
     - aur

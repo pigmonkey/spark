@@ -1,21 +1,27 @@
 ---
 - name: Install himawaripy into virtual environment
-  pip: name=git+https://github.com/boramalper/himawaripy#egg=himawaripy
-       virtualenv=/usr/local/env/himawaripy
-       virtualenv_command=virtualenv3
+  pip:
+    name: git+https://github.com/boramalper/himawaripy#egg=himawaripy
+    virtualenv: /usr/local/env/himawaripy
+    virtualenv_command: virtualenv3
 
 - name: Link himawaripy to bin
-  file: src=/usr/local/env/himawaripy/bin/himawaripy
-        dest=/usr/local/bin/himawaripy
-        state=link
+  file:
+    src: /usr/local/env/himawaripy/bin/himawaripy
+    dest: /usr/local/bin/himawaripy
+    state: link
 
 - name: Push himawaripy service file
-  template: src=himawaripy.service.j2 dest=/etc/systemd/user/himawaripy.service
+  template:
+    src: himawaripy.service.j2
+    dest: /etc/systemd/user/himawaripy.service
   notify:
     - reload systemd config
 
 - name: Push himawaripy timer file
-  template: src=himawaripy.timer.j2 dest=/etc/systemd/user/himawaripy.timer
+  template:
+    src: himawaripy.timer.j2
+    dest: /etc/systemd/user/himawaripy.timer
   notify:
     - reload systemd config
     - restart himawaripy
