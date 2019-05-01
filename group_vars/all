@@ -265,6 +265,7 @@ base_fonts:
     - ttf-droid
     - ttf-inconsolata
     - ttf-liberation
+    - ttf-opensans
     - ttf-ubuntu-font-family
 
 aur_fonts:
@@ -274,7 +275,6 @@ aur_fonts:
     - ttf-heuristica
     - ttf-merriweather
     - ttf-merriweather-sans
-    - ttf-opensans
     - ttf-oswald
     - ttf-quintessential
     - ttf-signika
