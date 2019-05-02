@@ -5,6 +5,7 @@
     state: present
 
 - name: Install hamlib
+  pacman:
     name: hamlib
     state: present
 
