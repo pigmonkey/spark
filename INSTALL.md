@@ -89,7 +89,7 @@ Change root into the base install and perform [base configuration tasks][12].
     $ echo $LANG UTF-8 >> /etc/locale.gen
     $ locale-gen
     $ echo LANG=$LANG > /etc/locale.conf
-    $ ln -s /usr/share/zoneinfo/America/Los_Angeles /etc/localtime
+    $ ln -fs /usr/share/zoneinfo/America/Los_Angeles /etc/localtime
     $ hwclock --systohc --utc
     $ echo mymachine > /etc/hostname
     $ systemctl enable dhcpcd.service
