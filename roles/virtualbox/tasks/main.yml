@@ -3,7 +3,6 @@
   pacman:
     name:
       - net-tools
-      - qt4
       - virtualbox
       - virtualbox-guest-iso
       - virtualbox-host-dkms
