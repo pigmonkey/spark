@@ -9,6 +9,13 @@
     name: pass-otp
     state: present
 
+- name: Install rofi-pass
+  pacman:
+    name: rofi-pass
+    state: present
+  tags:
+    - rofi
+
 - name: Install pass-update
   aur:
     name: pass-update
@@ -17,17 +24,9 @@
   tags:
     - aur
 
-- name: Install rofi-pass
-  aur:
-    name: rofi-pass
-    user: "{{ user.name }}"
-  tags:
-    - aur
-    - rofi
-
 - name: Install pwgen-passphrase
   aur:
-    name: rofi-pass
+    name: pwgen-passphrase
     user: "{{ user.name }}"
   tags:
     - aur

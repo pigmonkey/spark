@@ -16,7 +16,7 @@ execute platform-specific tasks.
 
 First, sync mirrors and install Ansible:
 
-    $ pacman -Syy python2-passlib ansible
+    $ pacman -Syy python-passlib ansible
 
 Second, install and update the submodules:
 

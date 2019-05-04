@@ -36,3 +36,10 @@
   aur: name=powerstat-git user={{ user.name }}
   tags:
     - aur
+
+- name: Install battery-stats
+  aur:
+    name: battery-stats-git
+    user: "{{ user.name }}"
+  tags:
+    - aur

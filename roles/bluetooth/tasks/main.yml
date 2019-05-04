@@ -17,7 +17,6 @@
       - bluez
       - bluez-libs
       - bluez-utils
-      - bluez-firmware
       - blueman
     state: present
   notify:
