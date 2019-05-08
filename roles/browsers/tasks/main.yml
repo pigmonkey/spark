@@ -1,22 +1,29 @@
 ---
 - name: Install w3m
-  pacman: name=w3m state=present
+  pacman:
+    name: w3m
+    state: present
 
 - name: Install Firefox
-  pacman: name=firefox state=present
+  pacman:
+    name: firefox
+    state: present
   tags:
     - firefox
 
 - name: Jail Firefox
-  file: src=/usr/bin/firejail
-        dest=/usr/local/bin/firefox
-        state=link
+  file:
+    src: /usr/bin/firejail
+    dest: /usr/local/bin/firefox
+    state: link
   tags:
     - firefox
     - firejail
 
 - name: Verify Firefox firejail local profile exists
-  file: path=/etc/firejail/firefox.local state=touch
+  file:
+    path: /etc/firejail/firefox.local
+    state: touch
   tags:
     - firefox
     - firejail
@@ -31,20 +38,25 @@
     - firejail
 
 - name: Install Chromium
-  pacman: name=chromium state=present
+  pacman:
+    name: chromium
+    state: present
   tags:
     - chromium
 
 - name: Jail Chromium
-  file: src=/usr/bin/firejail
-        dest=/usr/local/bin/chromium
-        state=link
+  file:
+    src: /usr/bin/firejail
+    dest: /usr/local/bin/chromium
+    state: link
   tags:
     - chromium
     - firejail
 
 - name: Verify Chromium firejail local profile exists
-  file: path=/etc/firejail/chromium.local state=touch
+  file:
+    path: /etc/firejail/chromium.local
+    state: touch
   tags:
     - chromium
     - firejail
@@ -59,20 +71,26 @@
     - firejail
 
 - name: Install Pepper Flash
-  pacman: name=pepper-flash state=present
+  pacman:
+    name: pepper-flash
+    state: present
   tags:
     - chromium
 
 - name: Install tor-browser-en
-  aur: name=tor-browser-en user={{ user.name }} skip_pgp=yes
+  aur:
+    name: tor-browser-en
+    user: "{{ user.name }}"
+    skip_pgp: yes
   tags:
     - tor-browser
     - aur
 
 - name: Jail tor-browser-en
-  file: src=/usr/bin/firejail
-        dest=/usr/local/bin/tor-browser-en
-        state=link
+  file:
+    src: /usr/bin/firejail
+    dest: /usr/local/bin/tor-browser-en
+    state: link
   tags:
     - tor-browser
     - firejail
@@ -94,25 +112,34 @@
     - firejail
 
 - name: Push rofi browser chooser
-  template: src=browser.sh.j2 dest=/usr/local/bin/browser mode=0755
+  template:
+    src: browser.sh.j2
+    dest: /usr/local/bin/browser
+    mode: 0755
   tags:
     - rofi
     - chooser
 
 - name: Create local desktop application dir
-  file: path=/usr/local/share/applications state=directory
+  file:
+    path: /usr/local/share/applications
+    state: directory
   tags:
     - rofi
     - chooser
 
 - name: Push rofi browser chooser desktop file
-  copy: src=browser.desktop dest=/usr/local/share/applications/browser.desktop
+  copy:
+    src: browser.desktop
+    dest: /usr/local/share/applications/browser.desktop
   tags:
     - rofi
     - chooser
 
 - name: Verify mimeapps.list exists
-  file: path=/etc/xdg/mimeapps.list state=touch
+  file:
+    path: /etc/xdg/mimeapps.list
+    state: touch
   tags:
     - rofi
     - chooser
@@ -135,7 +162,9 @@
     - chooser
 
 - name: Install surfraw
-  pacman: name=surfraw state=present
+  pacman:
+    name: surfraw
+    state: present
   tags:
     - surfraw
 
@@ -149,7 +178,10 @@
     - chooser
 
 - name: Push surfraw-rofi script
-  copy: src=surfraw-rofi dest=/usr/local/bin/surfraw-rofi mode=0755
+  copy:
+    src: surfraw-rofi
+    dest: /usr/local/bin/surfraw-rofi
+    mode: 0755
   tags:
     - surfraw
     - rofi
