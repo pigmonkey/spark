@@ -77,6 +77,22 @@
     - tor-browser
     - firejail
 
+- name: Install qutebrowser
+  pacman:
+    name: qutebrowser
+    state: present
+  tags:
+    - qutebrowser
+
+- name: Jail qutebrowser
+  file:
+    src: /usr/bin/firejail
+    dest: /usr/local/bin/qutebrowser
+    state: link
+  tags:
+    - qutebrowser
+    - firejail
+
 - name: Push rofi browser chooser
   template: src=browser.sh.j2 dest=/usr/local/bin/browser mode=0755
   tags:
