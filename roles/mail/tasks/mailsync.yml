@@ -3,7 +3,7 @@
   template:
     src: mailsync.sh.j2
     dest: /usr/local/bin/mailsync
-    mode: 755
+    mode: 0755
   tags:
     - mailsync
 
