@@ -111,6 +111,13 @@
     - qutebrowser
     - firejail
 
+- name: Install pdfjs for qutebrowser
+  pacman:
+    name: pdfjs
+    state: present
+  tags:
+    - qutebrowser
+
 - name: Push rofi browser chooser
   template:
     src: browser.sh.j2
