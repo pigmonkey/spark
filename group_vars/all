@@ -101,6 +101,7 @@ browser_choices:
     - firefox -P default
     - firefox -P work
     - firewarden chromium
+    - firewarden -c qutebrowser
     - tor-browser-en
     - play
     - qcode
