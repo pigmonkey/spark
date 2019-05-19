@@ -205,7 +205,7 @@ hostsctl:
 himawaripy:
     run_time: 15min
     run_boot_delay: 2min
-    run_on: trusted
+    run_on: never
     flags: --auto-offset --level 4
 
 goesimage:
