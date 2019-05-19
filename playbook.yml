@@ -74,6 +74,7 @@
     - { role: wttr, tags: ['wttr'] }
     - { role: hostsctl, tags: ['hostsctl'], when: "hostsctl is defined" }
     - { role: himawaripy, tags: ['himawaripy'], when: "himawaripy is defined" }
+    - { role: goesimage, tags: ['goesimage'], when: "goesimage is defined" }
     - { role: syncthing, tags: ['syncthing'], when: "syncthing is defined" }
     - { role: mirrorlist, tags: ['mirrorlist'], when: "mirrorlist is defined" }
     - { role: logitech, tags: ['logitech'] }

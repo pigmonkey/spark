@@ -1,0 +1,4 @@
+---
+- name: restart GOESImage
+  service: name="goesimage@{{ user.name }}.timer" state=restarted
+  when: goesimage.run_on == "all"

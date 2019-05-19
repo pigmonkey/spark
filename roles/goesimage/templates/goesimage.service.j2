@@ -1,0 +1,7 @@
+# {{ ansible_managed }}
+[Unit]
+Description=NOAA Geostationary Operational Environment Satellite Background Service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/goesimage {{ goesimage.flags }}

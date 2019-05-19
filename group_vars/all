@@ -208,6 +208,12 @@ himawaripy:
     run_on: trusted
     flags: --auto-offset --level 4
 
+goesimage:
+    run_time: 15min
+    run_boot_delay: 2min
+    run_on: trusted
+    flags: -w -e
+
 libinput:
     middle_click_scroll: 12
     button_mapping: "1 2 3 4 5 6 7 8 9 10 11 2"

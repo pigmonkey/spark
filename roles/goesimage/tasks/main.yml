@@ -1,0 +1,28 @@
+---
+- name: Install GOESImage
+  aur:
+    name: goesimage
+    user: "{{ user.name }}"
+  tags:
+    - aur
+
+- name: Push GOESImage service file
+  template:
+    src: goesimage.service.j2
+    dest: /etc/systemd/user/goesimage.service
+  notify:
+    - reload systemd config
+
+- name: Push GOESImage timer file
+  template:
+    src: goesimage.timer.j2
+    dest: /etc/systemd/user/goesimage.timer
+  notify:
+    - reload systemd config
+    - restart GOESImage
+
+- include_tasks: roles/nmtrust/tasks/unit.yml
+  vars:
+      unit: goesimage.timer
+      run_on: "{{ goesimage.run_on }}"
+      user_unit: true
