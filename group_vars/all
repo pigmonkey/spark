@@ -24,6 +24,7 @@ aur:
         - miller
         - myrepos
         - ctmg
+        - termdown-git
 
 ssh:
     port: 22
