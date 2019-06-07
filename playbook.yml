@@ -74,10 +74,11 @@
     - { role: wttr, tags: ['wttr'] }
     - { role: hostsctl, tags: ['hostsctl'], when: "hostsctl is defined" }
     - { role: himawaripy, tags: ['himawaripy'], when: "himawaripy is defined" }
-    - { role: dvorak, tags: ['dvorak'] }
+    - { role: goesimage, tags: ['goesimage'], when: "goesimage is defined" }
     - { role: syncthing, tags: ['syncthing'], when: "syncthing is defined" }
     - { role: mirrorlist, tags: ['mirrorlist'], when: "mirrorlist is defined" }
     - { role: logitech, tags: ['logitech'] }
+    - { role: dvorak, tags: ['dvorak'] }
   vars_prompt:
     - name: user_password
       prompt: "Enter desired user password"

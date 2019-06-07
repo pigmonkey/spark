@@ -1,0 +1,11 @@
+# {{ ansible_managed }}
+[Unit]
+Description=NOAA Geostationary Operational Environment Satellite Background Timer
+
+[Timer]
+OnBootSec={{ goesimage.run_boot_delay }}
+OnUnitActiveSec={{ goesimage.run_time }}
+Unit=goesimage.service
+
+[Install]
+WantedBy=timers.target

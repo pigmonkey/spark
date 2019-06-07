@@ -13,7 +13,6 @@
 - name: Install bluetooth libraries and tools
   pacman:
     name:
-      - pulseaudio-bluetooth
       - bluez
       - bluez-libs
       - bluez-utils

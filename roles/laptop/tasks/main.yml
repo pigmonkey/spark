@@ -43,3 +43,10 @@
     user: "{{ user.name }}"
   tags:
     - aur
+
+- name: Install battop
+  aur:
+    name: battop
+    user: "{{ user.name }}"
+  tags:
+    - aur

@@ -34,6 +34,13 @@
 - name: Install notmuch
   pacman: name=notmuch state=present
 
+- name: Install mutt-ics
+  aur:
+    name: mutt-ics
+    user: "{{ user.name }}"
+  tags:
+    - aur
+
 - include: msmtp.yml
 - include: isync.yml
 - include: offlineimap.yml
