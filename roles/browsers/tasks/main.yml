@@ -77,20 +77,28 @@
   tags:
     - chromium
 
-- name: Install tor-browser-en
+- name: Install tor-browser
   aur:
-    name: tor-browser-en
+    name: tor-browser
     user: "{{ user.name }}"
     skip_pgp: yes
   tags:
     - tor-browser
     - aur
 
-- name: Jail tor-browser-en
+- name: Jail tor-browser
   file:
     src: /usr/bin/firejail
-    dest: /usr/local/bin/tor-browser-en
+    dest: /usr/local/bin/tor-browser
     state: link
+  tags:
+    - tor-browser
+    - firejail
+
+- name: Push tor-browser firejail profile
+  copy: src=firejail/tor-browser.profile dest=/usr/local/etc/firejail/tor-browser.profile
+  notify:
+    - activate firejail profiles
   tags:
     - tor-browser
     - firejail
