@@ -29,6 +29,7 @@
     - { role: editors, tags: ['editors'] }
     - { role: filesystems, tags: ['filesystems'] }
     - { role: archive, tags: ['archive'] }
+    - { role: optical, tags: ['optical'] }
     - { role: udisks, tags: ['udisks'] }
     - { role: spell, tags: ['spell'] }
     - { role: browsers, tags: ['browsers'] }
