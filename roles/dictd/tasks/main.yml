@@ -25,3 +25,9 @@
     user: "{{ user.name }}"
   tags:
     - aur
+
+- name: Enable and start dictd
+  service:
+    name: dictd.service
+    enabled: yes
+    state: started
