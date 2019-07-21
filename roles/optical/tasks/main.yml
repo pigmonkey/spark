@@ -1,0 +1,15 @@
+---
+- name: Install cdrtools
+  pacman:
+    name: cdrtools
+    state: present
+
+- name: Install dvd+rw-tools
+  pacman:
+    name: dvd+rw-tools
+    state: present
+
+- name: Install xfburn
+  pacman:
+    name: xfburn
+    state: present
