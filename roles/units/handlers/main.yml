@@ -1,0 +1,4 @@
+---
+- name: restart units_cur
+  service: name=units_cur.timer state=restarted
+  when: units.run_on == "all"

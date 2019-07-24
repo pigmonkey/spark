@@ -1,0 +1,25 @@
+---
+- name: Install GNU Units
+  pacman:
+    name: units
+    state: present
+
+- name: Push GNU Units currency update service file
+  template:
+    src: units_cur.service.j2
+    dest: /etc/systemd/system/units_cur.service
+  notify:
+    - reload systemd config
+
+- name: Push GNU Units currency update timer file
+  template:
+    src: units_cur.timer.j2
+    dest: /etc/systemd/system/units_cur.timer
+  notify:
+    - reload systemd config
+    - restart units_cur
+
+- include_tasks: roles/nmtrust/tasks/unit.yml
+  vars:
+      unit: units_cur.timer
+      run_on: "{{ units.run_on }}"

@@ -1,0 +1,10 @@
+# {{ ansible_managed }}
+[Unit]
+Description=GNU Units Currency Update Service
+After=network.target
+
+[Service]
+Type=oneshot
+StandardOutput=syslog
+StandardError=syslog
+ExecStart=/usr/bin/units_cur{% if 'args' in units %} {{ units.args }}{% endif %}

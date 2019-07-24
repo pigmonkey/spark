@@ -1,0 +1,12 @@
+# {{ ansible_managed }}
+[Unit]
+Description=GNU Units Currency Update Timer
+
+[Timer]
+OnCalendar=daily
+Persistent=true
+RandomizedDelaySec=3600
+Unit=units_cur.service
+
+[Install]
+WantedBy=timers.target
