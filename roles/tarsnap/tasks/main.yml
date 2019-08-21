@@ -13,16 +13,6 @@
               state=present
               line=humanize-numbers
 
-- name: Install Tarsnapper into virtual environment
-  pip: name=tarsnapper
-       virtualenv=/usr/local/env/tarsnapper
-       virtualenv_command=virtualenv3
-
-- name: Link Tarsnapper to bin
-  file: src=/usr/local/env/tarsnapper/bin/tarsnapper
-        dest=/usr/local/bin/tarsnapper
-        state=link
-
 - name: Create Tarsnapper config include dir
   file: path=/usr/local/etc/tarsnapper.d/ state=directory
 
