@@ -1,31 +1,46 @@
 ---
 - name: Install Tarsnap
-  pacman: name=tarsnap state=present
+  pacman:
+    name: tarsnap
+    state: present
 
 - name: Copy default Tarsnap config
-  copy: src=/etc/tarsnap/tarsnap.conf.sample dest=/etc/tarsnap/tarsnap.conf
+  copy:
+    src: /etc/tarsnap/tarsnap.conf.sample
+    dest: /etc/tarsnap/tarsnap.conf
 
 - name: Create Tarsnap cache dir
-  file: path=/usr/local/tarsnap-cache state=directory
+  file:
+    path: /usr/local/tarsnap-cache
+    state: directory
 
 - name: Humanize Tarsnap numbers
-  lineinfile: dest=/etc/tarsnap/tarsnap.conf
-              state=present
-              line=humanize-numbers
+  lineinfile:
+    dest: /etc/tarsnap/tarsnap.conf
+    state: present
+    line: humanize-numbers
 
 - name: Create Tarsnapper config include dir
-  file: path=/usr/local/etc/tarsnapper.d/ state=directory
+  file:
+    path: /usr/local/etc/tarsnapper.d/
+    state: directory
 
 - name: Push Tarsnapper config
-  template: src=tarsnapper.conf.j2 dest=/usr/local/etc/tarsnapper.conf
+  template:
+    src: tarsnapper.conf.j2
+    dest: /usr/local/etc/tarsnapper.conf
 
 - name: Push Tarsnapper service file
-  template: src=tarsnapper.service.j2 dest=/etc/systemd/system/tarsnapper.service
+  template:
+    src: tarsnapper.service.j2
+    dest: /etc/systemd/system/tarsnapper.service
   notify:
     - reload systemd config
 
 - name: Push Tarsnapper timer file
-  template: src=tarsnapper.timer.j2 dest=/etc/systemd/system/tarsnapper.timer
+  template:
+    src: tarsnapper.timer.j2
+    dest: /etc/systemd/system/tarsnapper.timer
   notify:
     - reload systemd config
     - restart tarsnapper
