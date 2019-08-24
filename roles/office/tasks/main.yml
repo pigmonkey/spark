@@ -45,9 +45,11 @@
     name: simple-scan
     state: present
 
-- name: Install pandoc
+- name: Install pandoc and dependencies
   pacman:
-    name: pandoc
+    name:
+      - pandoc
+      - pandoc-citeproc
     state: present
 
 - name: Install texlive-core
