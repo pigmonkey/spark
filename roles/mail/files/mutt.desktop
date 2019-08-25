@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application 
+Name=mutt 
+Comment=Simple text based Mail User Agent 
+Exec=mutt-mailto
+Terminal=false 
+MimeType=x-scheme-handler/mailto; 
+Categories=Email
