@@ -26,10 +26,8 @@
   tags:
     - firejail
 
-- name: Install urlview
-  aur: name=urlview user={{ user.name }}
-  tags:
-    - aur
+- name: Install urlscan
+  pacman: name=urlscan
 
 - name: Install notmuch
   pacman: name=notmuch state=present
