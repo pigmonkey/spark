@@ -37,6 +37,9 @@
   tags:
     - aur
 
+- name: Install cmake for battery-stats
+  pacman: name=cmake state=present
+
 - name: Install battery-stats
   aur:
     name: battery-stats-git

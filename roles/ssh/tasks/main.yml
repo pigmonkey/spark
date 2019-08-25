@@ -16,11 +16,11 @@
 
 - name: Enable and start OpenSSH
   service: name=sshd.socket enabled=yes state=started
-  when: ssh.enable_sshd == True
+  when: ssh.enable_sshd is defined and ssh.enable_sshd == True
 
 - name: Disable and stop OpenSSH
   service: name=sshd.socket enabled=no state=stopped
-  when: ssh.enable_sshd == False
+  when: ssh.enable_sshd is defined and ssh.enable_sshd == True
 
 - name: Install sshfs
   pacman: name=sshfs state=present

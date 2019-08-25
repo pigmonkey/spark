@@ -1,14 +1,19 @@
 ---
 - name: Install neomutt
-  pacman: name=neomutt state=present
+  pacman:
+    name: neomutt
+    state: present
 
 - name: Make neomutt available as mutt
-  file: src=/usr/bin/neomutt
-        dest=/usr/local/bin/mutt
-        state=link
+  file:
+    src: /usr/bin/neomutt
+    dest: /usr/local/bin/mutt
+    state: link
 
 - name: Verify mutt firejail local profile exists
-  file: path=/etc/firejail/mutt.local state=touch
+  file:
+    path: /etc/firejail/mutt.local
+    state: touch
   tags:
     - firejail
 
@@ -26,13 +31,14 @@
   tags:
     - firejail
 
-- name: Install urlview
-  aur: name=urlview user={{ user.name }}
-  tags:
-    - aur
+- name: Install urlscan
+  pacman:
+    name: urlscan
 
 - name: Install notmuch
-  pacman: name=notmuch state=present
+  pacman:
+    name: notmuch
+    state: present
 
 - name: Install mutt-ics
   aur:
@@ -40,6 +46,33 @@
     user: "{{ user.name }}"
   tags:
     - aur
+
+- name: Push mutt-mailto script
+  copy:
+    src: mutt-mailto.sh
+    dest: /usr/local/bin/mutt-mailto
+    mode: 0755
+
+- name: Create local desktop application dir
+  file:
+    path: /usr/local/share/applications
+    state: directory
+
+- name: Push mutt desktop file
+  copy:
+    src: mutt.desktop
+    dest: /usr/local/share/applications/mutt.desktop
+
+- name: Verify mimeapps.list exists
+  file:
+    path: /etc/xdg/mimeapps.list
+    state: touch
+
+- name: Set mutt as default application for mailto links
+  lineinfile:
+    dest: /etc/xdg/mimeapps.list
+    regexp: "^x-scheme-handler/mailto="
+    line: "x-scheme-handler/mailto=mutt.desktop"
 
 - include: msmtp.yml
 - include: isync.yml

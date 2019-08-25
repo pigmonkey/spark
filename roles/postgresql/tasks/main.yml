@@ -3,7 +3,7 @@
   pacman: name=postgresql state=present
 
 - name: Install psycopg2
-  pacman: name=python2-psycopg2 state=present
+  pacman: name=python-psycopg2 state=present
 
 - name: Create postgres data root
   file: path={{ postgresql.root }}/data state=directory owner=postgres group=postgres
