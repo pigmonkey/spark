@@ -50,3 +50,10 @@
 
 - name: Install speedtest-cli
   pacman: name=speedtest-cli state=present
+
+- name: Install wireguard and kernel modules
+  pacman:
+    name:
+      - wireguard-tools
+      - wireguard-dkms
+    state: present
