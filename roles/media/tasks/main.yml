@@ -43,3 +43,8 @@
   pacman:
     name: zbar
     state: present
+
+- name: Install sxiv
+  pacman:
+    name: sxiv
+    state: present

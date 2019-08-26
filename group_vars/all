@@ -90,6 +90,8 @@ base_packages:
     - screen
     - python-pipenv
     - termdown
+    - fzf
+    - smartmontools
 
 filesystem_packages:
     - dosfstools
