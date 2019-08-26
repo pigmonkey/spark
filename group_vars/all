@@ -92,6 +92,7 @@ base_packages:
     - python-pipenv
     - termdown
     - fzf
+    - smartmontools
 
 filesystem_packages:
     - dosfstools
