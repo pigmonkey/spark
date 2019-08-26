@@ -20,6 +20,13 @@
     state: present
     line: humanize-numbers
 
+- name: Install tarsnapper
+  aur:
+    name: tarsnapper
+    user: "{{ user.name }}"
+  tags:
+    - aur
+
 - name: Create Tarsnapper config include dir
   file:
     path: /usr/local/etc/tarsnapper.d/
