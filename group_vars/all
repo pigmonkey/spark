@@ -91,6 +91,7 @@ base_packages:
     - screen
     - python-pipenv
     - termdown
+    - fzf
 
 filesystem_packages:
     - dosfstools
