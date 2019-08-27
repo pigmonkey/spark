@@ -19,6 +19,9 @@ then
 {% if mail.sync_taskwarrior %}
     task sync
 {% endif %}
+{% if mail.notmuch_new %}
+    notmuch new
+{% endif %}
     exit $?
 fi
 echo "No internet connection."
