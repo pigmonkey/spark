@@ -38,7 +38,7 @@ mail:
     sync_tool: isync
     sync_pim: True
     sync_taskwarrior: True
-    sync_notmuch: False
+    sync_notmuch: True
     sync_time: 5min
     sync_boot_delay: 2min
     sync_on: trusted
