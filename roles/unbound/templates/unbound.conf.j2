@@ -5,6 +5,7 @@ server:
   use-syslog: yes
   do-not-query-localhost: no
   access-control: 0.0.0.0/8 allow
+  trust-anchor-file: trusted-key.key
   {% if unbound.tls %}
   tls-upstream: yes
   tls-cert-bundle: /etc/ssl/certs/ca-certificates.crt
