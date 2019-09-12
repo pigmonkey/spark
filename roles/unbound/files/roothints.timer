@@ -1,0 +1,11 @@
+[Unit]
+Description=Unbound Root Hints Update Timer
+
+[Timer]
+OnCalendar=monthly
+Persistent=true
+RandomizedDelaySec=3600
+Unit=roothints.service
+ 
+[Install]
+WantedBy=timers.target
