@@ -144,8 +144,8 @@ localtime:
 unbound:
     tls: True
     nameservers:
-        - 1.1.1.1@853  # Cloudflare
-        - 9.9.9.9@853  # Quad9
+        - 1.1.1.1@853#cloudflare-dns.com  # Cloudflare
+        - 9.9.9.9@853#dns.quad9.net  # Quad9
 
 bluetooth:
     disable: False
