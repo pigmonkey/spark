@@ -5,7 +5,11 @@ server:
   use-syslog: yes
   do-not-query-localhost: no
   access-control: 0.0.0.0/8 allow
-  {% if unbound.tls %}tls-upstream: yes{% endif %}
+  trust-anchor-file: trusted-key.key
+  {% if unbound.tls %}
+  tls-upstream: yes
+  tls-cert-bundle: /etc/ssl/certs/ca-certificates.crt
+  {% endif %}
 
   # Set root DNS servers.
   root-hints: "/etc/unbound/root.hints"

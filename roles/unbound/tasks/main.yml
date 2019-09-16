@@ -40,3 +40,23 @@
   lineinfile: dest=/etc/resolvconf.conf
               state=present
               line="name_servers=127.0.0.1"
+
+- name: Push Unbound root hits update service file
+  copy:
+    src: roothints.service
+    dest: /etc/systemd/system/roothints.service
+  notify:
+    - reload systemd config
+
+- name: Push Unbound root hits update timer file
+  copy:
+    src: roothints.timer
+    dest: /etc/systemd/system/roothints.timer
+  notify:
+    - reload systemd config
+    - restart roothints
+
+- include_tasks: roles/nmtrust/tasks/unit.yml
+  vars:
+      unit: roothints.timer
+      run_on: "{{ unbound.roothints_update }}"

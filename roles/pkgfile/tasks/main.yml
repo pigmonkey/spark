@@ -1,0 +1,10 @@
+---
+- name: Install pkgfile
+  pacman:
+      name: pkgfile
+      state: present
+
+- include_tasks: roles/nmtrust/tasks/unit.yml
+  vars:
+      unit: pkgfile-update.timer
+      run_on: "{{ pkgfile.run_on }}"

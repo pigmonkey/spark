@@ -89,3 +89,8 @@
     user: "{{ user.name }}"
   tags:
     - aur
+
+- name: Install GNU Plot
+  pacman:
+    name: gnuplot
+    state: present

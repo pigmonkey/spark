@@ -78,6 +78,7 @@
     - { role: goesimage, tags: ['goesimage'], when: "goesimage is defined" }
     - { role: syncthing, tags: ['syncthing'], when: "syncthing is defined" }
     - { role: mirrorlist, tags: ['mirrorlist'], when: "mirrorlist is defined" }
+    - { role: pkgfile, tags: ['pkgfile'], when: "pkgfile is defined" }
     - { role: units, tags: ['units'], when: "units is defined" }
     - { role: logitech, tags: ['logitech'] }
     - { role: dvorak, tags: ['dvorak'] }
