@@ -1,8 +1,10 @@
 server:
   interface: 127.0.0.1
+  chroot: ""
+  use-syslog: yes
+  do-daemonize: no
   username: "unbound"
   directory: "/etc/unbound"
-  use-syslog: yes
   do-not-query-localhost: no
   access-control: 0.0.0.0/8 allow
   trust-anchor-file: trusted-key.key
