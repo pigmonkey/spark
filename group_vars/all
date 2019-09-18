@@ -48,10 +48,9 @@ network:
     conn_check:
         interval: 0
     trusted_uuid:
-       - 5370da43-a082-4a92-aad7-863253981428
-       - 632ac547-d419-4ec7-8c40-57911e526a74
-       - 6c8fd6ce-599d-4ce5-af00-5daa95a6eab9
-       - 078de978-0680-3c49-accc-e080945fada1
+       - 40ad5ce3-a119-4762-aea7-e3a8eb4de7da
+       - 08579418-09e4-4f58-b9e4-ae9622e18df9
+
 
 editors:
     - gvim
