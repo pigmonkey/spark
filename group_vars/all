@@ -11,7 +11,7 @@ user:
 hostname: obsidian
 
 dotfiles:
-    url: ssh://brett@seki.librum.org/home/brett/archives/dotfiles.git
+    url: ssh://brett@aleph.librum.org/home/brett/archives/dotfiles.git
     destination: projects/dotfiles
     rcup_flags: -fx README.md
 
