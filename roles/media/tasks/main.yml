@@ -48,3 +48,8 @@
   pacman:
     name: sxiv
     state: present
+
+- name: Install svgcleaner
+  pacman:
+    name: svgcleaner
+    state: present
