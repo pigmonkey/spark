@@ -7,3 +7,17 @@
 
 - name: Install khal
   pacman: name=khal state=present
+
+- name: Install etesync-dav
+  aur:
+      name: etesync-dav
+      user: "{{ user.name }}"
+  tags:
+    - aur
+  when: etesync == True
+
+- name: Push etesync-dav service file
+  copy: src=etesync-dav.service dest=/etc/systemd/user/etesync-dav.service
+  notify:
+    - reload systemd config
+  when: etesync == True
