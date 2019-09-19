@@ -135,6 +135,8 @@ postgresql:
 
 fingerprint: False
 
+etesync: False
+
 tor:
     run_on: trusted
 
