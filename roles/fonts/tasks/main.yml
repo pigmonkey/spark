@@ -1,5 +1,5 @@
 ---
-- name: Install freetyp2
+- name: Install freetype2
   pacman: name=freetype2 state=present
 
 - name: Install cairo
