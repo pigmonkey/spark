@@ -1,22 +1,33 @@
 ---
 - name: Install Unbound
-  pacman: name=unbound state=present
+  pacman:
+    name: unbound
+    state: present
 
 - name: Download root hints
-  get_url: url=https://www.internic.net/domain/named.cache dest=/etc/unbound/root.hints force=yes
+  get_url:
+    url: https://www.internic.net/domain/named.cache
+    dest: /etc/unbound/root.hints
+    force: yes
 
 - name: Copy Unbound configuration file
-  template: src=unbound.conf.j2 dest=/etc/unbound/unbound.conf
+  template:
+    src: unbound.conf.j2
+    dest: /etc/unbound/unbound.conf
   notify:
     - restart unbound
 
 - name: Enable and start Unbound
-  service: name=unbound.service enabled=yes state=started
+  service:
+    name: unbound.service
+    enabled: yes
+    state: started
 
 - name: Configure resolvconf to use Unbound
-  lineinfile: dest=/etc/resolvconf.conf
-              state=present
-              line="name_servers=127.0.0.1"
+  lineinfile:
+    dest: /etc/resolvconf.conf
+    state: present
+    line: "name_servers=127.0.0.1"
 
 - name: Push Unbound root hits update service file
   copy:

@@ -1,0 +1,13 @@
+# {{ ansible_managed }}
+[Unit]
+Description=Etesync DAV service
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/etesync-dav
+StandardOutput=syslog
+StandardError=syslog
+
+[Install]
+WantedBy=multi-user.target
