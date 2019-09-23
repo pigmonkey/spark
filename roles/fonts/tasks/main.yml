@@ -1,30 +1,41 @@
 ---
-- name: Install freetyp2
-  pacman: name=freetype2 state=present
+- name: Install freetype2
+  pacman:
+    name: freetype2
+    state: present
 
 - name: Install cairo
-  pacman: name=cairo state=present
+  pacman:
+    name: cairo
+    state: present
 
 - name: Install fontconfig
-  pacman: name=fontconfig state=present
+  pacman:
+    name: fontconfig
+    state: present
 
 - name: Enable LCD filter
-  file: src=/etc/fonts/conf.avail/11-lcdfilter-default.conf
-        dest=/etc/fonts/conf.d/11-lcdfilter-default.conf
-        state=link
+  file:
+    src: /etc/fonts/conf.avail/11-lcdfilter-default.conf
+    dest: /etc/fonts/conf.d/11-lcdfilter-default.conf
+    state: link
 
 - name: Enable sub-pixel rendering
-  file: src=/etc/fonts/conf.avail/10-sub-pixel-rgb.conf
-        dest=/etc/fonts/conf.d/10-sub-pixel-rgb.conf
-        state=link
+  file:
+    src: /etc/fonts/conf.avail/10-sub-pixel-rgb.conf
+    dest: /etc/fonts/conf.d/10-sub-pixel-rgb.conf
+    state: link
 
 - name: Enable hinting
-  file: src=/etc/fonts/conf.avail/10-hinting-slight.conf
-        dest=/etc/fonts/conf.d/10-hinting-slight.conf
-        state=link
+  file:
+    src: /etc/fonts/conf.avail/10-hinting-slight.conf
+    dest: /etc/fonts/conf.d/10-hinting-slight.conf
+    state: link
 
 - name: Push font substitutions
-  copy: src=local.conf dest=/etc/fonts/local.conf
+  copy:
+    src: local.conf
+    dest: /etc/fonts/local.conf
 
 - name: Install base fonts
   pacman:
