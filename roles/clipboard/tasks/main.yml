@@ -1,0 +1,23 @@
+---
+ - name: install greenclip from AUR
+   aur: name='rofi-greenclip' user={{ user.name }}
+   tags:
+    - clipboard
+ - name: copy greenclip.service
+   copy: src=greenclip.service dest=/etc/systemd/user/greenclip.service
+   tags:
+    - clipboard
+ - name: Enable greenclip.service
+   command: 'systemctl --user enable greenclip.service'
+   become: true
+   become_method: su
+   become_user: "{{ user.name }}"
+   tags:
+    - clipboard
+ - name: Start greenclip.service
+   command: 'systemctl --user start greenclip.service'
+   become: true
+   become_method: su
+   become_user: "{{ user.name }}"
+   tags:
+    - clipboard    
