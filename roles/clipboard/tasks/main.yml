@@ -3,6 +3,8 @@
    aur:
      name: rofi-greenclip
      user: "{{ user.name }}"
+  tags:
+    - aur
 
  - name: copy greenclip.service
    copy:
