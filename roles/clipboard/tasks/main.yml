@@ -1,9 +1,13 @@
 ---
  - name: install greenclip from AUR
-   aur: name='rofi-greenclip' user={{ user.name }}
+   aur:
+     name: rofi-greenclip
+     user: "{{ user.name }}"
 
  - name: copy greenclip.service
-   copy: src=greenclip.service dest=/etc/systemd/user/greenclip.service
+   copy:
+     src: greenclip.service
+     dest: /etc/systemd/user/greenclip.service
 
  - name: Enable greenclip.service
    systemd:
