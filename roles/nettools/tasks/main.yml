@@ -48,6 +48,9 @@
 - name: Install nethogs
   pacman: name=nethogs state=present
 
+- name: Install bmon
+  pacman: name=bmon state=present
+
 - name: Install speedtest-cli
   pacman: name=speedtest-cli state=present
 

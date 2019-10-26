@@ -1,0 +1,23 @@
+---
+ - name: install greenclip from AUR
+   aur:
+     name: rofi-greenclip
+     user: "{{ user.name }}"
+  tags:
+    - aur
+
+ - name: copy greenclip.service
+   copy:
+     src: greenclip.service
+     dest: /etc/systemd/user/greenclip.service
+
+ - name: Enable greenclip.service
+   systemd:
+    name: greenclip.service
+    scope: user
+    enabled: yes
+    state: started
+   become: yes
+   become_user: "{{ user.name }}"
+   environment:
+    XDG_RUNTIME_DIR: "/run/user/{{ user.uid }}"
