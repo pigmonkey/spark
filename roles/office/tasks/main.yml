@@ -62,20 +62,6 @@
     name: texlive-latexextra
     state: present
 
-- name: Install visidata
-  aur:
-    name: visidata
-    user: "{{ user.name }}"
-  tags:
-    - aur
-
-- name: Install additional libraries for visidata
-  pacman:
-    name:
-      - python-xlrd
-      - python-pandas
-    state: present
-
 - name: Install qalculate
   pacman:
     name: qalculate-gtk
