@@ -96,7 +96,7 @@ base_packages:
 filesystem_packages:
     - dosfstools
     - ntfs-3g
-    - exfat-utils
+    - exfat-utils-nofuse
 
 browser_choices:
     - firefox -P default
