@@ -1,0 +1,33 @@
+---
+- name: Install visidata
+  aur:
+    name: visidata
+    user: "{{ user.name }}"
+  tags:
+    - aur
+
+- name: Install additional libraries for visidata
+  pacman:
+    name:
+      - python-xlrd
+      - python-pandas
+    state: present
+
+- name: Push visidata desktop file
+  copy:
+    src: visidata.desktop
+    dest: /usr/local/share/applications/visidata.desktop
+
+- name: Verify mimeapps.list exists
+  file:
+    path: /etc/xdg/mimeapps.list
+    state: touch
+
+- name: Set visidata as default application for relevant mimetypes
+  lineinfile:
+    dest: /etc/xdg/mimeapps.list
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+  with_items:
+    - { regexp: '^text/csv=', line: 'text/csv=visidata.desktop' }
+    - { regexp: '^text/tab-separated-values=', line: 'text/tab-separated-values=visidata.desktop' }

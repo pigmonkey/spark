@@ -50,6 +50,7 @@
     - { role: mail, tags: ['mail'] }
     - { role: cups, tags: ['cups'] }
     - { role: office, tags: ['office'] }
+    - { role: visidata, tags: ['visidata'] }
     - { role: pdf, tags: ['pdf'] }
     - { role: dictd, tags: ['dictd'] }
     - { role: redshift, tags: ['redshift'] }
