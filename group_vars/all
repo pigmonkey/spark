@@ -94,6 +94,7 @@ base_packages:
     - termdown
     - fzf
     - smartmontools
+    - pyenv
 
 filesystem_packages:
     - dosfstools
