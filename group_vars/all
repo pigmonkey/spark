@@ -87,14 +87,10 @@ base_packages:
     - pv
     - minicom
     - jq
-    - python-docs
-    - python2-docs
     - screen
-    - python-pipenv
     - termdown
     - fzf
     - smartmontools
-    - pyenv
 
 filesystem_packages:
     - dosfstools

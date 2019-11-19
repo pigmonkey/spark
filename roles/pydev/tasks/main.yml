@@ -1,0 +1,17 @@
+---
+- name: Install pipenv
+  pacman:
+      name: python-pipenv
+      state: present
+
+- name: Install pyenv
+  pacman:
+      name: pyenv
+      state: present
+
+- name: Install documentation
+  pacman:
+      name:
+        - python-docs
+        - python2-docs
+      state: present
