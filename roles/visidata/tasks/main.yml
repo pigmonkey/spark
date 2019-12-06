@@ -11,6 +11,7 @@
     name:
       - python-xlrd
       - python-pandas
+      - python-openpyxl
     state: present
 
 - name: Push visidata desktop file
