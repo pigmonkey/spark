@@ -83,6 +83,7 @@
     - { role: units, tags: ['units'], when: "units is defined" }
     - { role: logitech, tags: ['logitech'] }
     - { role: pydev, tags: ['pydev'] }
+    - { role: aria2, tags: ['aria2'] }
   vars_prompt:
     - name: user_password
       prompt: "Enter desired user password"
