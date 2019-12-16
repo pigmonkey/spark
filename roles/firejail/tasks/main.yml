@@ -1,23 +1,35 @@
 ---
 - name: Install firejail
-  pacman: name=firejail state=present
+  pacman:
+    name: firejail
+    state: present
 
 - name: Install firewarden
-  aur: name=firewarden user={{ user.name }}
+  aur:
+    name: firewarden
+    user: "{{ user.name }}"
   tags:
     - aur
 
 - name: Install firejail profile update script
-  copy: src=profile-activate.sh dest=/usr/local/bin/profile-activate mode=0755
+  copy:
+    src: profile-activate.sh
+    dest: /usr/local/bin/profile-activate
+    mode: 0755
 
 - name: Create firejail profile directory
-  file: path=/usr/local/etc/firejail state=directory
+  file:
+    path: /usr/local/etc/firejail
+    state: directory
 
 - name: Verify firejail globals file exists
-  file: path=/etc/firejail/globals.local state=touch
+  file:
+    path: /etc/firejail/globals.local
+    state: touch
 
 - name: Add blacklist to globals
-  lineinfile: dest=/etc/firejail/globals.local
-              state=present
-              line="blacklist {{ item }}"
+  lineinfile:
+    dest: /etc/firejail/globals.local
+    state: present
+    line: "blacklist {{ item }}"
   with_items: "{{ firejail.blacklist }}"
