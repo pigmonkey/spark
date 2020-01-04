@@ -95,14 +95,6 @@
     - tor-browser
     - firejail
 
-- name: Push tor-browser firejail profile
-  copy: src=firejail/tor-browser.profile dest=/usr/local/etc/firejail/tor-browser.profile
-  notify:
-    - activate firejail profiles
-  tags:
-    - tor-browser
-    - firejail
-
 - name: Install qutebrowser
   pacman:
     name: qutebrowser
