@@ -84,6 +84,7 @@
     - { role: logitech, tags: ['logitech'] }
     - { role: pydev, tags: ['pydev'] }
     - { role: aria2, tags: ['aria2'] }
+    - { role: signal, tags: ['signal'] }
   vars_prompt:
     - name: user_password
       prompt: "Enter desired user password"
