@@ -29,6 +29,11 @@
   tags:
     - user
 
+- name: Install logrotate
+  pacman:
+      name: logrotate
+      state: present
+
 - name: Push logrotate config for user logs
   template:
     src: logrotate.j2

@@ -8,6 +8,11 @@
   pacman:
     update_cache: yes
 
+- name: Install inetutils for hostname
+  pacman:
+      name: inetutils
+      state: present
+
 - name: Set the hostname
   hostname:
     name: "{{ hostname }}"
