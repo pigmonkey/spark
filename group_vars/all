@@ -63,6 +63,8 @@ video_drivers:
 
 base_packages:
     - base-devel
+    - man-db
+    - man-pages
     - pacman-contrib
     - fwupd
     - dmidecode
