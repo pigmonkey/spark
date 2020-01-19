@@ -1,0 +1,18 @@
+---
+- name: Install android-tools
+  pacman:
+    name: android-tools
+    state: present
+
+- name: Install android-udev
+  pacman:
+    name: android-udev
+    state: present
+
+- name: Add {{ user.name }} to adbusers group
+  user:
+      name: "{{ user.name }}"
+      groups: adbusers
+      append: yes
+  tags:
+    - user
