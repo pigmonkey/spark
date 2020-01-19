@@ -26,3 +26,8 @@
       name: NetworkManager-dispatcher.service
       enabled: yes
       state: started
+
+- name: Disable dhcpcd service
+  service:
+      name: dhcpcd.service
+      enabled: no
