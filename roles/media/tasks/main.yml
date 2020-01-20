@@ -53,3 +53,8 @@
   pacman:
     name: svgcleaner
     state: present
+
+- name: Install flameshot
+  pacman:
+    name: flameshot
+    state: present
