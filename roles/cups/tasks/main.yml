@@ -8,7 +8,6 @@
       - cups-pdf
       - gutenprint
       - hplip
-      - gtk3-print-backends
     state: present
 
 - name: Add a print admin group

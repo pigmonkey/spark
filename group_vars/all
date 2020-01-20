@@ -61,6 +61,8 @@ video_drivers:
 
 base_packages:
     - base-devel
+    - man-db
+    - man-pages
     - pacman-contrib
     - fwupd
     - dmidecode
@@ -276,7 +278,6 @@ aur_fonts:
     - ttf-oswald
     - ttf-quintessential
     - ttf-signika
-    - ttf-symbola
 
 syncthing:
     run_on: trusted

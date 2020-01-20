@@ -85,6 +85,8 @@
     - { role: pydev, tags: ['pydev'] }
     - { role: dvorak, tags: ['dvorak'] }
     - { role: aria2, tags: ['aria2'] }
+    - { role: signal, tags: ['signal'] }
+    - { role: android, tags: ['android'] }
   vars_prompt:
     - name: user_password
       prompt: "Enter desired user password"

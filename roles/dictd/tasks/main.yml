@@ -4,6 +4,11 @@
     name: dictd
     state: present
 
+- name: Install flex
+  pacman:
+    name: flex
+    state: present
+
 - name: Install GNU Collaborative International Dictionary of English
   aur:
     name: dict-gcide
