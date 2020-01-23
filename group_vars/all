@@ -155,6 +155,7 @@ unbound:
         - lan
         - mesh
         - private
+    allow_lan_dns: True
 
 bluetooth:
     disable: False

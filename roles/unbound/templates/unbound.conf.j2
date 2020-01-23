@@ -1,3 +1,6 @@
+{% if unbound.allow_lan_dns %}include: "/etc/unbound/resolvconf.conf"
+{% endif %}
+
 server:
   interface: 127.0.0.1
   use-syslog: yes
