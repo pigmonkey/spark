@@ -7,10 +7,7 @@ server:
   do-not-query-localhost: no
   access-control: 0.0.0.0/8 allow
   trust-anchor-file: trusted-key.key
-  {% if unbound.tls %}
-  tls-upstream: yes
-  tls-cert-bundle: /etc/ssl/certs/ca-certificates.crt
-  {% endif %}
+  {% if unbound.tls %}tls-cert-bundle: /etc/ssl/certs/ca-certificates.crt{% endif %}
 
   # Set root DNS servers.
   root-hints: "/etc/unbound/root.hints"
@@ -27,6 +24,7 @@ server:
   # Define DNS servers to forward queries to.
   forward-zone:
     name: "."
+    {% if unbound.tls %}forward-tls-upstream: yes{% endif %}
     {% for nameserver in unbound.nameservers %}
     forward-addr: {{ nameserver }}
     {% endfor %}
