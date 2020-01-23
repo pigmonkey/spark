@@ -148,6 +148,13 @@ unbound:
     nameservers:
         - 1.1.1.1@853#cloudflare-dns.com  # Cloudflare
         - 9.9.9.9@853#dns.quad9.net  # Quad9
+    private_domains:
+        - corp
+        - home
+        - intranet
+        - lan
+        - mesh
+        - private
 
 bluetooth:
     disable: False
