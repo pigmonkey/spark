@@ -19,6 +19,7 @@
     - { role: pass, tags: ['pass'] }
     - { role: iptables, tags: ['iptables'] }
     - { role: nettools, tags: ['nettools'] }
+    - { role: openresolv, tags: ['openresolv'] }
     - { role: networkmanager, tags: ['networkmanager'] }
     - { role: nmtrust, tags: ['nmtrust'] }
     - { role: macchiato, tags: ['macchiato'] }

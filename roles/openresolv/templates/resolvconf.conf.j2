@@ -1,0 +1,12 @@
+# Configuration for resolvconf(8)
+# See resolvconf.conf(5) for details
+
+resolv_conf=/etc/resolv.conf
+
+{% if unbound %}
+name_servers=127.0.0.1
+{% if unbound.allow_lan_dns %}
+unbound_conf=/etc/unbound/resolvconf.conf
+private_interfaces="*"
+{% endif %}
+{% endif %}

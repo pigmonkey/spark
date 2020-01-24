@@ -60,8 +60,3 @@
       - wireguard-tools
       - wireguard-dkms
     state: present
-
-- name: Install openresolv
-  pacman:
-    name: openresolv
-    state: present

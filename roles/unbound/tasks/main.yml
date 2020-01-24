@@ -23,12 +23,6 @@
     enabled: yes
     state: started
 
-- name: Configure resolvconf to use Unbound
-  lineinfile:
-    dest: /etc/resolvconf.conf
-    state: present
-    line: "name_servers=127.0.0.1"
-
 - name: Push Unbound root hits update service file
   copy:
     src: roothints.service

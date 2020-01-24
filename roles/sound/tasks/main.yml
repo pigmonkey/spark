@@ -1,6 +1,8 @@
 ---
 - name: Install alsa-utils
-  pacman: name=alsa-utils state=present
+  pacman:
+    name: alsa-utils
+    state: present
 
 - name: Install PulseAudio
   pacman:
@@ -11,17 +13,25 @@
     state: present
 
 - name: Switch output to newly connected devices
-  lineinfile: dest=/etc/pulse/default.pa
-              state=present
-              line="load-module module-switch-on-connect"
+  lineinfile:
+    dest: /etc/pulse/default.pa
+    state: present
+    line: "load-module module-switch-on-connect"
 
 - name: Install pasystray
-  pacman: name=pasystray state=present
+  pacman:
+    name: pasystray
+    state: present
 
 - name: Install pulseaudio-ctl
-  aur: name=pulseaudio-ctl user={{ user.name }}
+  aur:
+    name: pulseaudio-ctl
+    user: "{{ user.name }}"
   tags:
     - aur
 
 - name: Push pamute
-  copy: src=pamute/pamute dest=/usr/local/bin/pamute mode=0755
+  copy:
+    src: pamute/pamute
+    dest: /usr/local/bin/pamute
+    mode: 0755

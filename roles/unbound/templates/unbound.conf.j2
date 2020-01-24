@@ -1,3 +1,6 @@
+{% if unbound.allow_lan_dns %}include: "/etc/unbound/resolvconf.conf"
+{% endif %}
+
 server:
   interface: 127.0.0.1
   use-syslog: yes
@@ -7,9 +10,7 @@ server:
   do-not-query-localhost: no
   access-control: 0.0.0.0/8 allow
   trust-anchor-file: trusted-key.key
-  {% if unbound.tls %}
-  tls-upstream: yes
-  tls-cert-bundle: /etc/ssl/certs/ca-certificates.crt
+  {% if unbound.tls %}tls-cert-bundle: /etc/ssl/certs/ca-certificates.crt
   {% endif %}
 
   # Set root DNS servers.
@@ -23,6 +24,22 @@ server:
   private-address: fd00::/8
   private-address: fe80::/10
 
+{% if unbound.private_domains %}
+  # Allow private domains.
+  {% for domain in unbound.private_domains %}private-domain: "{{ domain }}"
+  {% endfor %}
+
+  # Do not filter reverse lookups for private address space.
+  unblock-lan-zones: yes
+
+  # Do not validate reverse lookups for private address space.
+  insecure-lan-zones: yes
+
+  # Disable DNSSEC for private domains.
+  {% for domain in unbound.private_domains %}domain-insecure: "{{ domain }}"
+  {% endfor %}
+{% endif %}
+
 {% if unbound.nameservers %}
   # Define DNS servers to forward queries to.
   forward-zone:
@@ -30,4 +47,5 @@ server:
     {% for nameserver in unbound.nameservers %}
     forward-addr: {{ nameserver }}
     {% endfor %}
+    {% if unbound.tls %}forward-tls-upstream: yes{% endif %}
 {% endif %}
