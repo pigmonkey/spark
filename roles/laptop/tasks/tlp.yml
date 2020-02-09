@@ -10,8 +10,28 @@
   tags:
     - tlp
 
-- name: Copy TLP configuration file
-  copy: src=tlp.conf dest=/etc/default/tlp
+- name: Push TLP battery threshold config
+  copy:
+    src: tlp/20-battery.conf
+    dest: /etc/tlp.d/
+  notify:
+    - restart tlp
+  tags:
+    - tlp
+
+- name: Push TLP radio device config
+  copy:
+    src: tlp/20-rdw.conf
+    dest: /etc/tlp.d/
+  notify:
+    - restart tlp
+  tags:
+    - tlp
+
+- name: Push TLP PCIe config
+  copy:
+    src: tlp/20-pcie.conf
+    dest: /etc/tlp.d/
   notify:
     - restart tlp
   tags:
@@ -28,11 +48,8 @@
     - tlp
 
 - name: Enable TLP
-  service: name=tlp.service enabled=yes
-  tags:
-    - tlp
-
-- name: Enable TLP sleep
-  service: name=tlp-sleep.service enabled=yes
+  service:
+    name: tlp.service
+    enabled: yes
   tags:
     - tlp
