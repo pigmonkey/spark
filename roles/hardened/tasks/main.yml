@@ -7,3 +7,11 @@
     state: present
   notify:
     - rebuild grub
+
+- name: Enable unprivileged containers for non-root users
+  copy:
+    src: 99-userns.conf
+    dest: /etc/sysctl.d/99-userns.conf
+  notify:
+    - reload sysctl
+  when: hardened is defined and hardened.enable_namespaces
