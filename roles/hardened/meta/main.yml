@@ -1,3 +1,4 @@
 ---
 dependencies:
   - { role: grub }
+  - { role: sysctl }
