@@ -264,6 +264,7 @@ gnome:
         extensions_support: True
 
 base_fonts:
+    - adobe-source-code-pro-fonts
     - cantarell-fonts
     - gsfonts
     - noto-fonts
@@ -273,12 +274,16 @@ base_fonts:
     - ttf-carlito
     - ttf-dejavu
     - ttf-droid
+    - ttf-fira-mono
+    - ttf-ibm-plex
     - ttf-inconsolata
     - ttf-liberation
     - ttf-opensans
     - ttf-ubuntu-font-family
 
 aur_fonts:
+    - ttf-bitstream-charter
+    - ttf-cooper-hewitt
     - ttf-courier-prime
     - ttf-heuristica
     - ttf-merriweather

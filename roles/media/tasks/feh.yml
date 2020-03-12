@@ -11,3 +11,11 @@
   tags:
     - feh
     - firejail
+
+- name: Install imlib2-heic
+  aur:
+    name: imlib2-heic
+    user: "{{ user.name }}"
+  tags:
+    - aur
+    - feh
