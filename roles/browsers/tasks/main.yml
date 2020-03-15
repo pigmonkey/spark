@@ -77,19 +77,17 @@
   tags:
     - chromium
 
-- name: Install tor-browser
-  aur:
-    name: tor-browser
-    user: "{{ user.name }}"
-    skip_pgp: yes
+- name: Install Tor browser
+  pacman:
+    name: torbrowser-launcher
+    state: present
   tags:
     - tor-browser
-    - aur
 
-- name: Jail tor-browser
+- name: Jail Tor browser
   file:
     src: /usr/bin/firejail
-    dest: /usr/local/bin/tor-browser
+    dest: /usr/local/bin/torbrowser-launcher
     state: link
   tags:
     - tor-browser
