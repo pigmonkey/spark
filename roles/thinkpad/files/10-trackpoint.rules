@@ -1,1 +1,1 @@
-SUBSYSTEM=="serio", DRIVERS=="psmouse", DEVPATH=="/devices/platform/i8042/serio1/serio2", ATTR{sensitivity}="125", ATTR{speed}="125"
+SUBSYSTEM=="serio", DRIVERS=="psmouse", KERNEL=="serio2", ATTR{sensitivity}="125", ATTR{speed}="125"
