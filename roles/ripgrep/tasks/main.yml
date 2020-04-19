@@ -1,0 +1,13 @@
+---
+- name: Install ripgrep
+  pacman:
+    name: ripgrep
+    state: present
+
+- name: Install ripgrep-all
+  aur:
+    name:
+      - ripgrep-all
+    user: "{{ user.name }}"
+  tags:
+    - aur
