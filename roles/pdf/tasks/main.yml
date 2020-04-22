@@ -69,9 +69,7 @@
 
 - name: Install OCRmyPDF and dependencies
   aur:
-    name:
-      - python-pdfminer.six
-      - ocrmypdf
+    name: ocrmypdf
     user: "{{ user.name }}"
   tags:
     - ocrmypdf
