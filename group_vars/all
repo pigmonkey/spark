@@ -321,4 +321,4 @@ pkgfile:
 hardened:
     enable_namespaces: true
 
-kernel_parameters: "quiet consoleblank=60 i915.enable_psr=2"
+kernel_parameters: "quiet consoleblank=60"
