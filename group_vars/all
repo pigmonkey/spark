@@ -93,6 +93,7 @@ base_packages:
     - termdown
     - fzf
     - smartmontools
+    - htop
 
 filesystem_packages:
     - dosfstools
