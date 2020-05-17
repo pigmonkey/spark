@@ -71,15 +71,11 @@ base_packages:
     - tmux
     - git
     - rsync
-    - glances
     - coreutils
     - moreutils
     - dateutils
     - bc
     - ranger
-    - strace
-    - lsof
-    - sysstat
     - arch-wiki-lite
     - arch-wiki-docs
     - python-keyring
@@ -92,8 +88,6 @@ base_packages:
     - screen
     - termdown
     - fzf
-    - smartmontools
-    - htop
     - cpulimit
 
 filesystem_packages:

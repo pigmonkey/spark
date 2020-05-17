@@ -4,6 +4,7 @@
   roles:
     - { role: base, tags: ['base'] }
     - { role: gnupg, tags: ['gnupg'] }
+    - { role: sysmon, tags: ['sysmon'] }
     - { role: cron, tags: ['cron'] }
     - { role: microcode, tags: ['microcode'], when: "'GenuineIntel' in ansible_processor" }
     - { role: hardened, tags: ['hardened'] }
