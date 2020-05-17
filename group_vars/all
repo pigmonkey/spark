@@ -94,6 +94,7 @@ base_packages:
     - fzf
     - smartmontools
     - htop
+    - cpulimit
 
 filesystem_packages:
     - dosfstools
