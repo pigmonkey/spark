@@ -22,6 +22,7 @@
       - gst-plugins-good
       - exiv2
       - perl-image-exiftool
+      - perl-archive-zip
       - opus-tools
     state: present
 
