@@ -5,6 +5,6 @@ After=network.target
 [Service]
 Type=oneshot
 ExecStart=/usr/local/bin/mailsync
-StandardOutput=syslog
-StandardError=syslog
+StandardOutput=journal
+StandardError=journal
 Environment=DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/{{ user.uid }}/bus

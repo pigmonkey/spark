@@ -5,6 +5,6 @@ After=network.target
 
 [Service]
 Type=oneshot
-StandardOutput=syslog
-StandardError=syslog
+StandardOutput=journal
+StandardError=journal
 ExecStart=/usr/bin/units_cur{% if 'args' in units %} {{ units.args }}{% endif %}
