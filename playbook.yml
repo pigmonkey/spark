@@ -4,6 +4,7 @@
   roles:
     - { role: base, tags: ['base'] }
     - { role: gnupg, tags: ['gnupg'] }
+    - { role: sysmon, tags: ['sysmon'] }
     - { role: cron, tags: ['cron'] }
     - { role: microcode, tags: ['microcode'], when: "'GenuineIntel' in ansible_processor" }
     - { role: hardened, tags: ['hardened'] }
@@ -89,6 +90,7 @@
     - { role: signal, tags: ['signal'] }
     - { role: android, tags: ['android'] }
     - { role: ripgrep, tags: ['ripgrep'] }
+    - { role: zeal, tags: ['zeal'] }
   vars_prompt:
     - name: user_password
       prompt: "Enter desired user password"

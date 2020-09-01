@@ -69,15 +69,11 @@ base_packages:
     - tmux
     - git
     - rsync
-    - glances
     - coreutils
     - moreutils
     - dateutils
     - bc
     - ranger
-    - strace
-    - lsof
-    - sysstat
     - arch-wiki-lite
     - arch-wiki-docs
     - python-keyring
@@ -90,7 +86,7 @@ base_packages:
     - screen
     - termdown
     - fzf
-    - smartmontools
+    - cpulimit
 
 filesystem_packages:
     - dosfstools
@@ -309,4 +305,4 @@ pkgfile:
 hardened:
     enable_namespaces: true
 
-kernel_parameters: "quiet consoleblank=60 i915.enable_psr=2"
+kernel_parameters: "quiet consoleblank=60"

@@ -5,8 +5,8 @@ ConditionACPower=false
 [Service]
 Type=oneshot
 ExecStart=/usr/local/bin/lowbatt -u {{ user.name }}
-StandardOutput=syslog
-StandardError=syslog
+StandardOutput=journal
+StandardError=journal
 Environment=DISPLAY=:0
 
 [Install]

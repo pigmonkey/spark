@@ -3,5 +3,5 @@ Description=Cryptshot Backup Service
 [Service]
 Type=oneshot
 ExecStart=/usr/local/bin/cryptshot-execute
-StandardOutput=syslog
-StandardError=syslog
+StandardOutput=journal
+StandardError=journal

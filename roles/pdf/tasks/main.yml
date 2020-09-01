@@ -69,7 +69,10 @@
 
 - name: Install OCRmyPDF and dependencies
   aur:
-    name: ocrmypdf
+    name:
+      - python-humanfriendly
+      - python-coloredlogs
+      - ocrmypdf
     user: "{{ user.name }}"
   tags:
     - ocrmypdf

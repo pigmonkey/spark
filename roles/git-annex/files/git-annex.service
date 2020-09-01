@@ -4,8 +4,8 @@ Description=Git Annex Assistant Service
 [Service]
 Type=simple
 ExecStart=/usr/bin/git-annex assistant --foreground --autostart
-StandardOutput=syslog
-StandardError=syslog
+StandardOutput=journal
+StandardError=journal
 
 [Install]
 WantedBy=multi-user.target

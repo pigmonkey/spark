@@ -6,5 +6,5 @@ After=network.target
 [Service]
 Type=oneshot
 ExecStart=/usr/local/bin/backitup {% if tarsnapper.ac_only %}-a {% endif %}-p {{ tarsnapper.period }} -l /usr/local/etc/tarsnapper.lastrun -b "/usr/bin/tarsnapper -c /usr/local/etc/tarsnapper.conf make"
-StandardOutput=syslog
-StandardError=syslog
+StandardOutput=journal
+StandardError=journal

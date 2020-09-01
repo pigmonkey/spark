@@ -22,6 +22,7 @@
       - gst-plugins-good
       - exiv2
       - perl-image-exiftool
+      - perl-archive-zip
       - opus-tools
     state: present
 
@@ -55,4 +56,9 @@
 - name: Install flameshot
   pacman:
     name: flameshot
+    state: present
+
+- name: Install digikam
+  pacman:
+    name: digikam
     state: present
