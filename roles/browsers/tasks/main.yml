@@ -70,13 +70,6 @@
     - chromium
     - firejail
 
-- name: Install Pepper Flash
-  pacman:
-    name: pepper-flash
-    state: present
-  tags:
-    - chromium
-
 - name: Install Tor browser
   pacman:
     name: torbrowser-launcher
