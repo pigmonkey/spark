@@ -12,9 +12,9 @@ from the playbook or by skipping the `laptop` tag.
 If Spark is run on either a ThinkPad or a MacBook, it will detect this and
 execute platform-specific tasks.
 
-**NOte:** If you would like to try recreating all the tasks that are currently 
+**Note:** If you would like to try recreating all the tasks that are currently 
 included in the ansible playbook, through a VM, you would need a disk of at least 
-**16GB** in size.  
+**16GB** in size.
 
 ## Running
 
