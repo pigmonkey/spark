@@ -27,4 +27,4 @@
     - user
 
 - name: Enable and start CUPS
-  service: name=org.cups.cupsd.service enabled=yes state=started
+  service: name=cups.service enabled=yes state=started
