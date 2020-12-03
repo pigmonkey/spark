@@ -24,6 +24,7 @@ aur:
         - miller
         - myrepos
         - ctmg
+        - spiped
 
 ssh:
     port: 22
