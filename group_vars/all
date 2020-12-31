@@ -10,6 +10,12 @@ user:
 
 hostname: nous
 
+interception:
+    caps2esc:
+        enabled: True
+        mode: 1
+        delay: 20000
+
 dotfiles:
     url: git@github.com:pigmonkey/dotfiles.git
     destination: projects/dotfiles

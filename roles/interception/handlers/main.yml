@@ -1,0 +1,5 @@
+---
+- name: restart udevmon
+  service:
+    name: udevmon.service
+    state: restarted
