@@ -11,6 +11,7 @@
     - { role: ssh, tags: ['ssh'] }
     - { role: dotfiles, tags: ['dotfiles'] }
     - { role: ssd, tags: ['ssd'] }
+    - { role: interception, tags: ['interception'], when: "interception is defined" }
     - { role: fonts, tags: ['fonts'] }
     - { role: x, tags: ['x'] }
     - { role: lightdm, tags: ['lightdm'], when: "display_manager == 'lightdm'" }

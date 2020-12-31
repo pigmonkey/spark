@@ -3,7 +3,7 @@
   aur:
     name:
       - libldac
-      - pulseaudio-modules-bt-git
+      - pulseaudio-modules-bt
     user: "{{ user.name }}"
   tags:
     - aur

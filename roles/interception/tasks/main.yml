@@ -1,0 +1,20 @@
+---
+- name: Install caps2esc
+  pacman:
+    name: interception-caps2esc
+    state: present
+
+- name: Push caps2esc udevmon config
+  template:
+    src: caps2esc.yaml.j2
+    dest: /etc/interception/udevmon.d/caps2esc.yaml
+  notify:
+    - restart udevmon
+  when: interception.caps2esc.enabled is defined and interception.caps2esc.enabled == True
+
+- name: Enable and start udevmon
+  service:
+    name: udevmon.service
+    enabled: yes
+    state: started
+  when: interception.caps2esc.enabled is defined and interception.caps2esc.enabled == True

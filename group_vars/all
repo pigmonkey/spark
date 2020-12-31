@@ -10,6 +10,12 @@ user:
 
 hostname: obsidian
 
+interception:
+    caps2esc:
+        enabled: True
+        mode: 1
+        delay: 20000
+
 dotfiles:
     url: ssh://brett@aleph.librum.org/home/brett/archives/dotfiles.git
     destination: projects/dotfiles
@@ -24,6 +30,7 @@ aur:
         - miller
         - myrepos
         - ctmg
+        - spiped
 
 ssh:
     port: 22
@@ -87,6 +94,7 @@ base_packages:
     - termdown
     - fzf
     - cpulimit
+    - progress
 
 filesystem_packages:
     - dosfstools
