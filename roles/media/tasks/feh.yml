@@ -16,6 +16,7 @@
   aur:
     name: imlib2-heic
     user: "{{ user.name }}"
+    skip_pgp: yes
   tags:
     - aur
     - feh
