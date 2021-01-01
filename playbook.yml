@@ -21,6 +21,7 @@
     - { role: pass, tags: ['pass'] }
     - { role: iptables, tags: ['iptables'] }
     - { role: nettools, tags: ['nettools'] }
+    - { role: unbound, tags: ['unbound'] }
     - { role: openresolv, tags: ['openresolv'] }
     - { role: networkmanager, tags: ['networkmanager'] }
     - { role: nmtrust, tags: ['nmtrust'] }
@@ -28,7 +29,6 @@
     - { role: ntp, tags: ['ntp'] }
     - { role: firejail, tags: ['firejail'] }
     - { role: tor, tags: ['tor'], when: "tor is defined" }
-    - { role: unbound, tags: ['unbound'] }
     - { role: editors, tags: ['editors'] }
     - { role: filesystems, tags: ['filesystems'] }
     - { role: archive, tags: ['archive'] }
