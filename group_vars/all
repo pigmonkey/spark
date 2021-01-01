@@ -306,7 +306,6 @@ aur_fonts:
     - ttf-oswald
     - ttf-quintessential
     - ttf-signika
-    - otf-symbola
 
 syncthing:
     run_on: trusted
