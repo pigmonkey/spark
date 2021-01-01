@@ -96,7 +96,6 @@ base_packages:
     - termdown
     - fzf
     - cpulimit
-    - progress
 
 filesystem_packages:
     - dosfstools

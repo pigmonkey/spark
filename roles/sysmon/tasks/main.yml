@@ -28,3 +28,8 @@
   pacman:
     name: smartmontools
     state: present
+
+- name: Install progress
+  pacman:
+    name: progress
+    state: present
