@@ -31,6 +31,7 @@ aur:
         - myrepos
         - ctmg
         - spiped
+        - exfat-utils-dkms
 
 ssh:
     port: 22
@@ -99,7 +100,6 @@ base_packages:
 filesystem_packages:
     - dosfstools
     - ntfs-3g
-    - exfat-utils-dkms
 
 browser_choices:
     - firefox -P default
