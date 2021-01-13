@@ -5,5 +5,7 @@ Section "InputClass"
         Driver "libinput"
         Option "XkbLayout" "us"
         Option "XkbVariant" "dvorak"
+        {% if interception is not defined %}
         Option "XkbOptions" "ctrl:nocaps"
+        {% endif %}
 EndSection
