@@ -3,7 +3,7 @@
   aur:
     name:
       - hamradio-menus
-      - chirp-hg
+      - chirp-daily
     user: "{{ user.name }}"
   tags:
     - aur
