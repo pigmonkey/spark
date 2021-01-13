@@ -197,6 +197,16 @@ cryptshot:
           interval: 6
         - level: monthly
           interval: 3
+    - name: palisade
+      uuid: 9d4ada7c-2c47-4de9-b8d5-1c4158bd3031
+      keyfile: /home/pigmonkey/.keys/usb-palisade.key
+      retain:
+        - level: daily
+          interval: 7
+        - level: weekly
+          interval: 6
+        - level: monthly
+          interval: 3
     - name: pilchuck
       uuid: d96a0fc3-7ea1-42f7-b0d0-42e573c478bd
       keyfile: /home/pigmonkey/.keys/usb-pilchuck.key
