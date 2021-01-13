@@ -2,3 +2,4 @@
 dependencies:
   - { role: openresolv }
   - { role: systemd }
+  - { role: nmtrust }

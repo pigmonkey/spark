@@ -1,7 +1,4 @@
 ---
-- name: Install Viking
-  pacman: name=viking state=present
-
 - name: Install GPXSee
   pacman: name=gpxsee state=present
 
