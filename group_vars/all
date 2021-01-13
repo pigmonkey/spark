@@ -31,7 +31,7 @@ aur:
         - myrepos
         - ctmg
         - spiped
-        - exfat-utils-dkms
+        - exfat-linux-dkms
 
 ssh:
     port: 22
