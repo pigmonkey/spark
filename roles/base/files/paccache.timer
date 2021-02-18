@@ -3,8 +3,8 @@ Description=Clean-up Old Pacman Files
 
 [Timer]
 OnCalendar=daily
-AccuracySec=1h
-Persistent=True
+Persistent=true
+RandomizedDelaySec=3h
 
 [Install]
 WantedBy=multi-user.target

@@ -4,7 +4,7 @@ Description=Unbound Root Hints Update Timer
 [Timer]
 OnCalendar=monthly
 Persistent=true
-RandomizedDelaySec=3600
+RandomizedDelaySec=3h
 Unit=roothints.service
  
 [Install]

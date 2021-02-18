@@ -4,8 +4,8 @@ Description=Reflector Update Timer
 [Timer]
 Unit=reflector-update.service
 OnCalendar=daily
-Persistent=True
-RandomizedDelaySec=1h
+Persistent=true
+RandomizedDelaySec=3h
 
 [Install]
 WantedBy=timers.target
