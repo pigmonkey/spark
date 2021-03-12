@@ -44,3 +44,8 @@
   tags:
     - aur
     - geteltorito
+
+- name: Install pigz
+  pacman: name=pigz state=present
+  tags:
+    - pigz
