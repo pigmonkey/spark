@@ -49,6 +49,5 @@
 - include: unclutter.yml
 - include: autorandr.yml
 - include: srandrd.yml
-- include: termite.yml
 - include: autocutsel.yml
 - include: xdg.yml
