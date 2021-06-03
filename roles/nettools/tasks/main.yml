@@ -56,7 +56,5 @@
 
 - name: Install wireguard and kernel modules
   pacman:
-    name:
-      - wireguard-tools
-      - wireguard-dkms
+    name: wireguard-tools
     state: present
