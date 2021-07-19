@@ -1,8 +1,12 @@
 ---
 - name: Install GPXSee
-  pacman: name=gpxsee state=present
+  pacman:
+    name: gpxsee
+    state: present
 
 - name: Install gpxpy
-  aur: name=python-gpxpy user={{ user.name }}
+  aur:
+    name: python-gpxpy
+    user:  user.name }}
   tags:
     - aur
