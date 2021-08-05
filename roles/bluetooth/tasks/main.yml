@@ -1,12 +1,9 @@
 ---
 - name: Install PulseAudio bluetooth with LDAC/aptX support
-  aur:
+  pacman:
     name:
       - libldac
-      - pulseaudio-modules-bt
-    user: "{{ user.name }}"
-  tags:
-    - aur
+      - pulseaudio-bluetooth
   notify:
     - restart pulse as user
 
