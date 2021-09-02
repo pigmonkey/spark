@@ -3,7 +3,9 @@
   pacman: name=libotr state=present
 
 - name: Install Bitlbee
-  pacman: name=bitlbee state=present
+  aur: name=bitlbee state=present
+  tags:
+    - aur
 
 - name: Push Bitlbee configuration file
   template: src=bitlbee.conf.j2 dest=/etc/bitlbee/bitlbee.conf
