@@ -5,9 +5,11 @@
     state: present
 
 - name: Install Bitlbee
-  pacman:
+  aur:
     name: bitlbee
-    state: present
+    user: "{{ user.name }}"
+  tags:
+    - aur
 
 - name: Push Bitlbee configuration file
   template:
