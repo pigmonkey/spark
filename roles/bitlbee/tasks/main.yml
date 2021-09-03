@@ -16,7 +16,7 @@
 
 - name: Ensure proper ownership of configuration directory
   file:
-    path: var/lib/bitlbee
+    path: /var/lib/bitlbee
     group: bitlbee
     owner: bitlbee
 
