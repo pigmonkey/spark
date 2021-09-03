@@ -1,23 +1,36 @@
 ---
 - name: Install libOTR
-  pacman: name=libotr state=present
+  pacman:
+    name: libotr
+    state: present
 
 - name: Install Bitlbee
-  pacman: name=bitlbee state=present
+  pacman:
+    name: bitlbee
+    state: present
 
 - name: Push Bitlbee configuration file
-  template: src=bitlbee.conf.j2 dest=/etc/bitlbee/bitlbee.conf
+  template:
+    src: bitlbee.conf.j2
+    dest: /etc/bitlbee/bitlbee.conf
 
 - name: Ensure proper ownership of configuration directory
-  file: path=/var/lib/bitlbee group=bitlbee owner=bitlbee
+  file:
+    path: var/lib/bitlbee
+    group: bitlbee
+    owner: bitlbee
 
 - name: Create Bitlbee systemd unit file directory
-  file: path=/etc/systemd/system/bitlbee.service.d state=directory
+  file:
+    path: /etc/systemd/system/bitlbee.service.d
+    state: directory
   tags:
     - firejail
 
 - name: Push Bitlbee socket unit file
-  copy: src=bitlbee-service-override.conf dest=/etc/systemd/system/bitlbee.service.d/override.conf
+  copy:
+    src: bitlbee-service-override.conf
+    dest: /etc/systemd/system/bitlbee.service.d/override.conf
   notify:
     - reload systemd config
     - restart bitlbee
