@@ -1,14 +1,8 @@
 ---
 - name: Install magic-wormhole
-  aur:
-    name:
-      - python-hkdf
-      - python-spake2
-      - python-txtorcon
-      - magic-wormhole
-    user: "{{ user.name }}"
-  tags:
-    - aur
+  pacman:
+    name: magic-wormhole
+    state: present
 
 - name: Jail magic-wormhole
   file: src=/usr/bin/firejail
