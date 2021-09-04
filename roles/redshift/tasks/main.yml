@@ -22,15 +22,8 @@
   tags:
     - firejail
 
-- name: Push RedShift firejail profile
-  copy: src=firejail/redshift.profile dest=/usr/local/etc/firejail/redshift.profile
-  notify:
-    - activate firejail profiles
-  tags:
-    - firejail
-
 - name: Push RedShift GTK firejail profile
-  copy: src=firejail/redshift.profile dest=/usr/local/etc/firejail/redshift-gtk.profile
+  copy: src=firejail/redshift-gtk.profile dest=/usr/local/etc/firejail/redshift-gtk.profile
   notify:
     - activate firejail profiles
   tags:
