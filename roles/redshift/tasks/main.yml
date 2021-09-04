@@ -35,12 +35,3 @@
     - activate firejail profiles
   tags:
     - firejail
-
-- name: Allow RedShift to access geoclue
-  blockinfile:
-    dest: /etc/geoclue/geoclue.conf
-    block: |
-      [redshift]
-      allowed=true
-      system=false
-      users=
