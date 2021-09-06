@@ -86,9 +86,12 @@
     - tor-browser
     - firejail
 
-- name: Install qutebrowser
+- name: Install qutebrowser and dependencies
   pacman:
-    name: qutebrowser
+    name:
+      - qutebrowser
+      - python-adblock
+      - pdfjs
     state: present
   tags:
     - qutebrowser
@@ -101,13 +104,6 @@
   tags:
     - qutebrowser
     - firejail
-
-- name: Install pdfjs for qutebrowser
-  pacman:
-    name: pdfjs
-    state: present
-  tags:
-    - qutebrowser
 
 - name: Push rofi browser chooser
   template:
