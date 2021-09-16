@@ -4,34 +4,15 @@
     name: alsa-utils
     state: present
 
-- name: Install PulseAudio
+- name: Install Pipewire
   pacman:
     name:
-      - pulseaudio
-      - pulseaudio-alsa
+      - pipewire
+      - pipewire-pulse
       - pavucontrol
     state: present
-
-- name: Switch output to newly connected devices
-  lineinfile:
-    dest: /etc/pulse/default.pa
-    state: present
-    line: "load-module module-switch-on-connect"
 
 - name: Install pasystray
   pacman:
     name: pasystray
     state: present
-
-- name: Install pulseaudio-ctl
-  aur:
-    name: pulseaudio-ctl
-    user: "{{ user.name }}"
-  tags:
-    - aur
-
-- name: Push pamute
-  copy:
-    src: pamute/pamute
-    dest: /usr/local/bin/pamute
-    mode: 0755

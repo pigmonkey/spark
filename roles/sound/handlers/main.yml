@@ -1,7 +1,7 @@
 ---
 - name: restart pulse as user
   systemd:
-    name: pulseaudio.service
+    name: pipewire-pulse.service
     scope: user
     state: restarted
   become: yes
