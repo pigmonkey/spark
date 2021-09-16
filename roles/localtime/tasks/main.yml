@@ -8,12 +8,3 @@
   vars:
       unit: localtime.service
       run_on: "{{ localtime.run_on }}"
-
-- name: Allow localtimed to access geoclue
-  blockinfile:
-    dest: /etc/geoclue/geoclue.conf
-    block: |
-      [localtimed]
-      allowed=true
-      system=false
-      users=

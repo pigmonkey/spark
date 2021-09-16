@@ -9,38 +9,26 @@
     state: present
 
 - name: Jail RedShift
-  file: src=/usr/bin/firejail
-        dest=/usr/local/bin/redshift
-        state=link
+  file:
+    src: /usr/bin/firejail
+    dest: /usr/local/bin/redshift
+    state: link
   tags:
     - firejail
 
 - name: Jail RedShift GTK
-  file: src=/usr/bin/firejail
-        dest=/usr/local/bin/redshift-gtk
-        state=link
-  tags:
-    - firejail
-
-- name: Push RedShift firejail profile
-  copy: src=firejail/redshift.profile dest=/usr/local/etc/firejail/redshift.profile
-  notify:
-    - activate firejail profiles
+  file:
+    src: /usr/bin/firejail
+    dest: /usr/local/bin/redshift-gtk
+    state: link
   tags:
     - firejail
 
 - name: Push RedShift GTK firejail profile
-  copy: src=firejail/redshift.profile dest=/usr/local/etc/firejail/redshift-gtk.profile
+  copy:
+    src: firejail/redshift-gtk.profile
+    dest: /usr/local/etc/firejail/redshift-gtk.profile
   notify:
     - activate firejail profiles
   tags:
     - firejail
-
-- name: Allow RedShift to access geoclue
-  blockinfile:
-    dest: /etc/geoclue/geoclue.conf
-    block: |
-      [redshift]
-      allowed=true
-      system=false
-      users=

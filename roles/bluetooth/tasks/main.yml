@@ -1,12 +1,4 @@
 ---
-- name: Install PulseAudio bluetooth with LDAC/aptX support
-  pacman:
-    name:
-      - libldac
-      - pulseaudio-bluetooth
-  notify:
-    - restart pulse as user
-
 - name: Install bluetooth libraries and tools
   pacman:
     name:

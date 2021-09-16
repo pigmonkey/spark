@@ -1,24 +1,21 @@
 ---
 - name: Install magic-wormhole
-  aur:
-    name:
-      - python-hkdf
-      - python-spake2
-      - python-txtorcon
-      - magic-wormhole
-    user: "{{ user.name }}"
-  tags:
-    - aur
+  pacman:
+    name: magic-wormhole
+    state: present
 
 - name: Jail magic-wormhole
-  file: src=/usr/bin/firejail
-        dest=/usr/local/bin/wormhole
-        state=link
+  file:
+    src: /usr/bin/firejail
+    dest: /usr/local/bin/wormhole
+    state: link
   tags:
     - firejail
 
 - name: Push magic-wormhole firejail profile
-  copy: src=firejail/wormhole.profile dest=/usr/local/etc/firejail/wormhole.profile
+  copy:
+    src: firejail/wormhole.profile
+    dest: /usr/local/etc/firejail/wormhole.profile
   notify:
     - activate firejail profiles
   tags:
