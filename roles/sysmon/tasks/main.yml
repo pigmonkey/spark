@@ -9,6 +9,11 @@
     name: glances
     state: present
 
+- name: Install btop
+  pacman:
+    name: btop
+    state: present
+
 - name: Install htop
   pacman:
     name: htop
