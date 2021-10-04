@@ -4,6 +4,11 @@
     name: w3m
     state: present
 
+- name: Install lynx
+  pacman:
+    name: lynx
+    state: present
+
 - name: Install Firefox
   pacman:
     name: firefox
