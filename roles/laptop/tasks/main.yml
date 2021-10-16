@@ -33,7 +33,7 @@
   pacman: name=powertop state=present
 
 - name: Install powerstat
-  aur: name=powerstat-git user={{ user.name }}
+  aur: name=powerstat user={{ user.name }}
   tags:
     - aur
 
