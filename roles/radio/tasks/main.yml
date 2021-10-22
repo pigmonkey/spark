@@ -10,5 +10,5 @@
     state: present
 
 - include: rtl-sdr.yml
-- include: radio_mgmt.yml
+#- include: radio_mgmt.yml
 - include: radio_ops.yml
