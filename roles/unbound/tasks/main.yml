@@ -10,6 +10,11 @@
     dest: /etc/unbound/root.hints
     force: yes
 
+- name: Verify unbound resolvconf config file exists
+  file:
+    path: /etc/unbound/resolvconf.conf
+    state: touch
+
 - name: Copy Unbound configuration file
   template:
     src: unbound.conf.j2
