@@ -9,11 +9,6 @@
       - gnome-keyring
     state: present
 
-- name: Push NetworkManager openresolv config.
-  copy:
-      src: rc-manager.conf
-      dest: /etc/NetworkManager/conf.d/20-rc-manager.conf
-
 - name: Push connectivity check config
   template:
       src: connectivity.conf.j2

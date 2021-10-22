@@ -8,3 +8,8 @@
   template:
     src: resolvconf.conf.j2
     dest: /etc/resolvconf.conf
+
+- name: Push NetworkManager openresolv config.
+  copy:
+      src: rc-manager.conf
+      dest: /etc/NetworkManager/conf.d/20-rc-manager.conf
