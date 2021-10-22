@@ -76,5 +76,5 @@
 
 - include: msmtp.yml
 - include: isync.yml
-- include: offlineimap.yml
+#- include: offlineimap.yml
 - include: mailsync.yml
