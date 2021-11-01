@@ -1,12 +1,18 @@
 ---
 - name: Install rcm
-  aur: name=rcm user={{ user.name }}
+  aur:
+    name: rcm
+    user: "{{ user.name }}"
   when: dotfiles is defined
   tags:
     - aur
 
 - name: Clone user dotfiles
-  git: repo={{ dotfiles.url }} dest=/home/{{ user.name }}/{{ dotfiles.destination }} accept_hostkey=yes update=no
+  git:
+    repo: "{{ dotfiles.url }}"
+    dest: /home/{{ user.name }}/{{ dotfiles.destination }}
+    accept_hostkey: yes
+    update: no
   when: dotfiles is defined
   become: yes
   become_user: "{{ user.name }}"

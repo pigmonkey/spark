@@ -23,20 +23,33 @@ Verify that the system clock is up to date.
 
     $ timedatectl set-ntp true
 
+Store your desination disk in an environment variable.
+
+    $ export DISK=/dev/sda
+
 Create partitions for legacy boot, EFI, and root.
 
-    $ parted -s /dev/sda mklabel gpt
-    $ parted -s /dev/sda mkpart primary 2048s 2MiB
-    $ parted -s /dev/sda set 1 bios_grub on
-    $ parted -s /dev/sda mkpart primary fat32 2MiB 515MiB
-    $ parted -s /dev/sda set 2 boot on
-    $ parted -s /dev/sda set 2 esp on
-    $ parted -s /dev/sda mkpart primary 540MiB 100%
+    $ parted -s $DISK mklabel gpt
+    $ parted -s $DISK mkpart primary 2048s 2MiB
+    $ parted -s $DISK set 1 bios_grub on
+    $ parted -s $DISK mkpart primary fat32 2MiB 515MiB
+    $ parted -s $DISK set 2 boot on
+    $ parted -s $DISK set 2 esp on
+    $ parted -s $DISK mkpart primary 540MiB 100%
+
+Store your EFI and crypt devices in environment variables.
+
+    # If you're using a NVME disk:
+    $ export DEVEFI="$DISK"p2
+    $ export DEVCRYPT="$DISK"p3
+    # If you're using a SATA disk:
+    $ export DEVEFI="$DISK"2
+    $ export DEVCRYPT="$DISK"3
 
 Create and mount the encrypted root filesystem.
 
-    $ cryptsetup luksFormat --type luks1 /dev/sda3
-    $ cryptsetup luksOpen /dev/sda3 lvm
+    $ cryptsetup luksFormat --type luks1 $DEVCRYPT
+    $ cryptsetup luksOpen $DEVCRYPT lvm
     $ pvcreate /dev/mapper/lvm
     $ vgcreate arch /dev/mapper/lvm
     $ lvcreate -L 8G arch -n swap
@@ -50,8 +63,8 @@ Create and mount the encrypted root filesystem.
 Format and mount the EFI partition.
 
     $ mkdir /mnt/efi
-    $ mkfs.fat -F32 /dev/sda2
-    $ mount /dev/sda2 /mnt/efi
+    $ mkfs.fat -F32 $DEVEFI
+    $ mount $DEVEFI /mnt/efi
 
 Optionally edit the mirror list.
 
@@ -89,7 +102,7 @@ Set your mkinitcpio encrypt/lvm2 hooks.
 Add a keyfile to decrypt the root volume and properly set the hooks.
 
     $ dd bs=512 count=8 if=/dev/urandom of=/crypto_keyfile.bin
-    $ cryptsetup luksAddKey /dev/sda3 /crypto_keyfile.bin
+    $ cryptsetup luksAddKey $DEVCRYPT /crypto_keyfile.bin
     $ chmod 000 /crypto_keyfile.bin
     $ sed -i 's/^FILES=.*/FILES=(\/crypto_keyfile.bin)/' /etc/mkinitcpio.conf
     $ mkinitcpio -p linux
@@ -97,10 +110,10 @@ Add a keyfile to decrypt the root volume and properly set the hooks.
 Configure GRUB.
 
     $ echo GRUB_ENABLE_CRYPTODISK=y >> /etc/default/grub
-    $ ROOTUUID=$(blkid /dev/sda3 | awk '{print $2}' | cut -d '"' -f2)
+    $ ROOTUUID=$(blkid $DEVCRYPT | awk '{print $2}' | cut -d '"' -f2)
     $ sed -i "s/^GRUB_CMDLINE_LINUX=.*/GRUB_CMDLINE_LINUX=\"cryptdevice=UUID="$ROOTUUID":lvm:allow-discards root=\/dev\/mapper\/arch-root resume=\/dev\/mapper\/arch-swap\"/" /etc/default/grub
     $ grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=GRUB --recheck --removable
-    $ grub-install --target=i386-pc --recheck /dev/sda
+    $ grub-install --target=i386-pc --recheck $DISK
     $ grub-mkconfig -o /boot/grub/grub.cfg
     $ chmod -R g-rwx,o-rwx /boot
 

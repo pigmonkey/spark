@@ -17,7 +17,6 @@
     dest: /etc/systemd/user/git-annex.service
   notify:
     - reload systemd config
-    - restart git-annex
 
 - name: Check if git-annex autostart file exists
   stat:

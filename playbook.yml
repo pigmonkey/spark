@@ -58,7 +58,7 @@
     - { role: pdf, tags: ['pdf'] }
     - { role: dictd, tags: ['dictd'] }
     - { role: redshift, tags: ['redshift'] }
-    - { role: rtorrent, tags: ['rtorrent'] }
+    - { role: transmission, tags: ['transmission'] }
     - { role: virtualbox, tags: ['virtualbox'] }
     - { role: hashicorp, tags: ['hashicorp'] }
     - { role: virtualenv, tags: ['virtualenv'] }
