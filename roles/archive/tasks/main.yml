@@ -65,3 +65,11 @@
     state: present
   tags:
     - pigz
+
+- name: Install ventoy
+  aur:
+    name: ventoy-bin
+    user: "{{ user.name }}"
+  tags:
+    - aur
+    - ventoy
