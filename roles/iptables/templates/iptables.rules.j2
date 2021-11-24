@@ -19,6 +19,7 @@
 {% endif %}
 {% if syncthing.open_ports is defined and syncthing.open_ports == True %}
 -A INPUT -p tcp -m tcp --dport 22000 -j ACCEPT
+-A INPUT -p udp -m udp --dport 22000 -j ACCEPT
 -A INPUT -p udp -m udp --dport 21027 -j ACCEPT
 {% endif %}
 COMMIT

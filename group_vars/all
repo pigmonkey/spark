@@ -46,7 +46,7 @@ mail:
     sync_pim: True
     sync_taskwarrior: True
     sync_notmuch: True
-    sync_time: 5min
+    sync_time: 10min
     sync_boot_delay: 2min
     sync_on: trusted
 

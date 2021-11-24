@@ -74,6 +74,11 @@
     regexp: "^x-scheme-handler/mailto="
     line: "x-scheme-handler/mailto=mutt.desktop"
 
+- name: Install goimapnotify
+  pacman:
+    name: goimapnotify
+    state: present
+
 - include: msmtp.yml
 - include: isync.yml
 #- include: offlineimap.yml
