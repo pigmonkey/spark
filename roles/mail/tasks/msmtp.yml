@@ -10,7 +10,10 @@
     - msmtp
 
 - name: Verify alias file exists
-  file: path=/etc/aliases state=touch
+  copy:
+    content: ""
+    dest: /etc/aliases
+    force: false
   tags:
     - msmtp
 

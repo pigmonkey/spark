@@ -13,9 +13,10 @@
     - firejail
 
 - name: Verify LibreOffice firejail local profile exists
-  file:
-    path: /etc/firejail/libreoffice.local
-    state: touch
+  copy:
+    content: ""
+    dest: /etc/firejail/libreoffice.local
+    force: false
   tags:
     - firejail
 
