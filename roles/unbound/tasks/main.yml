@@ -11,9 +11,10 @@
     force: yes
 
 - name: Verify unbound resolvconf config file exists
-  file:
-    path: /etc/unbound/resolvconf.conf
-    state: touch
+  copy:
+    content: ""
+    dest: /etc/unbound/resolvconf.conf
+    force: false
 
 - name: Copy Unbound configuration file
   template:

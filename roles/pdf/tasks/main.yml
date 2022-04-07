@@ -16,9 +16,10 @@
     - firejail
 
 - name: Verify Okular firejail local profile exists
-  file:
-    path: /etc/firejail/okular.local
-    state: touch
+  copy:
+    content: ""
+    dest: /etc/firejail/okular.local
+    force: false
   tags:
     - okular
     - firejail

@@ -20,9 +20,10 @@
     dest: /usr/local/share/applications/visidata.desktop
 
 - name: Verify mimeapps.list exists
-  file:
-    path: /etc/xdg/mimeapps.list
-    state: touch
+  copy:
+    content: ""
+    dest: /etc/xdg/mimeapps.list
+    force: false
 
 - name: Set visidata as default application for relevant mimetypes
   lineinfile:

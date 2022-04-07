@@ -23,9 +23,10 @@
     state: directory
 
 - name: Verify firejail globals file exists
-  file:
-    path: /etc/firejail/globals.local
-    state: touch
+  copy:
+    content: ""
+    dest: /etc/firejail/globals.local
+    force: false
 
 - name: Add blacklist to globals
   lineinfile:
