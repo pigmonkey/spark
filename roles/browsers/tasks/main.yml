@@ -26,9 +26,10 @@
     - firejail
 
 - name: Verify Firefox firejail local profile exists
-  file:
-    path: /etc/firejail/firefox.local
-    state: touch
+  copy:
+    content: ""
+    dest: /etc/firejail/firefox.local
+    force: false
   tags:
     - firefox
     - firejail
@@ -59,9 +60,10 @@
     - firejail
 
 - name: Verify Chromium firejail local profile exists
-  file:
-    path: /etc/firejail/chromium.local
-    state: touch
+  copy:
+    content: ""
+    dest: /etc/firejail/chromium.local
+    force: false
   tags:
     - chromium
     - firejail
@@ -136,9 +138,10 @@
     - chooser
 
 - name: Verify mimeapps.list exists
-  file:
-    path: /etc/xdg/mimeapps.list
-    state: touch
+  copy:
+    content: ""
+    dest: /etc/xdg/mimeapps.list
+    force: false
   tags:
     - rofi
     - chooser

@@ -10,7 +10,7 @@
     - firejail
 
 - name: Verify mpd firejail local profile exists
-  file: path=/etc/firejail/mpd.local state=touch
+  copy: content="" dest="/etc/firejail/mpd.local" force=false
   tags:
     - firejail
 

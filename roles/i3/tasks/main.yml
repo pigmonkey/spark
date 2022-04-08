@@ -12,7 +12,10 @@
   pacman: name=py3status state=present
 
 - name: Verify that default applications file exists
-  file: path=/etc/xdg/mimeapps.list state=touch
+  copy:
+    content: ""
+    dest: /etc/xdg/mimeapps.list
+    force: false
 
 - name: Verify header in default applications file
   lineinfile: dest=/etc/xdg/mimeapps.list

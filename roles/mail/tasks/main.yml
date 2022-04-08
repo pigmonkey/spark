@@ -11,9 +11,10 @@
     state: link
 
 - name: Verify mutt firejail local profile exists
-  file:
-    path: /etc/firejail/mutt.local
-    state: touch
+  copy:
+    content: ""
+    dest: /etc/firejail/mutt.local
+    force: false
   tags:
     - firejail
 
@@ -64,9 +65,10 @@
     dest: /usr/local/share/applications/mutt.desktop
 
 - name: Verify mimeapps.list exists
-  file:
-    path: /etc/xdg/mimeapps.list
-    state: touch
+  copy:
+    content: ""
+    dest: /etc/xdg/mimeapps.list
+    force: false
 
 - name: Set mutt as default application for mailto links
   lineinfile:

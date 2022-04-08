@@ -17,6 +17,7 @@
       dest: /etc/nmtrust/trusted_networks
 
 - name: Verify trusted unit list exists
-  file:
-      path: /etc/nmtrust/trusted_units
-      state: touch
+  copy:
+      content: ""
+      dest: /etc/nmtrust/trusted_units
+      force: false
