@@ -1,17 +1,14 @@
 ---
-- name: Install visidata
-  aur:
-    name: visidata
-    user: "{{ user.name }}"
-  tags:
-    - aur
 
-- name: Install additional libraries for visidata
+- name: Install visidata and libraries
   pacman:
     name:
-      - python-xlrd
-      - python-pandas
+      - visidata
+      - python-lxml
       - python-openpyxl
+      - python-pandas
+      - python-requests
+      - python-xlrd
     state: present
 
 - name: Push visidata desktop file
