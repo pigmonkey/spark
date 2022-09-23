@@ -21,7 +21,5 @@
 
 - name: Install documentation
   pacman:
-      name:
-        - python-docs
-        - python2-docs
+      name: python-docs
       state: present
