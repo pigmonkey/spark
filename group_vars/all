@@ -319,6 +319,10 @@ syncthing:
     run_on: trusted
     open_ports: true
 
+kdeconnect:
+    run_on: trusted
+    open_ports: true
+
 mirrorlist:
     run_on: trusted
 
