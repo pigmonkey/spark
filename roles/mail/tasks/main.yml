@@ -81,7 +81,7 @@
     name: goimapnotify
     state: present
 
-- include: msmtp.yml
-- include: isync.yml
-#- include: offlineimap.yml
-- include: mailsync.yml
+- include_tasks: msmtp.yml
+- include_tasks: isync.yml
+#- include_tasks: offlineimap.yml
+- include_tasks: mailsync.yml

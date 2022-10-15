@@ -8,7 +8,7 @@
       - xorg-server-xwayland
     state: present
 
-- include: dconf.yml
-- include: gtk.yml
-- include: gnome_shell.yml
-- include: online_accounts.yml
+- include_tasks: dconf.yml
+- include_tasks: gtk.yml
+- include_tasks: gnome_shell.yml
+- include_tasks: online_accounts.yml

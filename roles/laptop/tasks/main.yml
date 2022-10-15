@@ -1,5 +1,5 @@
 ---
-- include: tlp.yml
+- include_tasks: tlp.yml
 
 - name: Copy touchpad configuration file
   copy: src=30-touchpad.conf dest=/etc/X11/xorg.conf.d/30-touchpad.conf

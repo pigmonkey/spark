@@ -23,4 +23,4 @@
               line='[Default Applications]'
               insertbefore=BOF
 
-- include: rofi.yml
+- include_tasks: rofi.yml

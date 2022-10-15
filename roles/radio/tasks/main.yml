@@ -9,6 +9,6 @@
     name: hamlib
     state: present
 
-- include: rtl-sdr.yml
-#- include: radio_mgmt.yml
-- include: radio_ops.yml
+- include_tasks: rtl-sdr.yml
+#- include_tasks: radio_mgmt.yml
+- include_tasks: radio_ops.yml

@@ -14,7 +14,7 @@
 - name: Create cryptshot last run directory
   file: path=/usr/local/etc/cryptshot/lastrun state=directory
 
-- include: config.yml
+- include_tasks: config.yml
   with_items: "{{ cryptshot }}"
   loop_control:
     loop_var: target
