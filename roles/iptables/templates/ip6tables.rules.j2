@@ -18,18 +18,18 @@ COMMIT
 -A INPUT -p ipv6-icmp --icmpv6-type 128 -m conntrack --ctstate NEW -j ACCEPT
 -A INPUT -p udp -m conntrack --ctstate NEW -j UDP
 -A INPUT -p tcp -m tcp --tcp-flags FIN,SYN,RST,ACK SYN -m conntrack --ctstate NEW -j TCP
--A INPUT -p udp -j REJECT --reject-with icmp6-adm-prohibited
--A INPUT -p tcp -j REJECT --reject-with tcp-reset
--A INPUT -j REJECT --reject-with icmp6-adm-prohibited
-{% if ssh.enable_sshd %}
--A TCP -p tcp -m tcp --dport {{ ssh.port }} -j ACCEPT
+{% if kdeconnect.open_ports is defined and kdeconnect.open_ports == True %}
+-A INPUT -p tcp -m tcp --dport 1714:1764 -m state --state NEW,ESTABLISHED -j ACCEPT
+-A INPUT -p udp -m udp --dport 1714:1764 -m state --state NEW,ESTABLISHED -j ACCEPT
 {% endif %}
 {% if syncthing.open_ports is defined and syncthing.open_ports == True %}
 -A INPUT -p tcp -m tcp --dport 22000 -j ACCEPT
 -A INPUT -p udp -m udp --dport 21027 -j ACCEPT
 {% endif %}
-{% if kdeconnect.open_ports is defined and kdeconnect.open_ports == True %}
--A INPUT -p tcp -m tcp --dport 1714:1764 -j ACCEPT
--A INPUT -p udp -m udp --dport 1714:1764 -j ACCEPT
+-A INPUT -p udp -j REJECT --reject-with icmp6-adm-prohibited
+-A INPUT -p tcp -j REJECT --reject-with tcp-reset
+-A INPUT -j REJECT --reject-with icmp6-adm-prohibited
+{% if ssh.enable_sshd %}
+-A TCP -p tcp -m tcp --dport {{ ssh.port }} -j ACCEPT
 {% endif %}
 COMMIT

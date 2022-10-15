@@ -15,15 +15,15 @@
 -A INPUT -p tcp -m tcp --dport 1714:1764 -m state --state NEW,ESTABLISHED -j ACCEPT
 -A INPUT -p udp -m udp --dport 1714:1764 -m state --state NEW,ESTABLISHED -j ACCEPT
 {% endif %}
+{% if syncthing.open_ports is defined and syncthing.open_ports == True %}
+-A INPUT -p tcp -m tcp --dport 22000 -j ACCEPT
+-A INPUT -p udp -m udp --dport 22000 -j ACCEPT
+-A INPUT -p udp -m udp --dport 21027 -j ACCEPT
+{% endif %}
 -A INPUT -p udp -j REJECT --reject-with icmp-port-unreachable
 -A INPUT -p tcp -j REJECT --reject-with tcp-reset
 -A INPUT -j REJECT --reject-with icmp-proto-unreachable
 {% if ssh.enable_sshd %}
 -A TCP -p tcp -m tcp --dport {{ ssh.port }} -j ACCEPT
-{% endif %}
-{% if syncthing.open_ports is defined and syncthing.open_ports == True %}
--A INPUT -p tcp -m tcp --dport 22000 -j ACCEPT
--A INPUT -p udp -m udp --dport 22000 -j ACCEPT
--A INPUT -p udp -m udp --dport 21027 -j ACCEPT
 {% endif %}
 COMMIT
