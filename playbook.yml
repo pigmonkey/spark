@@ -3,6 +3,7 @@
   become: yes
   roles:
     - { role: base, tags: ['base'] }
+    - { role: sudo, tags: ['sudo'] }
     - { role: gnupg, tags: ['gnupg'] }
     - { role: sysmon, tags: ['sysmon'] }
     - { role: cron, tags: ['cron'] }
@@ -22,6 +23,7 @@
     - { role: pass, tags: ['pass'] }
     - { role: iptables, tags: ['iptables'] }
     - { role: nettools, tags: ['nettools'] }
+    - { role: openvpn, tags: ['openvpn'] }
     - { role: nmtrust, tags: ['nmtrust'] }
     - { role: unbound, tags: ['unbound'] }
     - { role: openresolv, tags: ['openresolv'] }

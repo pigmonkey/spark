@@ -110,9 +110,6 @@ browser_choices:
     - qcode
     - "| xclip -selection c"
 
-passwordless_sudo:
-    - /usr/bin/openvpn*
-
 tarsnapper:
   deltas: 1h 1d 7d 30d 365d
   period: DAILY
