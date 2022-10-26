@@ -110,9 +110,6 @@ browser_choices:
     - qcode
     - "| xclip -selection c"
 
-passwordless_sudo:
-    - /usr/bin/openvpn*
-
 tarsnapper:
   deltas: 1h 1d 7d 30d 365d
   period: DAILY
@@ -296,6 +293,10 @@ aur_fonts:
     - ttf-signika
 
 syncthing:
+    run_on: trusted
+    open_ports: true
+
+kdeconnect:
     run_on: trusted
     open_ports: true
 

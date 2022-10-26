@@ -1,0 +1,16 @@
+---
+- name: Install KDE Connect
+  pacman: name=kdeconnect state=present
+
+- name: Push KDE Connect service file
+  template:
+    src: kdeconnect.service.j2
+    dest: /etc/systemd/user/kdeconnect.service
+  notify:
+    - reload systemd config
+
+- include_tasks: roles/nmtrust/tasks/unit.yml
+  vars:
+      unit: kdeconnect.service
+      run_on: "{{ syncthing.run_on }}"
+      user_unit: true

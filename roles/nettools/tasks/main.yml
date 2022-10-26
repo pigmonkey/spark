@@ -1,7 +1,4 @@
 ---
-- name: Install OpenVPN
-  pacman: name=openvpn state=present
-
 - name: Install MTR
   pacman: name=mtr state=present
 

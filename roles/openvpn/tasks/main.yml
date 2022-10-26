@@ -1,0 +1,8 @@
+---
+- name: Install OpenVPN
+  pacman: name=openvpn state=present
+
+- name: Allow passwordless OpenVPN for wheel group
+  template: src=sudo_openvpn.j2 dest=/etc/sudoers.d/02_openvpn mode=440 validate='visudo -cf %s'
+  tags:
+    - sudo
