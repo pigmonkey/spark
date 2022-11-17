@@ -36,6 +36,7 @@
 - name: Install Zathura and dependencies
   pacman:
     name:
+      - zathura-cb
       - zathura-pdf-mupdf
       - zathura-ps
     state: present
