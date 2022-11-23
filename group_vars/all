@@ -173,7 +173,7 @@ firejail:
 
 cryptshot:
     - name: darkstar
-      uuid: 157bdb7b-d209-4bdb-8a3b-26b5480fa954
+      uuid: a2cc4cc2-1bed-40c6-9132-49231f9a8b28
       keyfile: /home/brett/.keys/usb-darkstar.key
       retain:
         - level: daily
@@ -183,7 +183,7 @@ cryptshot:
         - level: monthly
           interval: 3
     - name: trinity
-      uuid: 65733392-e877-4e42-a17b-feb1a3ab49fc
+      uuid: b9bd2322-034b-46a6-9f9a-9da36d82b0d2
       keyfile: /home/brett/.keys/usb-trinity.key
       retain:
         - level: daily
