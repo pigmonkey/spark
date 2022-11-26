@@ -5,12 +5,12 @@ if [ $? -eq 0 ]; then
     BRIGHTNESS=true
 fi
 
-if ! pidof physlock > /dev/null; then
+if ! pidof i3lock > /dev/null; then
     if [ "$BRIGHTNESS" = true ]; then
         light -O
         light -S 10
     fi
-    /usr/sbin/physlock -md
+    /usr/bin/i3lock --color=1d2021 --ignore-empty-password
     if [ "$BRIGHTNESS" = true ]; then
         light -I
     fi

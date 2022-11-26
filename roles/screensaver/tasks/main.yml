@@ -2,8 +2,8 @@
 - name: Install xautolock
   pacman: name=xautolock state=present
 
-- name: Install physlock
-  pacman: name=physlock state=present
+- name: Install i3lock
+  pacman: name=i3lock state=present
 
 - name: Push lock script
   copy: src=lock.sh dest=/usr/local/bin/lock mode=0755
