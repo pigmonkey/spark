@@ -86,3 +86,10 @@
     user: "{{ user.name }}"
   tags:
     - aur
+
+- name: Install epy
+  aur:
+    name: epy-git
+    user: "{{ user.name }}"
+  tags:
+    - aur
