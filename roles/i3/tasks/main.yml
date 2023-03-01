@@ -9,7 +9,9 @@
     state: present
 
 - name: Install py3status
-  pacman: name=py3status state=present
+  pacman:
+    name: py3status
+    state: present
 
 - name: Verify that default applications file exists
   copy:
@@ -18,9 +20,10 @@
     force: false
 
 - name: Verify header in default applications file
-  lineinfile: dest=/etc/xdg/mimeapps.list
-              state=present
-              line='[Default Applications]'
-              insertbefore=BOF
+  lineinfile:
+    dest: /etc/xdg/mimeapps.list
+    state: present
+    line: '[Default Applications]'
+    insertbefore: BOF
 
 - include_tasks: rofi.yml

@@ -270,6 +270,9 @@ base_fonts:
     - noto-fonts
     - terminus-font
     - tex-gyre-fonts
+    - ttc-iosevka
+    - ttc-iosevka-aile
+    - ttc-iosevka-ss08
     - ttf-caladea
     - ttf-carlito
     - ttf-dejavu
@@ -288,6 +291,7 @@ aur_fonts:
     - ttf-heuristica
     - ttf-merriweather
     - ttf-merriweather-sans
+    - ttf-mplus-git
     - ttf-oswald
     - ttf-quintessential
     - ttf-signika

@@ -46,10 +46,9 @@
     name: simple-scan
     state: present
 
-- name: Install pandoc and dependencies
+- name: Install pandoc
   pacman:
-    name:
-      - pandoc
+    name: pandoc-cli
     state: present
 
 - name: Install texlive-core
@@ -84,6 +83,13 @@
 - name: Install xsv
   aur:
     name: xsv
+    user: "{{ user.name }}"
+  tags:
+    - aur
+
+- name: Install epy
+  aur:
+    name: epy-git
     user: "{{ user.name }}"
   tags:
     - aur
