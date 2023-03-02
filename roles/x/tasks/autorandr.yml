@@ -11,12 +11,3 @@
     daemon_reload: true
   tags:
     - autorandr
-
-- name: Enable autorandr-lid-listener.service to ensure it starts after closing/opening lid
-  ansible.builtin.systemd:
-    name: autorandr-lid-listener.service
-    enabled: true
-    state: started
-    daemon_reload: true
-  tags:
-    - autorandr
