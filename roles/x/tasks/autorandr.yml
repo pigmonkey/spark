@@ -3,3 +3,11 @@
   pacman: name=autorandr state=present
   tags:
     - autorandr
+
+- name: Enable autorandr.service to ensure it starts after wake from suspend
+  ansible.builtin.systemd:
+    name: autorandr
+    enabled: true
+    daemon_reload: true
+  tags:
+    - autorandr
