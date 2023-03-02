@@ -10,6 +10,5 @@
   ansible.builtin.systemd:
     name: autorandr
     enabled: true
-    daemon_reload: true
   tags:
     - autorandr
