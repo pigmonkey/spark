@@ -26,8 +26,8 @@
 - name: Enable and start lowbatt timer
   service: name=lowbatt.timer enabled=yes state=started
 
-- name: Install light
-  pacman: name=light state=present
+- name: Install brightnessctl
+  pacman: name=brightnessctl state=present
 
 - name: Install powertop
   pacman: name=powertop state=present
