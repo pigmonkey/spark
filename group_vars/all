@@ -29,7 +29,6 @@ aur:
         - zplug
         - miller
         - myrepos
-        - ctmg
 
 ssh:
     port: 22
@@ -57,10 +56,13 @@ network:
        - 40ad5ce3-a119-4762-aea7-e3a8eb4de7da
        - 08579418-09e4-4f58-b9e4-ae9622e18df9
        - 6862d52e-6fe9-46e2-b5ca-d900868dd96c
+       - 3fc4e571-24b9-40ff-9138-90d036aad90b
+       - 1be42e4c-cc30-428e-a733-ea6e712b8679
+       - 481dcb00-1a50-4f03-9253-db1c3305ba64
+
 
 editors:
     - gvim
-    - emacs
 
 video_drivers:
     - libva-intel-driver
@@ -132,7 +134,7 @@ postgresql:
 
 fingerprint: False
 
-etesync: False
+etesync: True
 
 tor:
     run_on: trusted
