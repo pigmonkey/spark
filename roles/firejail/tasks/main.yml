@@ -34,3 +34,9 @@
     state: present
     line: "blacklist {{ item }}"
   with_items: "{{ firejail.blacklist }}"
+
+- name: Add user to firejail users
+  lineinfile:
+    dest: /etc/firejail/firejail.users
+    state: present
+    line: "{{ user.name }}"
