@@ -1,8 +1,11 @@
 ---
 - name: Install GNU Units
-  pacman:
+  aur:
     name: units
-    state: present
+    user: "{{ user.name }}"
+    skip_pgp: yes
+  tags:
+    - aur
 
 - name: Push GNU Units currency update service file
   template:
