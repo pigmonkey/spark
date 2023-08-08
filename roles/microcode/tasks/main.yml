@@ -1,5 +1,26 @@
 ---
-- name: Install intel microcode
-  pacman: name=intel-ucode state=present
+- name: check if Intel processor
+  command: grep -q Intel /proc/cpuinfo
+  register: is_intel
+  failed_when: is_intel.rc > 1
+
+- name: check if AMD processor
+  command: grep -q AMD /proc/cpuinfo
+  register: is_amd
+  failed_when: is_amd.rc > 1
+
+- name: Install Intel microcode
+  pacman:
+    name: intel-ucode
+    state: present
+  when: is_intel.rc == 0
+  notify:
+    - rebuild grub
+
+- name: Install AMD microcode
+  pacman:
+    name: amd-ucode
+    state: present
+  when: is_amd.rc == 0
   notify:
     - rebuild grub
