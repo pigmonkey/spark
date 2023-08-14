@@ -95,6 +95,7 @@
     - { role: zeal, tags: ['zeal'] }
     - { role: kdeconnect, tags: ['kdeconnect'] }
     - { role: oomd, tags: ['oomd'] }
+    - { role: f3, tags: ['f3'] }
   vars_prompt:
     - name: user_password
       prompt: "Enter desired user password"
