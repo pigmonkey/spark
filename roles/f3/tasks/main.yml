@@ -1,0 +1,8 @@
+---
+- name: Install F3
+  aur:
+    name: f3
+    user: "{{ user.name }}"
+    skip_pgp: yes
+  tags:
+    - aur

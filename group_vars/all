@@ -122,10 +122,6 @@ tarsnapper:
 gitannex:
     stop_on_untrusted: True
 
-bitlbee:
-    run_on: trusted
-    torify: True
-
 bootloader: grub
 
 postgresql:

@@ -1,0 +1,15 @@
+---
+- name: Install Fedora systemd-oomd configuration
+  aur:
+      name: systemd-oomd-defaults
+      user: "{{ user.name }}"
+  notify:
+    - reload systemd config
+  tags:
+    - aur
+
+- name: Enable and start systemd-oomd
+  service:
+    name: systemd-oomd.service
+    enabled: yes
+    state: started

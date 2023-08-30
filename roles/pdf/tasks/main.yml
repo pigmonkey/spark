@@ -69,12 +69,9 @@
   tags:
     - pdfgrep
 
-- name: Install OCRmyPDF and dependencies
+- name: Install OCRmyPDF
   aur:
-    name:
-      - python-humanfriendly
-      - python-coloredlogs
-      - ocrmypdf
+    name: ocrmypdf
     user: "{{ user.name }}"
   tags:
     - ocrmypdf

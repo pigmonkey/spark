@@ -51,9 +51,9 @@
     name: pandoc-cli
     state: present
 
-- name: Install texlive-core
+- name: Install texlive-basic
   pacman:
-    name: texlive-core
+    name: texlive-basic
     state: present
 
 - name: Install texlive-latexextra
@@ -93,3 +93,8 @@
     user: "{{ user.name }}"
   tags:
     - aur
+
+- name: Install csvkit
+  pacman:
+    name: csvkit
+    state: present
