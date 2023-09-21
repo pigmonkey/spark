@@ -1,8 +1,5 @@
 ---
 - name: Install zeal
-  aur:
-    name:
-      - zeal
-    user: "{{ user.name }}"
-  tags:
-    - aur
+  pacman:
+      name: zeal
+      state: present
