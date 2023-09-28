@@ -97,7 +97,7 @@ base_packages:
 filesystem_packages:
     - dosfstools
     - ntfs-3g
-    - exfat-utils
+    - exfatprogs
     - gparted
 
 browser_choices:
