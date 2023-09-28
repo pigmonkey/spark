@@ -99,6 +99,7 @@ filesystem_packages:
     - ntfs-3g
     - exfatprogs
     - gparted
+    - udftools
 
 browser_choices:
     - firefox -P default
