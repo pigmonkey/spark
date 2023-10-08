@@ -93,6 +93,7 @@ base_packages:
     - termdown
     - fzf
     - cpulimit
+    - vivid
 
 filesystem_packages:
     - dosfstools
