@@ -8,3 +8,13 @@
   when: kernel_parameters is defined and bootloader == 'grub'
   notify:
     - rebuild grub
+
+- name: Disable Grub submenus
+  lineinfile:
+    dest: /etc/default/grub
+    regexp: '^GRUB_DISABLE_SUBMENU'
+    state: present
+    line: 'GRUB_DISABLE_SUBMENU=y'
+  when: bootloader == 'grub'
+  notify:
+    - rebuild grub
