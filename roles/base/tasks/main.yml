@@ -18,18 +18,6 @@
     name: "{{ hostname }}"
   when: hostname is defined
 
-- name: Set kernel parameters
-  lineinfile:
-    dest: /etc/default/grub
-    regexp: '^GRUB_CMDLINE_LINUX_DEFAULT'
-    state: present
-    line: 'GRUB_CMDLINE_LINUX_DEFAULT="{{ kernel_parameters }}"'
-  when: kernel_parameters is defined and bootloader == 'grub'
-  notify:
-    - rebuild grub
-  tags:
-    - kernelparams
-
 - include_tasks: shell.yml
 - include_tasks: user.yml
 - include_tasks: packages.yml
