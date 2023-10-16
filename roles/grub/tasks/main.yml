@@ -5,7 +5,7 @@
     regexp: '^GRUB_CMDLINE_LINUX_DEFAULT'
     state: present
     line: 'GRUB_CMDLINE_LINUX_DEFAULT="{{ kernel_parameters }}"'
-  when: kernel_parameters is defined and bootloader == 'grub'
+  when: kernel_parameters is defined
   notify:
     - rebuild grub
 
@@ -15,6 +15,5 @@
     regexp: '^GRUB_DISABLE_SUBMENU'
     state: present
     line: 'GRUB_DISABLE_SUBMENU=y'
-  when: bootloader == 'grub'
   notify:
     - rebuild grub
