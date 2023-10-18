@@ -17,3 +17,10 @@
     line: 'GRUB_DISABLE_SUBMENU=y'
   notify:
     - rebuild grub
+
+- name: Install Grub Pacman hook
+  aur:
+    name: grub-hook
+    user: "{{ user.name }}"
+  tags:
+    - aur
