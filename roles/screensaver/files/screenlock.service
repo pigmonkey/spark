@@ -4,7 +4,7 @@ Before=sleep.target
 
 [Service]
 User=%I
-Type=forking
+Type=simple
 Environment=DISPLAY=:0
 ExecStart=/usr/local/bin/lock
 ExecStartPost=/usr/bin/sleep 1

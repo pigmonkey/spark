@@ -10,7 +10,7 @@ if ! pidof i3lock > /dev/null; then
         brightnessctl --quiet --save
         brightnessctl --quiet set 10%
     fi
-    /usr/bin/i3lock --color=1d2021 --ignore-empty-password
+    /usr/bin/i3lock --color=1d2021 --ignore-empty-password --nofork
     if [ "$BRIGHTNESS" = true ]; then
         brightnessctl --quiet --restore
     fi
