@@ -16,3 +16,10 @@
     state: present
   tags:
     - shell
+
+- name: Install zsh-antidote
+  aur:
+    name: zsh-antidote
+    user: "{{ user.name }}"
+  tags:
+    - aur
