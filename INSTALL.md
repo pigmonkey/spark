@@ -83,7 +83,7 @@ Change root into the base install and perform base configuration tasks.
 
     $ arch-chroot /mnt /bin/bash
     $ export LANG=en_US.UTF-8
-    $ export TIME=en_DK.UTF-8
+    $ export TIME=en_CA.UTF-8
     $ echo $LANG UTF-8 >> /etc/locale.gen
     $ echo $TIME UTF-8 >> /etc/locale.gen
     $ locale-gen
