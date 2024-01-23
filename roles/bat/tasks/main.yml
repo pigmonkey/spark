@@ -1,0 +1,10 @@
+---
+- name: Install bat
+  pacman:
+    name: bat
+    state: present
+
+- name: Install bat-extras
+  pacman:
+    name: bat-extras
+    state: present

@@ -83,7 +83,7 @@ Change root into the base install and perform base configuration tasks.
 
     $ arch-chroot /mnt /bin/bash
     $ export LANG=en_US.UTF-8
-    $ export TIME=en_DK.UTF-8
+    $ export TIME=en_CA.UTF-8
     $ echo $LANG UTF-8 >> /etc/locale.gen
     $ echo $TIME UTF-8 >> /etc/locale.gen
     $ locale-gen
@@ -97,7 +97,7 @@ Change root into the base install and perform base configuration tasks.
 
 Set your mkinitcpio encrypt/lvm2 hooks.
 
-    $ sed -i 's/^HOOKS=.*/HOOKS=(base udev autodetect modconf block keyboard encrypt lvm2 resume filesystems fsck)/' /etc/mkinitcpio.conf
+    $ sed -i 's/^HOOKS=.*/HOOKS=(base udev autodetect modconf kms keyboard keymap consolefont block encrypt lvm2 resume filesystems fsck)/' /etc/mkinitcpio.conf
 
 Add a keyfile to decrypt the root volume and properly set the hooks.
 

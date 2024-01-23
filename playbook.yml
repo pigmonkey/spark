@@ -3,6 +3,7 @@
   become: yes
   roles:
     - { role: base, tags: ['base'] }
+    - { role: grub, tags: ['grub'], when: "bootloader == 'grub'"}
     - { role: sudo, tags: ['sudo'] }
     - { role: gnupg, tags: ['gnupg'] }
     - { role: sysmon, tags: ['sysmon'] }
@@ -93,6 +94,7 @@
     - { role: signal, tags: ['signal'] }
     - { role: android, tags: ['android'] }
     - { role: ripgrep, tags: ['ripgrep'] }
+    - { role: bat, tags: ['bat'] }
     - { role: zeal, tags: ['zeal'] }
     - { role: kdeconnect, tags: ['kdeconnect'] }
     - { role: oomd, tags: ['oomd'] }
