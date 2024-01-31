@@ -61,6 +61,11 @@
     name: texlive-latexextra
     state: present
 
+- name: Install texlive-binextra
+  pacman:
+    name: texlive-binextra
+    state: present
+
 - name: Install qalculate
   pacman:
     name: qalculate-gtk
