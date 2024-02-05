@@ -2,6 +2,7 @@
 - name: Create user group
   group:
     name: "{{ user.group }}"
+    gid: "{{ user.gid }}"
     state: present
   tags:
     - user

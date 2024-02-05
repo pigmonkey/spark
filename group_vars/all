@@ -2,6 +2,7 @@ user:
     name: brett
     uid: 1000
     group: brett
+    gid: 1000
     shell: /usr/bin/zsh
     email: brett@librum.org
     log:
