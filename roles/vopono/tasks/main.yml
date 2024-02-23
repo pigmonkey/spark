@@ -1,0 +1,17 @@
+---
+- name: Install Vopono
+  aur:
+    name: vopono
+    user: "{{ user.name }}"
+  tags:
+    - aur
+
+- name: Allow passwordless Vopono for wheel group
+  copy:
+    src: sudo_vopono
+    dest: /etc/sudoers.d/03_vopono
+    mode: 440
+    validate: 'visudo -cf %s'
+  tags:
+    - aur
+    - sudo
