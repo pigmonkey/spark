@@ -1,0 +1,1 @@
+%wheel ALL=(ALL) NOPASSWD:SETENV:/usr/bin/vopono*

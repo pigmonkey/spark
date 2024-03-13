@@ -26,11 +26,6 @@
 - name: Install sshuttle
   pacman: name=sshuttle state=present
 
-- name: Install pdsh
-  aur: name=pdsh user={{ user.name }}
-  tags:
-    - aur
-
 - name: Install wireshark
   pacman: name=wireshark-qt state=present
 
