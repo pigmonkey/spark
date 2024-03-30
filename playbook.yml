@@ -62,7 +62,6 @@
     - { role: redshift, tags: ['redshift'] }
     - { role: transmission, tags: ['transmission'] }
     - { role: virtualbox, tags: ['virtualbox'] }
-    - { role: hashicorp, tags: ['hashicorp'] }
     - { role: virtualenv, tags: ['virtualenv'] }
     - { role: backitup, tags: ['backitup'] }
     - { role: cryptshot, tags: ['cryptshot'], when: "cryptshot is defined" }
