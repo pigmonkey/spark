@@ -51,8 +51,7 @@ mail:
     sync_on: trusted
 
 network:
-    conn_check:
-        interval: 0
+    conn_check: False
     trusted_uuid:
         - 39744b35-2f2f-4a18-9da4-7542a56c28c2
         - d2642f7e-9e58-4b00-82f8-26b4ef76a54e
