@@ -15,6 +15,11 @@
       dest: /etc/NetworkManager/conf.d/20-connectivity.conf
   when: network.conn_check is defined
 
+- name: Push MAC address randomization config
+  template:
+      src: random_mac.conf.j2
+      dest: /etc/NetworkManager/conf.d/20-random_mac.conf
+
 - name: Enable and start NetworkManager
   service:
       name: NetworkManager.service

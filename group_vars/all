@@ -51,7 +51,6 @@ mail:
     sync_on: trusted
 
 network:
-    spoof_mac: True
     conn_check:
         interval: 0
     trusted_uuid:
