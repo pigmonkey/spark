@@ -15,3 +15,10 @@
         state=link
   tags:
     - firejail
+
+- name: Install libgourou
+  aur:
+    name: gourou
+    user: "{{ user.name }}"
+  tags:
+    - aur
