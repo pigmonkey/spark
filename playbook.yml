@@ -29,7 +29,6 @@
     - { role: unbound, tags: ['unbound'] }
     - { role: openresolv, tags: ['openresolv'] }
     - { role: networkmanager, tags: ['networkmanager'] }
-    - { role: macchiato, tags: ['macchiato'] }
     - { role: ntp, tags: ['ntp'] }
     - { role: firejail, tags: ['firejail'] }
     - { role: tor, tags: ['tor'], when: "tor is defined" }
@@ -62,7 +61,6 @@
     - { role: redshift, tags: ['redshift'] }
     - { role: transmission, tags: ['transmission'] }
     - { role: virtualbox, tags: ['virtualbox'] }
-    - { role: hashicorp, tags: ['hashicorp'] }
     - { role: virtualenv, tags: ['virtualenv'] }
     - { role: backitup, tags: ['backitup'] }
     - { role: cryptshot, tags: ['cryptshot'], when: "cryptshot is defined" }

@@ -50,9 +50,7 @@ mail:
     sync_on: trusted
 
 network:
-    spoof_mac: True
-    conn_check:
-        interval: 0
+    conn_check: False
     trusted_uuid:
        - 40ad5ce3-a119-4762-aea7-e3a8eb4de7da
        - 08579418-09e4-4f58-b9e4-ae9622e18df9
