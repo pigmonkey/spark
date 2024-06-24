@@ -91,7 +91,6 @@ base_packages:
     - screen
     - termdown
     - fzf
-    - cpulimit
     - vivid
 
 filesystem_packages:
