@@ -20,5 +20,6 @@
 
 - include_tasks: shell.yml
 - include_tasks: user.yml
+- include_tasks: sudo.yml
 - include_tasks: packages.yml
 - include_tasks: journal.yml

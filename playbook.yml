@@ -4,7 +4,6 @@
   roles:
     - { role: base, tags: ['base'] }
     - { role: grub, tags: ['grub'], when: "bootloader == 'grub'"}
-    - { role: sudo, tags: ['sudo'] }
     - { role: gnupg, tags: ['gnupg'] }
     - { role: sysmon, tags: ['sysmon'] }
     - { role: cron, tags: ['cron'] }
