@@ -19,6 +19,11 @@
       name: python-black
       state: present
 
+- name: Install uv
+  pacman:
+      name: uv
+      state: present
+
 - name: Install documentation
   pacman:
       name: python-docs
