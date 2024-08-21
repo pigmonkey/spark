@@ -1,0 +1,14 @@
+---
+- name: Install cyrus-sasl-xoauth2-git
+  aur:
+      name: cyrus-sasl-xoauth2-git
+      user: "{{ user.name }}"
+  tags:
+    - aur
+
+- name: oama-bin
+  aur:
+      name: oama-bin
+      user: "{{ user.name }}"
+  tags:
+    - aur
