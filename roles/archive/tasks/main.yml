@@ -23,13 +23,6 @@
   tags:
     - atool
 
-- name: Install hashdeep
-  pacman:
-    name: hashdeep
-    state: present
-  tags:
-    - hashdeep
-
 - name: Install par2cmdline
   pacman:
     name: par2cmdline

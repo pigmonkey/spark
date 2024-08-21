@@ -13,32 +13,25 @@
     src: logind.conf
     dest: /etc/systemd/logind.conf
 
-- name: Push low battery warning script
-  copy:
-    src: lowbatt.sh
-    dest: /usr/local/bin/lowbatt
-    mode: 0755
+- name: Install poweralertd
+  aur:
+    name: poweralertd
+    user: "{{ user.name }}"
+  tags:
+    - aur
 
-- name: Push low battery warning service file
-  template:
-    src: lowbatt.service.j2
-    dest: /etc/systemd/system/lowbatt.service
-  notify:
-    - reload systemd config
-
-- name: Push low battery timer file
-  template:
-    src: lowbatt.timer.j2
-    dest: /etc/systemd/system/lowbatt.timer
-  notify:
-    - reload systemd config
-    - restart lowbatt
-
-- name: Enable and start lowbatt timer
-  service:
-    name: lowbatt.timer
+- name: Enable and start poweralertd
+  systemd:
+    name: poweralertd.service
+    scope: user
     enabled: yes
     state: started
+  become: yes
+  become_user: "{{ user.name }}"
+  environment:
+    XDG_RUNTIME_DIR: "/run/user/{{ user.uid }}"
+  tags:
+    - aur
 
 - name: Install brightnessctl
   pacman:
