@@ -52,6 +52,7 @@
     - { role: taskwarrior, tags: ['taskwarrior'] }
     - { role: ledger, tags: ['ledger'] }
     - { role: mail, tags: ['mail'] }
+    - { role: goimapnotify, tags: ['goimapnotify'] }
     - { role: cups, tags: ['cups'] }
     - { role: office, tags: ['office'] }
     - { role: visidata, tags: ['visidata'] }

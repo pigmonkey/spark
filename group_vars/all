@@ -48,6 +48,7 @@ mail:
     sync_time: 10min
     sync_boot_delay: 2min
     sync_on: trusted
+    goimapnotify_wait: 10
 
 network:
     conn_check: False
