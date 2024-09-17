@@ -1,6 +1,9 @@
 #!/bin/bash
-
+# {{ ansible_managed}
+#
 /usr/bin/reflector --latest 20 \
+                   {% if mirrorlist.country %}--country {{ mirrorlist.country }} \
+                   {% endif %}
                    --sort rate \
                    --protocol https \
                    --save /etc/pacman.d/mirrorlist
