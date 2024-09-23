@@ -5,8 +5,8 @@
       state: present
 
 - name: Push reflector update script
-  copy:
-      src: reflector-update.sh
+  template:
+      src: reflector-update.sh.j2
       dest: /usr/local/bin/reflector-update
       mode: 0755
 

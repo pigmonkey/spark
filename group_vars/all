@@ -305,6 +305,7 @@ kdeconnect:
 
 mirrorlist:
     run_on: trusted
+    country: US
 
 units:
     run_on: trusted
