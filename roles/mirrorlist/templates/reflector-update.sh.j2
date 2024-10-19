@@ -1,5 +1,5 @@
 #!/bin/bash
-# {{ ansible_managed}
+# {{ ansible_managed }}
 #
 /usr/bin/reflector --latest 20 \
                    {% if mirrorlist.country %}--country {{ mirrorlist.country }} \
