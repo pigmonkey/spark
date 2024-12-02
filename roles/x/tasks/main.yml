@@ -48,5 +48,4 @@
 - include_tasks: sxhkd.yml
 - include_tasks: unclutter.yml
 - include_tasks: autorandr.yml
-- include_tasks: autocutsel.yml
 - include_tasks: xdg.yml
