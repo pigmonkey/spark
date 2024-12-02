@@ -48,7 +48,7 @@ Store your EFI and crypt devices in environment variables.
 
 Create and mount the encrypted root filesystem.
 
-    $ cryptsetup luksFormat --type luks1 $DEVCRYPT
+    $ cryptsetup luksFormat --type luks2 --pbkdf pbkdf2 $DEVCRYPT
     $ cryptsetup luksOpen $DEVCRYPT lvm
     $ pvcreate /dev/mapper/lvm
     $ vgcreate arch /dev/mapper/lvm
