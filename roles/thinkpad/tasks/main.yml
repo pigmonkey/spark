@@ -1,14 +1,4 @@
 ---
-- name: Install acpi_call for TLP battery functions
-  pacman: name=acpi_call-dkms state=present
-  tags:
-    - battery
-
-- name: Install tpacpi-bat
-  pacman: name=tpacpi-bat state=present
-  tags:
-    - battery
-
 - name: Install fprintd
   pacman: name=fprintd state=present
   tags:
