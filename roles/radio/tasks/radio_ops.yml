@@ -1,16 +1,20 @@
 ---
 - name: Install fldigi
-  aur:
+  kewlfft.aur.aur:
     name:
       - cty
       - flxmlrpc
       - fldigi
       - flrig
-    user: "{{ user.name }}"
+  become: yes
+  become_user: "{{ aur.user }}"
   tags:
     - aur
 
 - name: Install wsjtx
-  aur: name=wsjtx user={{ user.name }}
+  kewlfft.aur.aur:
+    name: wsjtx
+  become: yes
+  become_user: "{{ aur.user }}"
   tags:
     - aur

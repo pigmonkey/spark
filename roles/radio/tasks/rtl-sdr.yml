@@ -1,10 +1,16 @@
 ---
 - name: Install rtl-sdr-git
-  aur: name=rtl-sdr-git user={{ user.name }}
+  kewlfft.aur.aur:
+    name: rtl-sdr-git
+  become: yes
+  become_user: "{{ aur.user }}"
   tags:
     - aur
 
 - name: Install gr-ais-git
-  aur: name=gr-ais-git user={{ user.name }}
+  kewlfft.aur.aur:
+    name: gr-ais-git
+  become: yes
+  become_user: "{{ aur.user }}"
   tags:
     - aur

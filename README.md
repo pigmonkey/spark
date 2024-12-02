@@ -25,6 +25,10 @@ First, sync mirrors and install Ansible:
 Second, install and update the submodules:
 
     $ git submodule init && git submodule update
+
+Next, install the required Ansible collections as root.
+
+    # ansible-galaxy collection install -r requirements.yml
     
 Run the playbook as root.
 

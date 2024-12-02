@@ -17,8 +17,9 @@
     - firejail
 
 - name: Install libgourou
-  aur:
+  kewlfft.aur.aur:
     name: gourou
-    user: "{{ user.name }}"
+  become: yes
+  become_user: "{{ aur.user }}"
   tags:
     - aur

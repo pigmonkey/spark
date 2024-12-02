@@ -17,16 +17,19 @@
     - rofi
 
 - name: Install pass-update
-  aur:
+  kewlfft.aur.aur:
     name: pass-update
-    user: "{{ user.name }}"
-    skip_pgp: yes
+    use: makepkg
+    skip_pgp_check: yes
+  become: yes
+  become_user: "{{ aur.user }}"
   tags:
     - aur
 
 - name: Install pwgen-passphrase
-  aur:
+  kewlfft.aur.aur:
     name: pwgen-passphrase
-    user: "{{ user.name }}"
+  become: yes
+  become_user: "{{ aur.user }}"
   tags:
     - aur

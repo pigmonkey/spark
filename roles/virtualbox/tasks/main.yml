@@ -9,7 +9,10 @@
     state: present
 
 - name: Install VirtualBox extensions
-  aur: name=virtualbox-ext-oracle user={{ user.name }}
+  kewlfft.aur.aur:
+    name: virtualbox-ext-oracle
+  become: yes
+  become_user: "{{ aur.user }}"
   tags:
     - aur
 

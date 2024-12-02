@@ -18,8 +18,9 @@
     - shell
 
 - name: Install zsh-antidote
-  aur:
+  kewlfft.aur.aur:
     name: zsh-antidote
-    user: "{{ user.name }}"
+  become: yes
+  become_user: "{{ aur.user }}"
   tags:
     - aur

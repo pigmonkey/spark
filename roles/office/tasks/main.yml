@@ -72,11 +72,12 @@
     state: present
 
 - name: Install undertime and dependencies
-  aur:
+  kewlfft.aur.aur:
     name:
       - python-dateparser
       - python-undertime
-    user: "{{ user.name }}"
+  become: yes
+  become_user: "{{ aur.user }}"
   tags:
     - aur
 
@@ -86,16 +87,18 @@
     state: present
 
 - name: Install xsv
-  aur:
+  kewlfft.aur.aur:
     name: xsv
-    user: "{{ user.name }}"
+  become: yes
+  become_user: "{{ aur.user }}"
   tags:
     - aur
 
 - name: Install epy
-  aur:
+  kewlfft.aur.aur:
     name: epy-git
-    user: "{{ user.name }}"
+  become: yes
+  become_user: "{{ aur.user }}"
   tags:
     - aur
 

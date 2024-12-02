@@ -42,9 +42,10 @@
     state: present
 
 - name: Install mutt-ics
-  aur:
+  kewlfft.aur.aur:
     name: mutt-ics
-    user: "{{ user.name }}"
+  become: yes
+  become_user: "{{ aur.user }}"
   tags:
     - aur
 

@@ -1,8 +1,9 @@
 ---
 - name: Install rcm
-  aur:
+  kewlfft.aur.aur:
     name: rcm
-    user: "{{ user.name }}"
+  become: yes
+  become_user: "{{ aur.user }}"
   when: dotfiles is defined
   tags:
     - aur

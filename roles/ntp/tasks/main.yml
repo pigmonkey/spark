@@ -3,7 +3,10 @@
   pacman: name=chrony state=present
 
 - name: Install chrony networkmanager dispatcher
-  aur: name=networkmanager-dispatcher-chrony user={{ user.name }}
+  kewlfft.aur.aur:
+    name: networkmanager-dispatcher-chrony
+  become: yes
+  become_user: "{{ aur.user }}"
   tags:
     - aur
     - networkmanager

@@ -1,8 +1,9 @@
 ---
 - name: Install Vopono
-  aur:
+  kewlfft.aur.aur:
     name: vopono
-    user: "{{ user.name }}"
+  become: yes
+  become_user: "{{ aur.user }}"
   tags:
     - aur
 

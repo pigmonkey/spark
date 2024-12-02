@@ -1,6 +1,9 @@
 ---
 - name: Install flac2all
-  aur: name=flac2all user={{ user.name }}
+  kewlfft.aur.aur:
+    name: flac2all
+  become: yes
+  become_user: "{{ aur.user }}"
   tags:
     - aur
     - flac2all

@@ -1,8 +1,9 @@
 ---
 - name: install greenclip from AUR
-  aur:
+  kewlfft.aur.aur:
     name: rofi-greenclip
-    user: "{{ user.name }}"
+  become: yes
+  become_user: "{{ aur.user }}"
   tags:
     - aur
 

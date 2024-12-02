@@ -1,8 +1,9 @@
 ---
 - name: Install nmtrust
-  aur:
+  kewlfft.aur.aur:
       name: nmtrust-git
-      user: "{{ user.name }}"
+  become: yes
+  become_user: "{{ aur.user }}"
   tags:
     - aur
 

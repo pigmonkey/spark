@@ -23,7 +23,7 @@ dotfiles:
     rcup_flags: -fx README.md
 
 aur:
-    dir: aur
+    user: aur_builder
     packages:
         - yay
         - downgrade

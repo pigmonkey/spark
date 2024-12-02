@@ -70,9 +70,10 @@
     - pdfgrep
 
 - name: Install OCRmyPDF
-  aur:
+  kewlfft.aur.aur:
     name: ocrmypdf
-    user: "{{ user.name }}"
+  become: yes
+  become_user: "{{ aur.user }}"
   tags:
     - ocrmypdf
     - aur

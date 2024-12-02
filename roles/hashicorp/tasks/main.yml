@@ -20,9 +20,9 @@
     state: present
 
 - name: Install nomad
-  aur:
-    name:
-      - nomad
-    user: "{{ user.name }}"
+  kewlfft.aur.aur:
+    name: nomad
+  become: yes
+  become_user: "{{ aur.user }}"
   tags:
     - aur

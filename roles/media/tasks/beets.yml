@@ -18,7 +18,10 @@
     - beets
 
 - name: Install mp3val
-  aur: name=mp3val user={{ user.name }}
+  kewlfft.aur.aur:
+    name: mp3val
+  become: yes
+  become_user: "{{ aur.user }}"
   tags:
     - aur
     - beets

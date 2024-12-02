@@ -10,24 +10,28 @@
     state: present
 
 - name: Install GNU Collaborative International Dictionary of English
-  aur:
+  kewlfft.aur.aur:
     name: dict-gcide
-    user: "{{ user.name }}"
-    skip_pgp: yes
+    use: makepkg
+    skip_pgp_check: yes
+  become: yes
+  become_user: "{{ aur.user }}"
   tags:
     - aur
 
 - name: Install WordNet database
-  aur:
+  kewlfft.aur.aur:
     name: dict-wn
-    user: "{{ user.name }}"
+  become: yes
+  become_user: "{{ aur.user }}"
   tags:
     - aur
 
 - name: Install Moby thesaurus
-  aur:
+  kewlfft.aur.aur:
     name: dict-moby-thesaurus
-    user: "{{ user.name }}"
+  become: yes
+  become_user: "{{ aur.user }}"
   tags:
     - aur
 

@@ -1,6 +1,9 @@
 ---
 - name: Install localtime
-  aur: name=localtime-git user={{ user.name }}
+  kewlfft.aur.aur:
+    name: localtime-git
+  become: yes
+  become_user: "{{ aur.user }}"
   tags:
     - aur
 

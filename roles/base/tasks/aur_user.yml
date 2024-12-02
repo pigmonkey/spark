@@ -1,0 +1,18 @@
+---
+- name: Create AUR user
+  user:
+    name: "{{ aur.user }}"
+    create_home: yes
+    group: wheel
+  tags:
+    - aur
+
+- name: Allow passwordless Pacman for AUR user
+  template:
+    src: sudo_aur.j2
+    dest: /etc/sudoers.d/11-aur
+    mode: 0644
+    validate: 'visudo -cf %s'
+  tags:
+    - aur
+    - sudo

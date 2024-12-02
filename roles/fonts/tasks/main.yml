@@ -43,8 +43,9 @@
     state: present
 
 - name: Install AUR fonts
-  aur:
+  kewlfft.aur.aur:
     name: "{{ aur_fonts }}"
-    user: "{{ user.name }}"
+  become: yes
+  become_user: "{{ aur.user }}"
   tags:
     - aur

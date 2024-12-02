@@ -21,9 +21,10 @@
     line: humanize-numbers
 
 - name: Install tarsnapper
-  aur:
+  kewlfft.aur.aur:
     name: tarsnapper
-    user: "{{ user.name }}"
+  become: yes
+  become_user: "{{ aur.user }}"
   tags:
     - aur
 

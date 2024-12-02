@@ -5,9 +5,10 @@
     state: present
 
 - name: Install firewarden
-  aur:
+  kewlfft.aur.aur:
     name: firewarden
-    user: "{{ user.name }}"
+  become: yes
+  become_user: "{{ aur.user }}"
   tags:
     - aur
 

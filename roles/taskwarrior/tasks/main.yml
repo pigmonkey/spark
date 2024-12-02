@@ -8,6 +8,9 @@
     - refresh holidays
 
 - name: Install taskopen
-  aur: name=taskopen user={{ user.name }}
+  kewlfft.aur.aur:
+    name: taskopen
+  become: yes
+  become_user: "{{ aur.user }}"
   tags:
     - aur

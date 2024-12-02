@@ -1,8 +1,9 @@
 ---
 - name: Install GOESImage
-  aur:
+  kewlfft.aur.aur:
     name: goesimage
-    user: "{{ user.name }}"
+  become: yes
+  become_user: "{{ aur.user }}"
   tags:
     - aur
 

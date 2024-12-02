@@ -5,9 +5,10 @@
     state: present
 
 - name: Install Bitlbee
-  aur:
+  kewlfft.aur.aur:
     name: bitlbee
-    user: "{{ user.name }}"
+  become: yes
+  become_user: "{{ aur.user }}"
   tags:
     - aur
 

@@ -5,9 +5,10 @@
     state: present
 
 - name: Install git-annex-remote-rclone
-  aur:
+  kewlfft.aur.aur:
     name: git-annex-remote-rclone
-    user: "{{ user.name }}"
+  become: yes
+  become_user: "{{ aur.user }}"
   tags:
     - aur
 

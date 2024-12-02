@@ -1,9 +1,11 @@
 ---
 - name: Install GNU Units
-  aur:
+  kewlfft.aur.aur:
     name: units
-    user: "{{ user.name }}"
-    skip_pgp: yes
+    use: makepkg
+    skip_pgp_check: yes
+  become: yes
+  become_user: "{{ aur.user }}"
   tags:
     - aur
 

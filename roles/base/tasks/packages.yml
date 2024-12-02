@@ -18,19 +18,11 @@
     regexp: "^COMPRESSXZ"
     line: "COMPRESSXZ=(xz -c -z - --threads=0)"
 
-- name: Create AUR directory
-  file: path=/home/{{ user.name }}/{{ aur.dir }}
-        state=directory
-        owner={{ user.name }}
-        group={{ user.group }}
-  tags:
-    - aur
-    - packages
-
 - name: Install AUR base packages
-  aur:
+  kewlfft.aur.aur:
     name: "{{ aur.packages }}"
-    user: "{{ user.name }}"
+  become: yes
+  become_user: "{{ aur.user }}"
   tags:
     - aur
     - packages

@@ -1,6 +1,9 @@
 ---
 - name: Install hostsctl
-  aur: name=hostsctl user={{ user.name }}
+  kewlfft.aur.aur:
+    name: hostsctl
+  become: yes
+  become_user: "{{ aur.user }}"
   tags:
     - aur
 

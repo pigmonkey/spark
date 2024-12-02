@@ -15,9 +15,10 @@
     state: present
 
 - name: Install etesync-dav
-  aur:
+  kewlfft.aur.aur:
       name: etesync-dav
-      user: "{{ user.name }}"
+  become: yes
+  become_user: "{{ aur.user }}"
   tags:
     - aur
   when: etesync is defined and etesync == True

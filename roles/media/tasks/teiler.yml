@@ -1,10 +1,11 @@
 ---
 - name: Install teiler and dependencies
-  aur:
+  kewlfft.aur.aur:
     name:
       - xininfo-git
       - teiler-git
-    user: "{{ user.name }}"
+  become: yes
+  become_user: "{{ aur.user }}"
   tags:
     - aur
     - teiler

@@ -14,9 +14,10 @@
     dest: /etc/systemd/logind.conf
 
 - name: Install poweralertd
-  aur:
+  kewlfft.aur.aur:
     name: poweralertd
-    user: "{{ user.name }}"
+  become: yes
+  become_user: "{{ aur.user }}"
   tags:
     - aur
 
@@ -44,9 +45,10 @@
     state: present
 
 - name: Install powerstat
-  aur:
+  kewlfft.aur.aur:
     name: powerstat
-    user: "{{ user.name }}"
+  become: yes
+  become_user: "{{ aur.user }}"
   tags:
     - aur
 
@@ -56,15 +58,17 @@
     state: present
 
 - name: Install battery-stats
-  aur:
+  kewlfft.aur.aur:
     name: battery-stats-git
-    user: "{{ user.name }}"
+  become: yes
+  become_user: "{{ aur.user }}"
   tags:
     - aur
 
 - name: Install battop
-  aur:
+  kewlfft.aur.aur:
     name: battop
-    user: "{{ user.name }}"
+  become: yes
+  become_user: "{{ aur.user }}"
   tags:
     - aur

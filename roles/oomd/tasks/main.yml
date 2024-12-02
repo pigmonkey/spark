@@ -1,8 +1,9 @@
 ---
 - name: Install Fedora systemd-oomd configuration
-  aur:
+  kewlfft.aur.aur:
       name: systemd-oomd-defaults
-      user: "{{ user.name }}"
+  become: yes
+  become_user: "{{ aur.user }}"
   notify:
     - reload systemd config
   tags:
