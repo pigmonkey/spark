@@ -1,6 +1,5 @@
 ---
 - include_tasks: beets.yml
-- include_tasks: abcde.yml
 - include_tasks: imagemagick.yml
 - include_tasks: inkscape.yml
 - include_tasks: gimp.yml
@@ -60,4 +59,9 @@
 - name: Install digikam
   pacman:
     name: digikam
+    state: present
+
+- name: Install whipper
+  pacman:
+    name: whipper
     state: present

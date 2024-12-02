@@ -1,9 +1,0 @@
----
-- name: Install abcde and dependencies
-  pacman:
-    name:
-      - cdparanoia
-      - abcde
-    state: present
-  tags:
-    - abcde
