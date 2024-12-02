@@ -54,6 +54,7 @@ Create and mount the encrypted root filesystem.
     $ vgcreate arch /dev/mapper/lvm
     $ lvcreate -L 8G arch -n swap
     $ lvcreate -l +100%FREE arch -n root
+    $ lvreduce -L -256M arch/root
     $ lvdisplay
     $ mkswap -L swap /dev/mapper/arch-swap
     $ mkfs.ext4 /dev/mapper/arch-root
