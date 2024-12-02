@@ -4,6 +4,11 @@
     name: alsa-utils
     state: present
 
+- name: Install sof-firmware
+  pacman:
+    name: sof-firmware
+    state: present
+
 - name: Install Pipewire
   pacman:
     name:
@@ -15,4 +20,9 @@
 - name: Install pasystray
   pacman:
     name: pasystray
+    state: present
+
+- name: Install easyeffects
+  pacman:
+    name: easyeffects
     state: present
