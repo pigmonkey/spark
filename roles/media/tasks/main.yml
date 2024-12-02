@@ -31,9 +31,9 @@
   tags:
     - mat
 
-- name: Install youtube-dl
+- name: Install yt-dlp
   pacman:
-    name: youtube-dl
+    name: yt-dlp
     state: present
 
 - name: Install zbar
