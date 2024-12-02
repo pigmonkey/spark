@@ -44,14 +44,6 @@
   tags:
     - lesspipe
 
-- name: Install geteltorito
-  aur:
-    name: geteltorito
-    user: "{{ user.name }}"
-  tags:
-    - aur
-    - geteltorito
-
 - name: Install pigz
   pacman:
     name: pigz
