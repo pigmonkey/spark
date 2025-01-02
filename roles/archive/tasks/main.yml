@@ -4,7 +4,7 @@
     name:
       - zip
       - unzip
-      - p7zip
+      - 7zip
     state: present
   tags:
     - zip
