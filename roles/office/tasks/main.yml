@@ -71,16 +71,6 @@
     name: qalculate-gtk
     state: present
 
-- name: Install undertime and dependencies
-  kewlfft.aur.aur:
-    name:
-      - python-dateparser
-      - python-undertime
-  become: yes
-  become_user: "{{ aur.user }}"
-  tags:
-    - aur
-
 - name: Install GNU Plot
   pacman:
     name: gnuplot
