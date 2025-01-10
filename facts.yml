@@ -1,0 +1,10 @@
+---
+- hosts: localhost
+  tasks:
+  - name: Print ansible_facts
+    debug:
+      var: ansible_facts
+  - name: Save ansible_facts to /tmp/ansible_facts.json
+    copy:
+      content: "{{ ansible_facts|to_nice_json }}"
+      dest: /tmp/ansible_facts.json
