@@ -1,5 +1,14 @@
 ---
 - include_tasks: tlp.yml
+  when: power_management is defined and power_management == "tlp"
+
+- include_tasks: tuned.yml
+  when: power_management is defined and power_management == "tuned"
+
+- name: Install x86_energy_perf_policy
+  pacman:
+    name: x86_energy_perf_policy
+    state: present
 
 - name: Copy touchpad configuration file
   copy:

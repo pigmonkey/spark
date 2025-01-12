@@ -1,0 +1,15 @@
+---
+- name: Install TuneD
+  pacman:
+    name: tuned-ppd
+    state: present
+  tags:
+    - tuned
+
+- name: Enable and start TuneD
+  service:
+    name: tuned.service
+    enabled: yes
+    state: started
+  tags:
+    - tuned

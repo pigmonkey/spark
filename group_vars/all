@@ -336,3 +336,5 @@ hardened:
     enable_namespaces: true
 
 kernel_parameters: "quiet consoleblank=60"
+
+power_management: "tlp"
