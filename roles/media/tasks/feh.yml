@@ -11,14 +11,3 @@
   tags:
     - feh
     - firejail
-
-- name: Install imlib2-heic
-  kewlfft.aur.aur:
-    name: imlib2-heic
-    use: makepkg
-    skip_pgp_check: yes
-  become: yes
-  become_user: "{{ aur.user }}"
-  tags:
-    - aur
-    - feh
