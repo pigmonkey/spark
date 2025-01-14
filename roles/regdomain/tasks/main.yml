@@ -1,0 +1,12 @@
+---
+- name: Install wireless-regdb
+  pacman:
+    name: wireless-regdb
+    state: present
+
+- name: Set wireless regulatory domain
+  lineinfile:
+    dest: /etc/conf.d/wireless-regdom
+    regexp: ^WIRELESS_REGDOM
+    state: present
+    line: 'WIRELESS_REGDOM="{{ regdomain }}"'

@@ -23,6 +23,7 @@
     - { role: pass, tags: ['pass'] }
     - { role: iptables, tags: ['iptables'] }
     - { role: nettools, tags: ['nettools'] }
+    - { role: regdomain, tags: ['regdomain'], when: "regdomain is defined" }
     - { role: openvpn, tags: ['openvpn'] }
     - { role: nmtrust, tags: ['nmtrust'] }
     - { role: unbound, tags: ['unbound'] }
