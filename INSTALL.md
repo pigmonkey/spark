@@ -5,10 +5,6 @@ It will provide a system with full-disk encryption using [LVM on LUKS][3],
 including an [encrypted `/boot`][4]. The system will be bootable via both UEFI and
 legacy BIOS.
 
-Note that this guide assumes you are performing the install to `/dev/sda`. In
-some cases, you may find that your USB install disk claimed `/dev/sda` and you
-want to install to `/dev/sdb`. Confirm which disk is which before proceeding.
-
 On some newer systems (e.g. Dell XPS 15), set SATA operation mode to AHCI.
 
 Boot into the Arch installer.
@@ -25,7 +21,7 @@ Verify that the system clock is up to date.
 
 Store your desination disk in an environment variable.
 
-    $ export DISK=/dev/sda
+    $ export DISK=/dev/nvme0n1
 
 Create partitions for legacy boot, EFI, and root.
 
