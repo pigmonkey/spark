@@ -1,6 +1,0 @@
-#!/bin/sh
-
-# Default to non-lite version of DDG.
-export SURFRAW_duckduckgo_use_javascript=1
-
-surfraw $(sr -elvi | awk -F'-' '{print $1}' | sed '/:/d' | awk '{$1=$1};1' | rofi -kb-row-select "Tab" -kb-row-tab "Control+space" -dmenu -i -p "websearch: " -select duckduckgo)
