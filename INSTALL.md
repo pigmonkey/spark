@@ -65,7 +65,7 @@ Format and mount the EFI partition.
 
 Optionally edit the mirror list.
 
-    $ vi /etc/pacman.d/mirrorlist
+    $ vim /etc/pacman.d/mirrorlist
 
 Install the base system.
 
