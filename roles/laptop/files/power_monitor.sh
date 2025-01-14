@@ -5,6 +5,7 @@
 BAT=$(echo /sys/class/power_supply/BAT*)
 BAT_STATUS="$BAT/status"
 BAT_CAP="$BAT/capacity"
+AC_STATUS=/sys/class/power_supply/ACAD/online
 LOW_BAT_PERCENT=50
 
 AC_PROFILE="desktop"
@@ -19,7 +20,7 @@ prev=0
 
 while true; do
     # read the current state
-    if [[ $(cat "$BAT_STATUS") == "Discharging" ]]; then
+    if [[ $(cat "$AC_STATUS") == "0" ]]; then
         if [[ $(cat "$BAT_CAP") -gt $LOW_BAT_PERCENT ]]; then
             profile=$BAT_PROFILE
         else
@@ -39,5 +40,5 @@ while true; do
     prev=$profile
 
     # wait for the next power change event
-    inotifywait -qq "$BAT_STATUS" "$BAT_CAP"
+    inotifywait -qq "$AC_STATUS" "$BAT_CAP"
 done
