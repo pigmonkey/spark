@@ -1,0 +1,5 @@
+[Service]
+ExecStart=ectool chargecontrol normal 87 87
+
+[Install]
+WantedBy=default.target

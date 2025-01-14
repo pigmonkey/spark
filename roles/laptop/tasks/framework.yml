@@ -1,0 +1,27 @@
+---
+- name: Install fw-ectool-git
+  kewlfft.aur.aur:
+    name: fw-ectool-git
+  become: yes
+  become_user: "{{ aur.user }}"
+  tags:
+    - aur
+    - framework
+
+- name: Copy charge control service
+  copy:
+    src: chargecontrol.service
+    dest: /etc/systemd/system/
+  notify:
+    - reload systemd config
+    - restart charge control
+  tags:
+    - framework
+
+- name: Enable and start charge control service
+  service:
+    name: chargecontrol.service
+    enabled: yes
+    state: started
+  tags:
+    - framework

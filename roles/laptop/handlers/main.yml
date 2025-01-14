@@ -6,3 +6,8 @@
   service:
     name: power_monitor.service
     state: restarted
+
+- name: restart charge control
+  service:
+    name: chargecontrol.service
+    state: restarted

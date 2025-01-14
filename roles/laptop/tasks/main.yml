@@ -5,6 +5,9 @@
 - include_tasks: tuned.yml
   when: power_management is defined and power_management == "tuned"
 
+- include_tasks: framework.yml
+  when: power_management is defined and power_management == "tuned" and ansible_system_vendor == "Framework"
+
 - name: Install x86_energy_perf_policy
   pacman:
     name: x86_energy_perf_policy
