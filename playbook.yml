@@ -7,7 +7,7 @@
     - { role: gnupg, tags: ['gnupg'] }
     - { role: sysmon, tags: ['sysmon'] }
     - { role: cron, tags: ['cron'] }
-    - { role: microcode, tags: ['microcode'], when: "'GenuineIntel' in ansible_processor" }
+    - { role: microcode, tags: ['microcode'] }
     - { role: hardened, tags: ['hardened'] }
     - { role: ssh, tags: ['ssh'] }
     - { role: dotfiles, tags: ['dotfiles'] }
