@@ -53,3 +53,8 @@
   pacman:
     name: wireguard-tools
     state: present
+
+- name: Install wget
+  pacman:
+    name: wget
+    state: present
