@@ -336,6 +336,6 @@ hardened:
 
 kernel_parameters: "quiet consoleblank=60"
 
-power_management: "tlp"
+power_management: "tuned"
 
 regdomain: "US"
