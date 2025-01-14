@@ -1,0 +1,6 @@
+[Service]
+Environment=STARTUP_WAIT=30s
+ExecStart=/usr/local/bin/power_monitor.sh
+
+[Install]
+WantedBy=default.target

@@ -13,3 +13,38 @@
     state: started
   tags:
     - tuned
+
+- name: Install inotify-tools
+  pacman:
+    name: inotify-tools
+    state: present
+  tags:
+    - tuned
+
+- name: Install power monitor script
+  copy:
+    src: power_monitor.sh
+    dest: /usr/local/bin/
+    mode: 0755
+  notify:
+    - restart power monitor
+  tags:
+    - tuned
+
+- name: Copy power monitor service
+  copy:
+    src: power_monitor.service
+    dest: /etc/systemd/system/
+  notify:
+    - reload systemd config
+    - restart power monitor
+  tags:
+    - tuned
+
+- name: Enable and start power monitor service
+  service:
+    name: power_monitor.service
+    enabled: yes
+    state: started
+  tags:
+    - tuned

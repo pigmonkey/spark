@@ -2,5 +2,7 @@
 - name: restart tlp
   service: name=tlp.service state=restarted
 
-- name: restart lowbatt
-  service: name=lowbatt.timer state=restarted
+- name: restart power monitor
+  service:
+    name: power_monitor.service
+    state: restarted
