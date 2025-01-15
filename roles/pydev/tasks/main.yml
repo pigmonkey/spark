@@ -9,9 +9,9 @@
       name: pyenv
       state: present
 
-- name: Install black
+- name: Install ruff
   pacman:
-      name: python-black
+      name: ruff
       state: present
 
 - name: Install uv
