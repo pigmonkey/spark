@@ -1,0 +1,61 @@
+---
+- name: Install brightnessctl
+  pacman:
+    name: brightnessctl
+    state: present
+
+- name: Install illuminanced
+  kewlfft.aur.aur:
+    name: illuminanced-git
+  become: yes
+  become_user: "{{ aur.user }}"
+  when: illuminanced is defined
+  tags:
+    - aur
+
+- name: Set max backlight file
+  lineinfile:
+    dest: /etc/illuminanced.toml
+    regexp: ^max_backlight_file
+    state: present
+    line: 'max_backlight_file = "{{ illuminanced.max_backlight_file }}"'
+  when: illuminanced.max_backlight_file is defined
+  notify:
+    - restart illuminanced
+
+- name: Set backlight file
+  lineinfile:
+    dest: /etc/illuminanced.toml
+    regexp: ^backlight_file
+    state: present
+    line: 'backlight_file = "{{ illuminanced.backlight_file }}"'
+  when: illuminanced.backlight_file is defined
+  notify:
+    - restart illuminanced
+
+- name: Set illuminance file
+  lineinfile:
+    dest: /etc/illuminanced.toml
+    regexp: ^illuminance_file
+    state: present
+    line: 'illuminance_file = "{{ illuminanced.illuminance_file }}"'
+  when: illuminanced.illuminance_file is defined
+  notify:
+    - restart illuminanced
+
+- name: Set min backlight value
+  lineinfile:
+    dest: /etc/illuminanced.toml
+    regexp: ^min_backling
+    state: present
+    line: 'min_backlight = {{ illuminanced.min_backlight }}'
+  when: illuminanced.min_backlight is defined
+  notify:
+    - restart illuminanced
+
+- name: Enable and start illuminanced
+  service:
+    name: illuminanced.service
+    enabled: yes
+    state: started
+  when: illuminanced is defined

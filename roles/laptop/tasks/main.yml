@@ -46,11 +46,6 @@
   tags:
     - aur
 
-- name: Install brightnessctl
-  pacman:
-    name: brightnessctl
-    state: present
-
 - name: Install powertop
   pacman:
     name: powertop
