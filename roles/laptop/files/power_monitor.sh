@@ -16,7 +16,7 @@ LOW_BAT_PROFILE="laptop-battery-powersave"
 [[ -z $STARTUP_WAIT ]] || sleep "$STARTUP_WAIT"
 
 # start the monitor loop
-prev=0
+prev=$(tuned-adm active | tr -s ' ' | cut -d' ' -f4)
 
 while true; do
     # read the current state
@@ -39,6 +39,5 @@ while true; do
 
     prev=$profile
 
-    # wait for the next power change event
-    inotifywait -qq "$AC_STATUS" "$BAT_CAP"
+    sleep 10s
 done

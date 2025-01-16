@@ -14,13 +14,6 @@
   tags:
     - tuned
 
-- name: Install inotify-tools
-  pacman:
-    name: inotify-tools
-    state: present
-  tags:
-    - tuned
-
 - name: Install power monitor script
   copy:
     src: power_monitor.sh
