@@ -6,7 +6,7 @@ BAT=$(echo /sys/class/power_supply/BAT*)
 BAT_STATUS="$BAT/status"
 BAT_CAP="$BAT/capacity"
 AC_STATUS=/sys/class/power_supply/ACAD/online
-LOW_BAT_PERCENT=50
+LOW_BAT_PERCENT=70
 
 AC_PROFILE="desktop"
 BAT_PROFILE="balanced"
