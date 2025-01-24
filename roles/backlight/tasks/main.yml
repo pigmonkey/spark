@@ -53,6 +53,16 @@
   notify:
     - restart illuminanced
 
+- name: Set log destination
+  lineinfile:
+    dest: /etc/illuminanced.toml
+    regexp: ^log_to
+    state: present
+    line: 'log_to = "syslog"'
+  when: illuminanced is defined
+  notify:
+    - restart illuminanced
+
 - name: Enable and start illuminanced
   service:
     name: illuminanced.service
