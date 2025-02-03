@@ -171,7 +171,7 @@ firejail:
 
 cryptshot:
     - name: alta
-      uuid: 0a0db776-84c5-48e1-9079-cacfbc5de8a3
+      uuid: a71fda0d-a2a4-4b29-a9dd-2cbaba9731f8
       keyfile: /home/pigmonkey/.keys/usb-alta.key
       retain:
         - level: daily
