@@ -5,13 +5,9 @@
     state: present
 
 - name: Install illuminanced
-  kewlfft.aur.aur:
-    name: illuminanced-git
-  become: yes
-  become_user: "{{ aur.user }}"
+  pacman:
+    name: illuminanced
   when: illuminanced is defined
-  tags:
-    - aur
 
 - name: Set max backlight file
   lineinfile:
@@ -46,20 +42,10 @@
 - name: Set min backlight value
   lineinfile:
     dest: /etc/illuminanced.toml
-    regexp: ^min_backling
+    regexp: ^min_backlight
     state: present
     line: 'min_backlight = {{ illuminanced.min_backlight }}'
   when: illuminanced.min_backlight is defined
-  notify:
-    - restart illuminanced
-
-- name: Set log destination
-  lineinfile:
-    dest: /etc/illuminanced.toml
-    regexp: ^log_to
-    state: present
-    line: 'log_to = "syslog"'
-  when: illuminanced is defined
   notify:
     - restart illuminanced
 
