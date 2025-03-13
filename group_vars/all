@@ -73,6 +73,7 @@ base_packages:
     - pacman-contrib
     - fwupd
     - dmidecode
+    - lshw
     - tmux
     - git
     - rsync
