@@ -5,7 +5,7 @@ After=graphical.target
 
 [Service]
 Environment=DISPLAY=:0
-ExecStart=/usr/lib/kdeconnectd
+ExecStart=/usr/bin/kdeconnectd
 ExecStop=/usr/bin/kquitapp5 --service org.kde.kdeconnect kdeconnectd
 Restart=on-failure
 BusName=org.kde.kdeconnect
