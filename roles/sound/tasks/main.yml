@@ -26,3 +26,8 @@
   pacman:
     name: easyeffects
     state: present
+
+- name: Install calf studio gear
+  pacman:
+    name: calf
+    state: present
