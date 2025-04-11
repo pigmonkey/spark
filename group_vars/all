@@ -348,4 +348,4 @@ illuminanced:
     illuminance_file: /sys/bus/iio/devices/iio:device0/in_illuminance_raw
     min_backlight: 60
 
-terminal: alacritty
+terminal: kitty
