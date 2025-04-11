@@ -15,7 +15,7 @@
     - { role: interception, tags: ['interception'], when: "interception is defined" }
     - { role: fonts, tags: ['fonts'] }
     - { role: x, tags: ['x'] }
-    - { role: alacritty, tags: ['alacritty'] }
+    - { role: terminal, tags: ['terminal'], when: "terminal is defined" }
     - { role: lightdm, tags: ['lightdm'], when: "display_manager == 'lightdm'" }
     - { role: gdm, tags: ['gdm'], when: "display_manager == 'gdm'" }
     - { role: i3, tags: ['i3'], when: "desktop_environment == 'i3'" }

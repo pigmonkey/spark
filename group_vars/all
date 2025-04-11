@@ -347,3 +347,5 @@ illuminanced:
     backlight_file: /sys/class/backlight/amdgpu_bl1/brightness
     illuminance_file: /sys/bus/iio/devices/iio:device0/in_illuminance_raw
     min_backlight: 60
+
+terminal: alacritty

@@ -1,0 +1,5 @@
+---
+- name: Install {{ terminal }}
+  pacman:
+    name: "{{ terminal }}"
+    state: present
