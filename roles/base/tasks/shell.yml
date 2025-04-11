@@ -17,6 +17,15 @@
   tags:
     - shell
 
+- name: Install Starship
+  pacman:
+    name:
+      - ttf-nerd-fonts-symbols-mono
+      - starship
+    state: present
+  tags:
+    - shell
+
 - name: Install zsh-antidote
   kewlfft.aur.aur:
     name: zsh-antidote
