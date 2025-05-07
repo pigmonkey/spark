@@ -25,11 +25,3 @@
   become_user: "{{ aur.user }}"
   tags:
     - aur
-
-- name: Install pwgen-passphrase
-  kewlfft.aur.aur:
-    name: pwgen-passphrase
-  become: yes
-  become_user: "{{ aur.user }}"
-  tags:
-    - aur
