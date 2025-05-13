@@ -1,8 +1,11 @@
 ---
 - name: Install xautolock
-  pacman:
+  kewlfft.aur.aur:
     name: xautolock
-    state: present
+  become: yes
+  become_user: "{{ aur.user }}"
+  tags:
+    - aur
 
 - name: Install i3lock
   pacman:
