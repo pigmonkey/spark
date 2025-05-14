@@ -27,6 +27,11 @@
     name: easyeffects
     state: present
 
+- name: Install Linux Studio Plugins
+  pacman:
+    name: lsp-plugins
+    state: present
+
 - name: Install calf studio gear
   pacman:
     name: calf
