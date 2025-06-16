@@ -1,5 +1,5 @@
 [Service]
-ExecStart=ectool chargecontrol normal 87 87
+ExecStart=framework_tool --charge-limit 87
 
 [Install]
 WantedBy=default.target
