@@ -1,6 +1,8 @@
 ---
 - name: Install chrony
-  pacman: name=chrony state=present
+  pacman:
+    name: chrony
+    state: present
 
 - name: Install chrony networkmanager dispatcher
   kewlfft.aur.aur:
@@ -12,9 +14,14 @@
     - networkmanager
 
 - name: Push chrony configuration file
-  copy: src=chrony.conf dest=/etc/chrony.conf
+  copy:
+    src: chrony.conf
+    dest: /etc/chrony.conf
   notify:
     - restart chrony
 
 - name: Enable and start chrony
-  service: name=chronyd.service enabled=yes state=started
+  service:
+    name: chronyd.service
+    enabled: yes
+    state: started
