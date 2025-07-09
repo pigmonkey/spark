@@ -4,9 +4,9 @@
     name: yubikey-personalization-gui
     state: present
 
-- name: Install YubiKey Manager GUI
+- name: Install YubiKey Manager
   pacman:
-    name: yubikey-manager-qt
+    name: yubikey-manager
     state: present
 
 - name: Install smartcard libs/tools
