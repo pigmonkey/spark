@@ -1,9 +1,13 @@
 ---
 - name: Install YubiKey Personalization GUI
-  pacman: name=yubikey-personalization-gui state=present
+  pacman:
+    name: yubikey-personalization-gui
+    state: present
 
 - name: Install YubiKey Manager GUI
-  pacman: name=yubikey-manager-qt state=present
+  pacman:
+    name: yubikey-manager-qt
+    state: present
 
 - name: Install smartcard libs/tools
   pacman:
