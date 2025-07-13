@@ -21,7 +21,7 @@
 
 - name: Install WordNet database
   kewlfft.aur.aur:
-    name: dict-wn
+    name: wordnet-dictd
   become: yes
   become_user: "{{ aur.user }}"
   tags:
