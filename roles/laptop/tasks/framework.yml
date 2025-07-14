@@ -1,11 +1,8 @@
 ---
 - name: Install framework-system
-  kewlfft.aur.aur:
+  pacman:
     name: framework-system
-  become: yes
-  become_user: "{{ aur.user }}"
   tags:
-    - aur
     - framework
 
 - name: Copy charge control service
