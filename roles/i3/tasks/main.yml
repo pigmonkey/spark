@@ -13,6 +13,11 @@
     name: py3status
     state: present
 
+- name: Install wmfocus
+  pacman:
+    name: wmfocus
+    state: present
+
 - name: Verify that default applications file exists
   copy:
     content: ""
