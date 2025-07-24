@@ -9,9 +9,10 @@
       - gst-python
       - python-beautifulsoup4
       - python-gobject
+      - python-langdetect
+      - python-pyacoustid
       - python-pylast
       - python-requests
-      - python-pyacoustid
       - beets
     state: present
   tags:
