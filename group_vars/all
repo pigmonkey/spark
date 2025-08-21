@@ -342,10 +342,10 @@ power_management: "tuned"
 
 regdomain: "US"
 
-illuminanced:
-    max_backlight_file: /sys/class/backlight/amdgpu_bl1/max_brightness
-    backlight_file: /sys/class/backlight/amdgpu_bl1/brightness
-    illuminance_file: /sys/bus/iio/devices/iio:device0/in_illuminance_raw
-    min_backlight: 70
+# illuminanced:
+#     max_backlight_file: /sys/class/backlight/amdgpu_bl1/max_brightness
+#     backlight_file: /sys/class/backlight/amdgpu_bl1/brightness
+#     illuminance_file: /sys/bus/iio/devices/iio:device0/in_illuminance_raw
+#     min_backlight: 70
 
 terminal: kitty
