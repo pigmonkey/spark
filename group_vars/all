@@ -336,7 +336,7 @@ pkgfile:
 hardened:
     enable_namespaces: true
 
-kernel_parameters: "quiet consoleblank=60"
+kernel_parameters: "quiet consoleblank=60 amdgpu.abmlevel=0"
 
 power_management: "tuned"
 
