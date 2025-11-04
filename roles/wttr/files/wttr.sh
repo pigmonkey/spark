@@ -4,9 +4,9 @@
 location="$1"
 if [ -z "$1" ]; then
     location_data=$(curl -s http://ip-api.com/json)
-    location=$(echo "$location_data" | jq -r 'if (.zip | length) != 0 then .zip else .city end')
     lat=$(echo "$location_data" | jq '.lat')
     lon=$(echo "$location_data" | jq '.lon')
+    location=$lat,$lon
     country=$(echo "$location_data" | jq -r '.country')
 fi
 
