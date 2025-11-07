@@ -1,5 +1,0 @@
-[Service]
-ExecStart=framework_tool --charge-limit 87
-
-[Install]
-WantedBy=default.target
