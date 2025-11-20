@@ -33,7 +33,9 @@
 
 - name: Install yt-dlp
   pacman:
-    name: yt-dlp
+    name:
+      - yt-dlp
+      - yt-dlp-ejs
     state: present
 
 - name: Install zbar
