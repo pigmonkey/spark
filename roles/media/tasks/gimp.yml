@@ -20,8 +20,3 @@
   tags:
     - gimp
     - firejail
-
-- name: Install GIMP raw support
-  pacman: name=gimp-nufraw state=present
-  tags:
-    - gimp
