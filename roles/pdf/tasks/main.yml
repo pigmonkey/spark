@@ -69,9 +69,12 @@
   tags:
     - pdfgrep
 
-- name: Install OCRmyPDF
+- name: Install OCRmyPDF and dependencies
   kewlfft.aur.aur:
-    name: ocrmypdf
+    name:
+      - python-uharfbuzz
+      - python-fpdf2
+      - ocrmypdf
   become: yes
   become_user: "{{ aur.user }}"
   tags:
