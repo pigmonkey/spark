@@ -79,7 +79,6 @@ Generate and verify fstab.
 Change root into the base install and perform base configuration tasks.
 
     $ arch-chroot /mnt /bin/bash
-    $ ln -s /usr/share/i18n/locales/en_DK /usr/share/i18n/locales/en_SE
     $ export LANG=en_US.UTF-8
     $ export TIME=en_SE.UTF-8
     $ echo $LANG UTF-8 >> /etc/locale.gen
