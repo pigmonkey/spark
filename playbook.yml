@@ -62,6 +62,7 @@
     - { role: dictd, tags: ['dictd'] }
     - { role: redshift, tags: ['redshift'] }
     - { role: transmission, tags: ['transmission'] }
+    - { role: libvirt, tags: ['libvirt'] }
     - { role: virtualbox, tags: ['virtualbox'] }
     - { role: virtualenv, tags: ['virtualenv'] }
     - { role: backitup, tags: ['backitup'] }

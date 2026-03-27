@@ -1,0 +1,17 @@
+---
+- name: Install libvirt
+  pacman:
+    name:
+      - libvirt
+      - virt-install
+    state: present
+
+- name: Install qemu-base
+  pacman:
+    name: qemu-base
+    state: present
+
+- name: Install dnsmasq
+  pacman:
+    name: dnsmasq
+    state: present

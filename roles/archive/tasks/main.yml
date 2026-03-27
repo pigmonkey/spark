@@ -44,6 +44,13 @@
   tags:
     - lesspipe
 
+- name: Install libisoburn
+  pacman:
+    name: libisoburn
+    state: present
+  tags:
+    - libisoburn
+
 - name: Install pigz
   pacman:
     name: pigz
