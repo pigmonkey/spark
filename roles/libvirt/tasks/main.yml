@@ -15,3 +15,23 @@
   pacman:
     name: dnsmasq
     state: present
+
+- name: Enable libvirtd.socket
+  systemd:
+    name: libvirtd.socket
+    enabled: yes
+    state: started
+
+- name: Enable virtlogd.socket
+  systemd:
+    name: virtlogd.socket
+    enabled: yes
+    state: started
+
+- name: Add the user to libvirt group
+  user:
+    name: "{{ user.name }}"
+    groups: libvirt
+    append: yes
+  tags:
+    - user
