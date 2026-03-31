@@ -1,0 +1,4 @@
+# {{ ansible_managed }}
+{% for network in network.excluded_networks %}
+{{ network }}
+{% endfor %}

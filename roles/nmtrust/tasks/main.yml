@@ -17,6 +17,11 @@
       src: trusted_networks.j2
       dest: /etc/nmtrust/trusted_networks
 
+- name: Push excluded network list
+  template:
+      src: excluded_networks.j2
+      dest: /etc/nmtrust/excluded_networks
+
 - name: Verify trusted unit list exists
   copy:
       content: ""
