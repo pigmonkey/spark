@@ -66,6 +66,8 @@ network:
         # libvirt
         - virbr*
         - vnet*
+        # Migrant
+        - mg-wg-*
 
 editors:
     - gvim
