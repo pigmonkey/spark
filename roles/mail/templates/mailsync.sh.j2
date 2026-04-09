@@ -14,7 +14,7 @@ then
     /usr/bin/offlineimap -o
 {% endif %}
 {% if mail.sync_pim %}
-    vdirsyncer sync
+    pimsync sync
 {% endif %}
 {% if mail.sync_taskwarrior %}
     task sync

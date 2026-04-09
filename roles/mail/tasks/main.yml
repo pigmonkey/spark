@@ -23,6 +23,7 @@
     dest: /etc/firejail/mutt.local
     block: |
         noblacklist ~/.config/vdirsyncer
+        noblacklist ~/.config/pimsync
         noblacklist ~/.vdirsyncer
         noblacklist ~/.calendars
         noblacklist ~/.contacts

@@ -1,7 +1,7 @@
 ---
-- name: Install vdirsyncer
+- name: Install pimsync
   pacman:
-    name: vdirsyncer
+    name: pimsync
     state: present
 
 - name: Install khard

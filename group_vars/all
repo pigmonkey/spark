@@ -170,6 +170,7 @@ firejail:
     blacklist:
         - ~/.calendars
         - ~/.config/vdirsyncer
+        - ~/.config/pimsync
         - ~/.contacts
         - ~/.keys
         - ~/.mbsyncrc
