@@ -1,5 +1,0 @@
----
-- name: Restart bitlbee
-  ansible.builtin.service:
-    name: bitlbee
-    state: restarted

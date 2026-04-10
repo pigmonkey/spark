@@ -1,6 +1,0 @@
----
-dependencies:
-  - { role: nmtrust }
-  - { role: firejail }
-  - { role: systemd }
-  - { role: tor }
