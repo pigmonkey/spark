@@ -1,20 +1,21 @@
 ---
 - name: Install caps2esc
-  pacman:
+  community.general.pacman:
     name: interception-caps2esc
     state: present
 
 - name: Push caps2esc udevmon config
-  template:
+  ansible.builtin.template:
     src: caps2esc.yaml.j2
     dest: /etc/interception/udevmon.d/caps2esc.yaml
+    mode: "0644"
   notify:
-    - restart udevmon
-  when: interception.caps2esc.enabled is defined and interception.caps2esc.enabled == True
+    - Restart udevmon
+  when: interception.caps2esc.enabled is defined and interception.caps2esc.enabled
 
 - name: Enable and start udevmon
-  service:
+  ansible.builtin.service:
     name: udevmon.service
-    enabled: yes
+    enabled: true
     state: started
-  when: interception.caps2esc.enabled is defined and interception.caps2esc.enabled == True
+  when: interception.caps2esc.enabled is defined and interception.caps2esc.enabled

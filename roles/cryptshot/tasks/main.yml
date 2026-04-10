@@ -1,37 +1,64 @@
 ---
 - name: Install rsnapshot
-  pacman: name=rsnapshot state=present
+  community.general.pacman:
+    name: rsnapshot
+    state: present
 
 - name: Install cryptshot.sh script
-  copy: src=cryptshot/cryptshot.sh dest=/usr/local/bin/cryptshot mode=0755
+  ansible.builtin.copy:
+    src: cryptshot/cryptshot.sh
+    dest: /usr/local/bin/cryptshot
+    mode: "0755"
 
 - name: Create rsnapshot config directory
-  file: path=/usr/local/etc/rsnapshot state=directory
+  ansible.builtin.file:
+    path: /usr/local/etc/rsnapshot
+    state: directory
+    mode: "0755"
 
 - name: Create cryptshot config directory
-  file: path=/usr/local/etc/cryptshot state=directory
+  ansible.builtin.file:
+    path: /usr/local/etc/cryptshot
+    state: directory
+    mode: "0755"
 
 - name: Create cryptshot last run directory
-  file: path=/usr/local/etc/cryptshot/lastrun state=directory
+  ansible.builtin.file:
+    path: /usr/local/etc/cryptshot/lastrun
+    state: directory
+    mode: "0755"
 
-- include_tasks: config.yml
+- name: Include cryptshot config tasks
+  ansible.builtin.include_tasks: config.yml
   with_items: "{{ cryptshot }}"
   loop_control:
     loop_var: target
 
 - name: Push cryptshot execution script
-  template: src=cryptshot.sh.j2 dest=/usr/local/bin/cryptshot-execute mode=0755
+  ansible.builtin.template:
+    src: cryptshot.sh.j2
+    dest: /usr/local/bin/cryptshot-execute
+    mode: "0755"
 
 - name: Push cryptshot service file
-  template: src=cryptshot.service.j2 dest=/etc/systemd/system/cryptshot.service
+  ansible.builtin.template:
+    src: cryptshot.service.j2
+    dest: /etc/systemd/system/cryptshot.service
+    mode: "0644"
   notify:
-    - reload systemd config
+    - Reload systemd config
 
 - name: Push cryptshot timer file
-  template: src=cryptshot.timer.j2 dest=/etc/systemd/system/cryptshot.timer
+  ansible.builtin.template:
+    src: cryptshot.timer.j2
+    dest: /etc/systemd/system/cryptshot.timer
+    mode: "0644"
   notify:
-    - reload systemd config
-    - restart cryptshot
+    - Reload systemd config
+    - Restart cryptshot
 
 - name: Enable and start cryptshot timer
-  service: name=cryptshot.timer enabled=yes state=started
+  ansible.builtin.service:
+    name: cryptshot.timer
+    enabled: true
+    state: started

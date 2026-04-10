@@ -1,35 +1,38 @@
 ---
 - name: Push mail sync script
-  template:
+  ansible.builtin.template:
     src: mailsync.sh.j2
     dest: /usr/local/bin/mailsync
-    mode: 0755
+    mode: "0755"
   tags:
     - mailsync
 
 - name: Push mailsync service file
-  template:
+  ansible.builtin.template:
     src: mailsync.service.j2
     dest: /etc/systemd/user/mailsync.service
+    mode: "0644"
   tags:
     - mailsync
   notify:
-    - reload systemd config
+    - Reload systemd config
 
 - name: Push mailsync timer file
-  template:
+  ansible.builtin.template:
     src: mailsync.timer.j2
     dest: /etc/systemd/user/mailsync.timer
+    mode: "0644"
   tags:
     - mailsync
   notify:
-    - reload systemd config
-    - restart mailsync
+    - Reload systemd config
+    - Restart mailsync
 
-- include_tasks: roles/nmtrust/tasks/unit.yml
+- name: Include nmtrust unit tasks
+  ansible.builtin.include_tasks: roles/nmtrust/tasks/unit.yml
   vars:
-      unit: mailsync.timer
-      run_on: "{{ mail.sync_on }}"
-      user_unit: true
+    unit: mailsync.timer
+    run_on: "{{ mail.sync_on }}"
+    user_unit: true
   tags:
     - mailsync

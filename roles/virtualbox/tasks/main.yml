@@ -1,6 +1,6 @@
 ---
 - name: Install VirtualBox and dependencies
-  pacman:
+  community.general.pacman:
     name:
       - net-tools
       - virtualbox
@@ -11,12 +11,15 @@
 - name: Install VirtualBox extensions
   kewlfft.aur.aur:
     name: virtualbox-ext-oracle
-  become: yes
+  become: true
   become_user: "{{ aur.user }}"
   tags:
     - aur
 
 - name: Add the user to vboxusers group
-  user: name={{ user.name }} groups=vboxusers append=yes
+  ansible.builtin.user:
+    name: "{{ user.name }}"
+    groups: vboxusers
+    append: true
   tags:
     - user

@@ -1,15 +1,17 @@
 ---
 - name: Install openresolv
-  pacman:
+  community.general.pacman:
     name: openresolv
     state: present
 
 - name: Push resolvconf.conf
-  template:
+  ansible.builtin.template:
     src: resolvconf.conf.j2
     dest: /etc/resolvconf.conf
+    mode: "0644"
 
 - name: Push NetworkManager openresolv config.
-  copy:
-      src: rc-manager.conf
-      dest: /etc/NetworkManager/conf.d/20-rc-manager.conf
+  ansible.builtin.copy:
+    src: rc-manager.conf
+    dest: /etc/NetworkManager/conf.d/20-rc-manager.conf
+    mode: "0644"

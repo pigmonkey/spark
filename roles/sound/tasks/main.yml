@@ -1,16 +1,16 @@
 ---
 - name: Install alsa-utils
-  pacman:
+  community.general.pacman:
     name: alsa-utils
     state: present
 
 - name: Install sof-firmware
-  pacman:
+  community.general.pacman:
     name: sof-firmware
     state: present
 
 - name: Install Pipewire
-  pacman:
+  community.general.pacman:
     name:
       - pipewire
       - pipewire-pulse
@@ -18,21 +18,21 @@
     state: present
 
 - name: Install pasystray
-  pacman:
+  community.general.pacman:
     name: pasystray
     state: present
 
 - name: Install easyeffects
-  pacman:
+  community.general.pacman:
     name: easyeffects
     state: present
 
 - name: Install Linux Studio Plugins
-  pacman:
+  community.general.pacman:
     name: lsp-plugins
     state: present
 
 - name: Install calf studio gear
-  pacman:
+  community.general.pacman:
     name: calf
     state: present

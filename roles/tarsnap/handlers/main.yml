@@ -1,4 +1,6 @@
 ---
-- name: restart tarsnapper
-  service: name=tarsnapper.timer state=restarted
+- name: Restart tarsnapper
+  ansible.builtin.service:
+    name: tarsnapper.timer
+    state: restarted
   when: tarsnapper.run_on == "all"

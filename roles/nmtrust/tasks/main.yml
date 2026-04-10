@@ -1,29 +1,33 @@
 ---
 - name: Install nmtrust
   kewlfft.aur.aur:
-      name: nmtrust-git
-  become: yes
+    name: nmtrust-git
+  become: true
   become_user: "{{ aur.user }}"
   tags:
     - aur
 
 - name: Create nmtrust config directory
-  file:
-      path: /etc/nmtrust
-      state: directory
+  ansible.builtin.file:
+    path: /etc/nmtrust
+    state: directory
+    mode: "0755"
 
 - name: Push trusted network list
-  template:
-      src: trusted_networks.j2
-      dest: /etc/nmtrust/trusted_networks
+  ansible.builtin.template:
+    src: trusted_networks.j2
+    dest: /etc/nmtrust/trusted_networks
+    mode: "0644"
 
 - name: Push excluded network list
-  template:
-      src: excluded_networks.j2
-      dest: /etc/nmtrust/excluded_networks
+  ansible.builtin.template:
+    src: excluded_networks.j2
+    dest: /etc/nmtrust/excluded_networks
+    mode: "0644"
 
 - name: Verify trusted unit list exists
-  copy:
-      content: ""
-      dest: /etc/nmtrust/trusted_units
-      force: false
+  ansible.builtin.copy:
+    content: ""
+    dest: /etc/nmtrust/trusted_units
+    force: false
+    mode: "0644"

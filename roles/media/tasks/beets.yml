@@ -1,6 +1,6 @@
 ---
 - name: Install beets and dependencies
-  pacman:
+  community.general.pacman:
     name:
       - gst-libav
       - gst-plugins-bad
@@ -21,7 +21,7 @@
 - name: Install mp3val
   kewlfft.aur.aur:
     name: mp3val
-  become: yes
+  become: true
   become_user: "{{ aur.user }}"
   tags:
     - aur

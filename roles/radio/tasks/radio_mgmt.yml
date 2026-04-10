@@ -4,7 +4,7 @@
     name:
       - hamradio-menus
       - chirp-daily
-  become: yes
+  become: true
   become_user: "{{ aur.user }}"
   tags:
     - aur

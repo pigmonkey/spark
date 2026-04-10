@@ -1,45 +1,50 @@
 ---
-- include_tasks: tlp.yml
+- name: Include TLP tasks
+  ansible.builtin.include_tasks: tlp.yml
   when: power_management is defined and power_management == "tlp"
 
-- include_tasks: tuned.yml
+- name: Include tuned tasks
+  ansible.builtin.include_tasks: tuned.yml
   when: power_management is defined and power_management == "tuned"
 
-- include_tasks: framework.yml
+- name: Include Framework tasks
+  ansible.builtin.include_tasks: framework.yml
   when: power_management is defined and power_management == "tuned" and ansible_system_vendor == "Framework"
 
 - name: Install x86_energy_perf_policy
-  pacman:
+  community.general.pacman:
     name: x86_energy_perf_policy
     state: present
 
 - name: Copy touchpad configuration file
-  copy:
+  ansible.builtin.copy:
     src: 30-touchpad.conf
     dest: /etc/X11/xorg.conf.d/30-touchpad.conf
+    mode: "0644"
   tags:
     - libinput
 
 - name: Copy logind configuration file
-  copy:
+  ansible.builtin.copy:
     src: logind.conf
     dest: /etc/systemd/logind.conf
+    mode: "0644"
 
 - name: Install poweralertd
   kewlfft.aur.aur:
     name: poweralertd
-  become: yes
+  become: true
   become_user: "{{ aur.user }}"
   tags:
     - aur
 
 - name: Enable and start poweralertd
-  systemd:
+  ansible.builtin.systemd:
     name: poweralertd.service
     scope: user
-    enabled: yes
+    enabled: true
     state: started
-  become: yes
+  become: true
   become_user: "{{ user.name }}"
   environment:
     XDG_RUNTIME_DIR: "/run/user/{{ user.uid }}"
@@ -47,27 +52,27 @@
     - aur
 
 - name: Install powertop
-  pacman:
+  community.general.pacman:
     name: powertop
     state: present
 
 - name: Install powerstat
   kewlfft.aur.aur:
     name: powerstat
-  become: yes
+  become: true
   become_user: "{{ aur.user }}"
   tags:
     - aur
 
 - name: Install cmake for battery-stats
-  pacman:
+  community.general.pacman:
     name: cmake
     state: present
 
 - name: Install battery-stats
   kewlfft.aur.aur:
     name: battery-stats-git
-  become: yes
+  become: true
   become_user: "{{ aur.user }}"
   tags:
     - aur
@@ -75,7 +80,7 @@
 - name: Install battop
   kewlfft.aur.aur:
     name: battop
-  become: yes
+  become: true
   become_user: "{{ aur.user }}"
   tags:
     - aur

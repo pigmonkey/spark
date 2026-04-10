@@ -1,43 +1,44 @@
 ---
 - name: Install TuneD
-  pacman:
+  community.general.pacman:
     name: tuned-ppd
     state: present
   tags:
     - tuned
 
 - name: Enable and start TuneD
-  service:
+  ansible.builtin.service:
     name: tuned.service
-    enabled: yes
+    enabled: true
     state: started
   tags:
     - tuned
 
 - name: Install power monitor script
-  copy:
+  ansible.builtin.copy:
     src: power_monitor.sh
     dest: /usr/local/bin/
-    mode: 0755
+    mode: "0755"
   notify:
-    - restart power monitor
+    - Restart power monitor
   tags:
     - tuned
 
 - name: Copy power monitor service
-  copy:
+  ansible.builtin.copy:
     src: power_monitor.service
     dest: /etc/systemd/system/
+    mode: "0644"
   notify:
-    - reload systemd config
-    - restart power monitor
+    - Reload systemd config
+    - Restart power monitor
   tags:
     - tuned
 
 - name: Enable and start power monitor service
-  service:
+  ansible.builtin.service:
     name: power_monitor.service
-    enabled: yes
+    enabled: true
     state: started
   tags:
     - tuned

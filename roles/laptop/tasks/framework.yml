@@ -1,6 +1,6 @@
 ---
 - name: Install framework-system
-  pacman:
+  community.general.pacman:
     name: framework-system
   tags:
     - framework

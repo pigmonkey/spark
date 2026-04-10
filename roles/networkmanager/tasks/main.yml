@@ -1,6 +1,6 @@
 ---
 - name: Install NetworkManager and dependencies
-  pacman:
+  community.general.pacman:
     name:
       - networkmanager
       - networkmanager-openvpn
@@ -10,35 +10,37 @@
     state: present
 
 - name: Push connectivity check config
-  template:
-      src: connectivity.conf.j2
-      dest: /etc/NetworkManager/conf.d/20-connectivity.conf
+  ansible.builtin.template:
+    src: connectivity.conf.j2
+    dest: /etc/NetworkManager/conf.d/20-connectivity.conf
+    mode: "0644"
 
 - name: Push MAC address randomization config
-  template:
-      src: random_mac.conf.j2
-      dest: /etc/NetworkManager/conf.d/20-random_mac.conf
+  ansible.builtin.template:
+    src: random_mac.conf.j2
+    dest: /etc/NetworkManager/conf.d/20-random_mac.conf
+    mode: "0644"
 
 - name: Push WiFi/Wired Exclusive dispatcher
-  copy:
+  ansible.builtin.copy:
     src: wifi-wired-exclusive.sh
     dest: /etc/NetworkManager/dispatcher.d/70-wifi-wired-exclusive
-    mode: 0755
-  when: network.wifi_wired_exclusive is defined and network.wifi_wired_exclusive == True
+    mode: "0755"
+  when: network.wifi_wired_exclusive is defined and network.wifi_wired_exclusive
 
 - name: Enable and start NetworkManager
-  service:
-      name: NetworkManager.service
-      enabled: yes
-      state: started
+  ansible.builtin.service:
+    name: NetworkManager.service
+    enabled: true
+    state: started
 
 - name: Enable and start NetworkManager dispatcher
-  service:
-      name: NetworkManager-dispatcher.service
-      enabled: yes
-      state: started
+  ansible.builtin.service:
+    name: NetworkManager-dispatcher.service
+    enabled: true
+    state: started
 
 - name: Disable dhcpcd service
-  service:
-      name: dhcpcd.service
-      enabled: no
+  ansible.builtin.service:
+    name: dhcpcd.service
+    enabled: false

@@ -1,10 +1,12 @@
 ---
-- hosts: localhost
+- name: Gather and display Ansible facts
+  hosts: localhost
   tasks:
-  - name: Print ansible_facts
-    debug:
-      var: ansible_facts
-  - name: Save ansible_facts to /tmp/ansible_facts.json
-    copy:
-      content: "{{ ansible_facts|to_nice_json }}"
-      dest: /tmp/ansible_facts.json
+    - name: Print ansible_facts
+      ansible.builtin.debug:
+        var: ansible_facts
+    - name: Save ansible_facts to /tmp/ansible_facts.json
+      ansible.builtin.copy:
+        content: "{{ ansible_facts | to_nice_json }}"
+        dest: /tmp/ansible_facts.json
+        mode: "0644"

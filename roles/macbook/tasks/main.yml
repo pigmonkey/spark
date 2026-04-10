@@ -1,11 +1,14 @@
 ---
 - name: Copy mtrack-git configuration file
-  copy: src=50-mtrack-git.conf dest=/etc/X11/xorg.conf.d/50-mtrack-git.conf
+  ansible.builtin.copy:
+    src: 50-mtrack-git.conf
+    dest: /etc/X11/xorg.conf.d/50-mtrack-git.conf
+    mode: "0644"
 
 - name: Install xf86-input-mtrack-git
   kewlfft.aur.aur:
     name: xf86-input-mtrack-git
-  become: yes
+  become: true
   become_user: "{{ aur.user }}"
   tags:
     - aur

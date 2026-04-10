@@ -1,17 +1,23 @@
 ---
 - name: Install pianobar
-  pacman: name=pianobar state=present
+  community.general.pacman:
+    name: pianobar
+    state: present
 
 - name: Jail pianobar
-  file: src=/usr/bin/firejail
-        dest=/usr/local/bin/pianobar
-        state=link
+  ansible.builtin.file:
+    src: /usr/bin/firejail
+    dest: /usr/local/bin/pianobar
+    state: link
   tags:
     - firejail
 
 - name: Push pianobar firejail profile
-  copy: src=firejail/pianobar.profile dest=/usr/local/etc/firejail/pianobar.profile
+  ansible.builtin.copy:
+    src: firejail/pianobar.profile
+    dest: /usr/local/etc/firejail/pianobar.profile
+    mode: "0644"
   notify:
-    - activate firejail profiles
+    - Activate firejail profiles
   tags:
     - firejail

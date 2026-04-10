@@ -1,6 +1,6 @@
 ---
 - name: Install hunspell
-  pacman:
+  community.general.pacman:
     name:
       - hunspell
       - hunspell-en_US
@@ -9,7 +9,7 @@
     - hunspell
 
 - name: Install aspell
-  pacman:
+  community.general.pacman:
     name:
       - aspell
       - aspell-en

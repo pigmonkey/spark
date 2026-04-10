@@ -1,18 +1,18 @@
 ---
 - name: Add plugdev group
-  group:
-      name: plugdev
-      state: present
+  ansible.builtin.group:
+    name: plugdev
+    state: present
 
-- name: Add {{ user.name }} to plugdev group
-  user:
-      name: "{{ user.name }}"
-      groups: plugdev
-      append: yes
+- name: "Add user to plugdev group: {{ user.name }}"
+  ansible.builtin.user:
+    name: "{{ user.name }}"
+    groups: plugdev
+    append: true
   tags:
     - user
 
 - name: Install Solaar
-  pacman:
-      name: solaar
-      state: present
+  community.general.pacman:
+    name: solaar
+    state: present

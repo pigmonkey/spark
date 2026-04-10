@@ -1,11 +1,11 @@
 ---
 - name: Install LibreOffice
-  pacman:
+  community.general.pacman:
     name: libreoffice-fresh
     state: present
 
 - name: Jail LibreOffice
-  file:
+  ansible.builtin.file:
     src: /usr/bin/firejail
     dest: /usr/local/bin/libreoffice
     state: link
@@ -13,15 +13,16 @@
     - firejail
 
 - name: Verify LibreOffice firejail local profile exists
-  copy:
+  ansible.builtin.copy:
     content: ""
     dest: /etc/firejail/libreoffice.local
     force: false
+    mode: "0644"
   tags:
     - firejail
 
 - name: Restrict LibreOffice network access
-  lineinfile:
+  ansible.builtin.lineinfile:
     dest: /etc/firejail/libreoffice.local
     regexp: "^net"
     line: "net none"
@@ -29,7 +30,7 @@
     - firejail
 
 - name: Restrict LibreOffice access to /etc
-  lineinfile:
+  ansible.builtin.lineinfile:
     dest: /etc/firejail/libreoffice.local
     regexp: "^private-etc"
     line: "private-etc firejail,libreoffice,fonts,passwd"
@@ -37,49 +38,49 @@
     - firejail
 
 - name: Install enscript
-  pacman:
+  community.general.pacman:
     name: enscript
     state: present
 
 - name: Install Simple Scan
-  pacman:
+  community.general.pacman:
     name: simple-scan
     state: present
 
 - name: Install pandoc
-  pacman:
+  community.general.pacman:
     name: pandoc-cli
     state: present
 
 - name: Install texlive-basic
-  pacman:
+  community.general.pacman:
     name: texlive-basic
     state: present
 
 - name: Install texlive-latexextra
-  pacman:
+  community.general.pacman:
     name: texlive-latexextra
     state: present
 
 - name: Install texlive-binextra
-  pacman:
+  community.general.pacman:
     name: texlive-binextra
     state: present
 
 - name: Install qalculate
-  pacman:
+  community.general.pacman:
     name: qalculate-gtk
     state: present
 
 - name: Install GNU Plot
-  pacman:
+  community.general.pacman:
     name: gnuplot
     state: present
 
 - name: Install xsv
   kewlfft.aur.aur:
     name: xsv
-  become: yes
+  become: true
   become_user: "{{ aur.user }}"
   tags:
     - aur
@@ -87,12 +88,12 @@
 - name: Install epy
   kewlfft.aur.aur:
     name: epy-git
-  become: yes
+  become: true
   become_user: "{{ aur.user }}"
   tags:
     - aur
 
 - name: Install csvkit
-  pacman:
+  community.general.pacman:
     name: csvkit
     state: present

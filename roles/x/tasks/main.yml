@@ -1,57 +1,86 @@
 ---
 - name: Install Xorg
-  pacman: name=xorg-server state=present
+  community.general.pacman:
+    name: xorg-server
+    state: present
 
 - name: Install Xinit
-  pacman: name=xorg-xinit state=present
+  community.general.pacman:
+    name: xorg-xinit
+    state: present
 
 - name: Install xmodmap
-  pacman: name=xorg-xmodmap state=present
+  community.general.pacman:
+    name: xorg-xmodmap
+    state: present
 
 - name: Install xdpyinfo
-  pacman: name=xorg-xdpyinfo state=present
+  community.general.pacman:
+    name: xorg-xdpyinfo
+    state: present
 
 - name: Install xev
-  pacman: name=xorg-xev state=present
+  community.general.pacman:
+    name: xorg-xev
+    state: present
 
 - name: Install xorg-sessreg
-  pacman: name=xorg-sessreg state=present
+  community.general.pacman:
+    name: xorg-sessreg
+    state: present
 
 - name: Install xorg-xwininfo
-  pacman: name=xorg-xwininfo state=present
+  community.general.pacman:
+    name: xorg-xwininfo
+    state: present
 
 - name: Install xautomation
-  pacman: name=xautomation state=present
+  community.general.pacman:
+    name: xautomation
+    state: present
 
 - name: Install xcalib
-  pacman:
+  community.general.pacman:
     name: xcalib
     state: present
 
 - name: Install video driver(s)
-  pacman:
+  community.general.pacman:
     name: "{{ video_drivers }}"
     state: present
   when: video_drivers is defined
 
 - name: Add user to video group
-  user: name={{ user.name }} groups=video append=yes
+  ansible.builtin.user:
+    name: "{{ user.name }}"
+    groups: video
+    append: true
   tags:
     - user
 
 - name: Enable middle-click scrolling
-  template: src=30-scroll.conf dest=/etc/X11/xorg.conf.d/30-scroll.conf
+  ansible.builtin.template:
+    src: 30-scroll.conf
+    dest: /etc/X11/xorg.conf.d/30-scroll.conf
+    mode: "0644"
   when: libinput.middle_click_scroll is defined
   tags:
     - libinput
 
 - name: Remap mouse buttons
-  template: src=30-button_mapping.conf dest=/etc/X11/xorg.conf.d/30-button_mapping.conf
+  ansible.builtin.template:
+    src: 30-button_mapping.conf
+    dest: /etc/X11/xorg.conf.d/30-button_mapping.conf
+    mode: "0644"
   when: libinput.button_mapping is defined
   tags:
     - libinput
 
-- include_tasks: sxhkd.yml
-- include_tasks: unclutter.yml
-- include_tasks: autorandr.yml
-- include_tasks: xdg.yml
+- name: Include sxhkd tasks
+  ansible.builtin.include_tasks: sxhkd.yml
+- name: Include unclutter tasks
+  ansible.builtin.include_tasks: unclutter.yml
+- name: Include autorandr tasks
+  ansible.builtin.include_tasks: autorandr.yml
+- name: Include XDG tasks
+  ansible.builtin.include_tasks: xdg.yml

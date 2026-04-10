@@ -1,16 +1,16 @@
 ---
 - name: Install pass
-  pacman:
+  community.general.pacman:
     name: pass
     state: present
 
 - name: Install pass-otp
-  pacman:
+  community.general.pacman:
     name: pass-otp
     state: present
 
 - name: Install rofi-pass
-  pacman:
+  community.general.pacman:
     name: rofi-pass
     state: present
   tags:
@@ -20,8 +20,8 @@
   kewlfft.aur.aur:
     name: pass-update
     use: makepkg
-    skip_pgp_check: yes
-  become: yes
+    skip_pgp_check: true
+  become: true
   become_user: "{{ aur.user }}"
   tags:
     - aur

@@ -1,36 +1,40 @@
 ---
 - name: Install reflector
-  pacman:
-      name: reflector
-      state: present
+  community.general.pacman:
+    name: reflector
+    state: present
 
 - name: Push reflector update script
-  template:
-      src: reflector-update.sh.j2
-      dest: /usr/local/bin/reflector-update
-      mode: 0755
+  ansible.builtin.template:
+    src: reflector-update.sh.j2
+    dest: /usr/local/bin/reflector-update
+    mode: "0755"
 
 - name: Push pacman mirror list update hook
-  copy:
-      src: mirrorlist.hook
-      dest: /etc/pacman.d/hooks/mirrorlist.hook
+  ansible.builtin.copy:
+    src: mirrorlist.hook
+    dest: /etc/pacman.d/hooks/mirrorlist.hook
+    mode: "0644"
 
 - name: Push reflector update service file
-  copy:
-      src: reflector-update.service
-      dest: /etc/systemd/system/
+  ansible.builtin.copy:
+    src: reflector-update.service
+    dest: /etc/systemd/system/
+    mode: "0644"
   notify:
-    - reload systemd config
+    - Reload systemd config
 
 - name: Push reflector update timer file
-  copy:
-      src: reflector-update.timer
-      dest: /etc/systemd/system/
+  ansible.builtin.copy:
+    src: reflector-update.timer
+    dest: /etc/systemd/system/
+    mode: "0644"
   notify:
-    - reload systemd config
-    - restart reflector update
+    - Reload systemd config
+    - Restart reflector update
 
-- include_tasks: roles/nmtrust/tasks/unit.yml
+- name: Include nmtrust unit tasks
+  ansible.builtin.include_tasks: roles/nmtrust/tasks/unit.yml
   vars:
-      unit: reflector-update.timer
-      run_on: "{{ mirrorlist.run_on }}"
+    unit: reflector-update.timer
+    run_on: "{{ mirrorlist.run_on }}"

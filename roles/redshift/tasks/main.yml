@@ -1,6 +1,6 @@
 ---
 - name: Install RedShift and dependencies
-  pacman:
+  community.general.pacman:
     name:
       - librsvg
       - python-gobject
@@ -9,7 +9,7 @@
     state: present
 
 - name: Jail RedShift
-  file:
+  ansible.builtin.file:
     src: /usr/bin/firejail
     dest: /usr/local/bin/redshift
     state: link
@@ -17,7 +17,7 @@
     - firejail
 
 - name: Jail RedShift GTK
-  file:
+  ansible.builtin.file:
     src: /usr/bin/firejail
     dest: /usr/local/bin/redshift-gtk
     state: link
@@ -25,10 +25,11 @@
     - firejail
 
 - name: Push RedShift GTK firejail profile
-  copy:
+  ansible.builtin.copy:
     src: firejail/redshift-gtk.profile
     dest: /usr/local/etc/firejail/redshift-gtk.profile
+    mode: "0644"
   notify:
-    - activate firejail profiles
+    - Activate firejail profiles
   tags:
     - firejail

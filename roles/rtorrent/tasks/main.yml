@@ -1,10 +1,13 @@
 ---
 - name: Install rtorrent
-  pacman: name=rtorrent state=present
+  community.general.pacman:
+    name: rtorrent
+    state: present
 
 - name: Jail rtorrent
-  file: src=/usr/bin/firejail
-        dest=/usr/local/bin/rtorrent
-        state=link
+  ansible.builtin.file:
+    src: /usr/bin/firejail
+    dest: /usr/local/bin/rtorrent
+    state: link
   tags:
     - firejail

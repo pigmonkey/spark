@@ -1,83 +1,110 @@
 ---
 - name: Install msmtp
-  pacman: name=msmtp-mta state=present
+  community.general.pacman:
+    name: msmtp-mta
+    state: present
   tags:
     - msmtp
 
 - name: Push msmtp configuration file
-  copy: src=msmtprc dest=/etc/msmtprc
+  ansible.builtin.copy:
+    src: msmtprc
+    dest: /etc/msmtprc
+    mode: "0644"
   tags:
     - msmtp
 
 - name: Verify alias file exists
-  copy:
+  ansible.builtin.copy:
     content: ""
     dest: /etc/aliases
     force: false
+    mode: "0644"
   tags:
     - msmtp
 
 - name: Set root email alias
-  lineinfile: "dest=/etc/aliases
-              regexp=^root
-              state=present
-              line='root: {{ user.email }}'"
+  ansible.builtin.lineinfile:
+    dest: /etc/aliases
+    regexp: ^root
+    state: present
+    line: "root: {{ user.email }}"
   when: user.email is defined
   tags:
     - msmtp
 
 - name: Set user email alias
-  lineinfile: "dest=/etc/aliases
-              regexp=^{{ user.name }}
-              state=present
-              line='{{ user.name }}: {{ user.email }}'"
+  ansible.builtin.lineinfile:
+    dest: /etc/aliases
+    regexp: ^{{ user.name }}
+    state: present
+    line: "{{ user.name }}: {{ user.email }}"
   when: user.email is defined
   tags:
     - msmtp
 
 - name: Create cronie systemd unit file directory
-  file: path=/etc/systemd/system/cronie.service.d state=directory
+  ansible.builtin.file:
+    path: /etc/systemd/system/cronie.service.d
+    state: directory
+    mode: "0755"
   tags:
     - msmtp
     - cron
 
 - name: Override cronie send mail via msmtp
-  copy: src=cronie-service-msmtp.conf dest=/etc/systemd/system/cronie.service.d/msmtp.conf
+  ansible.builtin.copy:
+    src: cronie-service-msmtp.conf
+    dest: /etc/systemd/system/cronie.service.d/msmtp.conf
+    mode: "0644"
   notify:
-    - reload systemd config
-    - restart cron
+    - Reload systemd config
+    - Restart cron
   tags:
     - msmtp
     - cron
 
 - name: Copy msmtpq script
-  copy: src=/usr/share/doc/msmtp/msmtpq/msmtpq dest=/usr/local/bin/ mode=0755
+  ansible.builtin.copy:
+    src: /usr/share/doc/msmtp/msmtpq/msmtpq
+    dest: /usr/local/bin/
+    mode: "0755"
   tags:
     - msmtp
 
 - name: Copy msmtp-queue script
-  copy: src=/usr/share/doc/msmtp/msmtpq/msmtp-queue dest=/usr/local/bin/ mode=0755
+  ansible.builtin.copy:
+    src: /usr/share/doc/msmtp/msmtpq/msmtp-queue
+    dest: /usr/local/bin/
+    mode: "0755"
   tags:
     - msmtp
 
 - name: Create msmtp queue directory
-  file: path=/home/{{ user.name }}/.msmtp.queue state=directory mode=0700 owner={{ user.name }} group={{ user.group }}
+  ansible.builtin.file:
+    path: /home/{{ user.name }}/.msmtp.queue
+    state: directory
+    mode: "0700"
+    owner: "{{ user.name }}"
+    group: "{{ user.group }}"
   tags:
     - msmtp
 
 - name: Disable msmtpq connectivity test
-  lineinfile: "dest=/usr/local/bin/msmtpq
-              regexp=^EMAIL_CONN_TEST=
-              state=present
-              line='EMAIL_CONN_TEST=x'"
+  ansible.builtin.lineinfile:
+    dest: /usr/local/bin/msmtpq
+    regexp: ^EMAIL_CONN_TEST=
+    state: present
+    line: "EMAIL_CONN_TEST=x"
   tags:
     - msmtp
 
 - name: Set msmtpq log dir
-  lineinfile: "dest=/usr/local/bin/msmtpq
-              regexp=^LOG=
-              state=present
-              line='LOG=/home/{{ user.name }}/{{ user.log_dir }}/msmtp.queue.log'"
+  ansible.builtin.lineinfile:
+    dest: /usr/local/bin/msmtpq
+    regexp: ^LOG=
+    state: present
+    line: "LOG=/home/{{ user.name }}/{{ user.log_dir }}/msmtp.queue.log"
   when: user.log_dir is defined
   tags:
     - msmtp

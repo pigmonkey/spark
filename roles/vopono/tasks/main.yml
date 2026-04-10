@@ -2,17 +2,17 @@
 - name: Install Vopono
   kewlfft.aur.aur:
     name: vopono
-  become: yes
+  become: true
   become_user: "{{ aur.user }}"
   tags:
     - aur
 
 - name: Allow passwordless Vopono for wheel group
-  copy:
+  ansible.builtin.copy:
     src: sudo_vopono
     dest: /etc/sudoers.d/03_vopono
-    mode: 440
-    validate: 'visudo -cf %s'
+    mode: "0440"
+    validate: "visudo -cf %s"
   tags:
     - aur
     - sudo

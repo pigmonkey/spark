@@ -1,21 +1,23 @@
 ---
 - name: Install Tarsnap
-  pacman:
+  community.general.pacman:
     name: tarsnap
     state: present
 
 - name: Copy default Tarsnap config
-  copy:
+  ansible.builtin.copy:
     src: /etc/tarsnap/tarsnap.conf.sample
     dest: /etc/tarsnap/tarsnap.conf
+    mode: "0644"
 
 - name: Create Tarsnap cache dir
-  file:
+  ansible.builtin.file:
     path: /usr/local/tarsnap-cache
     state: directory
+    mode: "0700"
 
 - name: Humanize Tarsnap numbers
-  lineinfile:
+  ansible.builtin.lineinfile:
     dest: /etc/tarsnap/tarsnap.conf
     state: present
     line: humanize-numbers
@@ -23,37 +25,42 @@
 - name: Install tarsnapper
   kewlfft.aur.aur:
     name: tarsnapper
-  become: yes
+  become: true
   become_user: "{{ aur.user }}"
   tags:
     - aur
 
 - name: Create Tarsnapper config include dir
-  file:
+  ansible.builtin.file:
     path: /usr/local/etc/tarsnapper.d/
     state: directory
+    mode: "0755"
 
 - name: Push Tarsnapper config
-  template:
+  ansible.builtin.template:
     src: tarsnapper.conf.j2
     dest: /usr/local/etc/tarsnapper.conf
+    mode: "0644"
 
 - name: Push Tarsnapper service file
-  template:
+  ansible.builtin.template:
     src: tarsnapper.service.j2
     dest: /etc/systemd/system/tarsnapper.service
+    mode: "0644"
   notify:
-    - reload systemd config
+    - Reload systemd config
 
 - name: Push Tarsnapper timer file
-  template:
+  ansible.builtin.template:
     src: tarsnapper.timer.j2
     dest: /etc/systemd/system/tarsnapper.timer
+    mode: "0644"
   notify:
-    - reload systemd config
-    - restart tarsnapper
+    - Reload systemd config
+    - Restart tarsnapper
 
-- include_tasks: roles/nmtrust/tasks/unit.yml
+- name: Include nmtrust unit tasks
+  ansible.builtin.include_tasks: roles/nmtrust/tasks/unit.yml
   vars:
-      unit: tarsnapper.timer
-      run_on: "{{ tarsnapper.run_on }}"
+    unit: tarsnapper.timer
+    run_on: "{{ tarsnapper.run_on }}"

@@ -1,5 +1,7 @@
 ---
 - name: Install isync
-  pacman: name=isync state=present
+  community.general.pacman:
+    name: isync
+    state: present
   tags:
     - isync

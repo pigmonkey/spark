@@ -1,5 +1,7 @@
 ---
 - name: Install aws-cli
-  pacman: name=aws-cli state=present
+  community.general.pacman:
+    name: aws-cli
+    state: present
   tags:
     - aws-cli

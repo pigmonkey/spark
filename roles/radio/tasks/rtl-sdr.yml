@@ -2,7 +2,7 @@
 - name: Install rtl-sdr-git
   kewlfft.aur.aur:
     name: rtl-sdr-git
-  become: yes
+  become: true
   become_user: "{{ aur.user }}"
   tags:
     - aur
@@ -10,7 +10,7 @@
 - name: Install gr-ais-git
   kewlfft.aur.aur:
     name: gr-ais-git
-  become: yes
+  become: true
   become_user: "{{ aur.user }}"
   tags:
     - aur

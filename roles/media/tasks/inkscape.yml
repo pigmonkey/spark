@@ -1,5 +1,7 @@
 ---
 - name: Install Inkscape
-  pacman: name=inkscape state=present
+  community.general.pacman:
+    name: inkscape
+    state: present
   tags:
     - inkscape

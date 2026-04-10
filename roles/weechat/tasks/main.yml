@@ -1,13 +1,18 @@
 ---
 - name: Install weechat
-  pacman: name=weechat state=present
+  community.general.pacman:
+    name: weechat
+    state: present
 
 - name: Jail weechat
-  file: src=/usr/bin/firejail
-        dest=/usr/local/bin/weechat
-        state=link
+  ansible.builtin.file:
+    src: /usr/bin/firejail
+    dest: /usr/local/bin/weechat
+    state: link
   tags:
     - firejail
 
 - name: Install dunst
-  pacman: name=dunst state=present
+  community.general.pacman:
+    name: dunst
+    state: present

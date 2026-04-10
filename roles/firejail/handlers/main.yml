@@ -1,5 +1,7 @@
 ---
-- name: activate firejail profiles
-  command: /usr/local/bin/profile-activate
-  become: yes
+- name: Activate firejail profiles
+  ansible.builtin.command: /usr/local/bin/profile-activate
+  become: true
   become_user: "{{ user.name }}"
+  register: firejail_result
+  changed_when: not firejail_result.stdout.startswith('0 ')

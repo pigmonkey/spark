@@ -1,5 +1,5 @@
 ---
 - name: Install zeal
-  pacman:
-      name: zeal
-      state: present
+  community.general.pacman:
+    name: zeal
+    state: present

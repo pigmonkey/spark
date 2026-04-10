@@ -1,17 +1,22 @@
 ---
 - name: Install xdg-user-dirs
-  pacman: name=xdg-user-dirs state=present
+  community.general.pacman:
+    name: xdg-user-dirs
+    state: present
   tags:
     - xdg
 
 - name: Create user directories
-  command: /usr/bin/xdg-user-dirs-update
-  become: yes
+  ansible.builtin.command: /usr/bin/xdg-user-dirs-update
+  become: true
   become_user: "{{ user.name }}"
+  changed_when: false
   tags:
     - xdg
 
 - name: Install perl-file-mimeinfo
-  pacman: name=perl-file-mimeinfo state=present
+  community.general.pacman:
+    name: perl-file-mimeinfo
+    state: present
   tags:
     - xdg

@@ -2,13 +2,17 @@
 - name: Install hostsctl
   kewlfft.aur.aur:
     name: hostsctl
-  become: yes
+  become: true
   become_user: "{{ aur.user }}"
   tags:
     - aur
 
 - name: Push hostsctl config
-  template: src=hostsctl.conf.j2 dest=/etc/hostsctl.conf
+  ansible.builtin.template:
+    src: hostsctl.conf.j2
+    dest: /etc/hostsctl.conf
+    mode: "0644"
 
 - name: Update hostsctl
-  command: hostsctl update
+  ansible.builtin.command: hostsctl update
+  changed_when: true

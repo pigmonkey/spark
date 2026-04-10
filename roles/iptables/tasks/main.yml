@@ -1,16 +1,32 @@
 ---
 - name: Push ipv4 firewall config
-  template: src=iptables.rules.j2 dest=/etc/iptables/iptables.rules
+  ansible.builtin.template:
+    src: iptables.rules.j2
+    dest: /etc/iptables/iptables.rules
+    owner: root
+    group: root
+    mode: "0640"
   notify:
-    - restart iptables
+    - Restart iptables
 
 - name: Enable and start iptables
-  service: name=iptables.service enabled=yes state=started
+  ansible.builtin.service:
+    name: iptables.service
+    enabled: true
+    state: started
 
 - name: Push ipv6 firewall config
-  template: src=ip6tables.rules.j2 dest=/etc/iptables/ip6tables.rules
+  ansible.builtin.template:
+    src: ip6tables.rules.j2
+    dest: /etc/iptables/ip6tables.rules
+    owner: root
+    group: root
+    mode: "0640"
   notify:
-    - restart ip6tables
+    - Restart ip6tables
 
 - name: Enable and start ip6tables
-  service: name=ip6tables.service enabled=yes state=started
+  ansible.builtin.service:
+    name: ip6tables.service
+    enabled: true
+    state: started

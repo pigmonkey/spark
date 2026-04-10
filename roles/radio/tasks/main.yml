@@ -1,14 +1,16 @@
 ---
 - name: Install GNUradio
-  pacman:
+  community.general.pacman:
     name: gnuradio
     state: present
 
 - name: Install hamlib
-  pacman:
+  community.general.pacman:
     name: hamlib
     state: present
 
-- include_tasks: rtl-sdr.yml
-#- include_tasks: radio_mgmt.yml
-- include_tasks: radio_ops.yml
+- name: Include RTL-SDR tasks
+  ansible.builtin.include_tasks: rtl-sdr.yml
+- name: Include radio ops tasks
+  ansible.builtin.include_tasks: radio_ops.yml
+# - ansible.builtin.include_tasks: radio_mgmt.yml

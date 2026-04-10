@@ -2,6 +2,7 @@
 
 PROFILEDIR=~/.config/firejail
 SYSDIR=/usr/local/etc/firejail
+COUNT=0
 
 # If the profile directory does not exist, create it.
 if [ ! -d "$PROFILEDIR" ]; then
@@ -14,7 +15,9 @@ for path in "$SYSDIR"/*.profile; do
     file=`basename $path`
     destination=$PROFILEDIR/$file
     if [ ! -e $destination ]; then
-        echo "creating $destination"
         echo "include $SYSDIR/$file" > $destination
+        COUNT=$((COUNT + 1))
     fi
 done
+
+echo "$COUNT profiles activated"

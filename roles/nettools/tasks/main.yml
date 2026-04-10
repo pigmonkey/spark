@@ -1,60 +1,93 @@
 ---
 - name: Install MTR
-  pacman: name=mtr state=present
+  community.general.pacman:
+    name: mtr
+    state: present
 
 - name: Install net-tools
-  pacman: name=net-tools state=present
+  community.general.pacman:
+    name: net-tools
+    state: present
 
 - name: Install bind-tools
-  pacman: name=bind-tools state=present
+  community.general.pacman:
+    name: bind-tools
+    state: present
 
 - name: Install whois
-  pacman: name=whois state=present
+  community.general.pacman:
+    name: whois
+    state: present
 
 - name: Install netcat
-  pacman: name=openbsd-netcat state=present
+  community.general.pacman:
+    name: openbsd-netcat
+    state: present
 
 - name: Install lftp
-  pacman: name=lftp state=present
+  community.general.pacman:
+    name: lftp
+    state: present
 
 - name: Install nmap
-  pacman: name=nmap state=present
+  community.general.pacman:
+    name: nmap
+    state: present
 
 - name: Install tcpdump
-  pacman: name=tcpdump state=present
+  community.general.pacman:
+    name: tcpdump
+    state: present
 
 - name: Install sshuttle
-  pacman: name=sshuttle state=present
+  community.general.pacman:
+    name: sshuttle
+    state: present
 
 - name: Install wireshark
-  pacman: name=wireshark-qt state=present
+  community.general.pacman:
+    name: wireshark-qt
+    state: present
 
 - name: Add user to wireshark group
-  user: name={{ user.name }} groups=wireshark append=yes
+  ansible.builtin.user:
+    name: "{{ user.name }}"
+    groups: wireshark
+    append: true
   tags:
     - user
 
 - name: Install socat
-  pacman: name=socat state=present
+  community.general.pacman:
+    name: socat
+    state: present
 
 - name: Install nethogs
-  pacman: name=nethogs state=present
+  community.general.pacman:
+    name: nethogs
+    state: present
 
 - name: Install bmon
-  pacman: name=bmon state=present
+  community.general.pacman:
+    name: bmon
+    state: present
 
 - name: Install speedtest-cli
-  pacman: name=speedtest-cli state=present
+  community.general.pacman:
+    name: speedtest-cli
+    state: present
 
 - name: Install spiped
-  pacman: name=spiped state=present
+  community.general.pacman:
+    name: spiped
+    state: present
 
 - name: Install wireguard and kernel modules
-  pacman:
+  community.general.pacman:
     name: wireguard-tools
     state: present
 
 - name: Install wget
-  pacman:
+  community.general.pacman:
     name: wget
     state: present

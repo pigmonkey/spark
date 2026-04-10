@@ -1,15 +1,28 @@
 ---
 - name: Install udisks2
-  pacman: name=udisks2 state=present
+  community.general.pacman:
+    name: udisks2
+    state: present
 
 - name: Configure auto mount
-  template: src=10-udisks.rules.j2 dest=/etc/udev/rules.d/10-udisks.rules
+  ansible.builtin.template:
+    src: 10-udisks.rules.j2
+    dest: /etc/udev/rules.d/10-udisks.rules
+    mode: "0644"
 
 - name: Verify /media exists
-  file: path=/media state=directory
+  ansible.builtin.file:
+    path: /media
+    state: directory
+    mode: "0755"
 
 - name: Configure mount location
-  template: src=99-udisks2.rules.j2 dest=/etc/udev/rules.d/99-udisks2.rules
+  ansible.builtin.template:
+    src: 99-udisks2.rules.j2
+    dest: /etc/udev/rules.d/99-udisks2.rules
+    mode: "0644"
 
 - name: Install udiskie
-  pacman: name=udiskie state=present
+  community.general.pacman:
+    name: udiskie
+    state: present

@@ -1,11 +1,11 @@
 ---
 - name: Install dictd
-  pacman:
+  community.general.pacman:
     name: dictd
     state: present
 
 - name: Install flex
-  pacman:
+  community.general.pacman:
     name: flex
     state: present
 
@@ -13,8 +13,8 @@
   kewlfft.aur.aur:
     name: dict-gcide
     use: makepkg
-    skip_pgp_check: yes
-  become: yes
+    skip_pgp_check: true
+  become: true
   become_user: "{{ aur.user }}"
   tags:
     - aur
@@ -22,7 +22,7 @@
 - name: Install WordNet database
   kewlfft.aur.aur:
     name: wordnet-dictd
-  become: yes
+  become: true
   become_user: "{{ aur.user }}"
   tags:
     - aur
@@ -30,13 +30,13 @@
 - name: Install Moby thesaurus
   kewlfft.aur.aur:
     name: dict-moby-thesaurus
-  become: yes
+  become: true
   become_user: "{{ aur.user }}"
   tags:
     - aur
 
 - name: Enable and start dictd
-  service:
+  ansible.builtin.service:
     name: dictd.service
-    enabled: yes
+    enabled: true
     state: started

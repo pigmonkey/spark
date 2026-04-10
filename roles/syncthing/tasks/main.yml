@@ -1,9 +1,12 @@
 ---
 - name: Install syncthing
-  pacman: name=syncthing state=present
+  community.general.pacman:
+    name: syncthing
+    state: present
 
-- include_tasks: roles/nmtrust/tasks/unit.yml
+- name: Include nmtrust unit tasks
+  ansible.builtin.include_tasks: roles/nmtrust/tasks/unit.yml
   vars:
-      unit: syncthing.service
-      run_on: "{{ syncthing.run_on }}"
-      user_unit: true
+    unit: syncthing.service
+    run_on: "{{ syncthing.run_on }}"
+    user_unit: true

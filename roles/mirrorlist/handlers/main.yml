@@ -1,4 +1,6 @@
 ---
-- name: restart reflector update
-  service: name=mirrorlist.timer state=restarted
+- name: Restart reflector update
+  ansible.builtin.service:
+    name: mirrorlist.timer
+    state: restarted
   when: mirrorlist.run_on == "all"

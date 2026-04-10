@@ -1,6 +1,6 @@
 ---
 - name: Install bluetooth libraries and tools
-  pacman:
+  community.general.pacman:
     name:
       - bluez
       - bluez-libs
@@ -8,38 +8,38 @@
       - blueman
     state: present
   notify:
-    - restart pulse as user
+    - Restart pulse as user
 
 - name: Do not auto power on the bluetooth device
-  lineinfile:
+  ansible.builtin.lineinfile:
     dest: /etc/bluetooth/main.conf
     state: present
     line: "AutoEnable=false"
 
 - name: Unblock the bluetooth service
-  service:
+  ansible.builtin.service:
     name: rfkill-block@bluetooth.service
-    enabled: no
+    enabled: false
     state: stopped
-  when: bluetooth.disable == False
+  when: not bluetooth.disable
 
 - name: Enable and start the bluetooth service
-  service:
+  ansible.builtin.service:
     name: bluetooth.service
-    enabled: yes
+    enabled: true
     state: started
-  when: bluetooth.disable == False
+  when: not bluetooth.disable
 
 - name: Disable and stop the bluetooth service
-  service:
+  ansible.builtin.service:
     name: bluetooth.service
-    enabled: no
+    enabled: false
     state: stopped
-  when: bluetooth.disable == True
+  when: bluetooth.disable
 
 - name: Block the bluetooth service
-  service:
+  ansible.builtin.service:
     name: rfkill-block@bluetooth.service
-    enabled: yes
+    enabled: true
     state: started
-  when: bluetooth.disable == True
+  when: bluetooth.disable

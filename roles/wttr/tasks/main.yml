@@ -1,3 +1,6 @@
 ---
 - name: Push wttr script
-  copy: src=wttr.sh dest=/usr/local/bin/wttr mode=0755
+  ansible.builtin.copy:
+    src: wttr.sh
+    dest: /usr/local/bin/wttr
+    mode: "0755"

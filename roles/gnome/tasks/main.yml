@@ -1,6 +1,6 @@
 ---
 - name: Install GNOME
-  pacman:
+  community.general.pacman:
     name:
       - gnome
       - gnome-extra
@@ -8,7 +8,11 @@
       - xorg-server-xwayland
     state: present
 
-- include_tasks: dconf.yml
-- include_tasks: gtk.yml
-- include_tasks: gnome_shell.yml
-- include_tasks: online_accounts.yml
+- name: Include DConf tasks
+  ansible.builtin.include_tasks: dconf.yml
+- name: Include GTK tasks
+  ansible.builtin.include_tasks: gtk.yml
+- name: Include GNOME Shell tasks
+  ansible.builtin.include_tasks: gnome_shell.yml
+- name: Include online accounts tasks
+  ansible.builtin.include_tasks: online_accounts.yml

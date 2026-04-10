@@ -1,10 +1,10 @@
 ---
-- name: restart pulse as user
-  systemd:
+- name: Restart pulse as user
+  ansible.builtin.systemd:
     name: pipewire-pulse.service
     scope: user
     state: restarted
-  become: yes
+  become: true
   become_user: "{{ user.name }}"
   environment:
     XDG_RUNTIME_DIR: "/run/user/{{ user.uid }}"

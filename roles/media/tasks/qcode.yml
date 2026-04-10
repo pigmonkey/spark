@@ -1,10 +1,15 @@
 ---
 - name: Install qrencode
-  pacman: name=qrencode state=present
+  community.general.pacman:
+    name: qrencode
+    state: present
   tags:
     - qcode
 
 - name: Push qcode script
-  copy: src=qcode.sh dest=/usr/local/bin/qcode mode=0755
+  ansible.builtin.copy:
+    src: qcode.sh
+    dest: /usr/local/bin/qcode
+    mode: "0755"
   tags:
     - qcode

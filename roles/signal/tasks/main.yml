@@ -1,11 +1,11 @@
 ---
 - name: Install signal-desktop
-  pacman:
+  community.general.pacman:
     name: signal-desktop
     state: present
 
 - name: Jail signal-desktop
-  file:
+  ansible.builtin.file:
     src: /usr/bin/firejail
     dest: /usr/local/bin/signal-desktop
     state: link

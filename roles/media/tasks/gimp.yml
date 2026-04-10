@@ -1,11 +1,13 @@
 ---
 - name: Install poppler-glib
-  pacman: name=poppler-glib state=present
+  community.general.pacman:
+    name: poppler-glib
+    state: present
   tags:
     - gimp
 
 - name: Install GIMP
-  pacman:
+  community.general.pacman:
     name:
       - gimp
       - gimp-plugin-gmic
@@ -14,9 +16,10 @@
     - gimp
 
 - name: Jail GIMP
-  file: src=/usr/bin/firejail
-        dest=/usr/local/bin/gimp
-        state=link
+  ansible.builtin.file:
+    src: /usr/bin/firejail
+    dest: /usr/local/bin/gimp
+    state: link
   tags:
     - gimp
     - firejail

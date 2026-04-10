@@ -1,7 +1,11 @@
 ---
-- name: restart unbound
-  service: name=unbound state=restarted
+- name: Restart unbound
+  ansible.builtin.service:
+    name: unbound
+    state: restarted
 
-- name: restart roothints
-  service: name=roothints.timer state=restarted
+- name: Restart roothints
+  ansible.builtin.service:
+    name: roothints.timer
+    state: restarted
   when: unbound.roothints_update == "all"

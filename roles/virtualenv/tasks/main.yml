@@ -1,14 +1,25 @@
 ---
 - name: Install virtualenv and virtualenvwrapper
-  pacman: name=python-virtualenvwrapper state=present
+  community.general.pacman:
+    name: python-virtualenvwrapper
+    state: present
 
 - name: Create system environment group
-  group: name=env state=present
+  ansible.builtin.group:
+    name: env
+    state: present
 
 - name: Add user to system environment group
-  user: name={{ user.name }} groups=env append=yes
+  ansible.builtin.user:
+    name: "{{ user.name }}"
+    groups: env
+    append: true
   tags:
     - user
 
 - name: Create system environment dir
-  file: path=/usr/local/env state=directory group=env mode=2775
+  ansible.builtin.file:
+    path: /usr/local/env
+    state: directory
+    group: env
+    mode: "02775"

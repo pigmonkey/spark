@@ -1,50 +1,56 @@
 ---
 - name: Install Unbound
-  pacman:
+  community.general.pacman:
     name: unbound
     state: present
 
 - name: Download root hints
-  get_url:
+  ansible.builtin.get_url:
     url: https://www.internic.net/domain/named.cache
     dest: /etc/unbound/root.hints
-    force: yes
+    force: true
+    mode: "0644"
 
 - name: Verify unbound resolvconf config file exists
-  copy:
+  ansible.builtin.copy:
     content: ""
     dest: /etc/unbound/resolvconf.conf
     force: false
+    mode: "0644"
 
 - name: Copy Unbound configuration file
-  template:
+  ansible.builtin.template:
     src: unbound.conf.j2
     dest: /etc/unbound/unbound.conf
+    mode: "0644"
   notify:
-    - restart unbound
+    - Restart unbound
 
 - name: Enable and start Unbound
-  service:
+  ansible.builtin.service:
     name: unbound.service
-    enabled: yes
+    enabled: true
     state: started
 
 - name: Push Unbound root hits update service file
-  copy:
+  ansible.builtin.copy:
     src: roothints.service
     dest: /etc/systemd/system/roothints.service
+    mode: "0644"
   notify:
-    - reload systemd config
+    - Reload systemd config
 
 - name: Push Unbound root hits update timer file
-  copy:
+  ansible.builtin.copy:
     src: roothints.timer
     dest: /etc/systemd/system/roothints.timer
+    mode: "0644"
   notify:
-    - reload systemd config
-    - restart roothints
+    - Reload systemd config
+    - Restart roothints
 
-- include_tasks: roles/nmtrust/tasks/unit.yml
+- name: Include nmtrust unit tasks
+  ansible.builtin.include_tasks: roles/nmtrust/tasks/unit.yml
   vars:
-      unit: roothints.timer
-      run_on: "{{ unbound.roothints_update }}"
+    unit: roothints.timer
+    run_on: "{{ unbound.roothints_update }}"

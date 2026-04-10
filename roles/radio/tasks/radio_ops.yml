@@ -6,7 +6,7 @@
       - flxmlrpc
       - fldigi
       - flrig
-  become: yes
+  become: true
   become_user: "{{ aur.user }}"
   tags:
     - aur
@@ -14,7 +14,7 @@
 - name: Install wsjtx
   kewlfft.aur.aur:
     name: wsjtx
-  become: yes
+  become: true
   become_user: "{{ aur.user }}"
   tags:
     - aur

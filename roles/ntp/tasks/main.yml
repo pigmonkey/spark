@@ -1,24 +1,25 @@
 ---
 - name: Install chrony
-  pacman:
+  community.general.pacman:
     name: chrony
     state: present
 
 - name: Push chrony configuration file
-  copy:
+  ansible.builtin.copy:
     src: chrony.conf
     dest: /etc/chrony.conf
+    mode: "0644"
   notify:
-    - restart chrony
+    - Restart chrony
 
 - name: Enable and start chrony
-  service:
+  ansible.builtin.service:
     name: chronyd.service
-    enabled: yes
+    enabled: true
     state: started
 
 - name: Push chrony NetworkManager dispatcher
-  copy:
+  ansible.builtin.copy:
     src: chrony-dispatcher.sh
     dest: /etc/NetworkManager/dispatcher.d/70-chrony
-    mode: 0755
+    mode: "0755"

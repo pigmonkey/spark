@@ -1,24 +1,25 @@
 ---
-- name: install greenclip from AUR
+- name: Install greenclip from AUR
   kewlfft.aur.aur:
     name: rofi-greenclip
-  become: yes
+  become: true
   become_user: "{{ aur.user }}"
   tags:
     - aur
 
-- name: copy greenclip.service
-  copy:
+- name: Copy greenclip.service
+  ansible.builtin.copy:
     src: greenclip.service
     dest: /etc/systemd/user/greenclip.service
+    mode: "0644"
 
 - name: Enable greenclip.service
-  systemd:
+  ansible.builtin.systemd:
     name: greenclip.service
     scope: user
-    enabled: yes
+    enabled: true
     state: started
-  become: yes
+  become: true
   become_user: "{{ user.name }}"
   environment:
     XDG_RUNTIME_DIR: "/run/user/{{ user.uid }}"

@@ -1,11 +1,17 @@
 ---
 - name: Create journal config directory
-  file: path=/etc/systemd/journald.conf.d state=directory
+  ansible.builtin.file:
+    path: /etc/systemd/journald.conf.d
+    state: directory
+    mode: "0755"
   tags:
     - journal
 
 - name: Push journal max size config
-  template: src=00-journal-size.conf.j2 dest=/etc/systemd/journald.conf.d/00-journal-size.conf
+  ansible.builtin.template:
+    src: 00-journal-size.conf.j2
+    dest: /etc/systemd/journald.conf.d/00-journal-size.conf
+    mode: "0644"
   when: journal is defined and journal.max_size is defined
   tags:
     - journal

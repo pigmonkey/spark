@@ -1,32 +1,33 @@
 ---
 - name: Install pimsync
-  pacman:
+  community.general.pacman:
     name: pimsync
     state: present
 
 - name: Install khard
-  pacman:
+  community.general.pacman:
     name: khard
     state: present
 
 - name: Install khal
-  pacman:
+  community.general.pacman:
     name: khal
     state: present
 
 - name: Install etesync-dav
   kewlfft.aur.aur:
-      name: etesync-dav
-  become: yes
+    name: etesync-dav
+  become: true
   become_user: "{{ aur.user }}"
   tags:
     - aur
-  when: etesync is defined and etesync == True
+  when: etesync is defined and etesync
 
 - name: Push etesync-dav service file
-  copy:
+  ansible.builtin.copy:
     src: etesync-dav.service
     dest: /etc/systemd/user/etesync-dav.service
+    mode: "0644"
   notify:
-    - reload systemd config
-  when: etesync is defined and etesync == True
+    - Reload systemd config
+  when: etesync is defined and etesync

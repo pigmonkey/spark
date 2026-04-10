@@ -2,7 +2,7 @@
 - name: Install flac2all
   kewlfft.aur.aur:
     name: flac2all
-  become: yes
+  become: true
   become_user: "{{ aur.user }}"
   tags:
     - aur

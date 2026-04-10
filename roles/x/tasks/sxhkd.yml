@@ -1,5 +1,7 @@
 ---
 - name: Install sxhkd
-  pacman: name=sxhkd state=present
+  community.general.pacman:
+    name: sxhkd
+    state: present
   tags:
     - sxhkd

@@ -1,19 +1,21 @@
 ---
 - name: Install goimapnotify
-  pacman:
+  community.general.pacman:
     name: goimapnotify
     state: present
 
 - name: Create goimapnotify service override directory
-  file:
+  ansible.builtin.file:
     path: /etc/systemd/user/goimapnotify@.service.d
     state: directory
+    mode: "0755"
   when: mail.goimapnotify_wait is defined
 
 - name: Push goimapnotify service override file
-  template:
+  ansible.builtin.template:
     src: goimapnotify-service-override.conf.j2
     dest: /etc/systemd/user/goimapnotify@.service.d/override.conf
+    mode: "0644"
   when: mail.goimapnotify_wait is defined
   notify:
-    - reload user systemd config
+    - Reload user systemd config

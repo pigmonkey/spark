@@ -1,14 +1,25 @@
 ---
 - name: Install go
-  pacman: name=go state=present
+  community.general.pacman:
+    name: go
+    state: present
 
 - name: Create system go group
-  group: name=golang state=present
+  ansible.builtin.group:
+    name: golang
+    state: present
 
 - name: Add user to system golang group
-  user: name={{ user.name }} groups=golang append=yes
+  ansible.builtin.user:
+    name: "{{ user.name }}"
+    groups: golang
+    append: true
   tags:
     - user
 
 - name: Create system go dir
-  file: path=/usr/local/go state=directory group=golang mode=0775
+  ansible.builtin.file:
+    path: /usr/local/go
+    state: directory
+    group: golang
+    mode: "0775"

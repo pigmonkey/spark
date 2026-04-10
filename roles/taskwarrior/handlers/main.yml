@@ -1,5 +1,6 @@
 ---
-- name: refresh holidays
-  command: /usr/share/doc/timew/holidays/refresh
+- name: Refresh holidays
+  ansible.builtin.command: /usr/share/doc/timew/holidays/refresh
   args:
-      chdir: /usr/share/doc/timew/holidays
+    chdir: /usr/share/doc/timew/holidays
+  changed_when: true

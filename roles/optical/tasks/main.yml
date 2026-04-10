@@ -1,15 +1,15 @@
 ---
 - name: Install cdrtools
-  pacman:
+  community.general.pacman:
     name: cdrtools
     state: present
 
 - name: Install dvd+rw-tools
-  pacman:
+  community.general.pacman:
     name: dvd+rw-tools
     state: present
 
 - name: Install xfburn
-  pacman:
+  community.general.pacman:
     name: xfburn
     state: present

@@ -2,18 +2,20 @@
 - name: Disabling GNOME Shell top left hot corner
   kewlfft.aur.aur:
     name: gnome-shell-extension-no-topleft-hot-corner
-  become: yes
+  become: true
   become_user: "{{ aur.user }}"
   when: "gnome.gnome_shell.disable_top_left_hot_corner"
   tags:
     - aur
 
 - name: Enabling GNOME Shell top left hot corner
-  pacman: name=gnome-shell-extension-no-topleft-hot-corner state=absent
+  community.general.pacman:
+    name: gnome-shell-extension-no-topleft-hot-corner
+    state: absent
   when: "not gnome.gnome_shell.disable_top_left_hot_corner"
 
 - name: Configuring GNOME Shell Extensions support
-  pacman:
+  community.general.pacman:
     name:
       - gnome-shell-extensions
       - chrome-gnome-shell

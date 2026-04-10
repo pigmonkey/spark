@@ -1,11 +1,11 @@
 ---
 - name: Install wireless-regdb
-  pacman:
+  community.general.pacman:
     name: wireless-regdb
     state: present
 
 - name: Set wireless regulatory domain
-  lineinfile:
+  ansible.builtin.lineinfile:
     dest: /etc/conf.d/wireless-regdom
     regexp: ^WIRELESS_REGDOM
     state: present

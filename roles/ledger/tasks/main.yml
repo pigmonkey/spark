@@ -1,3 +1,5 @@
 ---
 - name: Install ledger
-  pacman: name=ledger state=present
+  community.general.pacman:
+    name: ledger
+    state: present

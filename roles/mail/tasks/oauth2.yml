@@ -1,16 +1,16 @@
 ---
 - name: Install cyrus-sasl-xoauth2-git
   kewlfft.aur.aur:
-      name: cyrus-sasl-xoauth2-git
-  become: yes
+    name: cyrus-sasl-xoauth2-git
+  become: true
   become_user: "{{ aur.user }}"
   tags:
     - aur
 
-- name: oama-bin
+- name: Oama-bin
   kewlfft.aur.aur:
-      name: oama-bin
-  become: yes
+    name: oama-bin
+  become: true
   become_user: "{{ aur.user }}"
   tags:
     - aur

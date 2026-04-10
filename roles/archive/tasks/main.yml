@@ -1,6 +1,6 @@
 ---
 - name: Install zip archive utilities
-  pacman:
+  community.general.pacman:
     name:
       - zip
       - unzip
@@ -10,49 +10,49 @@
     - zip
 
 - name: Install unrar
-  pacman:
+  community.general.pacman:
     name: unrar
     state: present
   tags:
     - unrar
 
 - name: Install atool
-  pacman:
+  community.general.pacman:
     name: atool
     state: present
   tags:
     - atool
 
 - name: Install par2cmdline
-  pacman:
+  community.general.pacman:
     name: par2cmdline
     state: present
   tags:
     - par2
 
 - name: Install ddrescue
-  pacman:
+  community.general.pacman:
     name: ddrescue
     state: present
   tags:
     - ddrescue
 
 - name: Install lesspipe
-  pacman:
+  community.general.pacman:
     name: lesspipe
     state: present
   tags:
     - lesspipe
 
 - name: Install libisoburn
-  pacman:
+  community.general.pacman:
     name: libisoburn
     state: present
   tags:
     - libisoburn
 
 - name: Install pigz
-  pacman:
+  community.general.pacman:
     name: pigz
     state: present
   tags:
@@ -61,7 +61,7 @@
 - name: Install ventoy
   kewlfft.aur.aur:
     name: ventoy-bin
-  become: yes
+  become: true
   become_user: "{{ aur.user }}"
   tags:
     - aur

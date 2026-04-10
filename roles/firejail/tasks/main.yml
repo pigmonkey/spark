@@ -1,49 +1,52 @@
 ---
 - name: Install firejail
-  pacman:
+  community.general.pacman:
     name: firejail
     state: present
 
 - name: Install firewarden
   kewlfft.aur.aur:
     name: firewarden
-  become: yes
+  become: true
   become_user: "{{ aur.user }}"
   tags:
     - aur
 
 - name: Install firejail profile update script
-  copy:
+  ansible.builtin.copy:
     src: profile-activate.sh
     dest: /usr/local/bin/profile-activate
-    mode: 0755
+    mode: "0755"
 
 - name: Create firejail profile directory
-  file:
+  ansible.builtin.file:
     path: /usr/local/etc/firejail
     state: directory
+    mode: "0755"
 
 - name: Verify firejail globals file exists
-  copy:
+  ansible.builtin.copy:
     content: ""
     dest: /etc/firejail/globals.local
     force: false
+    mode: "0644"
 
 - name: Add blacklist to globals
-  lineinfile:
+  ansible.builtin.lineinfile:
     dest: /etc/firejail/globals.local
     state: present
     line: "blacklist {{ item }}"
   with_items: "{{ firejail.blacklist }}"
 
 - name: Verify firejail users file exists
-  copy:
+  ansible.builtin.copy:
     content: ""
     dest: /etc/firejail/firejail.users
     force: false
+    mode: "0644"
 
 - name: Add user to firejail users
-  lineinfile:
+  ansible.builtin.lineinfile:
     dest: /etc/firejail/firejail.users
     state: present
     line: "{{ user.name }}"

@@ -1,6 +1,6 @@
 ---
 - name: Install autorandr
-  pacman:
+  community.general.pacman:
     name: autorandr
     state: present
   tags:

@@ -1,10 +1,10 @@
 ---
 - name: Install bat
-  pacman:
+  community.general.pacman:
     name: bat
     state: present
 
 - name: Install bat-extras
-  pacman:
+  community.general.pacman:
     name: bat-extras
     state: present

@@ -1,12 +1,13 @@
 ---
 - name: Install Tor
-  pacman:
+  community.general.pacman:
     name:
       - tor
       - torsocks
     state: present
 
-- include_tasks: roles/nmtrust/tasks/unit.yml
+- name: Include nmtrust unit tasks
+  ansible.builtin.include_tasks: roles/nmtrust/tasks/unit.yml
   vars:
-      unit: tor.service
-      run_on: "{{ tor.run_on }}"
+    unit: tor.service
+    run_on: "{{ tor.run_on }}"

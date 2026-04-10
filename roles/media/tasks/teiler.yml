@@ -4,7 +4,7 @@
     name:
       - xininfo-git
       - teiler-git
-  become: yes
+  become: true
   become_user: "{{ aur.user }}"
   tags:
     - aur

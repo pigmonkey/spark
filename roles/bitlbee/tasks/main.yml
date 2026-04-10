@@ -1,46 +1,50 @@
 ---
 - name: Install libOTR
-  pacman:
+  community.general.pacman:
     name: libotr
     state: present
 
 - name: Install Bitlbee
   kewlfft.aur.aur:
     name: bitlbee
-  become: yes
+  become: true
   become_user: "{{ aur.user }}"
   tags:
     - aur
 
 - name: Push Bitlbee configuration file
-  template:
+  ansible.builtin.template:
     src: bitlbee.conf.j2
     dest: /etc/bitlbee/bitlbee.conf
+    mode: "0644"
 
 - name: Ensure proper ownership of configuration directory
-  file:
+  ansible.builtin.file:
     path: /var/lib/bitlbee
     group: bitlbee
     owner: bitlbee
 
 - name: Create Bitlbee systemd unit file directory
-  file:
+  ansible.builtin.file:
     path: /etc/systemd/system/bitlbee.service.d
     state: directory
+    mode: "0755"
   tags:
     - firejail
 
 - name: Push Bitlbee socket unit file
-  copy:
+  ansible.builtin.copy:
     src: bitlbee-service-override.conf
     dest: /etc/systemd/system/bitlbee.service.d/override.conf
+    mode: "0644"
   notify:
-    - reload systemd config
-    - restart bitlbee
+    - Reload systemd config
+    - Restart bitlbee
   tags:
     - firejail
 
-- include_tasks: roles/nmtrust/tasks/unit.yml
+- name: Include nmtrust unit tasks
+  ansible.builtin.include_tasks: roles/nmtrust/tasks/unit.yml
   vars:
-      unit: bitlbee.service
-      run_on: "{{ bitlbee.run_on }}"
+    unit: bitlbee.service
+    run_on: "{{ bitlbee.run_on }}"

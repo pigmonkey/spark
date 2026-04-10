@@ -1,16 +1,20 @@
 ---
 - name: Install KDE Connect
-  pacman: name=kdeconnect state=present
+  community.general.pacman:
+    name: kdeconnect
+    state: present
 
 - name: Push KDE Connect service file
-  template:
+  ansible.builtin.template:
     src: kdeconnect.service.j2
     dest: /etc/systemd/user/kdeconnect.service
+    mode: "0644"
   notify:
-    - reload systemd config
+    - Reload systemd config
 
-- include_tasks: roles/nmtrust/tasks/unit.yml
+- name: Include nmtrust unit tasks
+  ansible.builtin.include_tasks: roles/nmtrust/tasks/unit.yml
   vars:
-      unit: kdeconnect.service
-      run_on: "{{ kdeconnect.run_on }}"
-      user_unit: true
+    unit: kdeconnect.service
+    run_on: "{{ kdeconnect.run_on }}"
+    user_unit: true

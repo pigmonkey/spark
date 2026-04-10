@@ -1,6 +1,6 @@
 ---
-- name: restart sshd
-  service:
+- name: Restart sshd
+  ansible.builtin.service:
     name: sshd.service
     state: restarted
-  when: ssh.enable_sshd == True
+  when: ssh.enable_sshd

@@ -1,19 +1,21 @@
 ---
 - name: Install universal base packages
-  pacman:
-      name: "{{ base_packages }}"
-      state: present
+  community.general.pacman:
+    name: "{{ base_packages }}"
+    state: present
   tags:
     - packages
 
 - name: Create pacman hook directory
-  file: path=/etc/pacman.d/hooks
-        state=directory
+  ansible.builtin.file:
+    path: /etc/pacman.d/hooks
+    state: directory
+    mode: "0755"
   tags:
     - packages
 
 - name: Use all cores when compressing packages
-  lineinfile:
+  ansible.builtin.lineinfile:
     dest: /etc/makepkg.conf
     regexp: "^COMPRESSXZ"
     line: "COMPRESSXZ=(xz -c -z - --threads=0)"
@@ -21,28 +23,37 @@
 - name: Install AUR base packages
   kewlfft.aur.aur:
     name: "{{ aur.packages }}"
-  become: yes
+  become: true
   become_user: "{{ aur.user }}"
   tags:
     - aur
     - packages
 
 - name: Push pacman cache cleanup service
-  copy: src=paccache.service dest=/etc/systemd/system/paccache.service
+  ansible.builtin.copy:
+    src: paccache.service
+    dest: /etc/systemd/system/paccache.service
+    mode: "0644"
   notify:
-    - reload systemd config
+    - Reload systemd config
   tags:
     - packages
 
 - name: Push pacman cache cleanup timer
-  copy: src=paccache.timer dest=/etc/systemd/system/paccache.timer
+  ansible.builtin.copy:
+    src: paccache.timer
+    dest: /etc/systemd/system/paccache.timer
+    mode: "0644"
   notify:
-    - reload systemd config
-    - restart paccache
+    - Reload systemd config
+    - Restart paccache
   tags:
     - packages
 
 - name: Enable and start pacman cache cleanup timer
-  service: name=paccache.timer enabled=yes state=started
+  ansible.builtin.service:
+    name: paccache.timer
+    enabled: true
+    state: started
   tags:
     - packages

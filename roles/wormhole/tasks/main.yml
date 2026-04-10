@@ -1,11 +1,11 @@
 ---
 - name: Install magic-wormhole
-  pacman:
+  community.general.pacman:
     name: magic-wormhole
     state: present
 
 - name: Jail magic-wormhole
-  file:
+  ansible.builtin.file:
     src: /usr/bin/firejail
     dest: /usr/local/bin/wormhole
     state: link
@@ -13,10 +13,11 @@
     - firejail
 
 - name: Push magic-wormhole firejail profile
-  copy:
+  ansible.builtin.copy:
     src: firejail/wormhole.profile
     dest: /usr/local/etc/firejail/wormhole.profile
+    mode: "0644"
   notify:
-    - activate firejail profiles
+    - Activate firejail profiles
   tags:
     - firejail

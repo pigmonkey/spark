@@ -1,5 +1,7 @@
 ---
 - name: Install gThumb
-  pacman: name=gthumb state=present
+  community.general.pacman:
+    name: gthumb
+    state: present
   tags:
     - gthumb

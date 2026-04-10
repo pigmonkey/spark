@@ -1,18 +1,18 @@
 ---
 - name: Install android-tools
-  pacman:
+  community.general.pacman:
     name: android-tools
     state: present
 
 - name: Install android-udev
-  pacman:
+  community.general.pacman:
     name: android-udev
     state: present
 
-- name: Add {{ user.name }} to adbusers group
-  user:
-      name: "{{ user.name }}"
-      groups: adbusers
-      append: yes
+- name: "Add user to adbusers group: {{ user.name }}"
+  ansible.builtin.user:
+    name: "{{ user.name }}"
+    groups: adbusers
+    append: true
   tags:
     - user

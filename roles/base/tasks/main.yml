@@ -1,26 +1,33 @@
 ---
 - name: Copy pacman configuration file
-  copy:
+  ansible.builtin.copy:
     src: pacman.conf
     dest: /etc/pacman.conf
+    mode: "0644"
 
 - name: Refresh pacman mirrors
-  pacman:
-    update_cache: yes
+  community.general.pacman:
+    update_cache: true
 
 - name: Install inetutils for hostname
-  pacman:
-      name: inetutils
-      state: present
+  community.general.pacman:
+    name: inetutils
+    state: present
 
 - name: Set the hostname
-  hostname:
+  ansible.builtin.hostname:
     name: "{{ hostname }}"
   when: hostname is defined
 
-- include_tasks: user.yml
-- include_tasks: sudo.yml
-- include_tasks: aur_user.yml
-- include_tasks: shell.yml
-- include_tasks: packages.yml
-- include_tasks: journal.yml
+- name: Include user tasks
+  ansible.builtin.include_tasks: user.yml
+- name: Include sudo tasks
+  ansible.builtin.include_tasks: sudo.yml
+- name: Include AUR user tasks
+  ansible.builtin.include_tasks: aur_user.yml
+- name: Include shell tasks
+  ansible.builtin.include_tasks: shell.yml
+- name: Include packages tasks
+  ansible.builtin.include_tasks: packages.yml
+- name: Include journal tasks
+  ansible.builtin.include_tasks: journal.yml

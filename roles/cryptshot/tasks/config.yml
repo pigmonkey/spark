@@ -1,6 +1,12 @@
 ---
-- name: Push {{ target.name }} rsnapshot config
-  template: src=rsnapshot.conf.j2 dest=/usr/local/etc/rsnapshot/{{ target.name }}.conf
+- name: "Push rsnapshot config: {{ target.name }}"
+  ansible.builtin.template:
+    src: rsnapshot.conf.j2
+    dest: /usr/local/etc/rsnapshot/{{ target.name }}.conf
+    mode: "0644"
 
-- name: Push {{ target.name }} cryptshot config
-  template: src=cryptshot.conf.j2 dest=/usr/local/etc/cryptshot/{{ target.name }}.conf
+- name: "Push cryptshot config: {{ target.name }}"
+  ansible.builtin.template:
+    src: cryptshot.conf.j2
+    dest: /usr/local/etc/cryptshot/{{ target.name }}.conf
+    mode: "0644"

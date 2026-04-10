@@ -1,16 +1,20 @@
 ---
 - name: Install taskwarrior
-  pacman: name=task state=present
+  community.general.pacman:
+    name: task
+    state: present
 
 - name: Install timewarrior
-  pacman: name=timew state=present
+  community.general.pacman:
+    name: timew
+    state: present
   notify:
-    - refresh holidays
+    - Refresh holidays
 
 - name: Install taskopen
   kewlfft.aur.aur:
     name: taskopen
-  become: yes
+  become: true
   become_user: "{{ aur.user }}"
   tags:
     - aur

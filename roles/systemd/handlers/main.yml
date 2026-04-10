@@ -1,10 +1,13 @@
 ---
-- name: reload systemd config
-  command: systemctl daemon-reload
+- name: Reload systemd config
+  ansible.builtin.systemd:
+    daemon_reload: true
 
-- name: reload user systemd config
-  command: systemctl --user daemon-reload
-  become: yes
+- name: Reload user systemd config
+  ansible.builtin.systemd:
+    daemon_reload: true
+    scope: user
+  become: true
   become_user: "{{ user.name }}"
   environment:
     XDG_RUNTIME_DIR: "/run/user/{{ user.uid }}"

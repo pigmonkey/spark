@@ -1,28 +1,28 @@
 ---
 - name: Install vagrant
-  pacman:
+  community.general.pacman:
     name: vagrant
     state: present
 
 - name: Install consul
-  pacman:
+  community.general.pacman:
     name: consul
     state: present
 
 - name: Install terraform
-  pacman:
+  community.general.pacman:
     name: terraform
     state: present
 
 - name: Install vault
-  pacman:
+  community.general.pacman:
     name: vault
     state: present
 
 - name: Install nomad
   kewlfft.aur.aur:
     name: nomad
-  become: yes
+  become: true
   become_user: "{{ aur.user }}"
   tags:
     - aur

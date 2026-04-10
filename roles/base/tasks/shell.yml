@@ -1,6 +1,6 @@
 ---
 - name: Install Bash
-  pacman:
+  community.general.pacman:
     name:
       - bash
       - bash-completion
@@ -9,7 +9,7 @@
     - shell
 
 - name: Install ZSH
-  pacman:
+  community.general.pacman:
     name:
       - zsh
       - zsh-completions
@@ -18,7 +18,7 @@
     - shell
 
 - name: Install Starship
-  pacman:
+  community.general.pacman:
     name:
       - ttf-nerd-fonts-symbols-mono
       - starship
@@ -29,7 +29,7 @@
 - name: Install zsh-antidote
   kewlfft.aur.aur:
     name: zsh-antidote
-  become: yes
+  become: true
   become_user: "{{ aur.user }}"
   tags:
     - aur

@@ -1,4 +1,6 @@
 ---
-- name: restart GOESImage
-  service: name="goesimage@{{ user.name }}.timer" state=restarted
+- name: Restart GOESImage
+  ansible.builtin.service:
+    name: "goesimage@{{ user.name }}.timer"
+    state: restarted
   when: goesimage.run_on == "all"

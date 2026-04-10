@@ -1,25 +1,25 @@
 ---
 - name: Install sudo
-  pacman:
+  community.general.pacman:
     name: sudo
     state: present
   tags:
     - sudo
 
 - name: Add user to wheel group
-  user:
+  ansible.builtin.user:
     name: "{{ user.name }}"
     groups: wheel
-    append: yes
+    append: true
   tags:
     - sudo
     - user
 
 - name: Copy sudo wheel group configuration
-  template:
+  ansible.builtin.template:
     src: sudo_wheel.j2
     dest: /etc/sudoers.d/01_wheel
-    mode: 440
-    validate: 'visudo -cf %s'
+    mode: "0440"
+    validate: "visudo -cf %s"
   tags:
     - sudo

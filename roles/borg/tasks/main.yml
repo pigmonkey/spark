@@ -1,6 +1,6 @@
 ---
 - name: Install borg
-  pacman:
+  community.general.pacman:
     name:
       - python-llfuse
       - borg

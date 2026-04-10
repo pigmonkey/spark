@@ -1,8 +1,10 @@
 ---
-- name: restart tlp
-  service: name=tlp.service state=restarted
+- name: Restart tlp
+  ansible.builtin.service:
+    name: tlp.service
+    state: restarted
 
-- name: restart power monitor
-  service:
+- name: Restart power monitor
+  ansible.builtin.service:
     name: power_monitor.service
     state: restarted

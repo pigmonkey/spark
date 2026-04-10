@@ -1,13 +1,16 @@
 ---
 - name: Install feh
-  pacman: name=feh state=present
+  community.general.pacman:
+    name: feh
+    state: present
   tags:
     - feh
 
 - name: Jail feh
-  file: src=/usr/bin/firejail
-        dest=/usr/local/bin/feh
-        state=link
+  ansible.builtin.file:
+    src: /usr/bin/firejail
+    dest: /usr/local/bin/feh
+    state: link
   tags:
     - feh
     - firejail

@@ -1,16 +1,29 @@
 ---
 - name: Install GNOME Display Manager (GDM)
-  pacman: name=gdm state=present
+  community.general.pacman:
+    name: gdm
+    state: present
 
 - name: Enable GDM
-  service: name=gdm.service enabled=yes
+  ansible.builtin.service:
+    name: gdm.service
+    enabled: true
 
 - name: Creating DConf configuration profile
-  copy: src=profile/gdm dest=/etc/dconf/profile/gdm
+  ansible.builtin.copy:
+    src: profile/gdm
+    dest: /etc/dconf/profile/gdm
+    mode: "0644"
 
 - name: Creating gdm.d directory for DConf
-  file: path=/etc/dconf/db/gdm.d state=directory mode=0755
+  ansible.builtin.file:
+    path: /etc/dconf/db/gdm.d
+    state: directory
+    mode: "0755"
 
 - name: Configuring GDM
-  template: src=gdm.d/00-spark.j2 dest=/etc/dconf/db/gdm.d/00-spark
-  notify: update DConf database
+  ansible.builtin.template:
+    src: gdm.d/00-spark.j2
+    dest: /etc/dconf/db/gdm.d/00-spark
+    mode: "0644"
+  notify: Update DConf database

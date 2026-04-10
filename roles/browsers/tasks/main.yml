@@ -1,23 +1,23 @@
 ---
 - name: Install w3m
-  pacman:
+  community.general.pacman:
     name: w3m
     state: present
 
 - name: Install lynx
-  pacman:
+  community.general.pacman:
     name: lynx
     state: present
 
 - name: Install Firefox
-  pacman:
+  community.general.pacman:
     name: firefox
     state: present
   tags:
     - firefox
 
 - name: Jail Firefox
-  file:
+  ansible.builtin.file:
     src: /usr/bin/firejail
     dest: /usr/local/bin/firefox
     state: link
@@ -26,16 +26,17 @@
     - firejail
 
 - name: Verify Firefox firejail local profile exists
-  copy:
+  ansible.builtin.copy:
     content: ""
     dest: /etc/firejail/firefox.local
     force: false
+    mode: "0644"
   tags:
     - firefox
     - firejail
 
 - name: Restrict Firefox access to /etc
-  lineinfile:
+  ansible.builtin.lineinfile:
     dest: /etc/firejail/firefox.local
     regexp: "^private-etc"
     line: "private-etc firejail,passwd,group,hostname,hosts,nsswitch.conf,resolv.conf,gtk-2.0,gtk-3.0,fonts,mime.types,asound.conf,pulse,localtime"
@@ -44,14 +45,14 @@
     - firejail
 
 - name: Install Chromium
-  pacman:
+  community.general.pacman:
     name: chromium
     state: present
   tags:
     - chromium
 
 - name: Jail Chromium
-  file:
+  ansible.builtin.file:
     src: /usr/bin/firejail
     dest: /usr/local/bin/chromium
     state: link
@@ -60,16 +61,17 @@
     - firejail
 
 - name: Verify Chromium firejail local profile exists
-  copy:
+  ansible.builtin.copy:
     content: ""
     dest: /etc/firejail/chromium.local
     force: false
+    mode: "0644"
   tags:
     - chromium
     - firejail
 
 - name: Restrict Chromium access to /etc
-  lineinfile:
+  ansible.builtin.lineinfile:
     dest: /etc/firejail/chromium.local
     regexp: "^private-etc"
     line: "private-etc firejail,passwd,group,hostname,hosts,nsswitch.conf,resolv.conf,gtk-2.0,gtk-3.0,fonts,mime.types,asound.conf,pulse,localtime"
@@ -78,14 +80,14 @@
     - firejail
 
 - name: Install Tor browser
-  pacman:
+  community.general.pacman:
     name: torbrowser-launcher
     state: present
   tags:
     - tor-browser
 
 - name: Jail Tor browser
-  file:
+  ansible.builtin.file:
     src: /usr/bin/firejail
     dest: /usr/local/bin/torbrowser-launcher
     state: link
@@ -94,7 +96,7 @@
     - firejail
 
 - name: Install qutebrowser and dependencies
-  pacman:
+  community.general.pacman:
     name:
       - qutebrowser
       - python-adblock
@@ -104,7 +106,7 @@
     - qutebrowser
 
 - name: Jail qutebrowser
-  file:
+  ansible.builtin.file:
     src: /usr/bin/firejail
     dest: /usr/local/bin/qutebrowser
     state: link
@@ -113,52 +115,55 @@
     - firejail
 
 - name: Push rofi browser chooser
-  template:
+  ansible.builtin.template:
     src: browser.sh.j2
     dest: /usr/local/bin/browser
-    mode: 0755
+    mode: "0755"
   tags:
     - rofi
     - chooser
 
 - name: Create local desktop application dir
-  file:
+  ansible.builtin.file:
     path: /usr/local/share/applications
     state: directory
+    mode: "0755"
   tags:
     - rofi
     - chooser
 
 - name: Push rofi browser chooser desktop file
-  copy:
+  ansible.builtin.copy:
     src: browser.desktop
     dest: /usr/local/share/applications/browser.desktop
+    mode: "0644"
   tags:
     - rofi
     - chooser
 
 - name: Verify mimeapps.list exists
-  copy:
+  ansible.builtin.copy:
     content: ""
     dest: /etc/xdg/mimeapps.list
     force: false
+    mode: "0644"
   tags:
     - rofi
     - chooser
 
 - name: Set rofi browser chooser as default application for relevant mimetypes
-  lineinfile:
+  ansible.builtin.lineinfile:
     dest: /etc/xdg/mimeapps.list
     regexp: "{{ item.regexp }}"
     line: "{{ item.line }}"
   with_items:
-    - { regexp: '^text/html=', line: 'text/html=browser.desktop' }
-    - { regexp: '^text/xml=', line: 'text/xml=browser.desktop' }
-    - { regexp: '^text/mml=', line: 'text/mml=browser.desktop' }
-    - { regexp: '^application/xhtml\+xml=', line: 'application/xhtml+xml=browser.desktop' }
-    - { regexp: '^application/xml=', line: 'application/xml=browser.desktop' }
-    - { regexp: '^x-scheme-handler/http=', line: 'x-scheme-handler/http=browser.desktop' }
-    - { regexp: '^x-scheme-handler/https=', line: 'x-scheme-handler/https=browser.desktop' }
+    - { regexp: "^text/html=", line: "text/html=browser.desktop" }
+    - { regexp: "^text/xml=", line: "text/xml=browser.desktop" }
+    - { regexp: "^text/mml=", line: "text/mml=browser.desktop" }
+    - { regexp: "^application/xhtml\\+xml=", line: "application/xhtml+xml=browser.desktop" }
+    - { regexp: "^application/xml=", line: "application/xml=browser.desktop" }
+    - { regexp: "^x-scheme-handler/http=", line: "x-scheme-handler/http=browser.desktop" }
+    - { regexp: "^x-scheme-handler/https=", line: "x-scheme-handler/https=browser.desktop" }
   tags:
     - rofi
     - chooser

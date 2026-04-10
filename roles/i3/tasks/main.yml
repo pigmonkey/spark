@@ -1,6 +1,6 @@
 ---
 - name: Install i3
-  pacman:
+  community.general.pacman:
     name:
       - i3-wm
       - i3blocks
@@ -9,26 +9,28 @@
     state: present
 
 - name: Install py3status
-  pacman:
+  community.general.pacman:
     name: py3status
     state: present
 
 - name: Install wmfocus
-  pacman:
+  community.general.pacman:
     name: wmfocus
     state: present
 
 - name: Verify that default applications file exists
-  copy:
+  ansible.builtin.copy:
     content: ""
     dest: /etc/xdg/mimeapps.list
     force: false
+    mode: "0644"
 
 - name: Verify header in default applications file
-  lineinfile:
+  ansible.builtin.lineinfile:
     dest: /etc/xdg/mimeapps.list
     state: present
-    line: '[Default Applications]'
+    line: "[Default Applications]"
     insertbefore: BOF
 
-- include_tasks: rofi.yml
+- name: Include rofi tasks
+  ansible.builtin.include_tasks: rofi.yml

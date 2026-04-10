@@ -1,17 +1,18 @@
 ---
 - name: Install linux-hardened
-  pacman:
+  community.general.pacman:
     name:
       - linux-hardened
       - linux-hardened-headers
     state: present
   notify:
-    - rebuild grub
+    - Rebuild grub
 
 - name: Enable unprivileged containers for non-root users
-  copy:
+  ansible.builtin.copy:
     src: 99-userns.conf
     dest: /etc/sysctl.d/99-userns.conf
+    mode: "0644"
   notify:
-    - reload sysctl
+    - Reload sysctl
   when: hardened is defined and hardened.enable_namespaces

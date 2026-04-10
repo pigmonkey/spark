@@ -1,6 +1,6 @@
 ---
 - name: Install TLP
-  pacman:
+  community.general.pacman:
     name:
       - ethtool
       - tlp
@@ -10,45 +10,52 @@
     - tlp
 
 - name: Push TLP battery threshold config
-  copy:
+  ansible.builtin.copy:
     src: tlp/20-battery.conf
     dest: /etc/tlp.d/
+    mode: "0644"
   notify:
-    - restart tlp
+    - Restart tlp
   tags:
     - tlp
 
 - name: Push TLP radio device config
-  copy:
+  ansible.builtin.copy:
     src: tlp/20-rdw.conf
     dest: /etc/tlp.d/
+    mode: "0644"
   notify:
-    - restart tlp
+    - Restart tlp
   tags:
     - tlp
 
 - name: Push TLP PCIe config
-  copy:
+  ansible.builtin.copy:
     src: tlp/20-pcie.conf
     dest: /etc/tlp.d/
+    mode: "0644"
   notify:
-    - restart tlp
+    - Restart tlp
   tags:
     - tlp
 
 - name: Mask systemd radio service
-  command: systemctl mask systemd-rfkill.service
+  ansible.builtin.systemd:
+    name: systemd-rfkill.service
+    masked: true
   tags:
     - tlp
 
 - name: Mask systemd radio socket
-  command: systemctl mask systemd-rfkill.socket
+  ansible.builtin.systemd:
+    name: systemd-rfkill.socket
+    masked: true
   tags:
     - tlp
 
 - name: Enable TLP
-  service:
+  ansible.builtin.service:
     name: tlp.service
-    enabled: yes
+    enabled: true
   tags:
     - tlp

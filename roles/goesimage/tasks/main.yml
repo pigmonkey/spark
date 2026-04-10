@@ -2,28 +2,31 @@
 - name: Install GOESImage
   kewlfft.aur.aur:
     name: goesimage
-  become: yes
+  become: true
   become_user: "{{ aur.user }}"
   tags:
     - aur
 
 - name: Push GOESImage service file
-  template:
+  ansible.builtin.template:
     src: goesimage.service.j2
     dest: /etc/systemd/user/goesimage.service
+    mode: "0644"
   notify:
-    - reload systemd config
+    - Reload systemd config
 
 - name: Push GOESImage timer file
-  template:
+  ansible.builtin.template:
     src: goesimage.timer.j2
     dest: /etc/systemd/user/goesimage.timer
+    mode: "0644"
   notify:
-    - reload systemd config
-    - restart GOESImage
+    - Reload systemd config
+    - Restart GOESImage
 
-- include_tasks: roles/nmtrust/tasks/unit.yml
+- name: Include nmtrust unit tasks
+  ansible.builtin.include_tasks: roles/nmtrust/tasks/unit.yml
   vars:
-      unit: goesimage.timer
-      run_on: "{{ goesimage.run_on }}"
-      user_unit: true
+    unit: goesimage.timer
+    run_on: "{{ goesimage.run_on }}"
+    user_unit: true

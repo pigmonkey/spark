@@ -1,85 +1,93 @@
 ---
 - name: Install neomutt
-  pacman:
+  community.general.pacman:
     name: neomutt
     state: present
 
 - name: Make neomutt available as mutt
-  file:
+  ansible.builtin.file:
     src: /usr/bin/neomutt
     dest: /usr/local/bin/mutt
     state: link
 
 - name: Verify mutt firejail local profile exists
-  copy:
+  ansible.builtin.copy:
     content: ""
     dest: /etc/firejail/mutt.local
     force: false
+    mode: "0644"
   tags:
     - firejail
 
 - name: Whitelist mutt related files
-  blockinfile:
+  ansible.builtin.blockinfile:
     dest: /etc/firejail/mutt.local
     block: |
-        noblacklist ~/.config/vdirsyncer
-        noblacklist ~/.config/pimsync
-        noblacklist ~/.vdirsyncer
-        noblacklist ~/.calendars
-        noblacklist ~/.contacts
-        noblacklist ~/.mbsyncrc
-        noblacklist ~/.offlineimap
-        noblacklist ~/.offlineimaprc
+      noblacklist ~/.config/vdirsyncer
+      noblacklist ~/.config/pimsync
+      noblacklist ~/.vdirsyncer
+      noblacklist ~/.calendars
+      noblacklist ~/.contacts
+      noblacklist ~/.mbsyncrc
+      noblacklist ~/.offlineimap
+      noblacklist ~/.offlineimaprc
   tags:
     - firejail
 
 - name: Install urlscan
-  pacman:
+  community.general.pacman:
     name: urlscan
 
 - name: Install notmuch
-  pacman:
+  community.general.pacman:
     name: notmuch
     state: present
 
 - name: Install mutt-ics
   kewlfft.aur.aur:
     name: mutt-ics
-  become: yes
+  become: true
   become_user: "{{ aur.user }}"
   tags:
     - aur
 
 - name: Push mutt-mailto script
-  copy:
+  ansible.builtin.copy:
     src: mutt-mailto.sh
     dest: /usr/local/bin/mutt-mailto
-    mode: 0755
+    mode: "0755"
 
 - name: Create local desktop application dir
-  file:
+  ansible.builtin.file:
     path: /usr/local/share/applications
     state: directory
+    mode: "0755"
 
 - name: Push mutt desktop file
-  copy:
+  ansible.builtin.copy:
     src: mutt.desktop
     dest: /usr/local/share/applications/mutt.desktop
+    mode: "0644"
 
 - name: Verify mimeapps.list exists
-  copy:
+  ansible.builtin.copy:
     content: ""
     dest: /etc/xdg/mimeapps.list
     force: false
+    mode: "0644"
 
 - name: Set mutt as default application for mailto links
-  lineinfile:
+  ansible.builtin.lineinfile:
     dest: /etc/xdg/mimeapps.list
     regexp: "^x-scheme-handler/mailto="
     line: "x-scheme-handler/mailto=mutt.desktop"
 
-- include_tasks: msmtp.yml
-- include_tasks: isync.yml
-#- include_tasks: offlineimap.yml
-- include_tasks: mailsync.yml
-- include_tasks: oauth2.yml
+- name: Include msmtp tasks
+  ansible.builtin.include_tasks: msmtp.yml
+- name: Include isync tasks
+  ansible.builtin.include_tasks: isync.yml
+# - ansible.builtin.include_tasks: offlineimap.yml
+- name: Include mailsync tasks
+  ansible.builtin.include_tasks: mailsync.yml
+- name: Include oauth2 tasks
+  ansible.builtin.include_tasks: oauth2.yml

@@ -1,43 +1,69 @@
 ---
 - name: Install PostgreSQL
-  pacman: name=postgresql state=present
+  community.general.pacman:
+    name: postgresql
+    state: present
 
 - name: Install psycopg2
-  pacman: name=python-psycopg2 state=present
+  community.general.pacman:
+    name: python-psycopg2
+    state: present
 
 - name: Create postgres data root
-  file: path={{ postgresql.root }}/data state=directory owner=postgres group=postgres
+  ansible.builtin.file:
+    path: "{{ postgresql.root }}/data"
+    state: directory
+    owner: postgres
+    group: postgres
+    mode: "0700"
 
 - name: Initialize database cluster
-  command: initdb --locale en_US.UTF-8 -E UTF8 -D {{ postgresql.root }}/data creates={{ postgresql.root }}/data/postgresql.conf
-  become: yes
+  ansible.builtin.command:
+    cmd: initdb --locale en_US.UTF-8 -E UTF8 -D {{ postgresql.root }}/data
+    creates: "{{ postgresql.root }}/data/postgresql.conf"
+  become: true
   become_user: postgres
 
 - name: Disable synchronous commits
-  lineinfile: dest={{ postgresql.root }}/data/postgresql.conf
-              regexp=^synchronous_commit
-              state=present
-              line="synchronous_commit = off"
+  ansible.builtin.lineinfile:
+    dest: "{{ postgresql.root }}/data/postgresql.conf"
+    regexp: ^synchronous_commit
+    state: present
+    line: "synchronous_commit = off"
   notify:
-    - restart postgresql
+    - Restart postgresql
 
 - name: Create service override directory
-  file: path=/etc/systemd/system/postgresql.service.d state=directory
+  ansible.builtin.file:
+    path: /etc/systemd/system/postgresql.service.d
+    state: directory
+    mode: "0755"
 
 - name: Push service override file
-  template: src=postgresql-override.conf.j2 dest=/etc/systemd/system/postgresql.service.d/override.conf
+  ansible.builtin.template:
+    src: postgresql-override.conf.j2
+    dest: /etc/systemd/system/postgresql.service.d/override.conf
+    mode: "0644"
   notify:
-    - reload systemd config
-    - restart postgresql
+    - Reload systemd config
+    - Restart postgresql
 
 - name: Disable and stop PostgreSQL
-  service: name=postgresql.service enabled=no state=stopped
-  when: postgresql is not defined or postgresql.enable is not defined or postgresql.enable != True
+  ansible.builtin.service:
+    name: postgresql.service
+    enabled: false
+    state: stopped
+  when: postgresql is not defined or postgresql.enable is not defined or not postgresql.enable
 
 - name: Enable and start PostgreSQL
-  service: name=postgresql.service enabled=yes state=started
-  when: postgresql is defined and postgresql.enable is defined and postgresql.enable == True
+  ansible.builtin.service:
+    name: postgresql.service
+    enabled: true
+    state: started
+  when: postgresql is defined and postgresql.enable is defined and postgresql.enable
 
 - name: Create the PostgreSQL user
-  postgresql_user: name={{ user.name }} role_attr_flags=CREATEDB,NOSUPERUSER
-  when: postgresql is defined and postgresql.enable is defined and postgresql.enable == True
+  community.postgresql.postgresql_user:
+    name: "{{ user.name }}"
+    role_attr_flags: CREATEDB,NOSUPERUSER
+  when: postgresql is defined and postgresql.enable is defined and postgresql.enable

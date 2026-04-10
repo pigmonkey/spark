@@ -1,13 +1,13 @@
 ---
 - name: Install Okular
-  pacman:
+  community.general.pacman:
     name: okular
     state: present
   tags:
     - okular
 
 - name: Jail Okular
-  file:
+  ansible.builtin.file:
     src: /usr/bin/firejail
     dest: /usr/local/bin/okular
     state: link
@@ -16,16 +16,17 @@
     - firejail
 
 - name: Verify Okular firejail local profile exists
-  copy:
+  ansible.builtin.copy:
     content: ""
     dest: /etc/firejail/okular.local
     force: false
+    mode: "0644"
   tags:
     - okular
     - firejail
 
 - name: Restrict Okular network access
-  lineinfile:
+  ansible.builtin.lineinfile:
     dest: /etc/firejail/okular.local
     regexp: "^net"
     line: "net none"
@@ -34,7 +35,7 @@
     - firejail
 
 - name: Install Zathura and dependencies
-  pacman:
+  community.general.pacman:
     name:
       - zathura-cb
       - zathura-pdf-mupdf
@@ -44,7 +45,7 @@
     - zathura
 
 - name: Set Zathura as default PDF viewer
-  lineinfile:
+  ansible.builtin.lineinfile:
     dest: /etc/xdg/mimeapps.list
     regexp: "^application/pdf"
     state: present
@@ -53,7 +54,7 @@
     - zathura
 
 - name: Jail Zathura
-  file:
+  ansible.builtin.file:
     src: /usr/bin/firejail
     dest: /usr/local/bin/zathura
     state: link
@@ -61,9 +62,8 @@
     - zathura
     - firejail
 
-
 - name: Install pdfgrep
-  pacman:
+  community.general.pacman:
     name: pdfgrep
     state: present
   tags:
@@ -75,14 +75,14 @@
       - python-uharfbuzz
       - python-fpdf2
       - ocrmypdf
-  become: yes
+  become: true
   become_user: "{{ aur.user }}"
   tags:
     - ocrmypdf
     - aur
 
 - name: Install tesseract-data-eng
-  pacman:
+  community.general.pacman:
     name: tesseract-data-eng
     state: present
   tags:

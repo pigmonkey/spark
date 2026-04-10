@@ -1,16 +1,16 @@
 ---
 - name: Install Fedora systemd-oomd configuration
   kewlfft.aur.aur:
-      name: systemd-oomd-defaults
-  become: yes
+    name: systemd-oomd-defaults
+  become: true
   become_user: "{{ aur.user }}"
   notify:
-    - reload systemd config
+    - Reload systemd config
   tags:
     - aur
 
 - name: Enable and start systemd-oomd
-  service:
+  ansible.builtin.service:
     name: systemd-oomd.service
-    enabled: yes
+    enabled: true
     state: started

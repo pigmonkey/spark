@@ -2,30 +2,31 @@
 - name: Install xautolock
   kewlfft.aur.aur:
     name: xautolock
-  become: yes
+  become: true
   become_user: "{{ aur.user }}"
   tags:
     - aur
 
 - name: Install i3lock
-  pacman:
+  community.general.pacman:
     name: i3lock
     state: present
 
 - name: Push lock script
-  copy:
+  ansible.builtin.copy:
     src: lock.sh
     dest: /usr/local/bin/lock
-    mode: 0755
+    mode: "0755"
 
 - name: Push screen lock service file
-  copy:
+  ansible.builtin.copy:
     src: screenlock.service
     dest: /etc/systemd/system/screenlock@.service
+    mode: "0644"
   notify:
-    - reload systemd config
+    - Reload systemd config
 
 - name: Enable screen lock service
-  service:
+  ansible.builtin.service:
     name: "screenlock@{{ user.name }}.service"
-    enabled: yes
+    enabled: true

@@ -1,14 +1,19 @@
 ---
 - name: Enable dvorak for XOrg libinput
-  template:
+  ansible.builtin.template:
     src: 40-libinput-dvorak.conf.j2
     dest: /etc/X11/xorg.conf.d/40-libinput-dvorak.conf
+    mode: "0644"
 
 - name: Add control-caps dvorak keymap
-  copy: src=dvorak-cc.map.gz dest=/usr/share/kbd/keymaps/i386/dvorak/dvorak-cc.map.gz
+  ansible.builtin.copy:
+    src: dvorak-cc.map.gz
+    dest: /usr/share/kbd/keymaps/i386/dvorak/dvorak-cc.map.gz
+    mode: "0644"
 
 - name: Enable dvorak-cc for vconsole
-  lineinfile: "dest=/etc/vconsole.conf
-              regexp=^KEYMAP=
-              state=present
-              line='KEYMAP=dvorak-cc'"
+  ansible.builtin.lineinfile:
+    dest: /etc/vconsole.conf
+    regexp: ^KEYMAP=
+    state: present
+    line: "KEYMAP=dvorak-cc"

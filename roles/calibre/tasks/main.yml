@@ -1,25 +1,29 @@
 ---
 - name: Install calibre
-  pacman: name=calibre state=present
+  community.general.pacman:
+    name: calibre
+    state: present
 
 - name: Jail calibre
-  file: src=/usr/bin/firejail
-        dest=/usr/local/bin/calibre
-        state=link
+  ansible.builtin.file:
+    src: /usr/bin/firejail
+    dest: /usr/local/bin/calibre
+    state: link
   tags:
     - firejail
 
 - name: Jail ebook-viewer
-  file: src=/usr/bin/firejail
-        dest=/usr/local/bin/ebook-viewer
-        state=link
+  ansible.builtin.file:
+    src: /usr/bin/firejail
+    dest: /usr/local/bin/ebook-viewer
+    state: link
   tags:
     - firejail
 
 - name: Install libgourou
   kewlfft.aur.aur:
     name: gourou
-  become: yes
+  become: true
   become_user: "{{ aur.user }}"
   tags:
     - aur

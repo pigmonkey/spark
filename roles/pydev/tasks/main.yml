@@ -1,25 +1,25 @@
 ---
 - name: Install pipenv
-  pacman:
-      name: python-pipenv
-      state: present
+  community.general.pacman:
+    name: python-pipenv
+    state: present
 
 - name: Install pyenv
-  pacman:
-      name: pyenv
-      state: present
+  community.general.pacman:
+    name: pyenv
+    state: present
 
 - name: Install ruff
-  pacman:
-      name: ruff
-      state: present
+  community.general.pacman:
+    name: ruff
+    state: present
 
 - name: Install uv
-  pacman:
-      name: uv
-      state: present
+  community.general.pacman:
+    name: uv
+    state: present
 
 - name: Install documentation
-  pacman:
-      name: python-docs
-      state: present
+  community.general.pacman:
+    name: python-docs
+    state: present

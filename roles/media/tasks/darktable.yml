@@ -1,5 +1,7 @@
 ---
 - name: Install darktable
-  pacman: name=darktable state=present
+  community.general.pacman:
+    name: darktable
+    state: present
   tags:
     - darktable

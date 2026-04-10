@@ -1,21 +1,28 @@
 ---
 - name: Install mpd
-  pacman: name=mpd state=present
+  community.general.pacman:
+    name: mpd
+    state: present
 
 - name: Jail mpd
-  file: src=/usr/bin/firejail
-        dest=/usr/local/bin/mpd
-        state=link
+  ansible.builtin.file:
+    src: /usr/bin/firejail
+    dest: /usr/local/bin/mpd
+    state: link
   tags:
     - firejail
 
 - name: Verify mpd firejail local profile exists
-  copy: content="" dest="/etc/firejail/mpd.local" force=false
+  ansible.builtin.copy:
+    content: ""
+    dest: "/etc/firejail/mpd.local"
+    force: false
+    mode: "0644"
   tags:
     - firejail
 
 - name: Set mpd firejail protocols
-  lineinfile:
+  ansible.builtin.lineinfile:
     dest: /etc/firejail/mpd.local
     regexp: "^protocol"
     line: "protocol unix,inet,inet6,netlink"
@@ -23,28 +30,39 @@
     - firejail
 
 - name: Push mpd service file
-  copy: src=mpd.service dest=/etc/systemd/user/mpd.service
+  ansible.builtin.copy:
+    src: mpd.service
+    dest: /etc/systemd/user/mpd.service
+    mode: "0644"
   notify:
-    - reload systemd config
+    - Reload systemd config
   tags:
     - firejail
 
 - name: Install mpc
-  pacman: name=mpc state=present
+  community.general.pacman:
+    name: mpc
+    state: present
 
 - name: Install ncmpcpp
-  pacman: name=ncmpcpp state=present
+  community.general.pacman:
+    name: ncmpcpp
+    state: present
 
 - name: Jail ncmpcpp
-  file: src=/usr/bin/firejail
-        dest=/usr/local/bin/ncmpcpp
-        state=link
+  ansible.builtin.file:
+    src: /usr/bin/firejail
+    dest: /usr/local/bin/ncmpcpp
+    state: link
   tags:
     - firejail
 
 - name: Push ncmpcpp firejail profile
-  copy: src=firejail/ncmpcpp.profile dest=/usr/local/etc/firejail/ncmpcpp.profile
+  ansible.builtin.copy:
+    src: firejail/ncmpcpp.profile
+    dest: /usr/local/etc/firejail/ncmpcpp.profile
+    mode: "0644"
   notify:
-    - activate firejail profiles
+    - Activate firejail profiles
   tags:
     - firejail

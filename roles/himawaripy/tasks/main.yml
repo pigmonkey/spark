@@ -1,33 +1,36 @@
 ---
 - name: Install himawaripy into virtual environment
-  pip:
+  ansible.builtin.pip:
     name: git+https://github.com/boramalper/himawaripy#egg=himawaripy
     virtualenv: /usr/local/env/himawaripy
     virtualenv_command: virtualenv3
 
 - name: Link himawaripy to bin
-  file:
+  ansible.builtin.file:
     src: /usr/local/env/himawaripy/bin/himawaripy
     dest: /usr/local/bin/himawaripy
     state: link
 
 - name: Push himawaripy service file
-  template:
+  ansible.builtin.template:
     src: himawaripy.service.j2
     dest: /etc/systemd/user/himawaripy.service
+    mode: "0644"
   notify:
-    - reload systemd config
+    - Reload systemd config
 
 - name: Push himawaripy timer file
-  template:
+  ansible.builtin.template:
     src: himawaripy.timer.j2
     dest: /etc/systemd/user/himawaripy.timer
+    mode: "0644"
   notify:
-    - reload systemd config
-    - restart himawaripy
+    - Reload systemd config
+    - Restart himawaripy
 
-- include_tasks: roles/nmtrust/tasks/unit.yml
+- name: Include nmtrust unit tasks
+  ansible.builtin.include_tasks: roles/nmtrust/tasks/unit.yml
   vars:
-      unit: himawaripy.timer
-      run_on: "{{ himawaripy.run_on }}"
-      user_unit: true
+    unit: himawaripy.timer
+    run_on: "{{ himawaripy.run_on }}"
+    user_unit: true

@@ -1,10 +1,10 @@
 ---
 - name: Install GPXSee
-  pacman:
+  community.general.pacman:
     name: gpxsee
     state: present
 
 - name: Install gpxpy
-  pacman:
+  community.general.pacman:
     name: python-gpxpy
     state: present

@@ -1,18 +1,18 @@
 ---
 - name: Create AUR user
-  user:
+  ansible.builtin.user:
     name: "{{ aur.user }}"
-    create_home: yes
+    create_home: true
     group: wheel
   tags:
     - aur
 
 - name: Allow passwordless Pacman for AUR user
-  template:
+  ansible.builtin.template:
     src: sudo_aur.j2
     dest: /etc/sudoers.d/11-aur
-    mode: 0644
-    validate: 'visudo -cf %s'
+    mode: "0644"
+    validate: "visudo -cf %s"
   tags:
     - aur
     - sudo

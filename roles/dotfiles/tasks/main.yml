@@ -2,24 +2,25 @@
 - name: Install rcm
   kewlfft.aur.aur:
     name: rcm
-  become: yes
+  become: true
   become_user: "{{ aur.user }}"
   when: dotfiles is defined
   tags:
     - aur
 
-- name: Clone user dotfiles
-  git:
+- name: Clone user dotfiles  # noqa: latest[git]
+  ansible.builtin.git:
     repo: "{{ dotfiles.url }}"
     dest: /home/{{ user.name }}/{{ dotfiles.destination }}
-    accept_hostkey: yes
-    update: no
+    accept_hostkey: true
+    update: false
   when: dotfiles is defined
-  become: yes
+  become: true
   become_user: "{{ user.name }}"
 
 - name: Install user dotfiles
-  command: rcup -d /home/{{ user.name}}/{{ dotfiles.destination}} {{ dotfiles.rcup_flags }}
+  ansible.builtin.command: rcup -d /home/{{ user.name }}/{{ dotfiles.destination }} {{ dotfiles.rcup_flags }}
   when: dotfiles is defined
-  become: yes
+  become: true
   become_user: "{{ user.name }}"
+  changed_when: true

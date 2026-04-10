@@ -1,40 +1,40 @@
 ---
 - name: Install sysstat
-  pacman:
+  community.general.pacman:
     name: sysstat
     state: present
 
 - name: Install glances
-  pacman:
+  community.general.pacman:
     name: glances
     state: present
 
 - name: Install btop
-  pacman:
+  community.general.pacman:
     name: btop
     state: present
 
 - name: Install htop
-  pacman:
+  community.general.pacman:
     name: htop
     state: present
 
 - name: Install lsof
-  pacman:
+  community.general.pacman:
     name: lsof
     state: present
 
 - name: Install strace
-  pacman:
+  community.general.pacman:
     name: strace
     state: present
 
 - name: Install smartmontools
-  pacman:
+  community.general.pacman:
     name: smartmontools
     state: present
 
 - name: Install progress
-  pacman:
+  community.general.pacman:
     name: progress
     state: present

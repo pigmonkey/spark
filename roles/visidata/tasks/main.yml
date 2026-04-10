@@ -1,7 +1,6 @@
 ---
-
 - name: Install visidata and libraries
-  pacman:
+  community.general.pacman:
     name:
       - visidata
       - python-lxml
@@ -12,21 +11,23 @@
     state: present
 
 - name: Push visidata desktop file
-  copy:
+  ansible.builtin.copy:
     src: visidata.desktop
     dest: /usr/local/share/applications/visidata.desktop
+    mode: "0644"
 
 - name: Verify mimeapps.list exists
-  copy:
+  ansible.builtin.copy:
     content: ""
     dest: /etc/xdg/mimeapps.list
     force: false
+    mode: "0644"
 
 - name: Set visidata as default application for relevant mimetypes
-  lineinfile:
+  ansible.builtin.lineinfile:
     dest: /etc/xdg/mimeapps.list
     regexp: "{{ item.regexp }}"
     line: "{{ item.line }}"
   with_items:
-    - { regexp: '^text/csv=', line: 'text/csv=visidata.desktop' }
-    - { regexp: '^text/tab-separated-values=', line: 'text/tab-separated-values=visidata.desktop' }
+    - { regexp: "^text/csv=", line: "text/csv=visidata.desktop" }
+    - { regexp: "^text/tab-separated-values=", line: "text/tab-separated-values=visidata.desktop" }

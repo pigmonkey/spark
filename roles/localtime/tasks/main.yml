@@ -2,12 +2,13 @@
 - name: Install localtime
   kewlfft.aur.aur:
     name: localtime-git
-  become: yes
+  become: true
   become_user: "{{ aur.user }}"
   tags:
     - aur
 
-- include_tasks: roles/nmtrust/tasks/unit.yml
+- name: Include nmtrust unit tasks
+  ansible.builtin.include_tasks: roles/nmtrust/tasks/unit.yml
   vars:
-      unit: localtime.service
-      run_on: "{{ localtime.run_on }}"
+    unit: localtime.service
+    run_on: "{{ localtime.run_on }}"

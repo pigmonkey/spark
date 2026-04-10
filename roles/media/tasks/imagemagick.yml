@@ -1,6 +1,6 @@
 ---
 - name: Install imagemagick and dependencies
-  pacman:
+  community.general.pacman:
     name:
       - libraw
       - libpng

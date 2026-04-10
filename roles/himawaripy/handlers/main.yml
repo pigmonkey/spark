@@ -1,4 +1,6 @@
 ---
-- name: restart himawaripy
-  service: name="himawaripy@{{ user.name }}.timer" state=restarted
+- name: Restart himawaripy
+  ansible.builtin.service:
+    name: "himawaripy@{{ user.name }}.timer"
+    state: restarted
   when: himawaripy.run_on == "all"

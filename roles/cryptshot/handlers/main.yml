@@ -1,3 +1,5 @@
 ---
-- name: restart cryptshot
-  service: name=cryptshot.timer state=restarted
+- name: Restart cryptshot
+  ansible.builtin.service:
+    name: cryptshot.timer
+    state: restarted

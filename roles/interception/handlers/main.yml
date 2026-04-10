@@ -1,5 +1,5 @@
 ---
-- name: restart udevmon
-  service:
+- name: Restart udevmon
+  ansible.builtin.service:
     name: udevmon.service
     state: restarted

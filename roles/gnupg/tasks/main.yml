@@ -1,41 +1,41 @@
 ---
 - name: Install gnupg
-  pacman:
+  community.general.pacman:
     name: gnupg
     state: present
 
 - name: Enable gpg-agent.socket
-  systemd:
+  ansible.builtin.systemd:
     name: gpg-agent.socket
     scope: user
-    enabled: yes
+    enabled: true
     state: started
-  become: yes
+  become: true
   become_user: "{{ user.name }}"
   environment:
     XDG_RUNTIME_DIR: "/run/user/{{ user.uid }}"
-  when: gnupg.enable_agent == True
+  when: gnupg.enable_agent
 
 - name: Enable dirmngr.socket
-  systemd:
+  ansible.builtin.systemd:
     name: dirmngr.socket
     scope: user
-    enabled: yes
+    enabled: true
     state: started
-  become: yes
+  become: true
   become_user: "{{ user.name }}"
   environment:
     XDG_RUNTIME_DIR: "/run/user/{{ user.uid }}"
-  when: gnupg.enable_agent == True
+  when: gnupg.enable_agent
 
 - name: Enable gpg-agent-ssh.socket
-  systemd:
+  ansible.builtin.systemd:
     name: gpg-agent-ssh.socket
     scope: user
-    enabled: yes
+    enabled: true
     state: started
-  become: yes
+  become: true
   become_user: "{{ user.name }}"
   environment:
     XDG_RUNTIME_DIR: "/run/user/{{ user.uid }}"
-  when: gnupg.enable_agent == True and gnupg.emulate_ssh == True
+  when: gnupg.enable_agent and gnupg.emulate_ssh

@@ -1,18 +1,29 @@
 ---
-- include_tasks: beets.yml
-- include_tasks: imagemagick.yml
-- include_tasks: inkscape.yml
-- include_tasks: gimp.yml
-- include_tasks: gthumb.yml
-- include_tasks: feh.yml
-- include_tasks: imv.yml
-- include_tasks: teiler.yml
-- include_tasks: flac2all.yml
-- include_tasks: darktable.yml
-- include_tasks: qcode.yml
+- name: Include beets tasks
+  ansible.builtin.include_tasks: beets.yml
+- name: Include ImageMagick tasks
+  ansible.builtin.include_tasks: imagemagick.yml
+- name: Include Inkscape tasks
+  ansible.builtin.include_tasks: inkscape.yml
+- name: Include GIMP tasks
+  ansible.builtin.include_tasks: gimp.yml
+- name: Include gThumb tasks
+  ansible.builtin.include_tasks: gthumb.yml
+- name: Include feh tasks
+  ansible.builtin.include_tasks: feh.yml
+- name: Include imv tasks
+  ansible.builtin.include_tasks: imv.yml
+- name: Include teiler tasks
+  ansible.builtin.include_tasks: teiler.yml
+- name: Include flac2all tasks
+  ansible.builtin.include_tasks: flac2all.yml
+- name: Include Darktable tasks
+  ansible.builtin.include_tasks: darktable.yml
+- name: Include qcode tasks
+  ansible.builtin.include_tasks: qcode.yml
 
 - name: Install misc media codecs and helpers
-  pacman:
+  community.general.pacman:
     name:
       - flac
       - lame
@@ -25,45 +36,45 @@
     state: present
 
 - name: Install Metadata Anonymisation Toolkit
-  pacman:
+  community.general.pacman:
     name: mat2
     state: present
   tags:
     - mat
 
 - name: Install yt-dlp
-  pacman:
+  community.general.pacman:
     name:
       - yt-dlp
       - yt-dlp-ejs
     state: present
 
 - name: Install zbar
-  pacman:
+  community.general.pacman:
     name: zbar
     state: present
 
 - name: Install sxiv
-  pacman:
+  community.general.pacman:
     name: sxiv
     state: present
 
 - name: Install svgcleaner
-  pacman:
+  community.general.pacman:
     name: svgcleaner
     state: present
 
 - name: Install flameshot
-  pacman:
+  community.general.pacman:
     name: flameshot
     state: present
 
 - name: Install digikam
-  pacman:
+  community.general.pacman:
     name: digikam
     state: present
 
 - name: Install whipper
-  pacman:
+  community.general.pacman:
     name: whipper
     state: present

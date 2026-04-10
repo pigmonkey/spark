@@ -1,6 +1,6 @@
 ---
 - name: Create user group
-  group:
+  ansible.builtin.group:
     name: "{{ user.group }}"
     gid: "{{ user.gid }}"
     state: present
@@ -8,55 +8,57 @@
     - user
 
 - name: Create user and assign to group
-  user:
+  ansible.builtin.user:
     name: "{{ user.name }}"
     group: "{{ user.group }}"
-    password: "{{ user_password|password_hash('sha512') }}"
+    password: "{{ user_password | password_hash('sha512') }}"
     shell: "{{ user.shell }}"
     update_password: on_create
     uid: "{{ user.uid }}"
     groups: uucp
-    append: yes
+    append: true
   tags:
     - user
 
 - name: Create user log dir
-  file:
+  ansible.builtin.file:
     path: /home/{{ user.name }}/{{ user.log.dir }}
     state: directory
     owner: "{{ user.name }}"
     group: "{{ user.group }}"
+    mode: "0755"
   when: user.log.dir is defined
   tags:
     - user
 
 - name: Install logrotate
-  pacman:
-      name: logrotate
-      state: present
+  community.general.pacman:
+    name: logrotate
+    state: present
 
 - name: Push logrotate config for user logs
-  template:
+  ansible.builtin.template:
     src: logrotate.j2
     dest: /etc/logrotate.d/user
+    mode: "0644"
   when: user.log.dir is defined
   tags:
     - user
 
 - name: Create user socket directory
-  file:
+  ansible.builtin.file:
     path: /run/user/{{ user.uid }}
     state: directory
     owner: "{{ user.name }}"
     group: "{{ user.group }}"
-    mode: 0700
+    mode: "0700"
   tags:
     - user
 
 - name: Start user systemd instance
-  service:
+  ansible.builtin.service:
     name: "user@{{ user.uid }}"
     state: started
-  notify: stop systemd per-user instance
+  notify: Stop systemd per-user instance
   tags:
     - user

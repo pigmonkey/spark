@@ -1,104 +1,105 @@
 ---
-- hosts: localhost
-  become: yes
+- name: Configure Arch Linux desktop
+  hosts: localhost
+  become: true
   roles:
-    - { role: base, tags: ['base'] }
-    - { role: grub, tags: ['grub'], when: "bootloader == 'grub'"}
-    - { role: gnupg, tags: ['gnupg'] }
-    - { role: sysmon, tags: ['sysmon'] }
-    - { role: cron, tags: ['cron'] }
-    - { role: microcode, tags: ['microcode'] }
-    - { role: hardened, tags: ['hardened'] }
-    - { role: ssh, tags: ['ssh'] }
-    - { role: dotfiles, tags: ['dotfiles'] }
-    - { role: ssd, tags: ['ssd'] }
-    - { role: interception, tags: ['interception'], when: "interception is defined" }
-    - { role: fonts, tags: ['fonts'] }
-    - { role: x, tags: ['x'] }
-    - { role: terminal, tags: ['terminal'], when: "terminal is defined" }
-    - { role: lightdm, tags: ['lightdm'], when: "display_manager == 'lightdm'" }
-    - { role: gdm, tags: ['gdm'], when: "display_manager == 'gdm'" }
-    - { role: i3, tags: ['i3'], when: "desktop_environment == 'i3'" }
-    - { role: gnome, tags: ['gnome'], when: "desktop_environment == 'gnome'" }
-    - { role: pass, tags: ['pass'] }
-    - { role: iptables, tags: ['iptables'] }
-    - { role: nettools, tags: ['nettools'] }
-    - { role: regdomain, tags: ['regdomain'], when: "regdomain is defined" }
-    - { role: openvpn, tags: ['openvpn'] }
-    - { role: nmtrust, tags: ['nmtrust'] }
-    - { role: unbound, tags: ['unbound'] }
-    - { role: openresolv, tags: ['openresolv'] }
-    - { role: networkmanager, tags: ['networkmanager'] }
-    - { role: ntp, tags: ['ntp'] }
-    - { role: firejail, tags: ['firejail'] }
-    - { role: tor, tags: ['tor'], when: "tor is defined" }
-    - { role: editors, tags: ['editors'] }
-    - { role: filesystems, tags: ['filesystems'] }
-    - { role: archive, tags: ['archive'] }
-    - { role: optical, tags: ['optical'] }
-    - { role: udisks, tags: ['udisks'] }
-    - { role: spell, tags: ['spell'] }
-    - { role: browsers, tags: ['browsers'] }
-    - { role: yubikey, tags: ['yubikey'] }
-    - { role: media, tags: ['media'] }
-    - { role: mpd, tags: ['mpd'] }
-    - { role: mpv, tags: ['mpv'] }
-    - { role: pianobar, tags: ['pianobar'] }
-    - { role: laptop, tags: ['laptop'] }
-    - { role: thinkpad, tags: ['thinkpad'], when: "'ThinkPad' in ansible_product_version" }
-    - { role: macbook, tags: ['macbook'], when: "'MacBook' in ansible_product_name" }
-    - { role: backlight, tags: ['backlight'] }
-    - { role: screensaver, tags: ['screensaver'] }
-    - { role: weechat, tags: ['weechat'] }
-    - { role: git-annex, tags: ['git-annex'], when: "gitannex is defined" }
-    - { role: taskwarrior, tags: ['taskwarrior'] }
-    - { role: ledger, tags: ['ledger'] }
-    - { role: mail, tags: ['mail'] }
-    - { role: goimapnotify, tags: ['goimapnotify'] }
-    - { role: cups, tags: ['cups'] }
-    - { role: office, tags: ['office'] }
-    - { role: visidata, tags: ['visidata'] }
-    - { role: pdf, tags: ['pdf'] }
-    - { role: dictd, tags: ['dictd'] }
-    - { role: redshift, tags: ['redshift'] }
-    - { role: transmission, tags: ['transmission'] }
-    - { role: libvirt, tags: ['libvirt'] }
-    - { role: virtualbox, tags: ['virtualbox'] }
-    - { role: virtualenv, tags: ['virtualenv'] }
-    - { role: backitup, tags: ['backitup'] }
-    - { role: cryptshot, tags: ['cryptshot'], when: "cryptshot is defined" }
-    - { role: borg, tags: ['borg'] }
-    - { role: tarsnap, tags: ['tarsnap'] }
-    - { role: mapping, tags: ['mapping'] }
-    - { role: sound, tags: ['sound'] }
-    - { role: pim, tags: ['pim'] }
-    - { role: postgresql, tags: ['postgresql'] }
-    - { role: calibre, tags: ['calibre'] }
-    - { role: aws, tags: ['aws'] }
-    - { role: parcimonie, tags: ['parcimonie'], when: "tor is defined" }
-    - { role: localtime, tags: ['localtime'], when: "localtime is defined" }
-    - { role: wormhole, tags: ['wormhole'] }
-    - { role: bluetooth, tags: ['bluetooth'], when: "bluetooth is defined" }
-    - { role: wttr, tags: ['wttr'] }
-    - { role: hostsctl, tags: ['hostsctl'], when: "hostsctl is defined" }
-    - { role: himawaripy, tags: ['himawaripy'], when: "himawaripy is defined" }
-    - { role: goesimage, tags: ['goesimage'], when: "goesimage is defined" }
-    - { role: syncthing, tags: ['syncthing'], when: "syncthing is defined" }
-    - { role: mirrorlist, tags: ['mirrorlist'], when: "mirrorlist is defined" }
-    - { role: pkgfile, tags: ['pkgfile'], when: "pkgfile is defined" }
-    - { role: units, tags: ['units'], when: "units is defined" }
-    - { role: logitech, tags: ['logitech'] }
-    - { role: pydev, tags: ['pydev'] }
-    - { role: aria2, tags: ['aria2'] }
-    - { role: signal, tags: ['signal'] }
-    - { role: android, tags: ['android'] }
-    - { role: ripgrep, tags: ['ripgrep'] }
-    - { role: bat, tags: ['bat'] }
-    - { role: zeal, tags: ['zeal'] }
-    - { role: kdeconnect, tags: ['kdeconnect'] }
-    - { role: oomd, tags: ['oomd'] }
-    - { role: f3, tags: ['f3'] }
-    - { role: vopono, tags: ['vopono'] }
+    - { role: base, tags: ["base"] }
+    - { role: grub, tags: ["grub"], when: "bootloader == 'grub'" }
+    - { role: gnupg, tags: ["gnupg"] }
+    - { role: sysmon, tags: ["sysmon"] }
+    - { role: cron, tags: ["cron"] }
+    - { role: microcode, tags: ["microcode"] }
+    - { role: hardened, tags: ["hardened"] }
+    - { role: ssh, tags: ["ssh"] }
+    - { role: dotfiles, tags: ["dotfiles"] }
+    - { role: ssd, tags: ["ssd"] }
+    - { role: interception, tags: ["interception"], when: "interception is defined" }
+    - { role: fonts, tags: ["fonts"] }
+    - { role: x, tags: ["x"] }
+    - { role: terminal, tags: ["terminal"], when: "terminal is defined" }
+    - { role: lightdm, tags: ["lightdm"], when: "display_manager == 'lightdm'" }
+    - { role: gdm, tags: ["gdm"], when: "display_manager == 'gdm'" }
+    - { role: i3, tags: ["i3"], when: "desktop_environment == 'i3'" }
+    - { role: gnome, tags: ["gnome"], when: "desktop_environment == 'gnome'" }
+    - { role: pass, tags: ["pass"] }
+    - { role: iptables, tags: ["iptables"] }
+    - { role: nettools, tags: ["nettools"] }
+    - { role: regdomain, tags: ["regdomain"], when: "regdomain is defined" }
+    - { role: openvpn, tags: ["openvpn"] }
+    - { role: nmtrust, tags: ["nmtrust"] }
+    - { role: unbound, tags: ["unbound"] }
+    - { role: openresolv, tags: ["openresolv"] }
+    - { role: networkmanager, tags: ["networkmanager"] }
+    - { role: ntp, tags: ["ntp"] }
+    - { role: firejail, tags: ["firejail"] }
+    - { role: tor, tags: ["tor"], when: "tor is defined" }
+    - { role: editors, tags: ["editors"] }
+    - { role: filesystems, tags: ["filesystems"] }
+    - { role: archive, tags: ["archive"] }
+    - { role: optical, tags: ["optical"] }
+    - { role: udisks, tags: ["udisks"] }
+    - { role: spell, tags: ["spell"] }
+    - { role: browsers, tags: ["browsers"] }
+    - { role: yubikey, tags: ["yubikey"] }
+    - { role: media, tags: ["media"] }
+    - { role: mpd, tags: ["mpd"] }
+    - { role: mpv, tags: ["mpv"] }
+    - { role: pianobar, tags: ["pianobar"] }
+    - { role: laptop, tags: ["laptop"] }
+    - { role: thinkpad, tags: ["thinkpad"], when: "'ThinkPad' in ansible_product_version" }
+    - { role: macbook, tags: ["macbook"], when: "'MacBook' in ansible_product_name" }
+    - { role: backlight, tags: ["backlight"] }
+    - { role: screensaver, tags: ["screensaver"] }
+    - { role: weechat, tags: ["weechat"] }
+    - { role: gitannex, tags: ["gitannex"], when: "gitannex is defined" }
+    - { role: taskwarrior, tags: ["taskwarrior"] }
+    - { role: ledger, tags: ["ledger"] }
+    - { role: mail, tags: ["mail"] }
+    - { role: goimapnotify, tags: ["goimapnotify"] }
+    - { role: cups, tags: ["cups"] }
+    - { role: office, tags: ["office"] }
+    - { role: visidata, tags: ["visidata"] }
+    - { role: pdf, tags: ["pdf"] }
+    - { role: dictd, tags: ["dictd"] }
+    - { role: redshift, tags: ["redshift"] }
+    - { role: transmission, tags: ["transmission"] }
+    - { role: libvirt, tags: ["libvirt"] }
+    - { role: virtualbox, tags: ["virtualbox"] }
+    - { role: virtualenv, tags: ["virtualenv"] }
+    - { role: backitup, tags: ["backitup"] }
+    - { role: cryptshot, tags: ["cryptshot"], when: "cryptshot is defined" }
+    - { role: borg, tags: ["borg"] }
+    - { role: tarsnap, tags: ["tarsnap"] }
+    - { role: mapping, tags: ["mapping"] }
+    - { role: sound, tags: ["sound"] }
+    - { role: pim, tags: ["pim"] }
+    - { role: postgresql, tags: ["postgresql"] }
+    - { role: calibre, tags: ["calibre"] }
+    - { role: aws, tags: ["aws"] }
+    - { role: parcimonie, tags: ["parcimonie"], when: "tor is defined" }
+    - { role: localtime, tags: ["localtime"], when: "localtime is defined" }
+    - { role: wormhole, tags: ["wormhole"] }
+    - { role: bluetooth, tags: ["bluetooth"], when: "bluetooth is defined" }
+    - { role: wttr, tags: ["wttr"] }
+    - { role: hostsctl, tags: ["hostsctl"], when: "hostsctl is defined" }
+    - { role: himawaripy, tags: ["himawaripy"], when: "himawaripy is defined" }
+    - { role: goesimage, tags: ["goesimage"], when: "goesimage is defined" }
+    - { role: syncthing, tags: ["syncthing"], when: "syncthing is defined" }
+    - { role: mirrorlist, tags: ["mirrorlist"], when: "mirrorlist is defined" }
+    - { role: pkgfile, tags: ["pkgfile"], when: "pkgfile is defined" }
+    - { role: units, tags: ["units"], when: "units is defined" }
+    - { role: logitech, tags: ["logitech"] }
+    - { role: pydev, tags: ["pydev"] }
+    - { role: aria2, tags: ["aria2"] }
+    - { role: signal, tags: ["signal"] }
+    - { role: android, tags: ["android"] }
+    - { role: ripgrep, tags: ["ripgrep"] }
+    - { role: bat, tags: ["bat"] }
+    - { role: zeal, tags: ["zeal"] }
+    - { role: kdeconnect, tags: ["kdeconnect"] }
+    - { role: oomd, tags: ["oomd"] }
+    - { role: f3, tags: ["f3"] }
+    - { role: vopono, tags: ["vopono"] }
   vars_prompt:
     - name: user_password
       prompt: "Enter desired user password"
