@@ -44,25 +44,12 @@
     name: mpc
     state: present
 
-- name: Install ncmpcpp
+- name: Install rmpc
   community.general.pacman:
-    name: ncmpcpp
+    name: rmpc
     state: present
 
-- name: Jail ncmpcpp
-  ansible.builtin.file:
-    src: /usr/bin/firejail
-    dest: /usr/local/bin/ncmpcpp
-    state: link
-  tags:
-    - firejail
-
-- name: Push ncmpcpp firejail profile
-  ansible.builtin.copy:
-    src: firejail/ncmpcpp.profile
-    dest: /usr/local/etc/firejail/ncmpcpp.profile
-    mode: "0644"
-  notify:
-    - Activate firejail profiles
-  tags:
-    - firejail
+- name: Install cava
+  community.general.pacman:
+    name: cava
+    state: present
