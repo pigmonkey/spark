@@ -44,7 +44,7 @@ gnupg:
 mail:
     sync_tool: isync
     sync_pim: True
-    sync_taskwarrior: True
+    sync_taskwarrior: False
     sync_notmuch: False
     sync_time: 10min
     sync_boot_delay: 2min
