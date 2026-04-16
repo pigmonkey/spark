@@ -63,7 +63,6 @@
     - { role: transmission, tags: ["transmission"] }
     - { role: libvirt, tags: ["libvirt"] }
     - { role: virtualbox, tags: ["virtualbox"] }
-    - { role: virtualenv, tags: ["virtualenv"] }
     - { role: backitup, tags: ["backitup"] }
     - { role: cryptshot, tags: ["cryptshot"], when: "cryptshot is defined" }
     - { role: borg, tags: ["borg"] }
@@ -80,7 +79,6 @@
     - { role: bluetooth, tags: ["bluetooth"], when: "bluetooth is defined" }
     - { role: wttr, tags: ["wttr"] }
     - { role: hostsctl, tags: ["hostsctl"], when: "hostsctl is defined" }
-    - { role: himawaripy, tags: ["himawaripy"], when: "himawaripy is defined" }
     - { role: goesimage, tags: ["goesimage"], when: "goesimage is defined" }
     - { role: syncthing, tags: ["syncthing"], when: "syncthing is defined" }
     - { role: mirrorlist, tags: ["mirrorlist"], when: "mirrorlist is defined" }
