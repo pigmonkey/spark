@@ -26,3 +26,10 @@
     state: present
   tags:
     - bat
+
+- name: Install fd
+  community.general.pacman:
+    name: fd
+    state: present
+  tags:
+    - fd
