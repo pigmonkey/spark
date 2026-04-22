@@ -89,8 +89,7 @@
     - { role: aria2, tags: ["aria2"] }
     - { role: signal, tags: ["signal"] }
     - { role: android, tags: ["android"] }
-    - { role: ripgrep, tags: ["ripgrep"] }
-    - { role: bat, tags: ["bat"] }
+    - { role: rustutils, tags: ["rustutils"] }
     - { role: zeal, tags: ["zeal"] }
     - { role: kdeconnect, tags: ["kdeconnect"] }
     - { role: oomd, tags: ["oomd"] }

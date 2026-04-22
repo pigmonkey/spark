@@ -1,0 +1,28 @@
+---
+- name: Install ripgrep
+  community.general.pacman:
+    name: ripgrep
+    state: present
+  tags:
+    - ripgrep
+
+- name: Install ripgrep-all
+  community.general.pacman:
+    name: ripgrep-all
+    state: present
+  tags:
+    - ripgrep
+
+- name: Install bat
+  community.general.pacman:
+    name: bat
+    state: present
+  tags:
+    - bat
+
+- name: Install bat-extras
+  community.general.pacman:
+    name: bat-extras
+    state: present
+  tags:
+    - bat
