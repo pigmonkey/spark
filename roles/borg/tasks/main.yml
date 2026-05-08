@@ -1,7 +1,0 @@
----
-- name: Install borg
-  community.general.pacman:
-    name:
-      - python-llfuse
-      - borg
-    state: present
