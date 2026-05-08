@@ -1,0 +1,31 @@
+---
+- name: Install resnap
+  ansible.builtin.copy:
+    src: resnap/resnap
+    dest: /usr/local/bin/
+    mode: "0755"
+
+- name: Install resnap-restore
+  ansible.builtin.copy:
+    src: resnap/resnap-restore
+    dest: /usr/local/bin/
+    mode: "0755"
+
+- name: Create resnap config directory
+  ansible.builtin.file:
+    path: /usr/local/etc/resnap
+    state: directory
+    mode: "0755"
+
+- name: Push resnap drives configuration
+  ansible.builtin.template:
+    src: drives.j2
+    dest: /usr/local/etc/resnap/drives
+    mode: "0644"
+  when: resnap.drives is defined
+
+- name: Push resnap exclude configuration
+  ansible.builtin.template:
+    src: excludes.j2
+    dest: /usr/local/etc/resnap/excludes
+    mode: "0644"

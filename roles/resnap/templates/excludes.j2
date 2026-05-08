@@ -1,0 +1,8 @@
+/lost+found
+/swapfile
+/tmp
+/var/cache
+/var/lib/dhcpcd
+/var/lib/docker
+/var/lib/pacman/sync
+{% if resnap.exclude_user_cache %}/home/{{ user.name }}/.cache{% endif %}

@@ -65,6 +65,7 @@
     - { role: virtualbox, tags: ["virtualbox"] }
     - { role: backitup, tags: ["backitup"] }
     - { role: cryptshot, tags: ["cryptshot"], when: "cryptshot is defined" }
+    - { role: resnap, tags: ["resnap"], when: "resnap is defined" }
     - { role: borg, tags: ["borg"] }
     - { role: tarsnap, tags: ["tarsnap"] }
     - { role: mapping, tags: ["mapping"] }
