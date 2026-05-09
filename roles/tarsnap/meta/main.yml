@@ -1,4 +1,0 @@
----
-dependencies:
-  - { role: nmtrust }
-  - { role: backitup }

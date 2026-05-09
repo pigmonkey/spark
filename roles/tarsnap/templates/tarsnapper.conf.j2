@@ -1,8 +1,0 @@
-# {{ ansible_managed }}
-deltas: {{ tarsnapper.deltas }}
-target: /{{ ansible_hostname }}/$name-$date
-include-jobs: /usr/local/etc/tarsnapper.d/*
-
-jobs:
-    etc:
-        source: /etc
