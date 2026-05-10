@@ -3,7 +3,8 @@
   kewlfft.aur.aur:
     name:
       - hamradio-menus
-      - chirp-daily
+      - python-yattag
+      - chirp-next
   become: true
   become_user: "{{ aur.user }}"
   tags:
