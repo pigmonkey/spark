@@ -1,0 +1,383 @@
+#!/usr/bin/env python3
+"""Check Ansible playbook packages against official Arch repos and AUR.
+
+Finds packages that have:
+- Moved from official repos to AUR (or disappeared entirely)
+- Moved from AUR to official repos (or disappeared entirely)
+"""
+
+import argparse
+import json
+import re
+import subprocess
+import sys
+import tarfile
+import time
+import urllib.parse
+import urllib.request
+from pathlib import Path
+
+import yaml
+
+warnings = []
+
+DB_DIR = Path("/var/lib/pacman/sync")
+DB_STALE_HOURS = 24
+
+
+# ------------------------------------------------------------------ variables
+
+
+def load_variables(playbook_dir):
+    """Load variables from group_vars/all."""
+    vars_file = playbook_dir / "group_vars" / "all"
+    if not vars_file.exists():
+        return {}
+    with open(vars_file) as f:
+        return yaml.safe_load(f) or {}
+
+
+def resolve_var(value, variables):
+    """Resolve a Jinja2 variable reference like '{{ var }}' or '{{ dict.key }}'.
+
+    Returns a list of package names, or None if the variable cannot be resolved.
+    """
+    match = re.fullmatch(r"\{\{\s*([a-zA-Z_][a-zA-Z0-9_.]*)\s*\}\}", value.strip())
+    if not match:
+        return None
+
+    node = variables
+    for key in match.group(1).split("."):
+        if isinstance(node, dict) and key in node:
+            node = node[key]
+        else:
+            return None
+
+    if isinstance(node, list):
+        return [str(p) for p in node]
+    if isinstance(node, str):
+        return [node]
+    return None
+
+
+# ------------------------------------------------------------------ collection
+
+
+def extract_pkg_names(module_args, variables, source_file, playbook_dir):
+    """Extract package name(s) from a pacman/aur module argument dict."""
+    if not isinstance(module_args, dict) or "name" not in module_args:
+        return []
+
+    name = module_args["name"]
+
+    if isinstance(name, list):
+        return [str(n) for n in name]
+
+    if isinstance(name, str):
+        if "{{" in name:
+            resolved = resolve_var(name, variables)
+            if resolved is None:
+                try:
+                    rel = source_file.relative_to(playbook_dir)
+                except ValueError:
+                    rel = source_file
+                warnings.append(f"cannot resolve '{name}' in {rel}")
+                return []
+            return resolved
+        return [name]
+
+    return []
+
+
+def collect_packages(playbook_dir, variables):
+    """Walk all role task files and collect official and AUR packages."""
+    official = {}  # pkg -> first source file
+    aur = {}
+
+    task_files = sorted(playbook_dir.rglob("roles/*/tasks/*.yml"))
+    for task_file in task_files:
+        try:
+            with open(task_file) as f:
+                tasks = yaml.safe_load(f)
+        except Exception as e:
+            warnings.append(f"could not parse {task_file}: {e}")
+            continue
+
+        if not isinstance(tasks, list):
+            continue
+
+        for task in tasks:
+            if not isinstance(task, dict):
+                continue
+
+            for module_key, target in (
+                ("community.general.pacman", official),
+                ("kewlfft.aur.aur", aur),
+            ):
+                if module_key in task:
+                    module_args = task[module_key]
+                    # Skip removal tasks — we only care about packages being installed
+                    if isinstance(module_args, dict):
+                        state = module_args.get("state", "present")
+                        if state in ("absent", "removed"):
+                            continue
+                    pkgs = extract_pkg_names(
+                        module_args, variables, task_file, playbook_dir
+                    )
+                    for pkg in pkgs:
+                        if pkg not in target:
+                            target[pkg] = task_file
+
+    return official, aur
+
+
+# ------------------------------------------------------------------ pacman
+
+
+def check_db_freshness():
+    """Warn if the sync DBs haven't been refreshed recently."""
+    cutoff = time.time() - DB_STALE_HOURS * 3600
+    oldest = min(DB_DIR.glob("*.db"), key=lambda p: p.stat().st_mtime, default=None)
+    if oldest and oldest.stat().st_mtime < cutoff:
+        age_h = (time.time() - oldest.stat().st_mtime) / 3600
+        warnings.append(
+            f"sync DB is {age_h:.0f}h old — run 'sudo pacman -Sy' or pass --refresh"
+        )
+
+
+def refresh_db():
+    """Refresh pacman sync databases."""
+    print("Refreshing package databases (sudo pacman -Sy)...")
+    result = subprocess.run(["sudo", "pacman", "-Sy"])
+    if result.returncode != 0:
+        sys.exit("error: failed to refresh package databases")
+
+
+def pacman_lookup(packages):
+    """Check packages against the official repos using pacman -Si and -Sg.
+
+    Package groups are considered valid (community.general.pacman installs them).
+    Returns (found: set, not_found: set).
+    """
+    if not packages:
+        return set(), set()
+
+    result = subprocess.run(
+        ["pacman", "-Si", "--", *packages],
+        capture_output=True,
+        text=True,
+    )
+
+    found = set()
+    for line in result.stdout.splitlines():
+        if line.startswith("Name"):
+            found.add(line.split(":", 1)[1].strip())
+
+    # For packages -Si didn't find, check if they're valid package groups
+    not_found = set(packages) - found
+    for pkg in not_found:
+        r = subprocess.run(["pacman", "-Sg", pkg], capture_output=True)
+        if r.returncode == 0:
+            found.add(pkg)
+
+    return found, not_found - found
+
+
+def build_replaces_map():
+    """Build a reverse map from old package names to new names via %REPLACES%.
+
+    Reads the pacman sync DB tarballs directly — no subprocess needed.
+    Returns {old_name: new_package_name}.
+    """
+    reverse = {}
+    for db_file in sorted(DB_DIR.glob("*.db")):
+        try:
+            with tarfile.open(db_file, "r:gz") as tar:
+                for member in tar.getmembers():
+                    if not member.name.endswith("/desc"):
+                        continue
+                    f = tar.extractfile(member)
+                    if f is None:
+                        continue
+                    name = None
+                    field = None
+                    replaces = []
+                    for raw in f.read().decode().splitlines():
+                        line = raw.strip()
+                        if line.startswith("%") and line.endswith("%"):
+                            field = line[1:-1]
+                        elif field == "NAME" and line:
+                            name = line
+                        elif field == "REPLACES" and line:
+                            replaces.append(line)
+                    if name:
+                        for entry in replaces:
+                            old = re.split(r"[<>=!]", entry)[0].strip()
+                            if old and old not in reverse:
+                                reverse[old] = name
+        except Exception as e:
+            warnings.append(f"could not read {db_file}: {e}")
+    return reverse
+
+
+# ------------------------------------------------------------------ AUR
+
+
+def aur_lookup(packages, batch_size=200):
+    """Query the AUR RPC API for a set of packages.
+
+    Returns (found: set, not_found: set).
+    """
+    if not packages:
+        return set(), set()
+
+    found = set()
+    pkg_list = list(packages)
+
+    for i in range(0, len(pkg_list), batch_size):
+        chunk = pkg_list[i : i + batch_size]
+        query = "&".join("arg[]=" + urllib.parse.quote(p, safe="") for p in chunk)
+        url = f"https://aur.archlinux.org/rpc/v5/info?{query}"
+        try:
+            with urllib.request.urlopen(url, timeout=30) as resp:
+                data = json.loads(resp.read())
+            for result in data.get("results", []):
+                found.add(result["Name"])
+        except Exception as e:
+            warnings.append(f"AUR RPC request failed: {e}")
+
+    return found, set(pkg_list) - found
+
+
+# ------------------------------------------------------------------ output
+
+
+def fmt_source(path, playbook_dir):
+    try:
+        return str(path.relative_to(playbook_dir))
+    except ValueError:
+        return str(path)
+
+
+# ------------------------------------------------------------------ main
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="Check Ansible playbook packages against official Arch repos and AUR."
+    )
+    parser.add_argument(
+        "playbook_dir",
+        nargs="?",
+        default=".",
+        help="path to the Ansible playbook directory (default: current directory)",
+    )
+    parser.add_argument(
+        "-y",
+        "--refresh",
+        action="store_true",
+        help="refresh pacman sync databases before checking (runs sudo pacman -Sy)",
+    )
+    args = parser.parse_args()
+
+    playbook_dir = Path(args.playbook_dir).resolve()
+    if not (playbook_dir / "group_vars").exists():
+        sys.exit(
+            f"error: {playbook_dir} does not look like an Ansible playbook directory"
+        )
+
+    if args.refresh:
+        refresh_db()
+    else:
+        check_db_freshness()
+
+    print("Loading variables...")
+    variables = load_variables(playbook_dir)
+
+    print("Scanning task files...")
+    official, aur = collect_packages(playbook_dir, variables)
+    print(f"  found {len(official)} official packages, {len(aur)} AUR packages")
+
+    print("\nBuilding package rename map from sync DB...")
+    replaces_map = build_replaces_map()
+    print(f"  {len(replaces_map)} Replaces entries indexed")
+
+    print("\nChecking official repo packages against pacman...")
+    ok_official, missing_official = pacman_lookup(set(official))
+    print(f"  {len(ok_official)} OK, {len(missing_official)} not found")
+
+    renamed_official = {}
+    still_missing_official = set()
+    for pkg in missing_official:
+        if pkg in replaces_map:
+            renamed_official[pkg] = replaces_map[pkg]
+        else:
+            still_missing_official.add(pkg)
+    if renamed_official:
+        print(f"  {len(renamed_official)} identified as renamed via Replaces metadata")
+
+    moved_to_aur = set()
+    if still_missing_official:
+        print(
+            f"  cross-checking {len(still_missing_official)} remaining missing packages against AUR..."
+        )
+        moved_to_aur, _ = aur_lookup(still_missing_official)
+
+    print("\nChecking AUR packages against AUR RPC...")
+    ok_aur, missing_aur = aur_lookup(set(aur))
+    print(f"  {len(ok_aur)} OK, {len(missing_aur)} not found")
+
+    moved_to_official = set()
+    if missing_aur:
+        print(
+            f"  cross-checking {len(missing_aur)} missing AUR packages against pacman..."
+        )
+        moved_to_official, _ = pacman_lookup(missing_aur)
+
+    # ------------------------------------------------------------------ report
+    any_issue = missing_official or missing_aur
+
+    print()
+    print("=" * 60)
+    print("RESULTS")
+    print("=" * 60)
+
+    if not any_issue:
+        print("All packages are good — nothing to fix.")
+    else:
+        if missing_official:
+            print()
+            print("Official packages no longer in official repos:")
+            for pkg in sorted(missing_official):
+                src = fmt_source(official[pkg], playbook_dir)
+                if pkg in renamed_official:
+                    status = f"renamed to {renamed_official[pkg]}"
+                elif pkg in moved_to_aur:
+                    status = "moved to AUR"
+                else:
+                    status = "not found anywhere"
+                print(f"  {pkg:<40}  [{status}]")
+                print(f"    {src}")
+
+        if missing_aur:
+            print()
+            print("AUR packages no longer in AUR:")
+            for pkg in sorted(missing_aur):
+                src = fmt_source(aur[pkg], playbook_dir)
+                status = (
+                    "moved to official repos"
+                    if pkg in moved_to_official
+                    else "not found anywhere"
+                )
+                print(f"  {pkg:<40}  [{status}]")
+                print(f"    {src}")
+
+    if warnings:
+        print()
+        print("Warnings:")
+        for w in warnings:
+            print(f"  {w}")
+
+
+if __name__ == "__main__":
+    main()
