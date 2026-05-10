@@ -78,12 +78,8 @@
     state: present
 
 - name: Install xsv
-  kewlfft.aur.aur:
+  community.general.pacman:
     name: xsv
-  become: true
-  become_user: "{{ aur.user }}"
-  tags:
-    - aur
 
 - name: Install epy
   kewlfft.aur.aur:
