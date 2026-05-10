@@ -72,7 +72,6 @@
 - name: Install OCRmyPDF and dependencies
   kewlfft.aur.aur:
     name:
-      - python-uharfbuzz
       - python-fpdf2
       - ocrmypdf
   become: true
