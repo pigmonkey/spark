@@ -81,14 +81,6 @@
   community.general.pacman:
     name: xsv
 
-- name: Install epy
-  kewlfft.aur.aur:
-    name: epy-git
-  become: true
-  become_user: "{{ aur.user }}"
-  tags:
-    - aur
-
 - name: Install csvkit
   community.general.pacman:
     name: csvkit
