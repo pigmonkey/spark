@@ -9,9 +9,9 @@
     name: net-tools
     state: present
 
-- name: Install bind-tools
+- name: Install bind
   community.general.pacman:
-    name: bind-tools
+    name: bind
     state: present
 
 - name: Install whois
