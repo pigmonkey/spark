@@ -295,3 +295,26 @@ regdomain: "US"
 #     min_backlight: 70
 
 terminal: kitty
+
+restash:
+    run_on: trusted
+    # sftp:
+    #     backup:
+    #         schedule: "hourly"
+    #         delay: "5min"
+    #     maintenance:
+    #         schedule: "daily"
+    #         delay: "1h"
+    #     check:
+    #         schedule: "*-*-1/3"
+    #         delay: "1h"
+    # b2:
+    #     backup:
+    #         schedule: "daily"
+    #         delay: "1h"
+    #     maintenance:
+    #         schedule: "daily"
+    #         delay: "1h"
+    #     check:
+    #         schedule: "*-*-1/3"
+    #         delay: "1h"

@@ -64,6 +64,7 @@
     - { role: backitup, tags: ["backitup"] }
     - { role: cryptshot, tags: ["cryptshot"], when: "cryptshot is defined" }
     - { role: resnap, tags: ["resnap"], when: "resnap is defined" }
+    - { role: restash, tags: ["restash"], when: "restash is defined" }
     - { role: mapping, tags: ["mapping"] }
     - { role: sound, tags: ["sound"] }
     - { role: pim, tags: ["pim"] }

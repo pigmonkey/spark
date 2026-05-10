@@ -7,3 +7,6 @@
 [submodule "roles/resnap/files/resnap"]
 	path = roles/resnap/files/resnap
 	url = https://github.com/pigmonkey/resnap
+[submodule "roles/restash/files/restash"]
+	path = roles/restash/files/restash
+	url = https://github.com/pigmonkey/restash/

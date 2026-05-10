@@ -1,0 +1,58 @@
+---
+- name: Install libnotify
+  community.general.pacman:
+    name: libnotify
+    state: present
+
+- name: Install restash
+  ansible.builtin.copy:
+    src: restash/restash
+    dest: /usr/local/bin/
+    mode: "0755"
+
+- name: Install restash-notify
+  ansible.builtin.copy:
+    src: restash/restash-notify
+    dest: /usr/local/bin/
+    mode: "0755"
+
+- name: Install restash systemd units
+  ansible.builtin.copy:
+    src: restash/systemd/
+    dest: /etc/systemd/user/
+    mode: "0644"
+  notify: Reload user systemd config
+
+- name: Enable restash timers
+  ansible.builtin.systemd:
+    name: "{{ item | basename }}"
+    enabled: true
+    scope: user
+  become: true
+  become_user: "{{ user.name }}"
+  environment:
+    XDG_RUNTIME_DIR: "/run/user/{{ user.uid }}"
+  with_fileglob:
+    - "{{ role_path }}/files/restash/systemd/*.timer"
+
+- name: Install restash timer schedule overrides
+  ansible.builtin.template:
+    src: timer-schedule.j2
+    dest: /etc/systemd/user/restash-{{ item.operation }}@{{ item.backend }}.timer.d/schedule.conf
+    mode: "0644"
+  notify: Reload user systemd config
+  when: restash[item.backend][item.operation] is defined
+  loop:
+    - { backend: sftp, operation: backup }
+    - { backend: sftp, operation: maintenance }
+    - { backend: sftp, operation: check }
+    - { backend: b2,   operation: backup }
+    - { backend: b2,   operation: maintenance }
+    - { backend: b2,   operation: check }
+
+- name: Include nmtrust unit tasks
+  ansible.builtin.include_tasks: roles/nmtrust/tasks/unit.yml
+  vars:
+    unit: restash.target
+    run_on: "{{ restash.run_on }}"
+    user_unit: true
