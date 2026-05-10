@@ -3,7 +3,7 @@
   community.general.pacman:
     name:
       - hunspell
-      - hunspell-en_US
+      - hunspell-en_us
     state: present
   tags:
     - hunspell
