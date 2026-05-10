@@ -131,4 +131,5 @@ the `network.trusted_uuid` list. NetworkManager UUIDs may be discovered using
 [7]: https://github.com/kewlfft/ansible-aur
 [8]: https://github.com/Jguer/yay
 [9]: https://wiki.archlinux.org/index.php/AUR_helpers
+[10]: https://github.com/netblue30/firejail
 [11]: https://github.com/pigmonkey/nmtrust
