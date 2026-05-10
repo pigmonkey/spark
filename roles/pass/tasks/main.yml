@@ -10,11 +10,14 @@
     state: present
 
 - name: Install rofi-pass
-  community.general.pacman:
+  kewlfft.aur.aur:
     name: rofi-pass
     state: present
+  become: true
+  become_user: "{{ aur.user }}"
   tags:
     - rofi
+    - aur
 
 - name: Install pass-update
   kewlfft.aur.aur:
