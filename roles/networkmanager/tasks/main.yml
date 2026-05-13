@@ -21,6 +21,12 @@
     dest: /etc/NetworkManager/conf.d/20-random_mac.conf
     mode: "0644"
 
+- name: Push privacy config
+  ansible.builtin.template:
+    src: privacy.conf.j2
+    dest: /etc/NetworkManager/conf.d/40-privacy.conf
+    mode: "0644"
+
 - name: Push WiFi/Wired Exclusive dispatcher
   ansible.builtin.copy:
     src: wifi-wired-exclusive.sh

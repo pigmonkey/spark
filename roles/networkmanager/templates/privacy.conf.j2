@@ -1,0 +1,23 @@
+# {{ ansible_managed }}
+[connection]
+# Prevent leaking the machine hostname to DHCP servers, which may log it or
+# use it to populate local DNS.
+ipv4.dhcp-send-hostname=0
+ipv6.dhcp-send-hostname=0
+
+# Use a per-connection client identifier derived from the connection's
+# stable-id rather than the MAC address, avoiding hardware identity exposure
+# in DHCPv4 requests.
+ipv4.dhcp-client-id=stable
+
+# Use a per-connection DUID derived from the connection's stable-id rather
+# than the global machine-id, preventing cross-network tracking via DHCPv6.
+ipv6.dhcp-duid=stable-uuid
+
+# Enable IPv6 Privacy Extensions (RFC 4941). Generates a temporary address in
+# addition to the stable one and prefers it for outgoing connections, making
+# cross-session tracking harder.
+ipv6.ip6-privacy=2
+{% for setting in network.privacy_settings | default([]) %}
+{{ setting }}
+{% endfor %}
