@@ -178,7 +178,7 @@ resnap:
     exclude_user_cache: True
     drives:
         - name: alta
-          uuid: a71fda0d-a2a4-4b29-a9dd-2cbaba9731f8
+          uuid: 03cdc071-a883-4515-be43-b486bd98136c
         - name: pilchuck
           uuid: b19dbe02-5447-4031-b08d-73380117bf44
 
