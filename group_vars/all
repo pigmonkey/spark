@@ -179,20 +179,12 @@ resnap:
     drives:
         - name: alta
           uuid: 03cdc071-a883-4515-be43-b486bd98136c
+        - name: bishorn
+          uuid: 245e474d-5228-4f08-850c-ebc6cfae0e4c
         - name: pilchuck
           uuid: b19dbe02-5447-4031-b08d-73380117bf44
 
 cryptshot:
-    - name: bishorn
-      uuid: baeb40a2-b19e-4adc-8ef6-44ee720a4d1a
-      keyfile: /home/pigmonkey/.keys/usb-bishorn.key
-      retain:
-        - level: daily
-          interval: 7
-        - level: weekly
-          interval: 6
-        - level: monthly
-          interval: 3
     - name: palisade
       uuid: 9d4ada7c-2c47-4de9-b8d5-1c4158bd3031
       keyfile: /home/pigmonkey/.keys/usb-palisade.key
