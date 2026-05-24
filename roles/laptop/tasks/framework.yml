@@ -4,3 +4,12 @@
     name: framework-system
   tags:
     - framework
+
+- name: Install framework-tool-tui
+  kewlfft.aur.aur:
+    name: framework-tool-tui
+  become: true
+  become_user: "{{ aur.user }}"
+  tags:
+    - aur
+    - framework
