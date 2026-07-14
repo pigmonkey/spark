@@ -62,7 +62,6 @@
     - { role: libvirt, tags: ["libvirt"] }
     - { role: virtualbox, tags: ["virtualbox"] }
     - { role: backitup, tags: ["backitup"] }
-    - { role: cryptshot, tags: ["cryptshot"], when: "cryptshot is defined" }
     - { role: resnap, tags: ["resnap"], when: "resnap is defined" }
     - { role: restash, tags: ["restash"], when: "restash is defined" }
     - { role: mapping, tags: ["mapping"] }
