@@ -108,7 +108,7 @@ base_packages:
 
 filesystem_packages:
     - dosfstools
-    - ntfs-3g
+    - ntfsprogs
     - exfatprogs
     - gparted
     - udftools
