@@ -1,0 +1,28 @@
+---
+- name: Install OBS Studio and v4l2loopback
+  community.general.pacman:
+    name:
+      - obs-studio
+      - v4l2loopback-dkms
+      - v4l2loopback-utils
+    state: present
+
+- name: Install onnxruntime for background removal plugin
+  community.general.pacman:
+    name: onnxruntime-cpu
+    state: present
+
+- name: Install OBS background removal plugin
+  kewlfft.aur.aur:
+    name: obs-backgroundremoval
+  become: true
+  become_user: "{{ aur.user }}"
+  tags:
+    - aur
+
+- name: Load v4l2loopback kernel module
+  community.general.modprobe:
+    name: v4l2loopback
+    params: 'exclusive_caps=1 card_label="OBS Virtual Camera"'
+    state: present
+    persistent: present

@@ -40,6 +40,7 @@
     - { role: browsers, tags: ["browsers"] }
     - { role: yubikey, tags: ["yubikey"] }
     - { role: media, tags: ["media"] }
+    - { role: obs, tags: ["obs"] }
     - { role: mpd, tags: ["mpd"] }
     - { role: mpv, tags: ["mpv"] }
     - { role: laptop, tags: ["laptop"] }
