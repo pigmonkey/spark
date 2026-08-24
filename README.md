@@ -49,9 +49,10 @@ enabled. By default, sshd is configured but not enabled.
 ## Dotfiles
 
 Ansible expects that the user wishes to clone dotfiles via the git repository
-specified via the `dotfiles.url` variable and install them with [rcm][5]. The
+specified via the `dotfiles.url` variable and apply them with [chezmoi][5]. The
 destination to clone the repository to is defined by the `dotfiles.destination`
-variable. This is relative the user's home directory.
+variable. This is relative the user's home directory, and is also used as
+chezmoi's `sourceDir`.
 
 These tasks will be skipped if the `dotfiles` variable is not defined.
 
@@ -126,7 +127,7 @@ the `network.trusted_uuid` list. NetworkManager UUIDs may be discovered using
 [2]: https://www.archlinux.org
 [3]: https://wiki.archlinux.org/index.php/Installation_guide#Post-installation
 [4]: https://wiki.archlinux.org/index.php/Secure_Shell#Managing_the_sshd_daemon
-[5]: https://thoughtbot.github.io/rcm/
+[5]: https://www.chezmoi.io/
 [6]: https://aur.archlinux.org
 [7]: https://github.com/kewlfft/ansible-aur
 [8]: https://github.com/Jguer/yay

@@ -1,12 +1,9 @@
 ---
-- name: Install rcm
-  kewlfft.aur.aur:
-    name: rcm
-  become: true
-  become_user: "{{ aur.user }}"
+- name: Install chezmoi
+  community.general.pacman:
+    name: chezmoi
+    state: present
   when: dotfiles is defined
-  tags:
-    - aur
 
 - name: Clone user dotfiles  # noqa: latest[git]
   ansible.builtin.git:
@@ -18,9 +15,24 @@
   become: true
   become_user: "{{ user.name }}"
 
-- name: Install user dotfiles
-  ansible.builtin.command: rcup -d /home/{{ user.name }}/{{ dotfiles.destination }} {{ dotfiles.rcup_flags }}
+- name: Apply user dotfiles
+  ansible.builtin.command: chezmoi apply --source=/home/{{ user.name }}/{{ dotfiles.destination }}
   when: dotfiles is defined
+  become: true
+  become_user: "{{ user.name }}"
+  changed_when: true
+
+- name: Check for tpm install script
+  ansible.builtin.stat:
+    path: /home/{{ user.name }}/.tmux/plugins/tpm/bin/install_plugins
+  register: tpm_install_script
+  when: dotfiles is defined
+  become: true
+  become_user: "{{ user.name }}"
+
+- name: Install tmux plugins
+  ansible.builtin.command: /home/{{ user.name }}/.tmux/plugins/tpm/bin/install_plugins
+  when: dotfiles is defined and tpm_install_script.stat.exists
   become: true
   become_user: "{{ user.name }}"
   changed_when: true
