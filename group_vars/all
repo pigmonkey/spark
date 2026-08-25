@@ -214,6 +214,7 @@ base_fonts:
     - cantarell-fonts
     - gsfonts
     - noto-fonts
+    - noto-fonts-emoji
     - terminus-font
     - tex-gyre-fonts
     - ttc-iosevka
