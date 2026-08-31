@@ -100,7 +100,6 @@ base_packages:
     - screen
     - termdown
     - fzf
-    - vivid
     - restic
     - myrepos
     - miller

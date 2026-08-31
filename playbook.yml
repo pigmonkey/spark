@@ -93,6 +93,7 @@
     - { role: oomd, tags: ["oomd"] }
     - { role: f3, tags: ["f3"] }
     - { role: vopono, tags: ["vopono"] }
+    - { role: colors, tags: ["colors"] }
   vars_prompt:
     - name: user_password
       prompt: "Enter desired user password"

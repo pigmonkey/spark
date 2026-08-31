@@ -1,0 +1,13 @@
+---
+- name: Install vivid
+  community.general.pacman:
+    name: vivid
+    state: present
+
+- name: Install tinty
+  kewlfft.aur.aur:
+    name: tinty-git
+  become: true
+  become_user: "{{ aur.user }}"
+  tags:
+    - aur
